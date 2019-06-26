@@ -1,0 +1,103 @@
+// TOOLS
+// swiper
+// ------------------
+
+
+
+
+
+// SWIPER
+// =================================================
+// Customize the styles of library swiper.
+//
+// Original source:
+// http://idangero.us/swiper/demos
+
+
+// MIXIN - SWIPER PAGINATION (Swiper 3.3.1 | February 7, 2016)
+// =================================================
+// This mixin 'swiper__button-color' reset the styles of library swiper: the bullets (swiper-pagination) and arrows (swiper-navigation). 
+// This version of the swiper it`s old as this mixin and are used in old proyects, in her the bullets-pagination and the swiper-pagination with border-color.
+// This mixin it`s using inside of the template swiper.
+//
+// This mixin require:
+//
+// Args:
+// ------------------
+// - $color
+// @param {color} Color of bullets and arrows.
+
+
+// Declaration of mixin
+@mixin t-swiper-pagination-331($color)
+	.swiper-button-prev:after
+		border-bottom: 3px solid $color
+		border-left: 3px solid $color
+
+	.swiper-button-next:after
+		border-top: 3px solid $color
+		border-right: 3px solid $color
+
+	.swiper-pagination-bullet
+		background-color: $color
+
+	.swiper-pagination-bullet-active
+		border-color: $color
+		background-color: transparent
+
+
+// Use mixin:
+// $c1: tomato
+//
+// Example 1
+// @include t-swiper-pagination-331($c1)
+//
+// Example 2
+// @include t-swiper-pagination-331(green)
+
+
+
+
+
+// MIXIN - SWIPER PAGINATION (Swiper 4.2.0 | March 16, 2018)
+// =================================================
+// This mixin 'swiperPagination' reset the styles of library swiper, the bullets (swiper-pagination) and arrows (swiper-navigation). 
+// This version of the swiper used the bullets-pagination with background-color and the swiper-pagination with images.
+// This mixin it`s using inside of the template swiper.
+// This mixin require:
+// Args:
+// ------------------
+// $color
+// @param {color} Color of bullets and arrows.
+
+// Declaration of mixin
+@mixin t-swiper-pagination-420($color: $c1, $bulletOpacity: .5, $buttonSize: 40px, $buttonBorder: 3px, $bulletSize: 10px)
+	.swiper-button-prev,
+	.swiper-button-next
+		width: $buttonSize
+		height: $buttonSize
+		margin: 0 20px
+		border-color: $color
+		border-style: solid
+		@include prefix(transform, translateY(-50%) rotate(45deg))
+		background-image: none
+
+	.swiper-button-prev
+		border-width: 0 0 $buttonBorder $buttonBorder
+
+	.swiper-button-next
+		border-width: $buttonBorder $buttonBorder 0 0
+
+	.swiper-pagination-bullet
+		width: $bulletSize
+		height: $bulletSize
+		background-color: $color
+		opacity: $bulletOpacity
+
+	.swiper-pagination-bullet-active
+		background-color: $color
+		opacity: 1
+
+
+// Use mixin:
+// @include t-swiper-pagination-420

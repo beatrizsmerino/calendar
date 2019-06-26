@@ -1,0 +1,76 @@
+// TOOLS
+// aspect-ratio
+// ------------------
+
+
+
+
+
+// MIXIN - ASPECT RATIO
+// =================================================
+// This mixin 'aspect-ratio' describes a method of using psuedo elements to maintain an elements aspect ratio, even as it scales.
+//
+// Original source:
+// https://css-tricks.com/snippets/sass/maintain-aspect-ratio-mixin/
+// Tecnical documentation:
+// https://css-tricks.com/aspect-ratio-boxes/
+// https://stackoverflow.com/questions/1495407/maintain-the-aspect-ratio-of-a-div-with-css
+//
+// This mixin require:
+//
+// External means:
+// ------------------
+// Mixin position
+// 
+// Args:
+// ------------------
+// - $width*
+// @param {num} Num integer for the width porportional.
+// - $height*
+// @param {num} Num integer for the height porportional.
+// - $position-vertical
+// @param {string} Position vertical of mixin position
+// - $position-horizontal
+// @param {string} Position horizontal of mixin position
+// - $padding
+// @param {num} Padding of content inner (you can define his width and height)
+
+// Declaration of mixin
+@mixin t-aspect-ratio($width, $height, $position-vertical: NULL, $position-horizontal: NULL, $padding: NULL)
+	&:before
+		display: block
+		content: ""
+		width: 100%
+		padding-top: ($height / $width) * 100%
+
+	// If you want text inside of the container
+	@if $position-vertical != NULL
+	position: relative
+
+	> :only-child
+		width: 100%
+		height: 100%
+		@include t-position($position-vertical, $position-horizontal)
+
+		> :only-child
+			padding: $padding
+			@include t-position($position-vertical, $position-horizontal)
+
+
+// Use mixin:
+// <div class="example-1"> 
+//  <div>
+//      <div>
+//          lorem ipsum
+//      </div>
+//   </div> 
+// </div>
+//
+// .example-1
+//   @include t-aspect-ratio(16, 9)
+//
+// .example-2
+//   @include t-aspect-ratio(8, 3, center, NULL, 5%)
+//
+// .example-3
+//   @include t-aspect-ratio(8, 3, top, right, 10px)
