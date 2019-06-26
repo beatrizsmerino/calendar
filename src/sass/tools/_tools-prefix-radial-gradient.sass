@@ -1,0 +1,40 @@
+// TOOLS
+// radial-gradient
+// ------------------
+
+
+
+
+
+// MIXIN - RADIAL GRADIENT
+// =================================================
+// This mixin 'radial-gradient' generates the necessary prefixes for this CSS property (including the old notation). With this, it creates a radial gradient mixture, it is easier and has its advantages: it is easy to update, maintain and scale. Everything is done from a configuration file, not from the style sheets, generating a cleaner code. Just indicate two colors, the first will be the start position color and the second will be the finish position color of the radial gradient.
+// Note: For the moment it is generated the radial gradient basic with two colors. We are working on this mixin to expand your configuration options.
+//
+// This mixin require:
+//
+// Args:
+// ------------------
+// - $from
+// @param {any} Color in which the gradient begins.
+// Values: red | #000000
+// - $to
+// @param {any} Color in which the gradient finish.
+// Values: red | #000000
+
+
+// Declaration of mixin
+@mixin t-radial-gradient($from, $to)
+	background: -webkit-radial-gradient(center, circle cover, $from 0%, $to 100%)
+	background: -moz-radial-gradient(center, circle cover, $from 0%, $to 100%)
+	background: -ms-radial-gradient(center, circle cover, $from 0%, $to 100%)
+	background: -o-radial-gradient(center, circle cover, $from 0%, $to 100%)
+	background: radial-gradient(center, circle cover, $from 0%, $to 100%)
+	background-color: $from
+
+
+// Use mixin:
+// .example-1
+//   @include t-radial-gradient(tomato, lightgreen)
+// .example-2
+//   @include t-radial-gradient(#555A5F, #000)
