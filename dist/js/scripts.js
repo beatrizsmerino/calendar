@@ -1,13 +1,4 @@
 
-let weeks = [
-  "Mond",
-  "Tues",
-  "Wedn",
-  "Thur",
-  "Frid",
-  "Satu",
-  "Sund"
-];
 let months = [
   "January",
   "February",
@@ -22,8 +13,17 @@ let months = [
   "November",
   "December"
 ];
+let weeks = [
+  "Sund",
+  "Mond",
+  "Tues",
+  "Wedn",
+  "Thur",
+  "Frid",
+  "Satu",
+];
 
-function calendarStructure() {
+function calendarCreateStructure() {
   for (m = 0; m <= 11; m++) {
     // MONTHS
     let month = document.createElement("DIV");
@@ -77,33 +77,55 @@ function calendarStructure() {
   }
 }
 
-function calendarDays() {
-  for (i = 1; i < 366; i++) {
-    let dateInitial = calendarDateInitial(2019, i);
-    let date = dateInitial.getDate();
-    let dateMonth = dateInitial.getMonth();
-    let dateDay = dateInitial.getDay();
-    console.log({dateInitial, date, dateMonth, dateDay});
-    let calendarTable = document.getElementsByClassName("calendar__table")[dateMonth];
+function calendarSetDays() {
+  var week = 0;
+  let thisYear = getThisYear();
 
-    if (date == 1) {
-      var week = 0;
+  for (i = 1; i < 366; i++) {
+    let dayOfYear = getDayOfYear(thisYear, i);
+    let dateDay = dayOfYear.getDate();
+    let dateMonth = dayOfYear.getMonth();
+    let dateWeek = dayOfYear.getDay();
+    let calendarMonth = document.getElementsByClassName("calendar__table")[dateMonth];
+
+    
+    if (dateDay == 1) {
+      week = 0;
     }
-    calendarTable.children[2].children[week].children[dateDay].innerText = date;
-    if (dateDay == 6) {
+    
+    console.log({ dayOfYear, dateDay, dateMonth, dateWeek, week });
+    console.log(calendarMonth.children[2]);
+    console.log(calendarMonth.children[2].children[0]);
+    console.log(calendarMonth.children[2].children[0].children[0]);
+
+
+    // insert days in the calendar
+    calendarMonth.children[2].children[week].children[dateWeek].innerText = dateDay;
+    
+    if (dateWeek == 6) {
       week = week + 1;
     }
+    
   }
 }
 
-function calendarDateInitial(year, day) {
-  var date = new Date(year, 0);
-  return new Date(date.setDate(day));
+
+function getThisYear() {
+  var date = new Date();
+  return date.getFullYear();
 }
 
+function getDayOfYear(year, day) {
+  var dateDay = new Date(year, 0);
+  return new Date(dateDay.setDate(day));
+}
+
+var dateDay = new Date(2019, 0);
+console.log(dateDay, new Date(dateDay.setDate(1)));
+
 function initCalendar() {
-  calendarStructure();
-  calendarDays();
+  calendarCreateStructure();
+  calendarSetDays();
 }
 
 initCalendar();
