@@ -8,10 +8,17 @@
   position: absolute
   top: calc(50% - (#{$calendar-width}px / 2))
   left: calc(50% - (#{$calendar-height}px / 2))
-  display: flex
-  align-items: center
-  overflow-y: hidden
-  overflow-x: scroll
+
+  &__year
+    text-align: center;
+    font-size: 2.5rem
+    font-weight: 700
+
+  &__inner
+    display: flex
+    align-items: center
+    overflow-y: hidden
+    overflow-x: scroll
 
   &__month
     &:not(:last-child)

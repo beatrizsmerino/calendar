@@ -24,11 +24,22 @@ let weeks = [
 ];
 
 function calendarCreateStructure() {
+  // YEAR
+  let year = document.createElement("div");
+  year.className = "calendar__year";
+  year.innerText = getThisYear();
+  document.getElementById("calendar").appendChild(year);
+
+  // INNER
+  let calendarInner = document.createElement("div");
+  calendarInner.className = "calendar__inner";
+  document.getElementById("calendar").appendChild(calendarInner);
+
   for (m = 0; m <= 11; m++) {
-    // MONTHS
+    // MONTHS 
     let month = document.createElement("DIV");
     month.className = "calendar__month swiper-slide";
-    document.getElementById("calendar").appendChild(month);
+    calendarInner.appendChild(month);
 
     // TABLE
     let tableMonth = document.createElement("TABLE");
@@ -88,11 +99,11 @@ function calendarSetDays() {
     let dateWeek = dayOfYear.getDay();
     let calendarMonth = document.getElementsByClassName("calendar__table")[dateMonth];
 
-    
+
     if (dateDay == 1) {
       week = 0;
     }
-    
+
     console.log({ dayOfYear, dateDay, dateMonth, dateWeek, week });
     console.log(calendarMonth.children[2]);
     console.log(calendarMonth.children[2].children[0]);
@@ -101,11 +112,11 @@ function calendarSetDays() {
 
     // insert days in the calendar
     calendarMonth.children[2].children[week].children[dateWeek].innerText = dateDay;
-    
+
     if (dateWeek == 6) {
       week = week + 1;
     }
-    
+
   }
 }
 
