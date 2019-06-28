@@ -1,0 +1,45 @@
+
+.calendar
+  $calendar-width: 400
+  $calendar-height: 320
+  //-------------------
+  width: #{$calendar-width}px
+  height: #{$calendar-height}px
+  position: absolute
+  top: calc(50% - (#{$calendar-width}px / 2))
+  left: calc(50% - (#{$calendar-height}px / 2))
+
+  &__year
+    text-align: center;
+    font-size: 2.5rem
+    font-weight: 700
+
+  &__inner
+    display: flex
+    align-items: center
+    overflow-y: hidden
+    overflow-x: scroll
+
+  &__month
+    &:not(:last-child)
+      margin-right: 3rem
+    
+  &__table
+    
+  &__title
+    padding: 0.5rem
+    font-size: 2rem
+    
+  &__header
+    
+  &__body
+    
+  &__cell
+    padding: 0.5rem
+    text-align: center
+    
+  &__row
+    
+  &__week
+    
+  &__day
