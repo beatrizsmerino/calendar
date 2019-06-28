@@ -1,0 +1,19 @@
+// TOOLS
+// clearfix
+// ------------------
+
+
+
+
+
+// MIXIN - CLEARFIX
+// =================================================
+@mixin t-clearfix($value)
+	@if $value == after
+		&:after
+			content: ''
+			display: block
+			clear: both
+
+	@else if $value == overflow
+		overflow: hidden

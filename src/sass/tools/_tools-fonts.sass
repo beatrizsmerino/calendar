@@ -1,0 +1,126 @@
+// TOOLS
+// font
+// ------------------
+
+
+
+
+
+// MIXIN - FONT SIZE PX
+// =================================================
+// pasas el numero en pixeles y te los devuelve en em en base a 16px
+
+  
+// Declaration of mixin  
+@mixin t-font-size--px($font: 16)
+	font-size: #{$font/16 + "em"}
+
+
+// MIXIN - FONT SIZE EM
+// =================================================
+// font size conversion
+// px to em more easy -> based to 10px insted of 16px
+// 1em = 16px -> default css
+// 16px * 0.625 = 10px -> now
+// 1.6em * 10px = 16px -> use
+//
+// para evitar tener que dar font-size al html y al body (al usar eso no todo se basa en 10px algunos tienen su tamaño directamente puesto en la etiqueta y habria que resetear una por una)
+// $s-font-size--html: 62.5%
+// $s-font-size--body: 10px
+
+
+// Declaration of mixin
+@mixin t-font-size--em($font: 1.6)
+	font-size: (((16 * 0.625) * $font)/16)#{"em"}
+
+
+// MIXIN - CONVERT PX TO EM
+// =================================================
+// This function 'em' it is a tool for below allows you to work out the pixels sizes from em.
+// 
+//
+// This function require:
+// External means:
+// ------------------
+// - $browser-context
+// @requires {variable} This variable must be defined for 1em.
+//
+// Args:
+// ------------------
+// - $pixels
+// @param {number} Pixels to convert (with or wtithout units).
+// - $base
+// @param {number} Pixel base for 1em. If not provided, variable used.
+// 
+//
+// This function return:
+// @return {number} Measure passed as parameter converted to em's.
+
+
+// Declaration of function
+@function t-em($pixels, $base: $browser-context)
+	@if (unitless($pixels))
+		$pixels: $pixels * 1px
+
+	@if (unitless($base))
+		$base: $base * 1px
+
+	@return $pixels / $base * 1em
+
+
+// Use function:
+// $browser-context: 10px
+// .example-1
+//   font-size: t-em(12px)
+//
+// $browser-context: 16px
+// .example-2
+//   font-size: t-em(12px)
+//
+// .example-3
+//   font-size: t-em(14)
+
+
+
+
+
+// MIXIN - CONVERT PX TO REM
+// =================================================
+// This function 'rem' it is a tool for below allows you to work out the pixels sizes from rem.
+//
+//
+// This function require:
+// External means:
+// ------------------
+// - $browser-context
+// @requires {variable} This variable must be defined for 1rem.
+// 
+// Args:
+// ------------------
+// - $pixels
+// @param {number} Pixels to convert with or wtithout units.
+//
+//
+// This function return:
+// @return {number}
+// Measure passed as parameter converted to rem's.
+
+
+// Declaration of function
+@function t-rem($pixels)
+	@if (unitless($pixels))
+		$pixels: $pixels * 1px
+
+	@return $pixels / $browser-context * 1rem
+
+
+// Use function:
+// $browser-context: 10px
+// .example-1
+//   font-size: t-rem(12px)
+//
+// $browser-context: 16px
+// .example-2{
+//   font-size: t-rem(12px)
+// .example-3
+//   font-size: t-rem(14)
