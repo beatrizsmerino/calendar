@@ -13,6 +13,7 @@ let months = [
   "November",
   "December"
 ];
+
 let weeks = [
   "Sund",
   "Mond",
@@ -99,16 +100,9 @@ function calendarSetDays() {
     let dateWeek = dayOfYear.getDay();
     let calendarMonth = document.getElementsByClassName("calendar__table")[dateMonth];
 
-
     if (dateDay == 1) {
       week = 0;
     }
-
-    console.log({ dayOfYear, dateDay, dateMonth, dateWeek, week });
-    console.log(calendarMonth.children[2]);
-    console.log(calendarMonth.children[2].children[0]);
-    console.log(calendarMonth.children[2].children[0].children[0]);
-
 
     // insert days in the calendar
     calendarMonth.children[2].children[week].children[dateWeek].innerText = dateDay;
@@ -130,9 +124,6 @@ function getDayOfYear(year, day) {
   var dateDay = new Date(year, 0);
   return new Date(dateDay.setDate(day));
 }
-
-var dateDay = new Date(2019, 0);
-console.log(dateDay, new Date(dateDay.setDate(1)));
 
 function initCalendar() {
   calendarCreateStructure();
