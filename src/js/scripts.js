@@ -27,7 +27,7 @@ function calendarStructure() {
   for (m = 0; m <= 11; m++) {
     // MONTHS
     let month = document.createElement("DIV");
-    month.className = "calendar__month swiper-slide";
+    month.className = "calendar__month";
     document.getElementById("calendar").appendChild(month);
 
     // TABLE
