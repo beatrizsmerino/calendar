@@ -1,0 +1,27 @@
+// COMPONENTS
+// header
+// ------------------
+
+
+
+
+
+// HEADER
+// =================================================
+.c-header
+    width: 100%
+    @include t-display(flex)
+    @include t-justify-content(space-between)
+
+.c-header-nav
+    &__list
+        @include t-display(flex)
+        font-size: 1.4rem
+
+    &__item
+        &:not(:last-child)
+            margin-right: 2rem
+
+    &__link
+        &.is-active
+            color: $s-color-brand-1
