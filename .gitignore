@@ -497,3 +497,10 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/node,macos,windows,visualstudio,visualstudiocode
+
+
+
+
+# FILES
+dist/css/styles.min.css
+dist/js/scripts.min.js
