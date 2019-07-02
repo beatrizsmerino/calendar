@@ -35,18 +35,24 @@ let rootDist    = 'dist/',
 
 // Root Files
 let rootFiles        = '**/*',
+    rootFilesHtml    = '**/*.html',
+    rootFilesPhp     = '**/*.php',
     rootFilesSass    = '**/*.sass',
     rootFilesCss     = '**/*.css',
     rootFilesJs      = '**/*.js';
 
 // Watch
-let WatchFilesCss     = rootDistCss + rootFilesCss,
-    WatchFilesJs      = rootDistJs + rootFilesJs;
+let WatchFilesHtml   = rootFilesHtml,
+    WatchFilesPhp    = rootFilesPhp,
+    WatchFilesCss    = rootDistCss + rootFilesCss,
+    WatchFilesJs     = rootDistJs + rootFilesJs;
 
 
 // Roots used to concat the files in a specific order.
 let filesJs = [
     rootSrcJs + 'scripts.js',
+    rootSrcJs + 'calendar1.js',
+    rootSrcJs + 'calendar2.js',
 ]
 
 
@@ -103,6 +109,8 @@ function watch()
     
     gulp.watch(
         [
+            WatchFilesHtml,
+            WatchFilesPhp,
             WatchFilesCss,
             WatchFilesJs,
         ]
