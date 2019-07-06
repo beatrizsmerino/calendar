@@ -23,9 +23,10 @@ let weeks = [
 	"Satu"
 ];
 
-function calendarCreateStructure() {
-	let calendar1 = document.getElementById("calendar1");
+let calendar1 = document.getElementById("calendar1");
 
+
+function calendarCreateStructure() {
 	// YEAR
 	let year = document.createElement("div");
 	year.className = "calendar__year";
@@ -115,7 +116,6 @@ function calendarSetDays() {
 	}
 }
 
-
 function getThisYear() {
 	let date = new Date();
 	return date.getFullYear();
@@ -131,4 +131,12 @@ function initCalendar() {
 	calendarSetDays();
 }
 
-initCalendar();
+
+window.addEventListener('load', function() {
+    if (calendar1 != null) {
+		console.log("There is a calendar1");
+		initCalendar();
+	} else {
+		console.log("There isn`t a calendar1");
+	}
+})
