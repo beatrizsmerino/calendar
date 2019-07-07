@@ -1,13 +1,12 @@
 
 .calendar
-  $calendar-width: 400
-  $calendar-height: 320
-  //-------------------
-  width: #{$calendar-width}px
-  height: #{$calendar-height}px
-  position: absolute
-  top: calc(50% - (#{$calendar-width}px / 2))
-  left: calc(50% - (#{$calendar-height}px / 2))
+  width: 420px
+
+  &__wrapper
+    height: 100%
+    @include t-display(flex)
+    @include t-justify-content(center)
+    @include t-align-items(center)
 
   &__year
     text-align: center
@@ -21,25 +20,58 @@
     overflow-x: scroll
 
   &__month
-    &:not(:last-child)
-      margin-right: 3rem
-    
-  &__table
-    
-  &__title
-    padding: 0.5rem
-    font-size: 2rem
-    
-  &__header
-    
-  &__body
-    
-  &__cell
-    padding: 0.5rem
-    text-align: center
-    
-  &__row
-    
+
+
+
+
+.calendar-month
+  &:not(:last-child)
+    margin-right: 5rem
+
+  &__name
+    margin-right: 0.2rem
+
   &__week
     
   &__day
+    width: 30px
+    height: 30px
+    margin: 0 auto
+    padding: 20px
+    @include t-display(flex)
+    @include t-justify-content(center)
+    @include t-align-items(center)
+    border-radius: 50%
+
+  &__today
+    border: 3px solid $s-color-brand-1
+
+
+.calendar-table
+  &__caption
+    padding: 0.5rem
+    font-size: 2rem
+
+  &__head
+
+  &__body
+    
+  &__foot
+
+  &__row
+
+  &__cell
+    padding: 0.5rem
+    text-align: center
+
+
+
+.calendar-nav
+  width: 100%
+
+  &__button
+    font-size: 2rem
+    cursor: pointer
+
+    &:not(:last-child)
+      margin-right: 1rem
