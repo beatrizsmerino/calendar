@@ -65,17 +65,6 @@ function calendar2__createStructure() {
 }
 
 function calendar2__setDate(year, month) {
-    let tableCaption = calendar2.getElementsByClassName("calendar-table__caption")[0];
-    let tableBody = calendar2.getElementsByClassName("calendar-table__body")[0];
-
-    // CALENDAR
-    /*     if (tableCaption != "" && tableBody != "") {
-            calendar2__setDays(year, month);
-            calendar2__setCaption(year, month);
-            calendar2__setNav(year, month);
-        } else {
-            calendar2__reset(tableCaption, tableBody);
-        } */
     calendar2__setDays(year, month);
     calendar2__setCaption(year, month);
     calendar2__setNav(year, month);
@@ -119,7 +108,33 @@ function calendar2__setDays(year, month) {
     }
     result += "</tr>";
 
-    calendar2.getElementsByTagName("tbody")[0].innerHTML = result;
+    let tableBody = calendar2.getElementsByTagName("tbody")[0];
+    tableBody.innerHTML = result;
+
+    var tableRowNum = tableBody.getElementsByClassName("calendar-table__row").length;
+
+    if (tableRowNum < 6) {
+
+        for (let count = tableRowNum; count < 6; count++) {
+            console.log(tableRowNum, count);
+            let tableRow = document.createElement("TR");
+            tableRow.className = "calendar-table__row";
+
+            for (let d = 0; d < 7; d++) {
+                let tableTd = document.createElement("TD");
+                tableTd.className = "calendar-table__cell";
+
+                let tableDay = document.createElement("DIV");
+                tableDay.className = "calendar-month__day";
+                tableTd.appendChild(tableDay);
+
+                tableRow.appendChild(tableTd);
+            }
+
+            tableBody.appendChild(tableRow);
+        }
+
+    }
 }
 
 function calendar2__setCaption(year, month) {
@@ -127,7 +142,7 @@ function calendar2__setCaption(year, month) {
     let monthCaption = calendar2.getElementsByClassName("calendar-table__caption");
     monthCaption[0].innerHTML = `
         <span class='calendar-month__name'>
-            ${months2[month - 1]}
+            ${ months2[month - 1]}
         </span>
         <span class='calendar__year'>
             ${year}
@@ -154,22 +169,12 @@ function calendar2__setNav(year, month) {
     // CALENDAR - FOOT
     let tableFoot = calendar2.getElementsByClassName("calendar-table__foot");
     tableFoot[0].innerHTML = `
-        <div class='calendar-nav'>
-            <a class='calendar-nav__button calendar-nav__prev'
-               onclick='calendar2__setDate(${prevYear},${prevMonth})'>&lt;</a>
-            <a class='calendar-nav__button calendar-nav__next'
-               onclick='calendar2__setDate(${nextYear},${nextMonth})'>&gt;</a>
+            <div class='calendar-nav'>
+                <a class='calendar-nav__button calendar-nav__prev'
+                    onclick='calendar2__setDate(${prevYear},${prevMonth})'>&lt;</a>
+                <a class='calendar-nav__button calendar-nav__next'
+                    onclick='calendar2__setDate(${nextYear},${nextMonth})'>&gt;</a>
         </div>`;
-
-    document.addEventListener('click', function () {
-        calendar2__reset();
-    });
-}
-
-
-function calendar2__reset(tableCaption, tableBody) {
-    tableCaption[0].innerHTML = "";
-    tableBody[0].innerHTML = "";
 }
 
 
