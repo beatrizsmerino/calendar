@@ -1,23 +1,24 @@
 // TOOLS
-// footer skitcky
+// sticky
 // ------------------
 
 
 
 
 
-// MIXIN - FOOTER STICKY
+// MIXIN - STICKY
 // =================================================
-@mixin t-footer-sticky
-	html
-		&.footer-sticky
-			height: 100%
+@mixin t-sticky
+	.c-sticky
+		height: 100%
 
-	.footer-sticky
-		body
+		&__body
 			height: 100%
 			@include t-display(flex)
 			@include t-flex-direction(column)
 
 		&__content
 			flex: 1 0 auto
+
+		&__footer
+			@include t-flex-shrink(0)
