@@ -177,12 +177,18 @@ function calendar2__setNav(year, month) {
         </div>`;
 }
 
+function calendar2__setWidth() {
+    let calendarWidth = $(".calendar-month").outerWidth();
+    $(".calendar").width(calendarWidth);
+}
+
 
 window.addEventListener('load', function () {
     if (calendar2 != null) {
         console.log("There is a calendar2");
         calendar2__createStructure();
         calendar2__setDate(dateNow.getFullYear(), dateNow.getMonth() + 1);
+        calendar2__setWidth();
 
     } else {
         console.log("There isn`t a calendar2");
