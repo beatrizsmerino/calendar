@@ -144,11 +144,15 @@ function getDayOfYear(year, day) {
 	return new Date(dateDay.setDate(day));
 }
 
-
 function initCalendar() {
 	calendarCreateStructure();
 	calendarSetDays();
 	getToday();
+}
+
+function calendarSetWidth() {
+    let calendarWidth = $(".calendar-month").outerWidth();
+    $(".calendar").width(calendarWidth);
 }
 
 
@@ -156,6 +160,7 @@ window.addEventListener('load', function () {
 	if (calendar1 != null) {
 		console.log("There is a calendar1");
 		initCalendar();
+		calendarSetWidth();
 	} else {
 		console.log("There isn`t a calendar1");
 	}
