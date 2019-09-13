@@ -47,9 +47,11 @@ let WatchFilesHtml   = rootFilesHtml,
     WatchFilesCss    = rootDistCss + rootFilesCss,
     WatchFilesJs     = rootDistJs + rootFilesJs;
 
-
+let nodeModules = "./node_modules/";
+    
 // Roots used to concat the files in a specific order.
 let filesJs = [
+    nodeModules + 'jquery/dist/jquery.min.js',
     rootSrcJs + 'scripts.js',
     rootSrcJs + 'calendar1.js',
     rootSrcJs + 'calendar2.js',
