@@ -1,4 +1,36 @@
-let months2 = [
+function formDataArray(formArray) {
+    //serialize data function
+    var returnArray = {};
+    for (var i = 0, len = formArray.length; i < len; i++)
+        returnArray[formArray[i].name] = formArray[i].value;
+    return returnArray;
+}
+
+var jsonArray = [];
+
+$(function () {
+    $("#datepicker").datepicker();
+    $("#calendarSave").submit(function (e) {
+        e.preventDefault();
+
+        var formData = $(this).serializeArray(),
+            convertFormDataTojson = formDataArray(formData);
+
+        var jsonData = JSON.stringify(convertFormDataTojson, undefined, 2);
+
+        jsonArray.push(jsonData);
+
+        console.log(jsonArray);
+        // console.log(jsonArray.date);
+    });
+});
+
+
+////////////////////////////////
+
+
+// CALENDAR
+let months3 = [
     "January",
     "February",
     "March",
@@ -13,25 +45,16 @@ let months2 = [
     "December"
 ];
 
-let weeks2 = [
-    "Mond",
-    "Tues",
-    "Wedn",
-    "Thur",
-    "Frid",
-    "Satu",
-    "Sund"
-];
+let weeks3 = ["Mond", "Tues", "Wedn", "Thur", "Frid", "Satu", "Sund"];
 
-let calendar2 = document.getElementById("calendar2");
+let calendar = document.getElementById("calendar3");
 let dateNow = new Date();
 
-
-function calendar2__createStructure() {
+function calendar3__createStructure() {
     // TABLE
     let tableMonth = document.createElement("TABLE");
     tableMonth.className = "calendar-table";
-    calendar2.appendChild(tableMonth);
+    calendar.appendChild(tableMonth);
 
     let monthCaption = document.createElement("CAPTION");
     monthCaption.className = "calendar-table__caption";
@@ -49,7 +72,7 @@ function calendar2__createStructure() {
     for (let w = 0; w < 7; w++) {
         let tableWeek = document.createElement("TH");
         tableWeek.className = "calendar-table__cell calendar__week";
-        tableWeek.innerText = weeks2[w];
+        tableWeek.innerText = weeks3[w];
         tableRow.appendChild(tableWeek);
     }
 
@@ -64,14 +87,13 @@ function calendar2__createStructure() {
     tableMonth.appendChild(tableFoot);
 }
 
-function calendar2__setDate(year, month) {
-    calendar2__setDays(year, month);
-    calendar2__setCaption(year, month);
-    calendar2__setNav(year, month);
+function calendar3__setDate(year, month) {
+    calendar3__setDays(year, month);
+    calendar3__setCaption(year, month);
+    calendar3__setNav(year, month);
 }
 
-
-function calendar2__setDays(year, month) {
+function calendar3__setDays(year, month) {
     let now = new Date(year, month - 1, 1);
     let last = new Date(year, month, 0);
     let firstDayWeek = now.getDay() == 0 ? 7 : now.getDay();
@@ -82,6 +104,8 @@ function calendar2__setDays(year, month) {
 
     // hacemos un bucle hasta 42, que es el máximo de valores que puede
     // haber... 6 columnas de 7 dias
+    var calendarDaysDateArray = [];
+
     for (let i = 1; i <= 42; i++) {
         if (i == firstDayWeek) {
             // determinamos en que dia empieza
@@ -89,18 +113,46 @@ function calendar2__setDays(year, month) {
         }
         if (i < firstDayWeek || i >= last_cell) {
             // celda vacia
-            result += "<td class='calendar-table__cell'><div class='calendar-month__day'>&nbsp;</td>";
+            result +=
+                "<td class='calendar-table__cell'><div class='calendar-month__day' data-date='0'>&nbsp;</td>";
         } else {
             // mostramos el dia
             if (
                 day == dateNow.getDate() &&
                 month == dateNow.getMonth() + 1 &&
                 year == dateNow.getFullYear()
-            )
-                result += "<td class='calendar-table__cell'><div class='calendar-month__today calendar-month__day'>" + day + "</td>";
-            else result += "<td class='calendar-table__cell'><div class='calendar-month__day'>" + day + "</div></td>";
+            ) {
+                result +=
+                    "<td class='calendar-table__cell'><div class='calendar-month__today calendar-month__day'>" +
+                    day +
+                    "</td>";
+            } else {
+                var zeroMonth = "";
+                var zeroDay = "";
+
+                if (day.toString().length == 1) {
+                    zeroDay = parseInt("0" + day.toString());
+                } else {
+                    zeroDay = day;
+                }
+
+                if (month.toString().length == 1) {
+                    zeroMonth = parseInt("0" + month.toString());
+                } else {
+                    zeroMonth = month;
+                }
+
+                calendarDaysDateArray.push({ date: { year: year, month: zeroMonth, day: zeroDay } });
+
+                result += "<td class='calendar-table__cell'>";
+                result += "<div class='calendar-month__day' data-date=" + year + "-" + zeroMonth + "-" + zeroDay + ">";
+                result += day;
+                result += "</div>";
+                result += "</td>";
+            }
             day++;
         }
+        console.log(calendarDaysDateArray);
         if (i % 7 == 0) {
             if (day > lastDayMonth) break;
             result += "</tr><tr class='calendar-table__row'>\n";
@@ -108,13 +160,12 @@ function calendar2__setDays(year, month) {
     }
     result += "</tr>";
 
-    let tableBody = calendar2.getElementsByTagName("tbody")[0];
+    let tableBody = calendar.getElementsByTagName("tbody")[0];
     tableBody.innerHTML = result;
 
     var tableRowNum = tableBody.getElementsByClassName("calendar-table__row").length;
 
     if (tableRowNum < 6) {
-
         for (let count = tableRowNum; count < 6; count++) {
             console.log(tableRowNum, count);
             let tableRow = document.createElement("TR");
@@ -133,23 +184,22 @@ function calendar2__setDays(year, month) {
 
             tableBody.appendChild(tableRow);
         }
-
     }
 }
 
-function calendar2__setCaption(year, month) {
+function calendar3__setCaption(year, month) {
     // CALENDAR - MONTH YEAR
-    let monthCaption = calendar2.getElementsByClassName("calendar-table__caption");
+    let monthCaption = calendar.getElementsByClassName("calendar-table__caption");
     monthCaption[0].innerHTML = `
         <span class='calendar-month__name'>
-            ${ months2[month - 1]}
+            ${months3[month - 1]}
         </span>
         <span class='calendar__year'>
             ${year}
         </span>`;
 }
 
-function calendar2__setNav(year, month) {
+function calendar3__setNav(year, month) {
     // Calculamos el siguiente mes y año
     let nextMonth = month + 1;
     let nextYear = year;
@@ -167,30 +217,17 @@ function calendar2__setNav(year, month) {
     }
 
     // CALENDAR - FOOT
-    let tableFoot = calendar2.getElementsByClassName("calendar-table__foot");
+    let tableFoot = calendar.getElementsByClassName("calendar-table__foot");
     tableFoot[0].innerHTML = `
-            <div class='calendar-nav'>
-                <a class='calendar-nav__button calendar-nav__prev'
-                    onclick='calendar2__setDate(${prevYear},${prevMonth})'>&lt;</a>
-                <a class='calendar-nav__button calendar-nav__next'
-                    onclick='calendar2__setDate(${nextYear},${nextMonth})'>&gt;</a>
-        </div>`;
+              <div class='calendar-nav'>
+                  <a class='calendar-nav__button calendar-nav__prev'
+                      onclick='calendar__setDate(${prevYear},${prevMonth})'></a>
+                  <a class='calendar-nav__button calendar-nav__next'
+                      onclick='calendar__setDate(${nextYear},${nextMonth})'></a>
+          </div>`;
 }
 
-function calendar2__setWidth() {
-    let calendarWidth = $(".calendar-month").outerWidth();
-    $(".calendar").width(calendarWidth);
-}
-
-
-window.addEventListener('load', function () {
-    if (calendar2 != null) {
-        console.log("There is a calendar2");
-        calendar2__createStructure();
-        calendar2__setDate(dateNow.getFullYear(), dateNow.getMonth() + 1);
-        calendar2__setWidth();
-
-    } else {
-        console.log("There isn`t a calendar2");
-    }
+window.addEventListener("load", function () {
+    calendar3__createStructure();
+    calendar3__setDate(dateNow.getFullYear(), dateNow.getMonth() + 1);
 });

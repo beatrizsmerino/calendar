@@ -8,17 +8,17 @@
 
 // MIXIN - STICKY
 // =================================================
-@mixin t-sticky
+@mixin sticky
 	.c-sticky
 		height: 100%
 
 		&__body
 			height: 100%
-			@include t-display(flex)
-			@include t-flex-direction(column)
+			@include display(flex)
+			@include flex-direction(column)
 
 		&__content
 			flex: 1 0 auto
 
 		&__footer
-			@include t-flex-shrink(0)
+			@include flex-shrink(0)

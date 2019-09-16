@@ -10,16 +10,17 @@
 // =================================================
 .c-header
     width: 100%
-    padding: 2rem
-    @include t-display(flex)
-    @include t-justify-content(space-between)
+    height: 6rem
+    @include display(flex)
+    @include justify-content(space-between)
+    @include align-items(center)
     position: fixed
     top: 0
     left: 0
 
 .c-header-nav
     &__list
-        @include t-display(flex)
+        @include display(flex)
         font-size: 1.4rem
 
     &__item
@@ -28,4 +29,4 @@
 
     &__link
         &.is-active
-            color: $s-color-brand-1
+            color: $color-brand-1

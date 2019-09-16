@@ -53,8 +53,9 @@ let nodeModules = "./node_modules/";
 let filesJs = [
     nodeModules + 'jquery/dist/jquery.min.js',
     rootSrcJs + 'scripts.js',
-    rootSrcJs + 'calendar1.js',
-    rootSrcJs + 'calendar2.js',
+    rootSrcJs + 'calendar-1.js',
+    rootSrcJs + 'calendar-2.js',
+    rootSrcJs + 'calendar-3.js',
 ]
 
 

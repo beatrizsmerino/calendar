@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="c-sticky">
+<html lang="en" class="c-page c-sticky">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +7,11 @@
     <title>Web</title>
     <link rel="stylesheet" href="dist/css/styles.min.css">
 </head>
-<body class="c-sticky__body">
+<body class="c-page__body c-sticky__body">
     <div class="c-sticky__content">
         <?php include 'views/modules/header.php' ?>
 
-        <main>
+        <main class="c-page__main c-container">
             <section>
                 <?php
                     $mvc = new MvcController();

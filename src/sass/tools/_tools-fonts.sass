@@ -12,7 +12,7 @@
 
   
 // Declaration of mixin  
-@mixin t-font-size--px($font: 16)
+@mixin font-size--px($font: 16)
 	font-size: #{$font/16 + "em"}
 
 
@@ -25,12 +25,12 @@
 // 1.6em * 10px = 16px -> use
 //
 // para evitar tener que dar font-size al html y al body (al usar eso no todo se basa en 10px algunos tienen su tamaño directamente puesto en la etiqueta y habria que resetear una por una)
-// $s-font-size--html: 62.5%
-// $s-font-size--body: 10px
+// $font-size--html: 62.5%
+// $font-size--body: 10px
 
 
 // Declaration of mixin
-@mixin t-font-size--em($font: 1.6)
+@mixin font-size--em($font: 1.6)
 	font-size: (((16 * 0.625) * $font)/16)#{"em"}
 
 

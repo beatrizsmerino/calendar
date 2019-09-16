@@ -8,7 +8,7 @@
 
 // MIXIN - BACKGROUND
 // =================================================
-@mixin t-background($position:center, $size:cover, $repeat:no-repeat)
+@mixin background($position:center, $size:cover, $repeat:no-repeat)
 	background-position: $position
 	background-size: $size
 	background-repeat: no-repeat
@@ -19,10 +19,10 @@
 
 // MIXIN - IMAGE REFLEX
 // =================================================
-@mixin t-img-reflex($direction: horizontal)
+@mixin img-reflex($direction: horizontal)
 	@if $direction == horizontal
-		@include t-prefix(transform, scaleX(-1))
+		@include prefix(transform, scaleX(-1))
 		filter: FlipH
 	@if $direction == vertical
-		@include t-prefix(transform, scaleY(-1))
+		@include prefix(transform, scaleY(-1))
 		filter: FlipH

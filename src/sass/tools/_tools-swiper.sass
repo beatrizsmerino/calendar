@@ -29,7 +29,7 @@
 
 
 // Declaration of mixin
-@mixin t-swiper-pagination-331($color)
+@mixin swiper-pagination-331($color)
 	.swiper-button-prev:after
 		border-bottom: 3px solid $color
 		border-left: 3px solid $color
@@ -50,10 +50,10 @@
 // $c1: tomato
 //
 // Example 1
-// @include t-swiper-pagination-331($c1)
+// @include swiper-pagination-331($c1)
 //
 // Example 2
-// @include t-swiper-pagination-331(green)
+// @include swiper-pagination-331(green)
 
 
 
@@ -71,7 +71,7 @@
 // @param {color} Color of bullets and arrows.
 
 // Declaration of mixin
-@mixin t-swiper-pagination-420($color: $c1, $bulletOpacity: .5, $buttonSize: 40px, $buttonBorder: 3px, $bulletSize: 10px)
+@mixin swiper-pagination-420($color: $c1, $bulletOpacity: .5, $buttonSize: 40px, $buttonBorder: 3px, $bulletSize: 10px)
 	.swiper-button-prev,
 	.swiper-button-next
 		width: $buttonSize
@@ -100,4 +100,4 @@
 
 
 // Use mixin:
-// @include t-swiper-pagination-420
+// @include swiper-pagination-420

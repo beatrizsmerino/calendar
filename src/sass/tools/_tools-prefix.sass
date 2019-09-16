@@ -8,7 +8,7 @@
 
 // MIXIN - PREFIX 
 // =================================================
-@mixin t-prefix($property, $value, $prefixes: webkit moz ms o)
+@mixin prefix($property, $value, $prefixes: webkit moz ms o)
 	@each $prefix in $prefixes
 		#{'-' + $prefix + '-' + $property}: $value
 
@@ -17,7 +17,7 @@
 
 
 // Use:
-// @include t-prefix(transform, rotate(45deg));
+// @include prefix(transform, rotate(45deg));
 
 
 
@@ -25,7 +25,7 @@
 
 // MIXIN - TRANSFORM
 // =================================================
-@mixin t-prefix--multiple($declarations, $prefixes: webkit moz ms o)
+@mixin prefix--multiple($declarations, $prefixes: webkit moz ms o)
 	@each $property, $value in $declarations
 		@each $prefix in $prefixes
 			#{'-' + $prefix + '-' + $property}: $value
@@ -35,7 +35,7 @@
 
 
 // Use:
-// @include t-prefix((
+// @include prefix((
 //    column-count: 3,
 //    column-gap: 1.5em,
 //    column-rule: 2px solid hotpink

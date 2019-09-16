@@ -41,7 +41,7 @@
 // table-header-group|table-footer-group|table-column-group|table-row-group|
 // list-item|
 // none|initial|inherit
-@mixin t-display($display)
+@mixin display($display)
 	@if $display == flex
 		display: -webkit-box
 		display: -moz-box
@@ -66,7 +66,7 @@
 // MIXIN - FLEX-DIRECTION
 // =================================================
 // row|row-reverse|column|column-reverse|initial|inherit
-@mixin t-flex-direction($direction)
+@mixin flex-direction($direction)
 	@if $direction == row
 		-webkit-box-orient: horizontal
 		-moz-box-orient: horizontal
@@ -115,7 +115,7 @@
 // MIXIN - FLEX-WRAP
 // =================================================
 // nowrap|wrap|wrap-reverse|initial|inherit
-@mixin t-flex-wrap($wrap)
+@mixin flex-wrap($wrap)
 	@if $wrap == nowrap
 		-webkit-flex-wrap: nowrap
 		-moz-flex-wrap: nowrap
@@ -144,15 +144,15 @@
 // MIXIN - FLEX-FLOX
 // =================================================
 // flex-direction flex-wrap|initial|inherit
-@mixin t-flex-flow($direction, $wrap)
-	@include t-flex-direction($direction)
-	@include t-flex-wrap($wrap)
+@mixin flex-flow($direction, $wrap)
+	@include flex-direction($direction)
+	@include flex-wrap($wrap)
 
 
 // MIXIN - JUSTIFY-CONTENT
 // =================================================
 // flex-start|flex-end|center|space-between|space-around|initial|inherit
-@mixin t-justify-content($align)
+@mixin justify-content($align)
 	@if $align == flex-start
 		-webkit-box-pack: start
 		-moz-box-pack: start
@@ -207,7 +207,7 @@
 // MIXIN - ALIGN-CONTENT
 // =================================================
 // stretch|center|flex-start|flex-end|space-between|space-around|initial|inherit
-@mixin t-align-content($align)
+@mixin align-content($align)
 	@if $align == flex-start
 		-ms-flex-line-pack: start
 		-webkit-align-content: flex-start
@@ -254,7 +254,7 @@
 // MIXIN - ALIGN-ITEMS
 // =================================================
 // stretch|center|flex-start|flex-end|baseline|initial|inherit
-@mixin t-align-items($align)
+@mixin align-items($align)
 	@if $align == flex-start
 		-webkit-box-align: start
 		-ms-flex-align: start
@@ -305,7 +305,7 @@
 // MIXIN - ALIGN-SELF
 // =================================================
 // auto|stretch|center|flex-start|flex-end|baseline|initial|inherit
-@mixin t-align-self($align)
+@mixin align-self($align)
 	@if $align == auto
 		-ms-flex-item-align: auto
 		-webkit-align-self: auto
@@ -352,7 +352,7 @@
 // MIXIN - ORDER
 // =================================================
 // number|initial|inherit
-@mixin t-order($order: 0)
+@mixin order($order: 0)
 	-webkit-box-ordinal-group: ($order + 1)
 	-moz-box-ordinal-group: $order
 	-ms-flex-order: $order
@@ -364,7 +364,7 @@
 // MIXIN - FLEX
 // =================================================
 // flex-grow flex-shrink flex-basis|auto|initial|inherit
-@mixin t-flex($grow: 0, $shrink: 1, $basis: auto)
+@mixin flex($grow: 0, $shrink: 1, $basis: auto)
 	@include flex-grow($grow)
 	@include flex-shrink($shrink)
 	@include flex-basis($basis)
@@ -373,7 +373,7 @@
 // MIXIN - FLEX-GROW
 // =================================================
 // number|initial|inherit
-@mixin t-flex-grow($grow: 0)
+@mixin flex-grow($grow: 0)
 	-webkit-flex-grow: $grow
 	-webkit-box-flex: $grow
 	-moz-flex-grow: $grow
@@ -384,7 +384,7 @@
 // MIXIN - FLEX-SHRINK
 // =================================================
 // number|initial|inherit
-@mixin t-flex-shrink($shrink: 1)
+@mixin flex-shrink($shrink: 1)
 	-webkit-flex-shrink: $shrink
 	-webkit-box-flex: $shrink
 	-moz-flex-shrink: $shrink
@@ -395,7 +395,7 @@
 // MIXIN - FLEX-BASIS
 // =================================================
 // number|auto|initial|inherit
-@mixin t-flex-basis($basis: auto)
+@mixin flex-basis($basis: auto)
 	-webkit-flex-basis: $basis
 	-moz-flex-basis: $basis
 	-ms-flex-preferred-size: $basis

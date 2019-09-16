@@ -67,6 +67,10 @@ p
 	& + p:not(:last-child)
 		margin-bottom: 10px
 
+ul,
+ol
+	list-style: none
+
 table
 	width: 100%
 
@@ -88,6 +92,8 @@ img
 
 // FORM
 // =================================================
+select,
+button,
 input
 	&[type="checkbox"],
 	&[type="radio"]
@@ -95,17 +101,12 @@ input
 		-moz-appearance: none
 		appearance: none
 
-select
-	-webkit-appearance: none
-	-moz-appearance: none
-	appearance: none
-
-
 fieldset
 	margin: 0
 	padding: 0
 	border: none
 
+button,
 input,
 select,
 textarea
@@ -114,13 +115,6 @@ textarea
 
 textarea
 	min-height: 150px
-	// para quitar el margin bottom fantasma que tiee por defecto
+	// para quitar el margin bottom fantasma que tiene por defecto
 	display: inherit
 	resize: vertical
-
-input
-	&[type="submit"],
-	&[type="reset"]
-		border: none
-		background-color: inherit
-		cursor: pointer
