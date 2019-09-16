@@ -116,7 +116,6 @@ function calendar2__setDays(year, month) {
     if (tableRowNum < 6) {
 
         for (let count = tableRowNum; count < 6; count++) {
-            console.log(tableRowNum, count);
             let tableRow = document.createElement("TR");
             tableRow.className = "calendar-table__row";
 

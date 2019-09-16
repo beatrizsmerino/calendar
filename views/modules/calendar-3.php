@@ -1,9 +1,9 @@
 <div class="c-page__wrapper">
     <div class="c-page__item c-box">
-        <form id="calendarSave" action="" method="">
+        <form id="calendar3Save" action="" method="">
             <fieldset class="c-form__group">
                 <label for="datepicker" class="c-label">Date:</label>
-                <input id="datepicker" class="c-form__field c-input" name="date" type="text" placeholder="dd/mm/yyyy" />
+                <input id="datepicker" class="c-form__field c-input" name="date" type="date" placeholder="dd/mm/yyyy" />
             </fieldset>
 
             <fieldset class="c-form__group">

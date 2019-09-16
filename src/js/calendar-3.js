@@ -9,8 +9,8 @@ function formDataArray(formArray) {
 var jsonArray = [];
 
 $(function () {
-    $("#datepicker").datepicker();
-    $("#calendarSave").submit(function (e) {
+    //$("#datepicker").datepicker();
+    $("#calendar3Save").submit(function (e) {
         e.preventDefault();
 
         var formData = $(this).serializeArray(),
@@ -21,7 +21,6 @@ $(function () {
         jsonArray.push(jsonData);
 
         console.log(jsonArray);
-        // console.log(jsonArray.date);
     });
 });
 
@@ -152,13 +151,15 @@ function calendar3__setDays(year, month) {
             }
             day++;
         }
-        console.log(calendarDaysDateArray);
+        
         if (i % 7 == 0) {
             if (day > lastDayMonth) break;
             result += "</tr><tr class='calendar-table__row'>\n";
         }
     }
     result += "</tr>";
+
+    console.log(calendarDaysDateArray);
 
     let tableBody = calendar.getElementsByTagName("tbody")[0];
     tableBody.innerHTML = result;
@@ -167,7 +168,6 @@ function calendar3__setDays(year, month) {
 
     if (tableRowNum < 6) {
         for (let count = tableRowNum; count < 6; count++) {
-            console.log(tableRowNum, count);
             let tableRow = document.createElement("TR");
             tableRow.className = "calendar-table__row";
 
