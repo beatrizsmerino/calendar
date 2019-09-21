@@ -1,26 +1,35 @@
-function formDataArray(formArray) {
+function formDataObj(formArray) {
     //serialize data function
-    var returnArray = {};
-    for (var i = 0, len = formArray.length; i < len; i++)
-        returnArray[formArray[i].name] = formArray[i].value;
-    return returnArray;
+    var returnObj = {};
+    for (var i = 0; i < formArray.length; i++){
+        returnObj[formArray[i].name] = formArray[i].value;
+    }
+    return returnObj;
 }
 
-var jsonArray = [];
+function formDataJson(form) {
+    var jsonArray = [],
+        formData = form.serializeArray(),
+        convertFormDataToJson = formDataObj(formData),
+        jsonData = JSON.stringify(convertFormDataToJson, undefined, 2);
+    
+    jsonArray.push(jsonData);
 
+    console.group("Form - Save days");
+    console.log(jsonArray);
+    console.log(typeof jsonArray);
+    console.log(jsonArray[0]);
+    console.groupEnd();
+
+    return jsonArray;
+}
+
+var datesSavedCalendar = [];
 $(function () {
     //$("#datepicker").datepicker();
     $("#calendar3Save").submit(function (e) {
         e.preventDefault();
-
-        var formData = $(this).serializeArray(),
-            convertFormDataTojson = formDataArray(formData);
-
-        var jsonData = JSON.stringify(convertFormDataTojson, undefined, 2);
-
-        jsonArray.push(jsonData);
-
-        console.log(jsonArray);
+        datesSavedCalendar = formDataJson($(this));
     });
 });
 
@@ -159,7 +168,10 @@ function calendar3__setDays(year, month) {
     }
     result += "</tr>";
 
+    console.group("Calendar - Month's days");
     console.log(calendarDaysDateArray);
+    console.log(typeof calendarDaysDateArray);
+    console.groupEnd();
 
     let tableBody = calendar.getElementsByTagName("tbody")[0];
     tableBody.innerHTML = result;
@@ -221,9 +233,9 @@ function calendar3__setNav(year, month) {
     tableFoot[0].innerHTML = `
               <div class='calendar-nav'>
                   <a class='calendar-nav__button calendar-nav__prev'
-                      onclick='calendar__setDate(${prevYear},${prevMonth})'></a>
+                      onclick='calendar3__setDate(${prevYear},${prevMonth})'></a>
                   <a class='calendar-nav__button calendar-nav__next'
-                      onclick='calendar__setDate(${nextYear},${nextMonth})'></a>
+                      onclick='calendar3__setDate(${nextYear},${nextMonth})'></a>
           </div>`;
 }
 
