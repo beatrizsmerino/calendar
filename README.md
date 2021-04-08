@@ -5,4 +5,4 @@
 
 # Calendar
 
-![Image of Calendar](https://github.com/beatrizsmerino/calendar/blob/master/doc/images/calendar.png)
+![Image of Calendar](https://github.com/beatrizsmerino/calendar/blob/master/README/images/calendar.png)
