@@ -130,11 +130,11 @@ function watch() {
 
 // EXPORTS
 // =================================================
-exports.createServer 	= createServer;
-exports.htmlCopy 	= htmlCopy;
+exports.createServer	= createServer;
+exports.htmlCopy 		= htmlCopy;
 exports.sassCompile 	= sassCompile;
-exports.jsCompile 	= jsCompile;
-exports.watch 		= watch;
+exports.jsCompile 		= jsCompile;
+exports.watch 			= watch;
 
 
 
