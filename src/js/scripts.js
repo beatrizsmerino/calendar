@@ -110,10 +110,13 @@ function calendarSetDays() {
 		let yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
 		tableDays.setAttribute("data-time", yearMonthDay);
 
+		if (tableDays.getAttribute("data-time") == getToday()) {
+			tableDays.className += " calendar__today";
+		}
+
 		if (dateWeek == 6) {
 			week = week + 1;
 		}
-
 	}
 }
 
@@ -134,6 +137,17 @@ function getThisYear() {
 function getDayOfYear(year, day) {
 	let dateDay = new Date(year, 0);
 	return new Date(dateDay.setDate(day));
+}
+
+function getToday() {
+	let currentDate = new Date();
+
+	let today = createYearMonthDay(
+		currentDate.getFullYear(),
+		currentDate.getMonth(),
+		currentDate.getDate()
+	);
+	return today;
 }
 
 function initCalendar() {
