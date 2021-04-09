@@ -104,15 +104,30 @@ function calendarSetDays() {
 		}
 
 		// insert days in the calendar
-		calendarMonth.children[2].children[week].children[dateWeek].innerText = dateDay;
+		let tableDays = calendarMonth.children[2].children[week].children[dateWeek];
+		tableDays.innerText = dateDay;
+
+		let yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
+		tableDays.setAttribute("data-time", yearMonthDay);
+
+		if (tableDays.getAttribute("data-time") == getToday()) {
+			tableDays.className += " calendar__today";
+		}
 
 		if (dateWeek == 6) {
 			week = week + 1;
 		}
-
 	}
 }
 
+function createYearMonthDay(year, month, day) {
+	let yyyy = String(year);
+	let mm = String(month + 1).padStart(2, "0"); //January is 0!
+	let dd = String(day).padStart(2, "0");
+
+	let yearMonthDay = yyyy + "-" + mm + "-" +dd;
+	return yearMonthDay;
+}
 
 function getThisYear() {
 	let date = new Date();
@@ -122,6 +137,17 @@ function getThisYear() {
 function getDayOfYear(year, day) {
 	let dateDay = new Date(year, 0);
 	return new Date(dateDay.setDate(day));
+}
+
+function getToday() {
+	let currentDate = new Date();
+
+	let today = createYearMonthDay(
+		currentDate.getFullYear(),
+		currentDate.getMonth(),
+		currentDate.getDate()
+	);
+	return today;
 }
 
 function initCalendar() {
