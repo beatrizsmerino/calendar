@@ -104,7 +104,11 @@ function calendarSetDays() {
 		}
 
 		// insert days in the calendar
-		calendarMonth.children[2].children[week].children[dateWeek].innerText = dateDay;
+		let tableDays = calendarMonth.children[2].children[week].children[dateWeek];
+		tableDays.innerText = dateDay;
+
+		let yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
+		tableDays.setAttribute("data-time", yearMonthDay);
 
 		if (dateWeek == 6) {
 			week = week + 1;
@@ -113,6 +117,14 @@ function calendarSetDays() {
 	}
 }
 
+function createYearMonthDay(year, month, day) {
+	let yyyy = String(year);
+	let mm = String(month + 1).padStart(2, "0"); //January is 0!
+	let dd = String(day).padStart(2, "0");
+
+	let yearMonthDay = yyyy + "-" + mm + "-" +dd;
+	return yearMonthDay;
+}
 
 function getThisYear() {
 	let date = new Date();
