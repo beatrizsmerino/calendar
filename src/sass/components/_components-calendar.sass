@@ -1,42 +1,56 @@
 
 .calendar
-  $calendar-width: 400
-  $calendar-height: 320
-  //-------------------
-  width: #{$calendar-width}px
-  height: #{$calendar-height}px
+	$calendar-width: 400
+	$calendar-height: 320
+	//-------------------
+	width: #{$calendar-width}px
+	height: #{$calendar-height}px
 
-  &__year
-    text-align: center
-    font-size: 2.5rem
-    font-weight: 700
+	&__year
+		text-align: center
+		font-size: 2.5rem
+		font-weight: 700
 
-  &__inner
-    display: flex
-    align-items: center
-    overflow-y: hidden
-    overflow-x: scroll
-
-  &__month
-    &:not(:last-child)
-      margin-right: 3rem
+	&__inner
+		display: flex
+		align-items: center
+		overflow-y: hidden
+		overflow-x: scroll
+		
+	&__month
+		&:not(:last-child)
+			margin-right: 3rem
+			
+	&__table
+	
+	&__title
+		padding: 0.5rem
+		font-size: 2rem
+	
+	&__header
+	
+	&__body
+		  
+	&__cell
+		padding: 0.5rem
+		text-align: center
+		
+	&__row
     
-  &__table
-    
-  &__title
-    padding: 0.5rem
-    font-size: 2rem
-    
-  &__header
-    
-  &__body
-    
-  &__cell
-    padding: 0.5rem
-    text-align: center
-    
-  &__row
-    
-  &__week
-    
-  &__day
+  	&__week
+		  
+	&__day
+	
+	&__today
+		position: relative
+		
+		&:before
+			content: ''
+			display: inline-block
+			width: 2.5rem
+			height: 2.5rem
+			position: absolute
+			top: calc(50% - 2.5rem/2)
+			left: calc(50% - 2.5rem/2)
+			border: 0.1rem solid $s-color-black
+			border-radius: 50%
