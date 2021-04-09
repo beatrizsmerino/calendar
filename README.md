@@ -9,6 +9,23 @@
 
 ![Image of Calendar](https://github.com/beatrizsmerino/calendar/blob/master/README/images/calendar.png)
 
+# NPM
+
+## Project setup
+
+After cloning this repository you need to install the required NPM packages.
+
+```
+npm install
+```
+
+## Deploy
+
+After development you can publish the content of `dist` folder in Github Pages (`gh-pages` branch)
+
+```
+npm run deploy
+```
 
 # GULP
 
