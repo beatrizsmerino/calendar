@@ -36,7 +36,7 @@ function calendarCreateStructure() {
 	document.getElementById("calendar").appendChild(calendarInner);
 
 	for (let m = 0; m <= 11; m++) {
-		// MONTHS 
+		// MONTHS
 		let month = document.createElement("DIV");
 		month.className = "calendar__month";
 		calendarInner.appendChild(month);
@@ -125,7 +125,7 @@ function createYearMonthDay(year, month, day) {
 	let mm = String(month + 1).padStart(2, "0"); //January is 0!
 	let dd = String(day).padStart(2, "0");
 
-	let yearMonthDay = yyyy + "-" + mm + "-" +dd;
+	let yearMonthDay = yyyy + "-" + mm + "-" + dd;
 	return yearMonthDay;
 }
 
@@ -150,9 +150,24 @@ function getToday() {
 	return today;
 }
 
+function calendarMoveScroll() {
+	let currentDate = new Date();
+	let currentMonth = currentDate.getMonth();
+	let month = document.querySelectorAll(".calendar__month");
+
+	let positionScroll = 0;
+	for (let index = 0; index < currentMonth; index++) {
+		let style = month[index].currentStyle || window.getComputedStyle(month[index]);
+		positionScroll += parseFloat(month[index].offsetWidth) + parseFloat(style.marginRight);
+	}
+
+	document.querySelector(".calendar__inner").scrollLeft = positionScroll;
+}
+
 function initCalendar() {
 	calendarCreateStructure();
 	calendarSetDays();
+	calendarMoveScroll();
 }
 
 initCalendar();
