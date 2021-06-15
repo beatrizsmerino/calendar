@@ -8,11 +8,11 @@
 
 // MIXIN - TEXT SEPARATE -- GUION
 // =================================================
-@mixin t-text-separate($content, $position: after, $padding: 0 15px)
+@mixin text-separate($content, $position: after, $padding: 0 15px)
 	&:#{$position}
 		content: '#{$content}'
 		padding: $padding
-		@include t-display(inline-block)
+		@include display(inline-block)
 
 
 
@@ -20,6 +20,6 @@
 
 // MIXIN - TEXT SEPARATE -- NO
 // =================================================
-@mixin t-text-separate-no($position: after)
+@mixin text-separate-no($position: after)
 	&:#{$position}
 		display: none

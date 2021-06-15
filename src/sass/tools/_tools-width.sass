@@ -8,7 +8,7 @@
 
 // MIXIN - WIDTH WITHOUT MARGIN FOR PADDING
 // =================================================
-@mixin t-width($items)
+@mixin width($items)
 	width: #{100/$items + "%"}
 
 
@@ -17,7 +17,7 @@
 
 // MIXIN - WIDTH WITH MARGIN
 // =================================================
-@mixin t-width-margin($items, $margin: 2)
+@mixin width-margin($items, $margin: 2)
 	width: #{(((100 - (($margin * $items) - $margin)) / $items)) + "%"}
 
 	@if $items == 1
@@ -37,7 +37,7 @@
 // This loop generate the clases for width form 5 to 5 and on the other hand, other loop generate the width 33 and 66.
 
 // Generation clases
-@mixin t-width-clases()
+@mixin width-clases()
 	// 0-5-10-15...100
 	$x: 20
 	@for $i from 0 through $x
@@ -77,7 +77,7 @@
 
   
 // Declaration of mixin
-@mixin t-width-clases-step($max, $step)
+@mixin width-clases-step($max, $step)
 	@for $i from 1 through floor($max/$step)
 		$i: $i * $step
 		.width#{$i}
@@ -85,4 +85,4 @@
 
 
 // Use mixin:
-// @include t-width-clases-step(100, 20);
+// @include width-clases-step(100, 20);
