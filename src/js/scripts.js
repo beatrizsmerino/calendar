@@ -150,9 +150,25 @@ function getToday() {
 	return today;
 }
 
+function calendarMoveScroll() {
+	let currentDate = new Date();
+	let currentMonth = currentDate.getMonth();
+	let month = document.querySelectorAll(".calendar__month");
+
+	let positionScroll = 0;
+	for (let index = 0; index < currentMonth; index++) {
+		let style = month[index].currentStyle || window.getComputedStyle(month[index]);
+		positionScroll += parseFloat(month[index].offsetWidth) + parseFloat(style.marginRight);
+
+	}
+
+	document.querySelector(".calendar__inner").scrollLeft = positionScroll;
+}
+
 function initCalendar() {
 	calendarCreateStructure();
 	calendarSetDays();
+	calendarMoveScroll();
 }
 
 initCalendar();
