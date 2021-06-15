@@ -24,7 +24,7 @@
 
 
 // Declaration of mixin
-@mixin t-radial-gradient($from, $to)
+@mixin radial-gradient($from, $to)
 	background: -webkit-radial-gradient(center, circle cover, $from 0%, $to 100%)
 	background: -moz-radial-gradient(center, circle cover, $from 0%, $to 100%)
 	background: -ms-radial-gradient(center, circle cover, $from 0%, $to 100%)
@@ -35,6 +35,6 @@
 
 // Use mixin:
 // .example-1
-//   @include t-radial-gradient(tomato, lightgreen)
+//   @include radial-gradient(tomato, lightgreen)
 // .example-2
-//   @include t-radial-gradient(#555A5F, #000)
+//   @include radial-gradient(#555A5F, #000)

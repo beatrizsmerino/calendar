@@ -19,7 +19,7 @@
 // 1.create keyframe
 // animations > _animations-keyframes
 //
-// @include t-keyframes(move-the-object)
+// @include keyframes(move-the-object)
 //  0%
 //    left: 100px
 //  100%
@@ -29,10 +29,10 @@
 // objects > _objects-...sass
 //
 // .object-to-animate
-//  @include t-animation('move-the-object .5s 1', 'move-the-object-again .5s 1 .5s')
+//  @include animation('move-the-object .5s 1', 'move-the-object-again .5s 1 .5s')
 
 
-@mixin t-keyframes($animationName)
+@mixin keyframes($animationName)
 	@-webkit-keyframes #{$animationName}
 		@content
 

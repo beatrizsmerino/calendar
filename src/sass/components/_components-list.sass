@@ -8,8 +8,8 @@
 
 // LIST WITHOUT BULLETS
 // =================================================
-.c-list__no
-	@include t-list-no
+.list__no
+	@include list-no
 
 
 
@@ -17,16 +17,16 @@
 
 // LIST
 // =================================================
-.c-list
-	.c-heading
+.list
+	.heading
 		padding: 20px
-		border-bottom: 1px solid $s-color-light-1
+		border-bottom: 1px solid $color-light-1
 
-		.c-title
+		.title
 			text-transform: uppercase
 			font-size: 16px
 			font-weight: bold
-			color: $s-color-brand-1
+			color: $color-brand-1
 
 	.o-content
 		padding: 20px
@@ -35,13 +35,13 @@
 		&:not(:last-child)
 			padding-bottom: 15px
 			margin-bottom: 15px
-			border-bottom: 1px solid $s-color-light-1
+			border-bottom: 1px solid $color-light-1
 
 		> *
 			&:not(:last-child)
 				margin-bottom: 5px
 
-	.c-title
+	.title
 		font-weight: normal
 		font-size: 16px
 		text-transform: none

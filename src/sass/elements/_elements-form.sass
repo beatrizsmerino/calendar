@@ -17,17 +17,17 @@ fieldset
 label
 	margin-bottom: 5px
 	display: inline-block
-	@include t-font-size--em(1.4)
-	color: $s-color-silver
+	@include font-size--em(1.4)
+	color: $color-silver
 
 textarea,
 select,
 input
 	width: 100%
 	padding: 10px
-	@include t-font-size--em(2)
-	border: 2px solid $s-color-silver
-	background-color: $s-color-light-1
+	@include font-size--em(2)
+	border: 2px solid $color-silver
+	background-color: $color-light-1
 
 
 input
@@ -36,7 +36,7 @@ input
 		float: right
 
 	&[type="file"]
-		@include t-font-size--em
+		@include font-size--em
 
 
 textarea
@@ -46,11 +46,11 @@ input
 	&[type="submit"],
 	&[type="reset"],
 	&[type="button"]
-		@extend .c-button
-		@extend .c-button--color
+		@extend .button
+		@extend .button--color
 
 button
-	@extend .c-button
+	@extend .button
 
 
 
@@ -58,7 +58,7 @@ button
 
 // MEDIA QUERIES
 // =================================================
-@include t-media('sm')
+@include media('sm')
 	input
 		&[type="submit"]
 			width: 100%

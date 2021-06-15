@@ -32,20 +32,20 @@
 // Values: width | height
 
 // Declaration of mixin
-@mixin t-media($breakpoint, $rule: 'max', $dimension: 'width')
+@mixin media($breakpoint, $rule: 'max', $dimension: 'width')
 	$rules: 'max', 'min'
 	$dimensions: 'width', 'height'
 	$units: 'px', 'em', 'rem', '%', 'vw', 'vh'
 
-	@if not t-contains($rules, $rule)
+	@if not contains($rules, $rule)
 		$rule: 'max'
-	@if not t-contains($dimensions, $dimension)
+	@if not contains($dimensions, $dimension)
 		$rule: 'width'
 	@if type-of($breakpoint)==number
 		@if unitless($breakpoint)
 			@media (#{$rule}-#{$dimension}: #{$breakpoint + 'px'})
 				@content
-		@else if t-contains($units, unit($breakpoint))
+		@else if contains($units, unit($breakpoint))
 			@media (#{$rule}-#{$dimension}: #{$breakpoint})
 				@content
 		@else
@@ -64,31 +64,31 @@
 
 
 // Use mixin:
-// @include t-media('sm')
+// @include media('sm')
 //   .example-1
 //     color: tomato
 //
-// @include t-media('lg', 'min')
+// @include media('lg', 'min')
 //   .example-2
 //      color: tomato
 //
-// @include t-media('sm', 'min', 'height')
+// @include media('sm', 'min', 'height')
 //   .example-3
 //     color: tomato
 //
-// @include t-media(300px) 
+// @include media(300px) 
 //   .example-4
 //     color: tomato
 //
-// @include t-media(90%)
+// @include media(90%)
 //   .example-5
 //     color: tomato
 //
-// @include t-media(1.2em)
+// @include media(1.2em)
 //   .example-6
 //     color: tomato
 //
 // $medida-especial: 2rem
-// @include t-media($medida-especial)
+// @include media($medida-especial)
 //   .example-7
 //     color: tomato

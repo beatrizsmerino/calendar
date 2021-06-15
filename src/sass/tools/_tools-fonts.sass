@@ -12,7 +12,7 @@
 
   
 // Declaration of mixin  
-@mixin t-font-size--px($font: 16)
+@mixin font-size--px($font: 16)
 	font-size: #{$font/16 + "em"}
 
 
@@ -25,12 +25,12 @@
 // 1.6em * 10px = 16px -> use
 //
 // para evitar tener que dar font-size al html y al body (al usar eso no todo se basa en 10px algunos tienen su tamaño directamente puesto en la etiqueta y habria que resetear una por una)
-// $s-font-size--html: 62.5%
-// $s-font-size--body: 10px
+// $font-size--html: 62.5%
+// $font-size--body: 10px
 
 
 // Declaration of mixin
-@mixin t-font-size--em($font: 1.6)
+@mixin font-size--em($font: 1.6)
 	font-size: (((16 * 0.625) * $font)/16)#{"em"}
 
 
@@ -58,7 +58,7 @@
 
 
 // Declaration of function
-@function t-em($pixels, $base: $browser-context)
+@function em($pixels, $base: $browser-context)
 	@if (unitless($pixels))
 		$pixels: $pixels * 1px
 
@@ -71,14 +71,14 @@
 // Use function:
 // $browser-context: 10px
 // .example-1
-//   font-size: t-em(12px)
+//   font-size: em(12px)
 //
 // $browser-context: 16px
 // .example-2
-//   font-size: t-em(12px)
+//   font-size: em(12px)
 //
 // .example-3
-//   font-size: t-em(14)
+//   font-size: em(14)
 
 
 
@@ -107,7 +107,7 @@
 
 
 // Declaration of function
-@function t-rem($pixels)
+@function rem($pixels)
 	@if (unitless($pixels))
 		$pixels: $pixels * 1px
 
@@ -117,10 +117,10 @@
 // Use function:
 // $browser-context: 10px
 // .example-1
-//   font-size: t-rem(12px)
+//   font-size: rem(12px)
 //
 // $browser-context: 16px
 // .example-2{
-//   font-size: t-rem(12px)
+//   font-size: rem(12px)
 // .example-3
-//   font-size: t-rem(14)
+//   font-size: rem(14)
