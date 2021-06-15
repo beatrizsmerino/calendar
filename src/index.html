@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="page sticky">
 
 	<head>
 		<meta charset="UTF-8">
@@ -8,8 +8,24 @@
 		<link rel="stylesheet" href="css/styles.min.css">
 	</head>
 
-	<body>
-		<div id="calendar" class="calendar"></div>
+	<body class="page__body sticky__body">
+		<header class="page__header sticky__header page__inner">
+			<span class="page__title">
+				Calendar
+			</span>
+		</header>
+
+		<main class="page__main sticky__main">
+			<section class="page__section page__inner">
+				<div class="page__container">
+					<div id="calendar" class="calendar"></div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="page__footer sticky__footer page__inner">
+			@Copyright <span id="currentDate">2021</span>
+		</footer>
 
 		<script src="js/scripts.min.js"></script>
 
