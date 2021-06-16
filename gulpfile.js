@@ -15,8 +15,9 @@ const gulp                = require("gulp"),
       sass                = require("gulp-sass"),
       srcMaps             = require("gulp-sourcemaps"),
       uglify              = require("gulp-uglify"),
-      babel               = require("gulp-babel");
-
+      babel               = require("gulp-babel"),
+	  webpackStream       = require("webpack-stream"),
+	  webpack             = require("webpack");
 
 
 // SETTINGS: FOLDER/FILE PATHS
@@ -102,12 +103,25 @@ function sassCompile() {
 }
 
 function jsCompile() {
+	const BabelConfig = {
+		presets: ["@babel/preset-env", "babel-preset-minify"],
+		plugins: [
+			"@babel/transform-runtime",
+			"@babel/plugin-transform-async-to-generator",
+		],
+	};
+
 	return gulp
 		.src(filesJsCompile)
+		.pipe(babel(BabelConfig))
 		.pipe(
-			babel({
-				presets: ["@babel/preset-env"],
-			})
+			webpackStream(
+				require("./webpack.config.js"),
+				webpack,
+				function (err, stats) {
+					/* Use stats to do more things if needed */
+				}
+			)
 		)
 		.pipe(concat("scripts.min.js"))
 		.pipe(uglify())
