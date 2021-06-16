@@ -8,10 +8,8 @@ const gulp                = require("gulp"),
       autoprefixer        = require("gulp-autoprefixer"),
       browserSync         = require("browser-sync").create(),
       reload              = browserSync.reload,
-      changed             = require("gulp-changed"),
       cleanCss            = require("gulp-clean-css"),
       concat              = require("gulp-concat"),
-      imagemin            = require("gulp-imagemin"),
       lineEndingCorrector = require("gulp-line-ending-corrector"),
       rename              = require("gulp-rename"),
       sass                = require("gulp-sass"),
@@ -96,6 +94,7 @@ function sassCompile() {
 				versions: ["last 2 versions"],
 			})
 		)
+		.pipe(cleanCss())
 		.pipe(srcMaps.write())
 		.pipe(lineEndingCorrector())
 		.pipe(rename("styles.min.css"))
