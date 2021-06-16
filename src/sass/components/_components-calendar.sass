@@ -72,3 +72,19 @@
 			left: calc(50% - 4rem/2)
 			border: 0.2rem solid $color-black
 			border-radius: 50%
+
+	&.is-show-months
+		width: 100%
+
+		+ .button__list .button-show-today
+			display: none
+
+		.calendar
+			&__inner
+				display: flex
+				flex-wrap: wrap
+				overflow-x: auto
+
+			&__month
+				&:not(:last-child)
+					margin: 3rem
