@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="page-home page sticky">
+<html lang="en" class="page-calendar-1 page sticky">
 
 	<head>
 		<meta charset="UTF-8">
@@ -17,12 +17,12 @@
 			<nav class="nav">
 				<ul class="nav__list">
 					<li class="nav__item">
-						<a class="nav__link is-active" href="index.html">
+						<a class="nav__link" href="index.html">
 							Home
 						</a>
 					</li>
 					<li class="nav__item">
-						<a class="nav__link" href="calendar-1.html">
+						<a class="nav__link is-active" href="calendar-1.html">
 							Calendar 1
 						</a>
 					</li>
@@ -31,21 +31,13 @@
 		</header>
 
 		<main class="page__main sticky__main">
-			<h1 class="page__title">
-				Calendars
-			</h1>
-
 			<section class="page__section page__inner">
 				<div class="page__container">
-					<h2 class="page__subtitle">
-						Calendar 1
-					</h2>
-
-					<div>
-						<p>
-							Calendar of the current year that starts the week on Sunday and it has the current date selected.
-							You can scroll horizontally to see the months and click on the button <code class="code">today</code> to return to the current date.
-						</p>
+					<div id="calendar" class="calendar"></div>
+					<div class="button__list button__list--center">
+						<button id="goToday" class="button button--bg-black">
+							today
+						</button>
 					</div>
 				</div>
 			</section>

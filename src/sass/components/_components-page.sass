@@ -1,0 +1,63 @@
+// COMPONENTS
+// page
+// =================================================
+
+
+
+
+
+.page
+	&__container
+		width: 100%
+		max-width: 140rem
+		margin: 0 auto
+
+	&__inner
+		padding-right: 3rem
+		padding-left: 3rem
+		position: relative
+
+		@include media("md") 
+			padding-right: 2rem
+			padding-left: 2rem
+
+	&__body
+
+	&__header
+		width: 100%
+		padding-top: 1rem
+		padding-bottom: 1rem 
+		display: flex
+		align-items: center
+		justify-content: space-between
+		font-size: 2rem
+		border-bottom: 0.1rem solid $color-black
+		background-color: $color-white
+
+	&__title
+		margin-bottom: $font-size--h1
+		font-size: $font-size--h1
+
+	&__subtitle
+		margin-bottom: $font-size--h2
+		font-size: $font-size--h2
+
+	&__main
+		padding: 5rem 0
+		display: flex
+		align-items: center
+		justify-content: center
+		flex-direction: column
+		background-color: $color-white
+
+	&__section
+		display: flex
+		justify-content: center
+	
+	&__footer
+		padding-top: 1rem
+		padding-bottom: 1rem 
+		text-align: center
+		font-size: 1.4rem
+		border-top: 0.1rem solid $color-black
+		background-color: $color-white
