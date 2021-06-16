@@ -1,4 +1,4 @@
-let months = [
+const months = [
 	"January",
 	"February",
 	"March",
@@ -13,7 +13,7 @@ let months = [
 	"December"
 ];
 
-let weeks = [
+const weeks = [
 	"Sund",
 	"Mond",
 	"Tues",
@@ -89,7 +89,7 @@ function calendarCreateStructure() {
 }
 
 function calendarSetDays() {
-	var week = 0;
+	let week = 0;
 	let thisYear = getThisYear();
 
 	for (let i = 1; i < 366; i++) {
