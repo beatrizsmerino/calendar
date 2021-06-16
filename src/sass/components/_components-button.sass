@@ -189,7 +189,6 @@
 				&__use 
 					fill: $color-white
 
-
 	&__list
 		margin-top: 2rem
 
@@ -200,3 +199,23 @@
 		&--center
 			display: flex
 			justify-content: center
+
+
+.button-show-months
+	> * 
+		&:not(:last-child) 
+			margin-right: 0
+
+	&__all
+		display: inline-block
+
+	&__one
+		display: none
+
+	&.is-change-text
+		.button-show-months
+			&__all
+				display: none
+
+			&__one
+				display: inline-block
