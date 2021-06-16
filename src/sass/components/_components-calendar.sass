@@ -61,6 +61,11 @@
 	
 	&__today
 		position: relative
+		color: $color-white
+
+		span
+			position: relative
+			z-index: 2
 		
 		&:before
 			content: ''
@@ -70,8 +75,10 @@
 			position: absolute
 			top: calc(50% - 4rem/2)
 			left: calc(50% - 4rem/2)
+			z-index: 1
 			border: 0.2rem solid $color-black
 			border-radius: 50%
+			background-color: $color-black
 
 	&.is-show-months
 		width: 100%
