@@ -23,6 +23,43 @@ const weeks = [
 	"Satu"
 ];
 
+
+function createYearMonthDay(year, month, day) {
+	let yyyy = String(year);
+	let mm = String(month + 1).padStart(2, "0"); //January is 0!
+	let dd = String(day).padStart(2, "0");
+
+	let yearMonthDay = yyyy + "-" + mm + "-" + dd;
+	return yearMonthDay;
+}
+
+function getThisYear() {
+	let date = new Date();
+	return date.getFullYear();
+}
+
+function getThisMonth() {
+	let date = new Date();
+	return date.getMonth();
+}
+
+function getThisDay() {
+	let date = new Date();
+	return date.getDate();
+}
+
+function getDayOfYear(year, day) {
+	let dateDay = new Date(year, 0);
+	return new Date(dateDay.setDate(day));
+}
+
+function getToday() {
+	let today = createYearMonthDay(getThisYear(), getThisMonth(), getThisDay());
+	return today;
+}
+
+
+
 function calendarCreateStructure() {
 	// YEAR
 	let year = document.createElement("div");
@@ -118,40 +155,6 @@ function calendarSetDays() {
 			week = week + 1;
 		}
 	}
-}
-
-function createYearMonthDay(year, month, day) {
-	let yyyy = String(year);
-	let mm = String(month + 1).padStart(2, "0"); //January is 0!
-	let dd = String(day).padStart(2, "0");
-
-	let yearMonthDay = yyyy + "-" + mm + "-" + dd;
-	return yearMonthDay;
-}
-
-function getThisYear() {
-	let date = new Date();
-	return date.getFullYear();
-}
-
-function getThisMonth() {
-	let date = new Date();
-	return date.getMonth();
-}
-
-function getThisDay() {
-	let date = new Date();
-	return date.getDate();
-}
-
-function getDayOfYear(year, day) {
-	let dateDay = new Date(year, 0);
-	return new Date(dateDay.setDate(day));
-}
-
-function getToday() {
-	let today = createYearMonthDay(getThisYear(), getThisMonth(), getThisDay());
-	return today;
 }
 
 function calendarMoveScrollToday() {
