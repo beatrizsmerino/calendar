@@ -48,7 +48,10 @@ let watchFilesHtml = pathDist + pathFilesHtml,
     watchFilesJs   = pathDistJs + pathFilesJs;
 
 // Paths used to concat the files in a specific order.
-let filesJsCompile = [pathSrcJs + "scripts.js"];
+let filesJsCompile = [
+	pathSrcJs + "scripts.js",
+	pathSrcJs + "calendar-1.js"
+];
 
 
 

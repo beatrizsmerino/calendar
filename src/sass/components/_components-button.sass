@@ -1,30 +1,198 @@
 // COMPONENTS
-// button
-// ------------------
-
-
-
-
-
 // BUTTON
 // =================================================
-.c-button
-	min-width: 200px
-	padding: 10px 20px
-	display: inline-block
-	text-decoration: none
-	text-transform: uppercase
-	font-size: 1.2em
 
-	&--color
-		color: $s-color-white
-		background-color: $s-color-brand-1
 
-	&-readmore
-		@include t-display(flex)
-		@include t-justify-content(center)
-		@include t-align-items(center)
 
-		&--white
-			color: $s-color-white
-			border: 2px solid $s-color-white
+
+
+.button 
+	padding: 1.2rem 4rem
+	display: flex
+	align-items: center
+	justify-content: center
+	text-transform: capitalize
+	font-size: 1.6rem
+	font-weight: 900
+	line-height: 110%
+	border: 0.2rem solid transparent
+	outline: none
+	background-color: transparent
+	user-select: none
+	cursor: pointer
+	appearance: none
+
+	> * 
+		pointer-events: none
+
+		&:not(:last-child) 
+			margin-right: 1rem
+
+		&:only-child 
+			margin-right: 0
+
+	&__icon 
+		&--left 
+			margin-right: 1rem
+
+		&--right 
+			margin-left: 1rem
+
+	&__text 
+		white-space: nowrap
+	
+	&--icon 
+		padding: 0
+	
+	&--bg-color,
+	&--line-color,
+	&--bg-white,
+	&--line-white,
+	&--bg-black,
+	&--line-black 
+		transition: color 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border-color 0.15s ease-in-out 0s
+	
+	&--bg-color 
+		color: $color-white
+		background-color: $color-brand-1
+
+		.icon 
+			&__use 
+				fill: $color-white
+
+		&:hover 
+			color: $color-white
+			background-color: mix($color-black, $color-brand-1, 15%)
+		
+		&-1 
+			color: $color-white
+			background-color: $color-brand-1
+
+			&:hover 
+				background-color: mix($color-black, $color-brand-1, 15%)
+			
+		&-2 
+			color: $color-white
+			background-color: $color-brand-2
+
+			&:hover 
+				background-color: mix($color-black, $color-brand-2, 15%)
+
+	&--line-color 
+		color: $color-brand-1
+		border-color: $color-brand-1
+
+		.icon 
+			&__use 
+				fill: $color-brand-1
+
+		&:hover 
+			color: $color-white
+			border-color: $color-brand-1
+			background-color: $color-brand-1
+
+			.icon 
+				&__use 
+					fill: $color-white
+
+		&-1 
+			color: $color-brand-1
+			border-color: $color-brand-1
+
+			.icon 
+				&__use 
+					fill: $color-brand-1
+
+			&:hover 
+				color: $color-white
+				border-color: $color-brand-1
+				background-color: $color-brand-1
+
+				.icon 
+					&__use 
+						fill: $color-white
+
+		&-2 
+			color: $color-brand-2
+			border-color: $color-brand-2
+
+			.icon 
+				&__use 
+					fill: $color-brand-2
+
+			&:hover 
+				color: $color-white
+				border-color: $color-brand-2
+				background-color: $color-brand-2
+
+				.icon 
+					&__use 
+						fill: $color-white
+				
+	&--bg-white 
+		color: $color-black
+		background-color: $color-white
+
+		.icon 
+			&__use 
+				fill: $color-black
+
+		&:hover 
+			color: $color-white
+			background-color: $color-black
+
+			.icon 
+				&__use 
+					fill: $color-white
+
+	&--line-white 
+		color: $color-white
+		border-color: $color-white
+
+		.icon 
+			&__use 
+				fill: $color-white
+
+		&:hover 
+			color: $color-black
+			border-color: $color-white
+			background-color: $color-white
+
+			.icon 
+				&__use 
+					fill: $color-black
+				
+	&--bg-black 
+		color: $color-white
+		background-color: $color-black
+
+		.icon 
+			&__use 
+				fill: $color-white
+			
+		&:hover 
+			background-color: $color-dark
+		
+	&--line-black 
+		color: $color-black
+		border-color: $color-black
+
+		.icon 
+			&__use 
+				fill: $color-black
+			
+		&:hover 
+			color: $color-white
+			background-color: $color-black
+
+			.icon 
+				&__use 
+					fill: $color-white
+
+
+	&__list
+		margin-top: 2rem
+
+		&--center
+			display: flex
+			justify-content: center
