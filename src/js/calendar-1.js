@@ -1,3 +1,5 @@
+"use strict";
+
 const months = [
 	"January",
 	"February",
@@ -157,6 +159,25 @@ function calendarSetDays() {
 	}
 }
 
+function calendarSetWeekend() {
+	let weekendSaturdays = document.querySelectorAll(
+		".calendar__body .calendar__row .calendar__cell:last-child"
+	);
+
+	let weekendSundays = document.querySelectorAll(
+		".calendar__body .calendar__row .calendar__cell:first-child"
+	);
+
+
+	[...weekendSaturdays, ...weekendSundays].map((item) =>
+		{
+			if (item.childNodes.length) {
+				item.classList.add("calendar__weekend");
+			}
+		}
+	);
+}
+
 function calendarMoveScrollToday() {
 	document.querySelector("#showToday").addEventListener("click", function () {
 		let currentMonth = getThisMonth();
@@ -187,6 +208,7 @@ function calendarShowAllMonths(){
 function initCalendar() {
 	calendarCreateStructure();
 	calendarSetDays();
+	calendarSetWeekend();
 
 	calendarMoveScrollToday();
 	document.querySelector("#showToday").click();
