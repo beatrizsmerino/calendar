@@ -134,26 +134,29 @@ function getThisYear() {
 	return date.getFullYear();
 }
 
+function getThisMonth() {
+	let date = new Date();
+	return date.getMonth();
+}
+
+function getThisDay() {
+	let date = new Date();
+	return date.getDate();
+}
+
 function getDayOfYear(year, day) {
 	let dateDay = new Date(year, 0);
 	return new Date(dateDay.setDate(day));
 }
 
 function getToday() {
-	let currentDate = new Date();
-
-	let today = createYearMonthDay(
-		currentDate.getFullYear(),
-		currentDate.getMonth(),
-		currentDate.getDate()
-	);
+	let today = createYearMonthDay(getThisYear(), getThisMonth(), getThisDay());
 	return today;
 }
 
 function calendarMoveScrollToday() {
 	document.querySelector("#showToday").addEventListener("click", function () {
-		let currentDate = new Date();
-		let currentMonth = currentDate.getMonth();
+		let currentMonth = getThisMonth();
 		let month = document.querySelectorAll(".calendar__month");
 
 		let positionScroll = 0;
