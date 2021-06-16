@@ -164,10 +164,17 @@ function calendarMoveScroll() {
 	document.querySelector(".calendar__inner").scrollLeft = positionScroll;
 }
 
+function calendarMoveScrollToday(){
+	document.querySelector("#goToday").addEventListener('click', function(){
+		calendarMoveScroll();
+	});
+}
+
 function initCalendar() {
 	calendarCreateStructure();
 	calendarSetDays();
 	calendarMoveScroll();
+	calendarMoveScrollToday();
 }
 
 initCalendar();
