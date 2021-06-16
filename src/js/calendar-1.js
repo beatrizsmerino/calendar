@@ -1,30 +1,95 @@
 "use strict";
 
-const months = [
-	"January",
-	"February",
-	"March",
-	"April",
-	"May",
-	"June",
-	"July",
-	"August",
-	"September",
-	"October",
-	"November",
-	"December"
-];
-
-const weeks = [
-	"Sund",
-	"Mond",
-	"Tues",
-	"Wedn",
-	"Thur",
-	"Frid",
-	"Satu"
-];
-
+const settings = {
+	languages: [
+		{
+			value: "en",
+			text: "English",
+		},
+		{
+			value: "fr",
+			text: "French",
+		},
+		{
+			value: "es",
+			text: "Spanish",
+		},
+	],
+	languageSelected: "en",
+	months: {
+		en: [
+			"January",
+			"February",
+			"March",
+			"April",
+			"May",
+			"June",
+			"July",
+			"August",
+			"September",
+			"October",
+			"November",
+			"December",
+		],
+		fr: [
+			"Janvier",
+			"Février",
+			"Mars",
+			"Avril",
+			"Mai",
+			"Juin",
+			"Juillet",
+			"Août",
+			"Septembre",
+			"Octobre",
+			"Novembre",
+			"Décembre",
+		],
+		es: [
+			"Enero",
+			"Febrero",
+			"Marzo",
+			"Abril",
+			"Mayo",
+			"Junio",
+			"Julio",
+			"Agosto",
+			"Septiembre",
+			"Octubre",
+			"Noviembre",
+			"Diciembre",
+		],
+	},
+	weeks: {
+		en: [
+			"Sunday",
+			"Monday",
+			"Tuesday",
+			"Wednesday",
+			"Thursday",
+			"Friday",
+			"Saturday",
+		],
+		fr: [
+			"Dimanche",
+			"Lundi",
+			"Mardi",
+			"Mercredi",
+			"Jeudi",
+			"Vendredi",
+			"Samedi",
+		],
+		es: [
+			"Domingo",
+			"Lunes",
+			"Martes",
+			"Miércoles",
+			"Jueves",
+			"Viernes",
+			"Sábado",
+		],
+	},
+};
 
 function createYearMonthDay(year, month, day) {
 	let yyyy = String(year);
@@ -60,9 +125,13 @@ function getToday() {
 	return today;
 }
 
+function get4Letters(words) {
+	let wordsFormatted = words.map((item) => item.slice(0, 4));
 
+	return wordsFormatted;
+}
 
-function calendarCreateStructure() {
+function calendarCreateStructure(monthsList, weeksList) {
 	// YEAR
 	let year = document.createElement("div");
 	year.className = "calendar__year";
@@ -88,7 +157,7 @@ function calendarCreateStructure() {
 		// TABLE - MONTHS
 		let monthTitle = document.createElement("CAPTION");
 		monthTitle.className = "calendar__title";
-		monthTitle.innerText = months[m];
+		monthTitle.innerText = monthsList[m];
 		tableMonth.appendChild(monthTitle);
 
 		// TABLE HEADER - WEEKS
@@ -103,7 +172,7 @@ function calendarCreateStructure() {
 		for (let w = 0; w < 7; w++) {
 			let tableWeek = document.createElement("TH");
 			tableWeek.className = "calendar__cell calendar__week";
-			tableWeek.innerText = weeks[w];
+			tableWeek.innerText = weeksList[w];
 			tableRow.appendChild(tableWeek);
 		}
 
@@ -180,47 +249,85 @@ function calendarSetWeekend() {
 
 function calendarMoveScrollToday() {
 	const button = document.querySelector("#buttonShowToday");
+	const month = document.querySelectorAll(".calendar__month");
+	const currentMonth = getThisMonth();
 
-	button.addEventListener("click", function () {
-		let currentMonth = getThisMonth();
-		let month = document.querySelectorAll(".calendar__month");
+	let positionScroll = 0;
+	for (let index = 0; index < currentMonth; index++) {
+		let style =
+			month[index].currentStyle || window.getComputedStyle(month[index]);
+		positionScroll +=
+			parseFloat(month[index].offsetWidth) +
+			parseFloat(style.marginRight);
+	}
 
-		let positionScroll = 0;
-		for (let index = 0; index < currentMonth; index++) {
-			let style =
-				month[index].currentStyle ||
-				window.getComputedStyle(month[index]);
-			positionScroll +=
-				parseFloat(month[index].offsetWidth) +
-				parseFloat(style.marginRight);
-		}
-
-		document.querySelector(".calendar__inner").scrollLeft = positionScroll;
-	});
+	document.querySelector(".calendar__inner").scrollLeft = positionScroll;
 }
 
 function calendarShowAllMonths() {
+	const calendar = document.querySelector("#calendar");
 	const button = document.querySelector("#buttonShowMonths");
 
-	button.addEventListener("click", function () {
-		this.classList.toggle("is-change-text");
-		document.querySelector("#calendar").classList.toggle("is-show-months");
+	button.classList.toggle("is-change-text");
+	calendar.classList.toggle("is-show-months");
+	if (!calendar.classList.contains("is-show-months")) {
 		document.querySelector("#buttonShowToday").click();
+	}
+}
+
+function calendarEmpty() {
+	const calendar = document.querySelector("#calendar");
+	calendar.innerHTML = "";
+}
+
+function calendarTranslate() {
+	const select = document.querySelector("#selectTranslate");
+
+	if (document.querySelectorAll("#selectTranslate option").length === 1) {
+		settings.languages.map((item) => {
+			let option = document.createElement("option");
+			option.value = item.value;
+			option.innerText = item.text;
+			select.appendChild(option);
+		});
+	}
+
+	select.addEventListener("change", function () {
+		settings.languageSelected = this.value;
+		calendarCreate(settings.languageSelected);
 	});
 }
 
-	});
-}
-
-function initCalendar() {
-	calendarCreateStructure();
+function calendarCreate(language) {
+	calendarEmpty();
+	calendarCreateStructure(
+		settings.months[language],
+		get4Letters(settings.weeks[language])
+	);
 	calendarSetDays();
 	calendarSetWeekend();
-
 	calendarMoveScrollToday();
-	document.querySelector("#buttonShowToday").click();
-
-	calendarShowAllMonths();
 }
 
-initCalendar();
+function calendarEvents() {
+	document
+		.querySelector("#buttonShowToday")
+		.addEventListener("click", function () {
+			calendarMoveScrollToday();
+		});
+
+	document
+		.querySelector("#buttonShowMonths")
+		.addEventListener("click", function () {
+			calendarShowAllMonths();
+		});
+
+	calendarTranslate();
+}
+
+function calendarInit() {
+	calendarCreate(settings.languageSelected);
+	calendarEvents();
+}
+
+calendarInit();
