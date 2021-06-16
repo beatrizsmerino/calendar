@@ -1,0 +1,87 @@
+// COMPONENTS
+// generics
+// =================================================
+
+
+
+
+*
+	&,
+	&:before,
+	&:after
+		box-sizing: border-box
+
+
+*::selection
+	color: $color-white
+	background-color: $color-brand-1
+
+
+
+// FONT
+// ------------------
+html,
+body,
+textarea,
+select,
+input,
+button
+	font-family: $font-1
+
+html
+	overflow-x: hidden
+	font-size: $font-size--html
+	font-weight: 400
+	background-color: $color-white
+
+body
+	font-size: $font-size--body
+	background-color: $color-white
+
+
+
+// LINK
+// ------------------
+a
+	display: inline-block
+	text-decoration: none
+	color: inherit
+
+	&:hover
+		color: inherit
+	
+
+
+// TEXT
+// ------------------
+p
+	font-size: 1.6rem
+	line-height: 160%
+
+	&:not(:last-child)
+		margin-bottom: 1rem
+
+	&:only-of-type
+		margin-bottom: 0
+
+
+
+// HEADINGS: H1-H6
+// ------------------
+h1
+	font-size: $font-size--h1
+
+h2
+	font-size: $font-size--h2
+
+h3
+	font-size: $font-size--h3
+
+h4
+	font-size: $font-size--h4
+
+h5
+	font-size: $font-size--h5
+
+h6
+	font-size: $font-size--h6
