@@ -105,7 +105,7 @@ function calendarSetDays() {
 
 		// insert days in the calendar
 		let tableDays = calendarMonth.children[2].children[week].children[dateWeek];
-		tableDays.innerText = dateDay;
+		tableDays.innerHTML = `<span>${dateDay}</span>`;
 
 		let yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
 		tableDays.setAttribute("data-time", yearMonthDay);
