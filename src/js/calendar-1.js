@@ -173,7 +173,7 @@ function calendarMoveScrollToday() {
 	});
 }
 
-function showAllMonths(){
+function calendarShowAllMonths(){
 	document.querySelector("#showMonths").addEventListener("click", function () {
 		this.classList.toggle("is-change-text");
 		document.querySelector("#calendar").classList.toggle("is-show-months");
@@ -188,7 +188,7 @@ function initCalendar() {
 	calendarMoveScrollToday();
 	document.querySelector("#showToday").click();
 
-	showAllMonths();
+	calendarShowAllMonths();
 }
 
 initCalendar();
