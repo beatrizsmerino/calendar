@@ -179,7 +179,9 @@ function calendarSetWeekend() {
 }
 
 function calendarMoveScrollToday() {
-	document.querySelector("#showToday").addEventListener("click", function () {
+	const button = document.querySelector("#buttonShowToday");
+
+	button.addEventListener("click", function () {
 		let currentMonth = getThisMonth();
 		let month = document.querySelectorAll(".calendar__month");
 
@@ -197,11 +199,16 @@ function calendarMoveScrollToday() {
 	});
 }
 
-function calendarShowAllMonths(){
-	document.querySelector("#showMonths").addEventListener("click", function () {
+function calendarShowAllMonths() {
+	const button = document.querySelector("#buttonShowMonths");
+
+	button.addEventListener("click", function () {
 		this.classList.toggle("is-change-text");
 		document.querySelector("#calendar").classList.toggle("is-show-months");
-		document.querySelector("#showToday").click();
+		document.querySelector("#buttonShowToday").click();
+	});
+}
+
 	});
 }
 
@@ -211,7 +218,7 @@ function initCalendar() {
 	calendarSetWeekend();
 
 	calendarMoveScrollToday();
-	document.querySelector("#showToday").click();
+	document.querySelector("#buttonShowToday").click();
 
 	calendarShowAllMonths();
 }
