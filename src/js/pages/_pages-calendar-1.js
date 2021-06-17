@@ -237,12 +237,14 @@ function calendarSetWidth() {
 	const calendar = document.querySelector("#calendar");
 	const calendarMonth = document.querySelector(".calendar__month");
 	const calendarMonthWidth = calendarMonth.clientWidth;
-	calendar.style.width = `${calendarMonthWidth}px`;
-}
+	const buttonShowToday = document.querySelector("#buttonShowToday");
 
-function calendarResetWidth() {
-	const calendar = document.querySelector("#calendar");
-	calendar.style.width = `auto`;
+	if (calendar.classList.contains("is-show-months")) {
+		calendar.style.width = `auto`;
+	} else {
+		calendar.style.width = `${calendarMonthWidth}px`;
+		buttonShowToday.click();
+	}
 }
 
 function calendarSetWeekend() {
@@ -282,16 +284,11 @@ function calendarMoveScrollToday() {
 function calendarShowAllMonths() {
 	const calendar = document.querySelector("#calendar");
 	const buttonShowMonths = document.querySelector("#buttonShowMonths");
-	const buttonShowToday = document.querySelector("#buttonShowToday");
 
 	buttonShowMonths.classList.toggle("is-change-text");
 	calendar.classList.toggle("is-show-months");
-	if (!calendar.classList.contains("is-show-months")) {
-		buttonShowToday.click();
-		calendarSetWidth();
-	} else {
-		calendarResetWidth();
-	}
+
+	calendarSetWidth();
 }
 
 function calendarEmpty() {
