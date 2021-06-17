@@ -197,7 +197,10 @@ gulp.task(
 	gulp.series(htmlCopy, sassCompile, jsCompile, createSprite, svgCopy, watch)
 );
 gulp.task("serve", gulp.series(createServer));
-gulp.task("build", gulp.series(htmlCopy, sassCompile, jsCompile));
+gulp.task(
+	"build",
+	gulp.series(htmlCopy, sassCompile, jsCompile, createSprite, svgCopy)
+);
 gulp.task("html", gulp.series(htmlCopy));
 gulp.task("css", gulp.series(sassCompile));
 gulp.task("js", gulp.series(jsCompile));
