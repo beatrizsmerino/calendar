@@ -205,14 +205,16 @@ function calendarSetDays() {
 		let dateDay = dayOfYear.getDate();
 		let dateMonth = dayOfYear.getMonth();
 		let dateWeek = dayOfYear.getDay();
-		let calendarMonth = document.getElementsByClassName("calendar__table")[dateMonth];
+		let calendarMonth =
+			document.getElementsByClassName("calendar__table")[dateMonth];
 
 		if (dateDay == 1) {
 			week = 0;
 		}
 
 		// insert days in the calendar
-		let tableDays = calendarMonth.children[2].children[week].children[dateWeek];
+		let tableDays =
+			calendarMonth.children[2].children[week].children[dateWeek];
 		tableDays.innerHTML = `<span>${dateDay}</span>`;
 
 		let yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
@@ -249,14 +251,11 @@ function calendarSetWeekend() {
 		".calendar__body .calendar__row .calendar__cell:first-child"
 	);
 
-
-	[...weekendSaturdays, ...weekendSundays].map((item) =>
-		{
-			if (item.childNodes.length) {
-				item.classList.add("calendar__weekend");
-			}
+	[...weekendSaturdays, ...weekendSundays].map((item) => {
+		if (item.childNodes.length) {
+			item.classList.add("calendar__weekend");
 		}
-	);
+	});
 }
 
 function calendarMoveScrollToday() {
@@ -266,8 +265,12 @@ function calendarMoveScrollToday() {
 
 	let positionScroll = 0;
 	for (let index = 0; index < currentMonth; index++) {
-		let style = calendarMonth[index].currentStyle || window.getComputedStyle(calendarMonth[index]);
-		positionScroll += parseFloat(calendarMonth[index].offsetWidth) + parseFloat(style.marginRight);
+		let style =
+			calendarMonth[index].currentStyle ||
+			window.getComputedStyle(calendarMonth[index]);
+		positionScroll +=
+			parseFloat(calendarMonth[index].offsetWidth) +
+			parseFloat(style.marginRight);
 	}
 
 	calendarInner.scrollLeft = positionScroll;
