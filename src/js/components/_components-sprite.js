@@ -28,6 +28,6 @@ function printSprites() {
 	});
 }
 
-(function() {
+document.addEventListener("DOMContentLoaded", function () {
 	printSprites();
-}());
+});

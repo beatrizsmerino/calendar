@@ -5,4 +5,7 @@ function copyright(){
 	document.querySelector("#currentYear").innerHTML = currentYear;
 }
 
-copyright();
+
+document.addEventListener("DOMContentLoaded", function () {
+	copyright();
+});
