@@ -228,6 +228,18 @@ function calendarSetDays() {
 	}
 }
 
+function calendarSetWidth() {
+	const calendar = document.querySelector("#calendar");
+	const calendarMonth = document.querySelector(".calendar__month");
+	const calendarMonthWidth = calendarMonth.clientWidth;
+	calendar.style.width = `${calendarMonthWidth}px`;
+}
+
+function calendarResetWidth() {
+	const calendar = document.querySelector("#calendar");
+	calendar.style.width = `auto`;
+}
+
 function calendarSetWeekend() {
 	let weekendSaturdays = document.querySelectorAll(
 		".calendar__body .calendar__row .calendar__cell:last-child"
@@ -248,30 +260,31 @@ function calendarSetWeekend() {
 }
 
 function calendarMoveScrollToday() {
-	const button = document.querySelector("#buttonShowToday");
-	const month = document.querySelectorAll(".calendar__month");
+	const calendarInner = document.querySelector(".calendar__inner");
+	const calendarMonth = document.querySelectorAll(".calendar__month");
 	const currentMonth = getThisMonth();
 
 	let positionScroll = 0;
 	for (let index = 0; index < currentMonth; index++) {
-		let style =
-			month[index].currentStyle || window.getComputedStyle(month[index]);
-		positionScroll +=
-			parseFloat(month[index].offsetWidth) +
-			parseFloat(style.marginRight);
+		let style = calendarMonth[index].currentStyle || window.getComputedStyle(calendarMonth[index]);
+		positionScroll += parseFloat(calendarMonth[index].offsetWidth) + parseFloat(style.marginRight);
 	}
 
-	document.querySelector(".calendar__inner").scrollLeft = positionScroll;
+	calendarInner.scrollLeft = positionScroll;
 }
 
 function calendarShowAllMonths() {
 	const calendar = document.querySelector("#calendar");
-	const button = document.querySelector("#buttonShowMonths");
+	const buttonShowMonths = document.querySelector("#buttonShowMonths");
+	const buttonShowToday = document.querySelector("#buttonShowToday");
 
-	button.classList.toggle("is-change-text");
+	buttonShowMonths.classList.toggle("is-change-text");
 	calendar.classList.toggle("is-show-months");
 	if (!calendar.classList.contains("is-show-months")) {
-		document.querySelector("#buttonShowToday").click();
+		buttonShowToday.click();
+		calendarSetWidth();
+	} else {
+		calendarResetWidth();
 	}
 }
 
@@ -306,6 +319,7 @@ function calendarCreate(language) {
 	);
 	calendarSetDays();
 	calendarSetWeekend();
+	calendarSetWidth();
 	calendarMoveScrollToday();
 }
 
