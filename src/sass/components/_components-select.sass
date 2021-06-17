@@ -7,9 +7,22 @@
 
 
 .select
-	padding: 1rem 3rem 1rem 1rem
+	padding: 1rem 5rem 1rem 2rem
 	font-size: 1.5rem
 	font-weight: 700
+
+	&__wrapper
+		position: relative
+		display: flex
+		justify-content: space-between
+		align-items: center
+
+	&__icon
+		position: absolute
+		top: 50%
+		right: 2rem
+		transform: translate(0, -50%)
+		pointer-events: none
 
 	&--black
 		border: 0.2rem solid $color-black
