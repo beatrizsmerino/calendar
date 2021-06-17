@@ -350,4 +350,8 @@ function calendarInit() {
 	calendarEvents();
 }
 
-calendarInit();
+document.addEventListener("DOMContentLoaded", function () {
+	if (document.querySelector("html").classList.contains("page-calendar-1")) {
+		calendarInit();
+	}
+});
