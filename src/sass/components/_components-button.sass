@@ -7,14 +7,14 @@
 
 
 .button 
-	padding: 1.2rem 4rem
+	padding: 1rem 1.5rem
 	display: flex
 	align-items: center
 	justify-content: center
 	text-transform: capitalize
-	font-size: 1.6rem
-	font-weight: 900
-	line-height: 110%
+	font-size: 1.4rem
+	font-weight: 700
+	line-height: 100%
 	border: 0.2rem solid transparent
 	outline: none
 	background-color: transparent
@@ -171,7 +171,7 @@
 				fill: $color-white
 			
 		&:hover 
-			background-color: $color-dark
+			background-color: mix($color-white, $color-black, 25%)
 		
 	&--line-black 
 		color: $color-black
@@ -189,10 +189,33 @@
 				&__use 
 					fill: $color-white
 
-
 	&__list
 		margin-top: 2rem
+
+		>*
+			&:not(:last-child)
+				margin-right: 1.5rem
 
 		&--center
 			display: flex
 			justify-content: center
+
+
+.button-show-months
+	> * 
+		&:not(:last-child) 
+			margin-right: 0
+
+	&__all
+		display: inline-block
+
+	&__one
+		display: none
+
+	&.is-change-text
+		.button-show-months
+			&__all
+				display: none
+
+			&__one
+				display: inline-block
