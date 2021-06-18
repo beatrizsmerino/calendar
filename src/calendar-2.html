@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="page-home page sticky">
+<html lang="en" class="page-calendar-2 page sticky">
 
 	<head>
 		<meta charset="UTF-8">
@@ -18,7 +18,7 @@
 			<nav class="nav">
 				<ul class="nav__list">
 					<li class="nav__item">
-						<a class="nav__link is-active" href="index.html">
+						<a class="nav__link" href="index.html">
 							Home
 						</a>
 					</li>
@@ -28,7 +28,7 @@
 						</a>
 					</li>
 					<li class="nav__item">
-						<a class="nav__link" href="calendar-2.html">
+						<a class="nav__link is-active" href="calendar-2.html">
 							Calendar 2
 						</a>
 					</li>
@@ -37,23 +37,9 @@
 		</header>
 
 		<main class="page__main sticky__main">
-			<h1 class="page__title">
-				Calendars
-			</h1>
-
 			<section class="page__section page__inner">
 				<div class="page__container">
-					<h2 class="page__subtitle">
-						Calendar 1
-					</h2>
-
-					<div>
-						<p>
-							Calendar of the current year, that starts the week on Sunday and it has the current date selected.
-							You can scroll horizontally to see the months and click on the <strong>button</strong> <code class="code">show today</code> to return to the current date.
-							The <strong>button</strong> <code class="code">show all months</code> display one by one or all months at the same time. And with the <strong>select</strong> of the <code class="code">languages</code> you can change the language of the name months and weeks.
-						</p>
-					</div>
+					<div id="calendar" class="calendar no-select"></div>
 				</div>
 			</section>
 		</main>
