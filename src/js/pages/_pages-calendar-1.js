@@ -183,15 +183,13 @@ function calendarCreateStructure(monthsList, weeksList) {
 		[...contain].map((item) => item.appendChild(calendarRow));
 	}
 
-	function calendarWeekCreate(){
+	function calendarWeekCreate(weeksList, week) {
 		const calendarRow = document.querySelectorAll(".calendar__header .calendar__row");
 
-		for (let w = 0; w < 7; w++) {
-			const calendarWeek = document.createElement("TH");
-			calendarWeek.className = "calendar__cell calendar__week";
-			calendarWeek.innerText = weeksList[w];
-			[...calendarRow].map((item) => item.appendChild(calendarWeek));
-		}
+		const calendarWeek = document.createElement("TH");
+		calendarWeek.className = "calendar__cell calendar__week";
+		calendarWeek.innerText = weeksList[week];
+		[...calendarRow].map((item) => item.appendChild(calendarWeek));
 	}
 
 	function calendarBodyCreate() {
@@ -222,7 +220,10 @@ function calendarCreateStructure(monthsList, weeksList) {
 		const calendarHeader = document.querySelectorAll(".calendar__header");
 		calendarRowCreate(calendarHeader);
 
-		calendarWeekCreate();
+		for (let w = 0; w < 7; w++) {
+			calendarWeekCreate(weeksList, w);
+		}
+
 		calendarBodyCreate();
 
 		for (let f = 0; f < 6; f++) {
