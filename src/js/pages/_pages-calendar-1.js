@@ -142,16 +142,19 @@ function calendarCreateStructure(monthsList, weeksList) {
 		document.getElementById("calendar").appendChild(calendarYear);
 	}
 
+	function calendarInner() {
+		const calendarInner = document.createElement("div");
+		calendarInner.className = "calendar__inner";
+		document.getElementById("calendar").appendChild(calendarInner);
+	}
+
 	calendarYear();
+	calendarInner();
 
-
-	// INNER
-	const calendarInner = document.createElement("div");
-	calendarInner.className = "calendar__inner";
-	document.getElementById("calendar").appendChild(calendarInner);
 
 	for (let m = 0; m <= 11; m++) {
 		// MONTHS
+		const calendarInner = document.querySelector(".calendar__inner");
 		const month = document.createElement("DIV");
 		month.className = "calendar__month";
 		calendarInner.appendChild(month);
