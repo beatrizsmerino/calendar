@@ -177,6 +177,12 @@ function calendarCreateStructure(monthsList, weeksList) {
 		[...calendarTable].map((item) => item.appendChild(calendarHeader));
 	}
 
+	function calendarRowCreate(contain){
+		const calendarRow = document.createElement("TR");
+		calendarRow.className = "calendar__row";
+		[...contain].map((item) => item.appendChild(calendarRow));
+	}
+
 	function calendarWeekCreate(){
 		const calendarRow = document.querySelectorAll(".calendar__header .calendar__row");
 
@@ -206,25 +212,21 @@ function calendarCreateStructure(monthsList, weeksList) {
 		calendarHeaderCreate();
 
 		const calendarHeader = document.querySelectorAll(".calendar__header");
-		const tableRow = document.createElement("TR");
-		tableRow.className = "calendar__row";
-		[...calendarHeader].map((item) => item.appendChild(tableRow));
+		calendarRowCreate(calendarHeader);
 
 		calendarWeekCreate();
 		calendarBodyCreate();
 
 		for (let f = 0; f < 6; f++) {
 			const calendarBody = document.querySelectorAll(".calendar__body");
-			const tableRow = document.createElement("TR");
-			tableRow.className = "calendar__row";
-			[...calendarBody].map(item=>item.appendChild(tableRow));
+			calendarRowCreate(calendarBody);
 			
-
 			for (let d = 0; d < 7; d++) {
+				const calendarRow = document.querySelectorAll(".calendar__row");
 				const tableDays = document.createElement("TD");
 				tableDays.className = "calendar__cell calendar__day";
 				tableDays.innerText = "";
-				tableRow.appendChild(tableDays);
+				[...calendarRow].map((item) => item.appendChild(tableDays));
 			}
 		}
 	}
