@@ -246,16 +246,14 @@ function calendarSetDays() {
 		const dateDay = dayOfYear.getDate();
 		const dateMonth = dayOfYear.getMonth();
 		const dateWeek = dayOfYear.getDay();
-		const calendarMonth =
-			document.querySelectorAll(".calendar__table")[dateMonth];
+		const calendarMonth = document.querySelectorAll(".calendar__table")[dateMonth];
 
 		if (dateDay == 1) {
 			week = 0;
 		}
 
 		// insert days in the calendar
-		const tableDays =
-			calendarMonth.children[2].children[week].children[dateWeek];
+		const tableDays = calendarMonth.children[2].children[week].children[dateWeek];
 		tableDays.innerHTML = `<span>${dateDay}</span>`;
 
 		const yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
