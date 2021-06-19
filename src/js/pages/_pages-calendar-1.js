@@ -163,6 +163,13 @@ function calendarCreateStructure(monthsList, weeksList) {
 		[...calendarTable].map((item) => item.appendChild(calendarTitle));
 	}
 
+	function calendarBodyCreate() {
+		const calendarTable = document.querySelectorAll(".calendar__table");
+		const calendarBody = document.createElement("TBODY");
+		calendarBody.className = "calendar__body";
+		[...calendarTable].map((item) => item.appendChild(calendarBody));
+	}
+
 	calendarYearCreate();
 	calendarInnerCreate();
 
@@ -194,15 +201,14 @@ function calendarCreateStructure(monthsList, weeksList) {
 			tableRow.appendChild(tableWeek);
 		}
 
-		// TABLE BODY - DAYS
-		const tableBody = document.createElement("TBODY");
-		tableBody.className = "calendar__body";
-		tableMonth.appendChild(tableBody);
+		calendarBodyCreate();
 
 		for (let f = 0; f < 6; f++) {
+			const calendarBody = document.querySelectorAll(".calendar__body");
 			const tableRow = document.createElement("TR");
 			tableRow.className = "calendar__row";
-			tableBody.appendChild(tableRow);
+			[...calendarBody].map(item=>item.appendChild(tableRow));
+			
 
 			for (let d = 0; d < 7; d++) {
 				const tableDays = document.createElement("TD");
