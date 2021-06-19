@@ -135,11 +135,15 @@ function get4Letters(words) {
 }
 
 function calendarCreateStructure(monthsList, weeksList) {
-	// YEAR
-	const year = document.createElement("div");
-	year.className = "calendar__year";
-	year.innerText = getThisYear();
-	document.getElementById("calendar").appendChild(year);
+	function calendarYear() {
+		const calendarYear = document.createElement("div");
+		calendarYear.className = "calendar__year";
+		calendarYear.innerText = getThisYear();
+		document.getElementById("calendar").appendChild(calendarYear);
+	}
+
+	calendarYear();
+
 
 	// INNER
 	const calendarInner = document.createElement("div");
