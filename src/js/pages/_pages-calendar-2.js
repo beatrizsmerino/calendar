@@ -52,37 +52,42 @@ document.addEventListener("DOMContentLoaded", function () {
 					// determinamos en que dia empieza
 					day = 1;
 				}
+				
 				if (i < firstDayOfWeek || i >= lastCell) {
-					// celda vacia
-					result += `
+					let emptyCell = `
 						<td class="calendar__cell calendar__day">
 							<span>
 								&nbsp;
 							</span>
 						</td>
 					`;
+
+					result += emptyCell;
 				} else {
 					// mostramos el dia
 					if (
 						day == getThisDay() &&
 						month == getThisMonth() + 1 &&
 						year == getThisYear()
-					)
-						result += `
+					) {
+						let todayCell = `
 							<td class="calendar__cell calendar__day calendar__today">
 								<span>
 									${day}
 								</span>
 							</td>
 						`;
-					else
-						result += `
+						result += todayCell;
+					} else {
+						let dayCell = `
 							<td class="calendar__cell calendar__day">
 								<span>
 									${day}
 								</span>
 							</td>
 						`;
+						result += dayCell;
+					}
 					day++;
 				}
 				if (i % 7 == 0) {
@@ -108,9 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				prevYear = year - 1;
 			}
 
-			document
-				.getElementById("calendar")
-				.getElementsByTagName("caption")[0].innerHTML = `
+			let captionTemplate = `
 					<div>
 						<div class="calendar__title">
 							<span class='calendar__month'>
@@ -130,6 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
 						</div>
 					</div>
 				`;
+
+			document
+				.getElementById("calendar")
+				.getElementsByTagName("caption")[0].innerHTML = captionTemplate;
 			document
 				.getElementById("calendar")
 				.getElementsByTagName("tbody")[0].innerHTML = result;
