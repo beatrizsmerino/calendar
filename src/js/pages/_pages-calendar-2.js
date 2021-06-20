@@ -2,22 +2,23 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 	if (document.querySelector("html").classList.contains("page-calendar-2")) {
-		var meses = Array(
-			"Enero",
-			"Febrero",
-			"Marzo",
-			"Abril",
-			"Mayo",
-			"Junio",
-			"Julio",
-			"Agosto",
-			"Septiembre",
-			"Octubre",
-			"Noviembre",
-			"Diciembre"
-		);
-
-		let weeks = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
+		const settings = {
+			months: [
+				"Enero",
+				"Febrero",
+				"Marzo",
+				"Abril",
+				"Mayo",
+				"Junio",
+				"Julio",
+				"Agosto",
+				"Septiembre",
+				"Octubre",
+				"Noviembre",
+				"Diciembre",
+			],
+			weeks: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+		};
 
 		var actual = new Date();
 
@@ -100,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<div>
 					<div class="calendar__title">
 						<span class='calendar__month'>
-							${meses[month - 1]}
+							${settings.months[month - 1]}
 						</span>
 						<span class='calendar__year'>
 							${year}
