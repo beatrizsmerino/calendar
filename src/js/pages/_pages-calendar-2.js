@@ -20,7 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
 			weeks: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
 		};
 
-		var date = new Date();
+
+		function getThisYear() {
+			const date = new Date();
+			return date.getFullYear();
+		}
+
+		function getThisMonth() {
+			const date = new Date();
+			return date.getMonth();
+		}
+
+		function getThisDay() {
+			const date = new Date();
+			return date.getDate();
+		}
 
 		function calendarCreate(year, month) {
 			var now = new Date(year, month - 1, 1);
@@ -50,9 +64,9 @@ document.addEventListener("DOMContentLoaded", function () {
 				} else {
 					// mostramos el dia
 					if (
-						day == date.getDate() &&
-						month == date.getMonth() + 1 &&
-						year == date.getFullYear()
+						day == getThisDay() &&
+						month == getThisMonth() + 1 &&
+						year == getThisYear()
 					)
 						result += `
 							<td class="calendar__cell calendar__day calendar__today">
@@ -121,22 +135,22 @@ document.addEventListener("DOMContentLoaded", function () {
 				.getElementsByTagName("tbody")[0].innerHTML = result;
 		}
 
-		calendarCreate(date.getFullYear(), date.getMonth() + 1);
+		calendarCreate(getThisYear(), getThisMonth() + 1);
 
 		let buttonToday = document.getElementById("goToday");
 		let buttonNextYear = document.getElementById("goNextYear");
 		let buttonLastYear = document.getElementById("goLastYear");
 
 		buttonToday.addEventListener("click", function () {
-			calendarCreate(date.getFullYear(), date.getMonth() + 1);
+			calendarCreate(getThisYear(), getThisMonth() + 1);
 		});
 
 		buttonNextYear.addEventListener("click", function () {
-			calendarCreate(date.getFullYear() + 1, date.getMonth() + 1);
+			calendarCreate(getThisYear() + 1, getThisMonth() + 1);
 		});
 
 		buttonLastYear.addEventListener("click", function () {
-			calendarCreate(date.getFullYear() - 1, date.getMonth() + 1);
+			calendarCreate(getThisYear() - 1, getThisMonth() + 1);
 		});
 	}
 });
