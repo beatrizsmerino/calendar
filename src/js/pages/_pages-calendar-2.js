@@ -17,7 +17,15 @@ document.addEventListener("DOMContentLoaded", function () {
 				"Noviembre",
 				"Diciembre",
 			],
-			weeks: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+			weeks: [
+				"Lunes",
+				"Martes",
+				"Miércoles",
+				"Jueves",
+				"Viernes",
+				"Sábado",
+				"Domingo",
+			],
 		};
 
 
@@ -36,6 +44,99 @@ document.addEventListener("DOMContentLoaded", function () {
 			return date.getDate();
 		}
 
+		function get4Letters(words) {
+			const wordsFormatted = words.map((item) => item.slice(0, 4));
+
+			return wordsFormatted;
+		}
+
+		function calendarInnerCreate() {
+			const calendar = document.getElementById("calendar");
+			const calendarInner = document.createElement("div");
+			calendarInner.className = "calendar__inner";
+			calendar.appendChild(calendarInner);
+		}
+
+		function calendarMonthCreate() {
+			const calendarInner = document.querySelector(".calendar__inner");
+			const calendarMonth = document.createElement("DIV");
+			calendarMonth.className = "calendar__month";
+			calendarInner.appendChild(calendarMonth);
+		}
+
+		function calendarTableCreate() {
+			const calendarMonth = document.querySelectorAll(".calendar__month");
+			const calendarTable = document.createElement("TABLE");
+			calendarTable.className = "calendar__table";
+			[...calendarMonth].map((item) => item.appendChild(calendarTable));
+		}
+
+		function calendarHeaderCreate() {
+			const calendarTable = document.querySelectorAll(".calendar__table");
+			const calendarHeader = document.createElement("THEAD");
+			calendarHeader.className = "calendar__header";
+			[...calendarTable].map((item) => item.appendChild(calendarHeader));
+		}
+
+		function calendarCaptionCreate() {
+			const calendarTable = document.querySelectorAll(".calendar__table");
+			const calendarCaption = document.createElement("CAPTION");
+			calendarCaption.className = "calendar__caption";
+			[...calendarTable].map((item) => item.appendChild(calendarCaption));
+		}
+
+		function calendarTitleCreate() {
+			const monthsList = settings.months;
+			for (let month = 0; month <= 11; month++) {
+				const calendarCaption = document.querySelectorAll(".calendar__caption");
+				const calendarTitle = document.createElement("DIV");
+				calendarTitle.className = "calendar__title";
+				calendarTitle.innerText = monthsList[month];
+				[...calendarCaption].map((item) =>
+					item.appendChild(calendarTitle)
+				);
+			}
+		}
+
+		function calendarRowCreate(contain) {
+			const calendarRow = document.createElement("TR");
+			calendarRow.className = "calendar__row";
+			[...contain].map((item) => item.appendChild(calendarRow));
+		}
+
+		function calendarWeekCreate() {
+			const weeksList = settings.weeks;
+			const weeksListFormatted = get4Letters(weeksList);
+			for (let week = 0; week < 7; week++) {
+				const calendarRow = document.querySelectorAll(
+					".calendar__header .calendar__row"
+				);
+				const calendarWeek = document.createElement("TH");
+				calendarWeek.className = "calendar__cell calendar__week";
+				calendarWeek.innerText = weeksListFormatted[week];
+				[...calendarRow].map((item) => item.appendChild(calendarWeek));
+			}
+		}
+
+		function calendarBodyCreate() {
+			const calendarTable = document.querySelectorAll(".calendar__table");
+			const calendarBody = document.createElement("TBODY");
+			calendarBody.className = "calendar__body";
+			[...calendarTable].map((item) => item.appendChild(calendarBody));
+		}
+
+		function calendarCreateStructure() {
+			calendarInnerCreate();
+			calendarMonthCreate();
+			calendarTableCreate();
+			calendarCaptionCreate();
+			calendarTitleCreate();
+			calendarHeaderCreate();
+			calendarRowCreate(document.querySelectorAll(".calendar__header"));
+			calendarWeekCreate();
+			calendarBodyCreate();
+		}
+
 		function calendarCreate(year, month) {
 			var now = new Date(year, month - 1, 1);
 			var last = new Date(year, month, 0);
@@ -52,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					// determinamos en que dia empieza
 					day = 1;
 				}
-				
+
 				if (i < firstDayOfWeek || i >= lastCell) {
 					let emptyCell = `
 						<td class="calendar__cell calendar__day">
@@ -142,6 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				.getElementsByTagName("tbody")[0].innerHTML = result;
 		}
 
+		calendarCreateStructure();
 		calendarCreate(getThisYear(), getThisMonth() + 1);
 
 		let buttonToday = document.getElementById("goToday");
