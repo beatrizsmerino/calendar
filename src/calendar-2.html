@@ -39,7 +39,36 @@
 		<main class="page__main sticky__main">
 			<section class="page__section page__inner">
 				<div class="page__container">
-					<div id="calendar" class="calendar no-select"></div>
+					<div class="list-buttons">
+						<button id="goLastYear" class="button button--black">
+							Last Year
+						</button>
+						<button id="goToday" class="button">
+							Today
+						</button>
+						<button id="goNextYear" class="button button--black">
+							Next Year
+						</button>
+					</div>
+
+					<div class="calendar__wrapper">
+						<table id="calendar" class="calendar">
+							<caption class="calendar__caption"></caption>
+							<thead>
+								<tr>
+									<th>Lun</th>
+									<th>Mar</th>
+									<th>Mie</th>
+									<th>Jue</th>
+									<th>Vie</th>
+									<th>Sab</th>
+									<th>Dom</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</section>
 		</main>
