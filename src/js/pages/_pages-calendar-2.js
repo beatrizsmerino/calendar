@@ -83,11 +83,11 @@ function mostrarCalendario(year, month) {
 					${year}
 				</span>
 			</div>
-			<div>
-				<a onclick='mostrarCalendario(${prevYear},${prevMonth})'>
+			<div class="button__list button__list--center">
+				<a class="button button--line-black" onclick='mostrarCalendario(${prevYear},${prevMonth})'>
 					&lt;
 				</a>
-				<a onclick='mostrarCalendario(${nextYear},${nextMonth})'>
+				<a class="button button--line-black" onclick='mostrarCalendario(${nextYear},${nextMonth})'>
 					&gt;
 				</a>
 			</div>
