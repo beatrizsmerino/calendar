@@ -8,42 +8,77 @@
 
 .page-calendar-2
 	.calendar
-		height: 26rem
-  
-		&__wrapper
-			position: relative
-    
+		width: 40rem
+		margin: 0 auto
+
+		&__year
+			text-align: center
+			font-size: 4rem
+			font-weight: 700
+
 		&__caption
 			text-align: left
 			padding: 0.5rem 1rem
 			font-weight: bold
-    
-		div
-			&:nth-child(1)
-				float: left
-      
-			&:nth-child(2)
-				float: right
 
-		th,
-		td
-			padding: 1rem
-  
-		td
-			text-align: center
-    
-		a
-			cursor: pointer
-    
-		.hoy
-			width: 4rem
-			height: 4rem
-			margin: 0 auto
-			padding: 1rem
+			> div
+				width: 100%
+				display: flex
+				justify-content: space-between
+				align-items: center
+
+			.button
+				&__list
+					margin-top: 0
+
+		&__inner
 			display: flex
-			justify-content: center
 			align-items: center
+			justify-content: center
+
+		&__month
+				
+		&__table
+
+		&__title
+			padding: 0.8rem
+			font-size: 3.2rem
+
+		&__header
+		
+		&__body
+
+		&__cell
+			padding: 0.8rem
 			text-align: center
-			color: #fff
-			border-radius: 50%
-			background-color: rgba(tomato, 0.7)
+			font-size: 1.6rem
+			
+		&__row
+			
+		&__week
+		
+		&__weekend
+			background-color: rgba($color-black, 0.1)
+			
+		&__day
+
+		&__today
+			position: relative
+			color: $color-white
+
+			span
+				position: relative
+				z-index: 2
+			
+			&:before
+				content: ''
+				display: inline-block
+				width: 4rem
+				height: 4rem
+				position: absolute
+				top: calc(50% - 4rem/2)
+				left: calc(50% - 4rem/2)
+				z-index: 1
+				border: 0.2rem solid $color-black
+				border-radius: 50%
+				background-color: $color-black

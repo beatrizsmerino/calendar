@@ -23,7 +23,7 @@ function mostrarCalendario(year, month) {
 	var primerDiaSemana = now.getDay() == 0 ? 7 : now.getDay();
 	var ultimoDiaMes = last.getDate();
 	var dia = 0;
-	var resultado = '<tr>';
+	var resultado = '<tr class="calendar__row">';
 	var diaActual = 0;
 	var last_cell = primerDiaSemana + ultimoDiaMes;
 
@@ -36,7 +36,14 @@ function mostrarCalendario(year, month) {
 		}
 		if (i < primerDiaSemana || i >= last_cell) {
 			// celda vacia
-			resultado += '<td>&nbsp;</td>';
+			resultado +=
+				`
+					<td class="calendar__cell calendar__day">
+						<span>
+							&nbsp;
+						</span>
+					</td>
+				`;
 		} else {
 			// mostramos el dia
 			if (
@@ -44,13 +51,27 @@ function mostrarCalendario(year, month) {
 				month == actual.getMonth() + 1 &&
 				year == actual.getFullYear()
 			)
-				resultado += `<td class="hoy">${dia}</td>`;
-			else resultado += `<td>${dia}</td>`;
+				resultado += 
+					`
+						<td class="calendar__cell calendar__day calendar__today">
+							<span>
+								${dia}
+							</span>
+						</td>
+					`;
+			else resultado += 
+				`
+					<td class="calendar__cell calendar__day">
+						<span>
+							${dia}
+						</span>
+					</td>
+				`;
 			dia++;
 		}
 		if (i % 7 == 0) {
 			if (dia > ultimoDiaMes) break;
-			resultado += '</tr><tr>';
+			resultado += '</tr><tr class="calendar__row">';
 		}
 	}
 	resultado += '</tr>';
@@ -75,22 +96,24 @@ function mostrarCalendario(year, month) {
 		.getElementById("calendar")
 		.getElementsByTagName("caption")[0].innerHTML =
 			`
-			<div>
-				<span class='calendar__month'>
-					${meses[month - 1]}
-				</span>
-				<span class='calendar__year'>
-					${year}
-				</span>
-			</div>
-			<div class="button__list button__list--center">
-				<a class="button button--line-black" onclick='mostrarCalendario(${prevYear},${prevMonth})'>
-					&lt;
-				</a>
-				<a class="button button--line-black" onclick='mostrarCalendario(${nextYear},${nextMonth})'>
-					&gt;
-				</a>
-			</div>
+				<div>
+					<div class="calendar__title">
+						<span class='calendar__month'>
+							${meses[month - 1]}
+						</span>
+						<span class='calendar__year'>
+							${year}
+						</span>
+					</div>
+					<div class="button__list button__list--center">
+						<a class="button button--line-black" onclick='mostrarCalendario(${prevYear},${prevMonth})'>
+							&lt;
+						</a>
+						<a class="button button--line-black" onclick='mostrarCalendario(${nextYear},${nextMonth})'>
+							&gt;
+						</a>
+					</div>
+				</div>
 			`;
 	document
 		.getElementById("calendar")

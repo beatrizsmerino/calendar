@@ -38,22 +38,26 @@
 		<main class="page__main sticky__main">
 			<section class="page__section page__inner">
 				<div class="page__container">
-					<div class="calendar__wrapper">
-						<table id="calendar" class="calendar">
-							<caption class="calendar__caption"></caption>
-							<thead>
-								<tr>
-									<th>Lun</th>
-									<th>Mar</th>
-									<th>Mie</th>
-									<th>Jue</th>
-									<th>Vie</th>
-									<th>Sab</th>
-									<th>Dom</th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
+					<div id="calendar" class="calendar no-select">
+						<div class="calendar__inner">
+							<div class="calendar__month">
+								<table class="calendar__table">
+									<caption class="calendar__caption"></caption>
+									<thead class="calendar__header">
+										<tr class="calendar__row">
+											<th class="calendar__cell calendar__week">Lun</th>
+											<th class="calendar__cell calendar__week">Mar</th>
+											<th class="calendar__cell calendar__week">Mie</th>
+											<th class="calendar__cell calendar__week">Jue</th>
+											<th class="calendar__cell calendar__week">Vie</th>
+											<th class="calendar__cell calendar__week">Sab</th>
+											<th class="calendar__cell calendar__week">Dom</th>
+										</tr>
+									</thead>
+									<tbody class="calendar__body"></tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 					<div class="button__list button__list--center no-select">
 						<button id="goLastYear" class="button button--bg-black">
