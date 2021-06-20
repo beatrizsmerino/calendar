@@ -162,12 +162,19 @@ function calendarCreateStructure(monthsList, weeksList) {
 		[...calendarMonth].map((item) => item.appendChild(calendarTable));
 	}
 
-	function calendarTitleCreate(monthsList, month) {
+	function calendarCaptionCreate() {
 		const calendarTable = document.querySelectorAll(".calendar__table");
-		const calendarTitle = document.createElement("CAPTION");
+		const calendarCaption = document.createElement("CAPTION");
+		calendarCaption.className = "calendar__caption";
+		[...calendarTable].map((item) => item.appendChild(calendarCaption));
+	}
+
+	function calendarTitleCreate(monthsList, month) {
+		const calendarCaption = document.querySelectorAll(".calendar__caption");
+		const calendarTitle = document.createElement("DIV");
 		calendarTitle.className = "calendar__title";
 		calendarTitle.innerText = monthsList[month];
-		[...calendarTable].map((item) => item.appendChild(calendarTitle));
+		[...calendarCaption].map((item) => item.appendChild(calendarTitle));
 	}
 
 	function calendarHeaderCreate(){
@@ -214,6 +221,7 @@ function calendarCreateStructure(monthsList, weeksList) {
 	for (let m = 0; m <= 11; m++) {
 		calendarMonthCreate();
 		calendarTableCreate();
+		calendarCaptionCreate();
 		calendarTitleCreate(monthsList, m);
 		calendarHeaderCreate();
 
