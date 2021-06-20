@@ -23,7 +23,7 @@ function mostrarCalendario(year, month) {
 	var primerDiaSemana = now.getDay() == 0 ? 7 : now.getDay();
 	var ultimoDiaMes = last.getDate();
 	var dia = 0;
-	var resultado = "<tr>";
+	var resultado = '<tr>';
 	var diaActual = 0;
 	var last_cell = primerDiaSemana + ultimoDiaMes;
 
@@ -36,7 +36,7 @@ function mostrarCalendario(year, month) {
 		}
 		if (i < primerDiaSemana || i >= last_cell) {
 			// celda vacia
-			resultado += "<td>&nbsp;</td>";
+			resultado += '<td>&nbsp;</td>';
 		} else {
 			// mostramos el dia
 			if (
@@ -44,16 +44,16 @@ function mostrarCalendario(year, month) {
 				month == actual.getMonth() + 1 &&
 				year == actual.getFullYear()
 			)
-				resultado += "<td class='hoy'>" + dia + "</td>";
-			else resultado += "<td>" + dia + "</td>";
+				resultado += `<td class="hoy">${dia}</td>`;
+			else resultado += `<td>${dia}</td>`;
 			dia++;
 		}
 		if (i % 7 == 0) {
 			if (dia > ultimoDiaMes) break;
-			resultado += "</tr><tr>\n";
+			resultado += '</tr><tr>';
 		}
 	}
-	resultado += "</tr>";
+	resultado += '</tr>';
 
 	// Calculamos el siguiente mes y año
 	nextMonth = month + 1;
@@ -74,21 +74,24 @@ function mostrarCalendario(year, month) {
 	document
 		.getElementById("calendar")
 		.getElementsByTagName("caption")[0].innerHTML =
-		"<div><span class='calendar__month'>" +
-		meses[month - 1] +
-		"</span>" +
-		"<span class='calendar__year'>" +
-		year +
-		"</span>" +
-		"</div><div><a onclick='mostrarCalendario(" +
-		prevYear +
-		"," +
-		prevMonth +
-		")'>&lt;</a> <a onclick='mostrarCalendario(" +
-		nextYear +
-		"," +
-		nextMonth +
-		")'>&gt;</a></div>";
+			`
+			<div>
+				<span class='calendar__month'>
+					${meses[month - 1]}
+				</span>
+				<span class='calendar__year'>
+					${year}
+				</span>
+			</div>
+			<div>
+				<a onclick='mostrarCalendario(${prevYear},${prevMonth})'>
+					&lt;
+				</a>
+				<a onclick='mostrarCalendario(${nextYear},${nextMonth})'>
+					&gt;
+				</a>
+			</div>
+			`;
 	document
 		.getElementById("calendar")
 		.getElementsByTagName("tbody")[0].innerHTML = resultado;
