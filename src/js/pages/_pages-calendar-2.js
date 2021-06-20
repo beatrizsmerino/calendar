@@ -20,28 +20,27 @@ document.addEventListener("DOMContentLoaded", function () {
 			weeks: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
 		};
 
-		var actual = new Date();
+		var date = new Date();
 
-		function mostrarCalendario(year, month) {
+		function calendarCreate(year, month) {
 			var now = new Date(year, month - 1, 1);
 			var last = new Date(year, month, 0);
-			var primerDiaSemana = now.getDay() == 0 ? 7 : now.getDay();
-			var ultimoDiaMes = last.getDate();
-			var dia = 0;
-			var resultado = '<tr class="calendar__row">';
-			var diaActual = 0;
-			var last_cell = primerDiaSemana + ultimoDiaMes;
+			var firstDayOfWeek = now.getDay() == 0 ? 7 : now.getDay();
+			var lastDayOfMonth = last.getDate();
+			var day = 0;
+			var result = '<tr class="calendar__row">';
+			var lastCell = firstDayOfWeek + lastDayOfMonth;
 
 			// hacemos un bucle hasta 42, que es el máximo de valores que puede
 			// haber... 6 columnas de 7 dias
 			for (var i = 1; i <= 42; i++) {
-				if (i == primerDiaSemana) {
+				if (i == firstDayOfWeek) {
 					// determinamos en que dia empieza
-					dia = 1;
+					day = 1;
 				}
-				if (i < primerDiaSemana || i >= last_cell) {
+				if (i < firstDayOfWeek || i >= lastCell) {
 					// celda vacia
-					resultado += `
+					result += `
 					<td class="calendar__cell calendar__day">
 						<span>
 							&nbsp;
@@ -51,33 +50,33 @@ document.addEventListener("DOMContentLoaded", function () {
 				} else {
 					// mostramos el dia
 					if (
-						dia == actual.getDate() &&
-						month == actual.getMonth() + 1 &&
-						year == actual.getFullYear()
+						day == date.getDate() &&
+						month == date.getMonth() + 1 &&
+						year == date.getFullYear()
 					)
-						resultado += `
+						result += `
 						<td class="calendar__cell calendar__day calendar__today">
 							<span>
-								${dia}
+								${day}
 							</span>
 						</td>
 					`;
 					else
-						resultado += `
+						result += `
 					<td class="calendar__cell calendar__day">
 						<span>
-							${dia}
+							${day}
 						</span>
 					</td>
 				`;
-					dia++;
+					day++;
 				}
 				if (i % 7 == 0) {
-					if (dia > ultimoDiaMes) break;
-					resultado += '</tr><tr class="calendar__row">';
+					if (day > lastDayOfMonth) break;
+					result += '</tr><tr class="calendar__row">';
 				}
 			}
-			resultado += "</tr>";
+			result += "</tr>";
 
 			// Calculamos el siguiente mes y año
 			let nextMonth = month + 1;
@@ -108,10 +107,10 @@ document.addEventListener("DOMContentLoaded", function () {
 						</span>
 					</div>
 					<div class="button__list button__list--center">
-						<a class="button button--line-black" onclick='mostrarCalendario(${prevYear},${prevMonth})'>
+						<a class="button button--line-black" onclick='calendarCreate(${prevYear},${prevMonth})'>
 							&lt;
 						</a>
-						<a class="button button--line-black" onclick='mostrarCalendario(${nextYear},${nextMonth})'>
+						<a class="button button--line-black" onclick='calendarCreate(${nextYear},${nextMonth})'>
 							&gt;
 						</a>
 					</div>
@@ -119,25 +118,25 @@ document.addEventListener("DOMContentLoaded", function () {
 			`;
 			document
 				.getElementById("calendar")
-				.getElementsByTagName("tbody")[0].innerHTML = resultado;
+				.getElementsByTagName("tbody")[0].innerHTML = result;
 		}
 
-		mostrarCalendario(actual.getFullYear(), actual.getMonth() + 1);
+		calendarCreate(date.getFullYear(), date.getMonth() + 1);
 
 		let buttonToday = document.getElementById("goToday");
 		let buttonNextYear = document.getElementById("goNextYear");
 		let buttonLastYear = document.getElementById("goLastYear");
 
 		buttonToday.addEventListener("click", function () {
-			mostrarCalendario(actual.getFullYear(), actual.getMonth() + 1);
+			calendarCreate(date.getFullYear(), date.getMonth() + 1);
 		});
 
 		buttonNextYear.addEventListener("click", function () {
-			mostrarCalendario(actual.getFullYear() + 1, actual.getMonth() + 1);
+			calendarCreate(date.getFullYear() + 1, date.getMonth() + 1);
 		});
 
 		buttonLastYear.addEventListener("click", function () {
-			mostrarCalendario(actual.getFullYear() - 1, actual.getMonth() + 1);
+			calendarCreate(date.getFullYear() - 1, date.getMonth() + 1);
 		});
 	}
 });
