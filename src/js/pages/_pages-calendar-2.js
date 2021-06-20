@@ -41,12 +41,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				if (i < firstDayOfWeek || i >= lastCell) {
 					// celda vacia
 					result += `
-					<td class="calendar__cell calendar__day">
-						<span>
-							&nbsp;
-						</span>
-					</td>
-				`;
+						<td class="calendar__cell calendar__day">
+							<span>
+								&nbsp;
+							</span>
+						</td>
+					`;
 				} else {
 					// mostramos el dia
 					if (
@@ -55,20 +55,20 @@ document.addEventListener("DOMContentLoaded", function () {
 						year == date.getFullYear()
 					)
 						result += `
-						<td class="calendar__cell calendar__day calendar__today">
-							<span>
-								${day}
-							</span>
-						</td>
-					`;
+							<td class="calendar__cell calendar__day calendar__today">
+								<span>
+									${day}
+								</span>
+							</td>
+						`;
 					else
 						result += `
-					<td class="calendar__cell calendar__day">
-						<span>
-							${day}
-						</span>
-					</td>
-				`;
+							<td class="calendar__cell calendar__day">
+								<span>
+									${day}
+								</span>
+							</td>
+						`;
 					day++;
 				}
 				if (i % 7 == 0) {
@@ -97,25 +97,25 @@ document.addEventListener("DOMContentLoaded", function () {
 			document
 				.getElementById("calendar")
 				.getElementsByTagName("caption")[0].innerHTML = `
-				<div>
-					<div class="calendar__title">
-						<span class='calendar__month'>
-							${settings.months[month - 1]}
-						</span>
-						<span class='calendar__year'>
-							${year}
-						</span>
+					<div>
+						<div class="calendar__title">
+							<span class='calendar__month'>
+								${settings.months[month - 1]}
+							</span>
+							<span class='calendar__year'>
+								${year}
+							</span>
+						</div>
+						<div class="button__list button__list--center">
+							<a class="button button--line-black" onclick='calendarCreate(${prevYear},${prevMonth})'>
+								&lt;
+							</a>
+							<a class="button button--line-black" onclick='calendarCreate(${nextYear},${nextMonth})'>
+								&gt;
+							</a>
+						</div>
 					</div>
-					<div class="button__list button__list--center">
-						<a class="button button--line-black" onclick='calendarCreate(${prevYear},${prevMonth})'>
-							&lt;
-						</a>
-						<a class="button button--line-black" onclick='calendarCreate(${nextYear},${nextMonth})'>
-							&gt;
-						</a>
-					</div>
-				</div>
-			`;
+				`;
 			document
 				.getElementById("calendar")
 				.getElementsByTagName("tbody")[0].innerHTML = result;
