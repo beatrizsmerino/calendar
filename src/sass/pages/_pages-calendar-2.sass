@@ -7,3 +7,72 @@
 
 
 .page-calendar-2
+	.calendar
+		height: 260px
+  
+		&__wrapper
+			position: relative
+    
+		&__caption
+			text-align: left
+			padding: 5px 10px
+			font-weight: bold
+    
+		div
+			&:nth-child(1)
+				float: left
+      
+			&:nth-child(2)
+				float: right
+
+		th,
+		td
+			padding: 10px
+  
+		td
+			text-align: center
+    
+		a
+			cursor: pointer
+    
+		.hoy
+			width: 40px
+			height: 40px
+			margin: 0 auto
+			padding: 10px
+			display: flex
+			justify-content: center
+			align-items: center
+			text-align: center
+			color: #fff
+			border-radius: 50%
+			background-color: rgba(tomato, 0.7)
+
+    
+	.list-buttons
+		margin-bottom: 2rem
+		text-align: center
+  
+	.button
+		padding: 0.5rem 1rem
+		display: inline-block
+		font-size: 1rem
+		color: tomato
+		border: 2px solid tomato
+		background-color: white
+		cursor: pointer
+  
+		&:hover
+			color: white
+			border-color: transparent
+			background-color: tomato
+  
+		&--black
+			color: black
+			border-color: black
+			background-color: white
+    
+		&:hover
+			color: white
+			border-color: transparent
+			background-color: black
