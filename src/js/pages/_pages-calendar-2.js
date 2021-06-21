@@ -83,19 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			[...calendarTable].map((item) => item.appendChild(calendarCaption));
 		}
 
-		function calendarTitleCreate() {
-			const monthsList = settings.months;
-			for (let month = 0; month <= 11; month++) {
-				const calendarCaption = document.querySelectorAll(".calendar__caption");
-				const calendarTitle = document.createElement("DIV");
-				calendarTitle.className = "calendar__title";
-				calendarTitle.innerText = monthsList[month];
-				[...calendarCaption].map((item) =>
-					item.appendChild(calendarTitle)
-				);
-			}
-		}
-
 		function calendarRowCreate(contain) {
 			const calendarRow = document.createElement("TR");
 			calendarRow.className = "calendar__row";
@@ -156,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarMonthCreate();
 			calendarTableCreate();
 			calendarCaptionCreate();
-			calendarTitleCreate();
 			calendarHeaderCreate();
 			calendarRowCreate(document.querySelectorAll(".calendar__header"));
 			calendarWeekCreate();
@@ -203,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					result += '</tr><tr class="calendar__row">';
 				}
 			}
-			result += "</tr>";
+			result += '</tr>';
 
 			document.querySelector(".calendar__body").innerHTML = result;
 		}
