@@ -231,10 +231,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			let captionTemplate = `
 					<div>
 						<div class="calendar__title">
-							<span class='calendar__year'>
+							<span class='calendar__year-name'>
 								${year}
 							</span>
-							<span class='calendar__month'>
+							<span class='calendar__month-name'>
 								${settings.months[month - 1]}
 							</span>
 						</div>
