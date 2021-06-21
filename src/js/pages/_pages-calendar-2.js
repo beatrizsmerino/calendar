@@ -124,15 +124,31 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarDayCreate(day) {
 			const calendarDay = document.createElement("TD");
 			calendarDay.className = "calendar__cell calendar__day";
-			calendarDay.innerHTML = `<span>${day}</span>`;
+			calendarDay.innerHTML = day;
 			return calendarDay.outerHTML;
 		}
 
 		function calendarTodayCreate(day) {
 			const calendarDay = document.createElement("TD");
 			calendarDay.className = "calendar__cell calendar__day calendar__today";
-			calendarDay.innerHTML = `<span>${day}</span>`;
+			calendarDay.innerHTML = day;
 			return calendarDay.outerHTML;
+		}
+
+		function calendarSetWeekend() {
+			const weekendSaturdays = document.querySelectorAll(
+				".calendar__body .calendar__row .calendar__cell:nth-child(6)"
+			);
+
+			const weekendSundays = document.querySelectorAll(
+				".calendar__body .calendar__row .calendar__cell:nth-child(7)"
+			);
+
+			[...weekendSaturdays, ...weekendSundays].map((item) => {
+				if (item.childNodes.length) {
+					item.classList.add("calendar__weekend");
+				}
+			});
 		}
 
 		function calendarCreateStructure() {
@@ -165,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 
 				if (i < firstDayOfWeek || i >= lastCell) {
-					let emptyCell = calendarDayCreate('&nbsp');
+					let emptyCell = calendarDayCreate('');
 					result += emptyCell;
 				} else {
 					// mostramos el dia
@@ -174,10 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
 						month == getThisMonth() + 1 &&
 						year == getThisYear()
 					) {
-						let todayCell = calendarTodayCreate(day);
+						let todayCell = calendarTodayCreate(`<span>${day}</span>`);
 						result += todayCell;
 					} else {
-						let dayCell = calendarDayCreate(day);
+						let dayCell = calendarDayCreate(`<span>${day}</span>`);
 						result += dayCell;
 					}
 					day++;
@@ -236,6 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarCreate(year, month) {
 			calendarButtonsPrevAndNext(year, month);
 			calendarAllDaysCreate(year, month);
+			calendarSetWeekend();
 		}
 
 		function calendarEvents() {
