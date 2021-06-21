@@ -137,6 +137,49 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarBodyCreate();
 		}
 
+		function calendarButtonsPrevAndNext(year, month) {
+			// Calculamos el siguiente mes y año
+			let nextMonth = month + 1;
+			let nextYear = year;
+			if (month + 1 > 12) {
+				nextMonth = 1;
+				nextYear = year + 1;
+			}
+
+			// Calculamos el anterior mes y año
+			let prevMonth = month - 1;
+			let prevYear = year;
+			if (month - 1 < 1) {
+				prevMonth = 12;
+				prevYear = year - 1;
+			}
+
+			let captionTemplate = `
+					<div>
+						<div class="calendar__title">
+							<span class='calendar__month'>
+								${settings.months[month - 1]}
+							</span>
+							<span class='calendar__year'>
+								${year}
+							</span>
+						</div>
+						<div class="button__list button__list--center">
+							<a class="button button--line-black" onclick='calendarCreate(${prevYear},${prevMonth})'>
+								&lt;
+							</a>
+							<a class="button button--line-black" onclick='calendarCreate(${nextYear},${nextMonth})'>
+								&gt;
+							</a>
+						</div>
+					</div>
+				`;
+
+			document
+				.getElementById("calendar")
+				.getElementsByTagName("caption")[0].innerHTML = captionTemplate;
+		}
+
 		function calendarCreate(year, month) {
 			var now = new Date(year, month - 1, 1);
 			var last = new Date(year, month, 0);
@@ -198,46 +241,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 			result += "</tr>";
 
-			// Calculamos el siguiente mes y año
-			let nextMonth = month + 1;
-			let nextYear = year;
-			if (month + 1 > 12) {
-				nextMonth = 1;
-				nextYear = year + 1;
-			}
+			calendarButtonsPrevAndNext(year, month);
 
-			// Calculamos el anterior mes y año
-			let prevMonth = month - 1;
-			let prevYear = year;
-			if (month - 1 < 1) {
-				prevMonth = 12;
-				prevYear = year - 1;
-			}
-
-			let captionTemplate = `
-					<div>
-						<div class="calendar__title">
-							<span class='calendar__month'>
-								${settings.months[month - 1]}
-							</span>
-							<span class='calendar__year'>
-								${year}
-							</span>
-						</div>
-						<div class="button__list button__list--center">
-							<a class="button button--line-black" onclick='calendarCreate(${prevYear},${prevMonth})'>
-								&lt;
-							</a>
-							<a class="button button--line-black" onclick='calendarCreate(${nextYear},${nextMonth})'>
-								&gt;
-							</a>
-						</div>
-					</div>
-				`;
-
-			document
-				.getElementById("calendar")
-				.getElementsByTagName("caption")[0].innerHTML = captionTemplate;
 			document
 				.getElementById("calendar")
 				.getElementsByTagName("tbody")[0].innerHTML = result;
