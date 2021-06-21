@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			],
 		};
 
-
 		function getThisYear() {
 			const date = new Date();
 			return date.getFullYear();
@@ -88,7 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarTitleCreate() {
 			const monthsList = settings.months;
 			for (let month = 0; month <= 11; month++) {
-				const calendarCaption = document.querySelectorAll(".calendar__caption");
+				const calendarCaption =
+					document.querySelectorAll(".calendar__caption");
 				const calendarTitle = document.createElement("DIV");
 				calendarTitle.className = "calendar__title";
 				calendarTitle.innerText = monthsList[month];
@@ -243,23 +243,26 @@ document.addEventListener("DOMContentLoaded", function () {
 				.getElementsByTagName("tbody")[0].innerHTML = result;
 		}
 
+		function calendarEvents() {
+			let buttonToday = document.getElementById("goToday");
+			let buttonNextYear = document.getElementById("goNextYear");
+			let buttonLastYear = document.getElementById("goLastYear");
+
+			buttonToday.addEventListener("click", function () {
+				calendarCreate(getThisYear(), getThisMonth() + 1);
+			});
+
+			buttonNextYear.addEventListener("click", function () {
+				calendarCreate(getThisYear() + 1, getThisMonth() + 1);
+			});
+
+			buttonLastYear.addEventListener("click", function () {
+				calendarCreate(getThisYear() - 1, getThisMonth() + 1);
+			});
+		}
+
 		calendarCreateStructure();
 		calendarCreate(getThisYear(), getThisMonth() + 1);
-
-		let buttonToday = document.getElementById("goToday");
-		let buttonNextYear = document.getElementById("goNextYear");
-		let buttonLastYear = document.getElementById("goLastYear");
-
-		buttonToday.addEventListener("click", function () {
-			calendarCreate(getThisYear(), getThisMonth() + 1);
-		});
-
-		buttonNextYear.addEventListener("click", function () {
-			calendarCreate(getThisYear() + 1, getThisMonth() + 1);
-		});
-
-		buttonLastYear.addEventListener("click", function () {
-			calendarCreate(getThisYear() - 1, getThisMonth() + 1);
-		});
+		calendarEvents();
 	}
 });
