@@ -209,6 +209,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarButtonsPrevAndNext(year, month) {
+			year = parseInt(year);
+			month = parseInt(month);
+
 			// Calculamos el siguiente mes y año
 			let nextMonth = month + 1;
 			let nextYear = year;
@@ -228,18 +231,18 @@ document.addEventListener("DOMContentLoaded", function () {
 			let captionTemplate = `
 					<div>
 						<div class="calendar__title">
-							<span class='calendar__month'>
-								${settings.months[month - 1]}
-							</span>
 							<span class='calendar__year'>
 								${year}
 							</span>
+							<span class='calendar__month'>
+								${settings.months[month - 1]}
+							</span>
 						</div>
 						<div class="button__list button__list--center">
-							<a class="button button--line-black" onclick='calendarCreate(${prevYear},${prevMonth})'>
+							<a class="button__prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}"'>
 								&lt;
 							</a>
-							<a class="button button--line-black" onclick='calendarCreate(${nextYear},${nextMonth})'>
+							<a class="button__next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}"'>
 								&gt;
 							</a>
 						</div>
@@ -247,6 +250,17 @@ document.addEventListener("DOMContentLoaded", function () {
 				`;
 
 			document.querySelector(".calendar__caption").innerHTML = captionTemplate;
+
+			let buttonPrev = document.querySelectorAll('.button__prev');
+			let buttonNext = document.querySelectorAll('.button__next');
+
+			[...buttonPrev, ...buttonNext].map((item) =>
+				item.addEventListener("click", function () {
+					let year = this.getAttribute("date-year");
+					let month = this.getAttribute("date-month");
+					calendarCreate(year, month);
+				})
+			);
 		}
 
 		function calendarCreate(year, month) {
