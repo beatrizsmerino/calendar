@@ -43,6 +43,23 @@ document.addEventListener("DOMContentLoaded", function () {
 			return date.getDate();
 		}
 
+		function createYearMonthDay(year, month, day) {
+			const yyyy = String(year);
+			const mm = String(month + 1).padStart(2, "0"); //January is 0!
+			const dd = String(day).padStart(2, "0");
+			const yearMonthDay = yyyy + "-" + mm + "-" + dd;
+			return yearMonthDay;
+		}
+
+		function getToday() {
+			const today = createYearMonthDay(
+				getThisYear(),
+				getThisMonth(),
+				getThisDay()
+			);
+			return today;
+		}
+
 		function get4Letters(words) {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
 			return wordsFormatted;
@@ -108,18 +125,22 @@ document.addEventListener("DOMContentLoaded", function () {
 			[...calendarTable].map((item) => item.appendChild(calendarBody));
 		}
 
-		function calendarDayCreate(day) {
-			const calendarDay = document.createElement("TD");
-			calendarDay.className = "calendar__cell calendar__day";
-			calendarDay.innerHTML = day;
-			return calendarDay.outerHTML;
-		}
+		function calendarDayCreate(year, month, day) {
+				const calendarDay = document.createElement("TD");
+				
+				if(getThisDay() === day){
+					calendarDay.className = "calendar__cell calendar__day calendar__today";
+				} else {
+					calendarDay.className = "calendar__cell calendar__day";
+				}
+				
+				if(day != 0){
+					const yearMonthDay = createYearMonthDay(year, month - 1,day);
+					calendarDay.setAttribute("data-time", yearMonthDay);
+					calendarDay.innerHTML = `<span>${day}</span>`;
+				}
 
-		function calendarTodayCreate(day) {
-			const calendarDay = document.createElement("TD");
-			calendarDay.className = "calendar__cell calendar__day calendar__today";
-			calendarDay.innerHTML = day;
-			return calendarDay.outerHTML;
+				return calendarDay.outerHTML;
 		}
 
 		function calendarSetWeekend() {
@@ -167,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 
 				if (i < firstDayOfWeek || i >= lastCell) {
-					let emptyCell = calendarDayCreate('');
+					let emptyCell = calendarDayCreate("", "", "");
 					result += emptyCell;
 				} else {
 					// mostramos el dia
@@ -176,10 +197,10 @@ document.addEventListener("DOMContentLoaded", function () {
 						month == getThisMonth() + 1 &&
 						year == getThisYear()
 					) {
-						let todayCell = calendarTodayCreate(`<span>${day}</span>`);
+						let todayCell = calendarDayCreate(year, month, day);
 						result += todayCell;
 					} else {
-						let dayCell = calendarDayCreate(`<span>${day}</span>`);
+						let dayCell = calendarDayCreate(year, month, day);
 						result += dayCell;
 					}
 					day++;
