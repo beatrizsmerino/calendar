@@ -225,11 +225,19 @@ document.addEventListener("DOMContentLoaded", function () {
 							</span>
 						</div>
 						<div class="button__list button__list--center">
-							<a class="button__prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}"'>
-								&lt;
+							<a class="calendar__button-prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}"'>
+								<i class="icon">
+									<svg class="icon__svg">
+										<use class="icon__use" href="#icon-chevron-left" />
+									</svg>
+								</i>
 							</a>
-							<a class="button__next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}"'>
-								&gt;
+							<a class="calendar__button-next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}"'>
+								<i class="icon">
+									<svg class="icon__svg">
+										<use class="icon__use" href="#icon-chevron-right" />
+									</svg>
+								</i>
 							</a>
 						</div>
 					</div>
@@ -237,8 +245,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			document.querySelector(".calendar__caption").innerHTML = captionTemplate;
 
-			let buttonPrev = document.querySelectorAll('.button__prev');
-			let buttonNext = document.querySelectorAll('.button__next');
+			let buttonPrev = document.querySelectorAll('.calendar__button-prev');
+			let buttonNext = document.querySelectorAll('.calendar__button-next');
 
 			[...buttonPrev, ...buttonNext].map((item) =>
 				item.addEventListener("click", function () {
