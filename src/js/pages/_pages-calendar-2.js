@@ -121,6 +121,20 @@ document.addEventListener("DOMContentLoaded", function () {
 			[...calendarTable].map((item) => item.appendChild(calendarBody));
 		}
 
+		function calendarDayCreate(day) {
+			const calendarDay = document.createElement("TD");
+			calendarDay.className = "calendar__cell calendar__day";
+			calendarDay.innerHTML = `<span>${day}</span>`;
+			return calendarDay.outerHTML;
+		}
+
+		function calendarTodayCreate(day) {
+			const calendarDay = document.createElement("TD");
+			calendarDay.className = "calendar__cell calendar__day calendar__today";
+			calendarDay.innerHTML = `<span>${day}</span>`;
+			return calendarDay.outerHTML;
+		}
+
 		function calendarCreateStructure() {
 			calendarInnerCreate();
 			calendarMonthCreate();
@@ -133,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarBodyCreate();
 		}
 
-		function calendarDaysCreate(year, month) {
+		function calendarAllDaysCreate(year, month) {
 			var now = new Date(year, month - 1, 1);
 			var last = new Date(year, month, 0);
 			var firstDayOfWeek = now.getDay() == 0 ? 7 : now.getDay();
@@ -151,14 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 
 				if (i < firstDayOfWeek || i >= lastCell) {
-					let emptyCell = `
-						<td class="calendar__cell calendar__day">
-							<span>
-								&nbsp;
-							</span>
-						</td>
-					`;
-
+					let emptyCell = calendarDayCreate('&nbsp');
 					result += emptyCell;
 				} else {
 					// mostramos el dia
@@ -167,22 +174,10 @@ document.addEventListener("DOMContentLoaded", function () {
 						month == getThisMonth() + 1 &&
 						year == getThisYear()
 					) {
-						let todayCell = `
-							<td class="calendar__cell calendar__day calendar__today">
-								<span>
-									${day}
-								</span>
-							</td>
-						`;
+						let todayCell = calendarTodayCreate(day);
 						result += todayCell;
 					} else {
-						let dayCell = `
-							<td class="calendar__cell calendar__day">
-								<span>
-									${day}
-								</span>
-							</td>
-						`;
+						let dayCell = calendarDayCreate(day);
 						result += dayCell;
 					}
 					day++;
@@ -240,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarCreate(year, month) {
 			calendarButtonsPrevAndNext(year, month);
-			calendarDaysCreate(year, month);
+			calendarAllDaysCreate(year, month);
 		}
 
 		function calendarEvents() {
