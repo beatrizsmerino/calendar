@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function get4Letters(words) {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
-
 			return wordsFormatted;
 		}
 
@@ -87,8 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarTitleCreate() {
 			const monthsList = settings.months;
 			for (let month = 0; month <= 11; month++) {
-				const calendarCaption =
-					document.querySelectorAll(".calendar__caption");
+				const calendarCaption = document.querySelectorAll(".calendar__caption");
 				const calendarTitle = document.createElement("DIV");
 				calendarTitle.className = "calendar__title";
 				calendarTitle.innerText = monthsList[month];
@@ -108,9 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const weeksList = settings.weeks;
 			const weeksListFormatted = get4Letters(weeksList);
 			for (let week = 0; week < 7; week++) {
-				const calendarRow = document.querySelectorAll(
-					".calendar__header .calendar__row"
-				);
+				const calendarRow = document.querySelectorAll(".calendar__header .calendar__row");
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
 				calendarWeek.innerText = weeksListFormatted[week];
@@ -198,9 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 			result += "</tr>";
 
-			document
-				.getElementById("calendar")
-				.getElementsByTagName("tbody")[0].innerHTML = result;
+			document.querySelector(".calendar__body").innerHTML = result;
 		}
 
 		function calendarButtonsPrevAndNext(year, month) {
@@ -241,9 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					</div>
 				`;
 
-			document
-				.getElementById("calendar")
-				.getElementsByTagName("caption")[0].innerHTML = captionTemplate;
+			document.querySelector(".calendar__caption").innerHTML = captionTemplate;
 		}
 
 		function calendarCreate(year, month) {
