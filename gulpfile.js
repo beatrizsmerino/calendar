@@ -59,7 +59,8 @@ let watchFilesHtml = pathDist + pathFilesHtml,
 let filesJsCompile = [
 	pathSrcJs + "scripts.js",
 	pathSrcJs + "components/_components-sprite.js",
-	pathSrcJs + "pages/_pages-calendar-1.js"
+	pathSrcJs + "pages/_pages-calendar-1.js",
+	pathSrcJs + "pages/_pages-calendar-2.js",
 ];
 
 
