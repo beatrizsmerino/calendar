@@ -7,7 +7,8 @@
 
 # Calendar
 
-![Image of Calendar](https://github.com/beatrizsmerino/calendar/blob/master/README/images/calendar.png)
+![Image of Calendar](README/images/calendar-1.jpg)
+![Image of Calendar](README/images/calendar-2.jpg)
 
 # NPM
 
