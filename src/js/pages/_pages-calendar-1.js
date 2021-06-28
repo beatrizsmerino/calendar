@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			return today;
 		}
 
-		function get4Letters(words) {
+		function getFirst4Letters(words) {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
 
 			return wordsFormatted;
@@ -397,7 +397,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarEmpty();
 			calendarCreateStructure(
 				settings.months[language],
-				get4Letters(settings.weeks[language])
+				getFirst4Letters(settings.weeks[language])
 			);
 			calendarSetDays();
 			calendarSetWeekend();
