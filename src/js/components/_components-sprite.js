@@ -1,7 +1,7 @@
 /**
  * @file componentSprites
  * @description Add sprite to html page
- * @author Beatriz Sopeña Merino <b.sopena@webpac.com>
+ * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
  * @copyright (2020)
  */
 
