@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function createYearMonthDay(year, month, day) {
 			const yyyy = String(year);
-			const mm = String(month + 1).padStart(2, "0"); //January is 0!
+			const mm = String(month + 1).padStart(2, "0"); // January is 0!
 			const dd = String(day).padStart(2, "0");
 			const yearMonthDay = yyyy + "-" + mm + "-" + dd;
 			return yearMonthDay;
@@ -177,11 +177,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			var result = '<tr class="calendar__row">';
 			var lastCell = firstDayOfWeek + lastDayOfMonth;
 
-			// hacemos un bucle hasta 42, que es el máximo de valores que puede
-			// haber... 6 columnas de 7 dias
+			// Created loop up to 42, which is the maximum number of values that can be present.
+			// 6 columns of 7 days
 			for (var i = 1; i <= 42; i++) {
 				if (i == firstDayOfWeek) {
-					// determinamos en que dia empieza
+					// Determine on which day it starts
 					day = 1;
 				}
 
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					let emptyCell = calendarDayCreate("", "", "");
 					result += emptyCell;
 				} else {
-					// mostramos el dia
+					// Show the day
 					if (
 						day == getThisDay() &&
 						month == getThisMonth() + 1 &&
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			year = parseInt(year);
 			month = parseInt(month);
 
-			// Calculamos el siguiente mes y año
+			// Calculate the next month and year
 			let nextMonth = month + 1;
 			let nextYear = year;
 			if (month + 1 > 12) {
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				nextYear = year + 1;
 			}
 
-			// Calculamos el anterior mes y año
+			// Calculate the previous month and year
 			let prevMonth = month - 1;
 			let prevYear = year;
 			if (month - 1 < 1) {
