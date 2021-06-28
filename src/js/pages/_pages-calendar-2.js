@@ -215,20 +215,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			month = parseInt(month);
 
 			// Calculate the next month and year
-			let nextMonth = month + 1;
-			let nextYear = year;
-			if (month + 1 > 12) {
-				nextMonth = 1;
-				nextYear = year + 1;
-			}
+			let nextMonth = (month + 1 > 12) ? 1 : month + 1;
+			let nextYear = (month + 1 > 12) ? year + 1 : year;
 
 			// Calculate the previous month and year
-			let prevMonth = month - 1;
-			let prevYear = year;
-			if (month - 1 < 1) {
-				prevMonth = 12;
-				prevYear = year - 1;
-			}
+			let prevMonth = (month - 1 < 1) ? 12 : month - 1;
+			let prevYear = (month - 1 < 1) ? year - 1 : year;
 
 			let captionTemplate = `
 					<div>
