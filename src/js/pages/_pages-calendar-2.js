@@ -1,7 +1,9 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-	if (document.querySelector("html").classList.contains("page-calendar-2")) {
+	const pageCalendar2 = document.querySelector("html").classList.contains("page-calendar-2");
+
+	if (pageCalendar2) {
 		const settings = {
 			months: [
 				"Enero",
