@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const yyyy = String(year);
 			const mm = String(month + 1).padStart(2, "0"); // January is 0!
 			const dd = String(day).padStart(2, "0");
-			const yearMonthDay = yyyy + "-" + mm + "-" + dd;
+			const yearMonthDay = `${yyyy}-${mm}-${dd}`;
 			return yearMonthDay;
 		}
 
