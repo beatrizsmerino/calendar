@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			return yearMonthDay;
 		}
 
-		function get4Letters(words) {
+		function getFirst4Letters(words) {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
 			return wordsFormatted;
 		}
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarWeekCreate() {
 			const weeksList = settings.weeks;
-			const weeksListFormatted = get4Letters(weeksList);
+			const weeksListFormatted = getFirst4Letters(weeksList);
 			for (let week = 0; week < 7; week++) {
 				const calendarRow = document.querySelectorAll(
 					".calendar__header .calendar__row"
