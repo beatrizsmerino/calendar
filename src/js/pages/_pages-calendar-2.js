@@ -1,7 +1,9 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-	const pageCalendar2 = document.querySelector("html").classList.contains("page-calendar-2");
+	const pageCalendar2 = document
+		.querySelector("html")
+		.classList.contains("page-calendar-2");
 
 	if (pageCalendar2) {
 		const settings = {
@@ -103,7 +105,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			const weeksList = settings.weeks;
 			const weeksListFormatted = get4Letters(weeksList);
 			for (let week = 0; week < 7; week++) {
-				const calendarRow = document.querySelectorAll(".calendar__header .calendar__row");
+				const calendarRow = document.querySelectorAll(
+					".calendar__header .calendar__row"
+				);
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
 				calendarWeek.innerText = weeksListFormatted[week];
@@ -119,21 +123,22 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarDayCreate(year, month, day) {
-				const calendarDay = document.createElement("TD");
-				
-				if(getThisDay() === day){
-					calendarDay.className = "calendar__cell calendar__day calendar__today";
-				} else {
-					calendarDay.className = "calendar__cell calendar__day";
-				}
-				
-				if(day != 0){
-					const yearMonthDay = createYearMonthDay(year, month - 1,day);
-					calendarDay.setAttribute("data-time", yearMonthDay);
-					calendarDay.innerHTML = `<span>${day}</span>`;
-				}
+			const calendarDay = document.createElement("TD");
 
-				return calendarDay.outerHTML;
+			if (getThisDay() === day) {
+				calendarDay.className =
+					"calendar__cell calendar__day calendar__today";
+			} else {
+				calendarDay.className = "calendar__cell calendar__day";
+			}
+
+			if (day != 0) {
+				const yearMonthDay = createYearMonthDay(year, month - 1, day);
+				calendarDay.setAttribute("data-time", yearMonthDay);
+				calendarDay.innerHTML = `<span>${day}</span>`;
+			}
+
+			return calendarDay.outerHTML;
 		}
 
 		function calendarSetWeekend() {
@@ -203,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					result += '</tr><tr class="calendar__row">';
 				}
 			}
-			result += '</tr>';
+			result += "</tr>";
 
 			document.querySelector(".calendar__body").innerHTML = result;
 		}
@@ -257,10 +262,15 @@ document.addEventListener("DOMContentLoaded", function () {
 					</div>
 				`;
 
-			document.querySelector(".calendar__caption").innerHTML = captionTemplate;
+			document.querySelector(".calendar__caption").innerHTML =
+				captionTemplate;
 
-			let buttonPrev = document.querySelectorAll('.calendar__button-prev');
-			let buttonNext = document.querySelectorAll('.calendar__button-next');
+			let buttonPrev = document.querySelectorAll(
+				".calendar__button-prev"
+			);
+			let buttonNext = document.querySelectorAll(
+				".calendar__button-next"
+			);
 
 			[...buttonPrev, ...buttonNext].map((item) =>
 				item.addEventListener("click", function () {
