@@ -238,36 +238,39 @@ document.addEventListener("DOMContentLoaded", function () {
 				[...calendarRow].map((item) => item.appendChild(calendarDay));
 			}
 
-			calendarYearCreate();
-			calendarInnerCreate();
+			function calendarAllMonthsCreate() {
+				for (let m = 0; m <= 11; m++) {
+					calendarMonthCreate();
+					calendarTableCreate();
+					calendarCaptionCreate();
+					calendarTitleCreate(monthsList, m);
+					calendarHeaderCreate();
 
-			for (let m = 0; m <= 11; m++) {
-				calendarMonthCreate();
-				calendarTableCreate();
-				calendarCaptionCreate();
-				calendarTitleCreate(monthsList, m);
-				calendarHeaderCreate();
+					const calendarHeader =
+						document.querySelectorAll(".calendar__header");
+					calendarRowCreate(calendarHeader);
 
-				const calendarHeader =
-					document.querySelectorAll(".calendar__header");
-				calendarRowCreate(calendarHeader);
+					for (let w = 0; w < 7; w++) {
+						calendarWeekCreate(weeksList, w);
+					}
 
-				for (let w = 0; w < 7; w++) {
-					calendarWeekCreate(weeksList, w);
-				}
+					calendarBodyCreate();
 
-				calendarBodyCreate();
+					for (let f = 0; f < 6; f++) {
+						const calendarBody =
+							document.querySelectorAll(".calendar__body");
+						calendarRowCreate(calendarBody);
 
-				for (let f = 0; f < 6; f++) {
-					const calendarBody =
-						document.querySelectorAll(".calendar__body");
-					calendarRowCreate(calendarBody);
-
-					for (let d = 0; d < 7; d++) {
-						calendarDayCreate();
+						for (let d = 0; d < 7; d++) {
+							calendarDayCreate();
+						}
 					}
 				}
 			}
+
+			calendarYearCreate();
+			calendarInnerCreate();
+			calendarAllMonthsCreate();
 		}
 
 		function calendarSetDays() {
