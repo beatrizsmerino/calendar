@@ -105,9 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const weeksList = settings.weeks;
 			const weeksListFormatted = getFirst4Letters(weeksList);
 			for (let week = 0; week < 7; week++) {
-				const calendarRow = document.querySelectorAll(
-					".calendar__header .calendar__row"
-				);
+				const calendarRow = document.querySelectorAll(".calendar__header .calendar__row");
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
 				calendarWeek.innerText = weeksListFormatted[week];
@@ -126,8 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const calendarDay = document.createElement("TD");
 
 			if (getThisDay() === day) {
-				calendarDay.className =
-					"calendar__cell calendar__day calendar__today";
+				calendarDay.className = "calendar__cell calendar__day calendar__today";
 			} else {
 				calendarDay.className = "calendar__cell calendar__day";
 			}
@@ -262,15 +259,10 @@ document.addEventListener("DOMContentLoaded", function () {
 					</div>
 				`;
 
-			document.querySelector(".calendar__caption").innerHTML =
-				captionTemplate;
+			document.querySelector(".calendar__caption").innerHTML = captionTemplate;
 
-			let buttonPrev = document.querySelectorAll(
-				".calendar__button-prev"
-			);
-			let buttonNext = document.querySelectorAll(
-				".calendar__button-next"
-			);
+			let buttonPrev = document.querySelectorAll(".calendar__button-prev");
+			let buttonNext = document.querySelectorAll(".calendar__button-next");
 
 			[...buttonPrev, ...buttonNext].map((item) =>
 				item.addEventListener("click", function () {

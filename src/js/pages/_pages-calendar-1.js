@@ -155,16 +155,14 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			function calendarMonthCreate() {
-				const calendarInner =
-					document.querySelector(".calendar__inner");
+				const calendarInner = document.querySelector(".calendar__inner");
 				const calendarMonth = document.createElement("DIV");
 				calendarMonth.className = "calendar__month";
 				calendarInner.appendChild(calendarMonth);
 			}
 
 			function calendarTableCreate() {
-				const calendarMonth =
-					document.querySelectorAll(".calendar__month");
+				const calendarMonth = document.querySelectorAll(".calendar__month");
 				const calendarTable = document.createElement("TABLE");
 				calendarTable.className = "calendar__table";
 				[...calendarMonth].map((item) =>
@@ -173,8 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			function calendarCaptionCreate() {
-				const calendarTable =
-					document.querySelectorAll(".calendar__table");
+				const calendarTable = document.querySelectorAll(".calendar__table");
 				const calendarCaption = document.createElement("CAPTION");
 				calendarCaption.className = "calendar__caption";
 				[...calendarTable].map((item) =>
@@ -183,8 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			function calendarTitleCreate(monthsList, month) {
-				const calendarCaption =
-					document.querySelectorAll(".calendar__caption");
+				const calendarCaption = document.querySelectorAll(".calendar__caption");
 				const calendarTitle = document.createElement("DIV");
 				calendarTitle.className = "calendar__title";
 				calendarTitle.innerText = monthsList[month];
@@ -194,8 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			function calendarHeaderCreate() {
-				const calendarTable =
-					document.querySelectorAll(".calendar__table");
+				const calendarTable = document.querySelectorAll(".calendar__table");
 				const calendarHeader = document.createElement("THEAD");
 				calendarHeader.className = "calendar__header";
 				[...calendarTable].map((item) =>
@@ -221,8 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			function calendarBodyCreate() {
-				const calendarTable =
-					document.querySelectorAll(".calendar__table");
+				const calendarTable = document.querySelectorAll(".calendar__table");
 				const calendarBody = document.createElement("TBODY");
 				calendarBody.className = "calendar__body";
 				[...calendarTable].map((item) =>
@@ -246,8 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					calendarTitleCreate(monthsList, m);
 					calendarHeaderCreate();
 
-					const calendarHeader =
-						document.querySelectorAll(".calendar__header");
+					const calendarHeader = document.querySelectorAll(".calendar__header");
 					calendarRowCreate(calendarHeader);
 
 					for (let w = 0; w < 7; w++) {
@@ -257,8 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					calendarBodyCreate();
 
 					for (let f = 0; f < 6; f++) {
-						const calendarBody =
-							document.querySelectorAll(".calendar__body");
+						const calendarBody = document.querySelectorAll(".calendar__body");
 						calendarRowCreate(calendarBody);
 
 						for (let d = 0; d < 7; d++) {
@@ -282,23 +274,17 @@ document.addEventListener("DOMContentLoaded", function () {
 				const dateDay = dayOfYear.getDate();
 				const dateMonth = dayOfYear.getMonth();
 				const dateWeek = dayOfYear.getDay();
-				const calendarMonth =
-					document.querySelectorAll(".calendar__table")[dateMonth];
+				const calendarMonth = document.querySelectorAll(".calendar__table")[dateMonth];
 
 				if (dateDay == 1) {
 					week = 0;
 				}
 
 				// Insert days in the calendar
-				const tableDays =
-					calendarMonth.children[2].children[week].children[dateWeek];
+				const tableDays = calendarMonth.children[2].children[week].children[dateWeek];
 				tableDays.innerHTML = `<span>${dateDay}</span>`;
 
-				const yearMonthDay = createYearMonthDay(
-					thisYear,
-					dateMonth,
-					dateDay
-				);
+				const yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
 				tableDays.setAttribute("data-time", yearMonthDay);
 
 				if (tableDays.getAttribute("data-time") == getToday()) {
@@ -361,8 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarShowAllMonths() {
 			const calendar = document.querySelector("#calendar");
-			const buttonShowMonths =
-				document.querySelector("#buttonShowMonths");
+			const buttonShowMonths = document.querySelector("#buttonShowMonths");
 
 			buttonShowMonths.classList.toggle("is-change-text");
 			calendar.classList.toggle("is-show-months");
@@ -378,10 +363,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarTranslate() {
 			const select = document.querySelector("#selectTranslate");
 
-			if (
-				document.querySelectorAll("#selectTranslate option").length ===
-				1
-			) {
+			if (document.querySelectorAll("#selectTranslate option").length === 1) {
 				settings.languages.map((item) => {
 					const option = document.createElement("option");
 					option.value = item.value;
