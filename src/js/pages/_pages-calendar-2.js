@@ -154,6 +154,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 
+		function calendarEmpty() {
+			const calendar = document.querySelector("#calendar");
+			calendar.innerHTML = "";
+		}
+
 		function calendarCreateStructure() {
 			calendarInnerCreate();
 			calendarMonthCreate();
@@ -266,6 +271,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarCreate(year, month) {
+			calendarEmpty();
+			calendarCreateStructure();
 			calendarButtonsPrevAndNext(year, month);
 			calendarAllDaysCreate(year, month);
 			calendarSetWeekend();
@@ -289,7 +296,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 
-		calendarCreateStructure();
 		calendarCreate(getThisYear(), getThisMonth() + 1);
 		calendarEvents();
 	}
