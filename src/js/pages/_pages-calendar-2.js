@@ -53,15 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			return yearMonthDay;
 		}
 
-		function getToday() {
-			const today = createYearMonthDay(
-				getThisYear(),
-				getThisMonth(),
-				getThisDay()
-			);
-			return today;
-		}
-
 		function get4Letters(words) {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
 			return wordsFormatted;
