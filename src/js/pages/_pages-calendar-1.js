@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function createYearMonthDay(year, month, day) {
 			const yyyy = String(year);
-			const mm = String(month + 1).padStart(2, "0"); //January is 0!
+			const mm = String(month + 1).padStart(2, "0"); // January is 0!
 			const dd = String(day).padStart(2, "0");
 			const yearMonthDay = yyyy + "-" + mm + "-" + dd;
 			return yearMonthDay;
@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					week = 0;
 				}
 
-				// insert days in the calendar
+				// Insert days in the calendar
 				const tableDays =
 					calendarMonth.children[2].children[week].children[dateWeek];
 				tableDays.innerHTML = `<span>${dateDay}</span>`;
