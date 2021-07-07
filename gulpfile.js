@@ -61,6 +61,7 @@ let filesJsCompile = [
 	pathSrcJs + "components/_components-sprite.js",
 	pathSrcJs + "pages/_pages-calendar-1.js",
 	pathSrcJs + "pages/_pages-calendar-2.js",
+	pathSrcJs + "pages/_pages-calendar-3.js",
 ];
 
 
