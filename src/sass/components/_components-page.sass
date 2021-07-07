@@ -1,6 +1,7 @@
 // COMPONENTS
 // PAGE
-// =================================================
+// =================================================	
+@use "sass:math"
 
 
 
@@ -39,7 +40,7 @@
 		font-size: $font-size--h1
 
 	&__subtitle
-		margin-bottom: $font-size--h2 / 2
+		margin-bottom: math.div($font-size--h2, 2)
 		font-size: $font-size--h2
 
 	&__main
