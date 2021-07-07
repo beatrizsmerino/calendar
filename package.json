@@ -35,5 +35,8 @@
 		"webpack-cli": "^4.7.2",
 		"webpack-stream": "^6.1.2"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"lodash": "^4.17.21",
+		"lodash.template": "^4.5.0"
+	}
 }
