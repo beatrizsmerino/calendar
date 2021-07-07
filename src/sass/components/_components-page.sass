@@ -1,6 +1,7 @@
 // COMPONENTS
 // PAGE
-// =================================================
+// =================================================	
+@use "sass:math"
 
 
 
@@ -21,7 +22,7 @@
 			padding-right: 2rem
 			padding-left: 2rem
 
-	&__body
+	// &__body
 
 	&__header
 		width: 100%
@@ -39,7 +40,7 @@
 		font-size: $font-size--h1
 
 	&__subtitle
-		margin-bottom: $font-size--h2 / 2
+		margin-bottom: math.div($font-size--h2, 2)
 		font-size: $font-size--h2
 
 	&__main

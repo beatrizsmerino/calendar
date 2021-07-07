@@ -4,21 +4,21 @@
 
 // DEPENDENCIES
 // =================================================
-const gulp                = require("gulp"),
-      autoprefixer        = require("gulp-autoprefixer"),
-      browserSync         = require("browser-sync").create(),
-      reload              = browserSync.reload,
-      cleanCss            = require("gulp-clean-css"),
-      concat              = require("gulp-concat"),
-      lineEndingCorrector = require("gulp-line-ending-corrector"),
-      rename              = require("gulp-rename"),
-      sass                = require("gulp-sass"),
-      srcMaps             = require("gulp-sourcemaps"),
-	  svgSprite           = require('gulp-svg-sprites'),
-      uglify              = require("gulp-uglify"),
-      babel               = require("gulp-babel"),
-	  webpackStream       = require("webpack-stream"),
-	  webpack             = require("webpack");
+const gulp                    = require("gulp"),
+      gulpAutoprefixer        = require("gulp-autoprefixer"),
+      gulpBabel               = require("gulp-babel"),
+      gulpCleanCss            = require("gulp-clean-css"),
+      gulpConcat              = require("gulp-concat"),
+      gulpLineEndingCorrector = require("gulp-line-ending-corrector"),
+      gulpRename              = require("gulp-rename"),
+      gulpSass                = require("gulp-sass")(require("sass")),
+	  gulpSourcemaps          = require("gulp-sourcemaps"),
+	  gulpSvgSprites          = require("gulp-svg-sprites"),
+      gulpUglify              = require("gulp-uglify"),
+	  webpackStream           = require("webpack-stream"),
+	  webpack                 = require("webpack"),
+	  browserSync             = require("browser-sync").create(),
+	  reload                  = browserSync.reload;
 
 
 // SETTINGS: FOLDER/FILE PATHS
@@ -92,24 +92,24 @@ function sassCompile() {
 	return gulp
 		.src([pathSrcSass + "styles.sass"])
 		.pipe(
-			srcMaps.init({
+			gulpSourcemaps.init({
 				loadMaps: true,
 			})
 		)
 		.pipe(
-			sass({
+			gulpSass({
 				outputStyle: "compressed",
-			}).on("error", sass.logError)
+			}).on("error", gulpSass.logError)
 		)
 		.pipe(
-			autoprefixer({
+			gulpAutoprefixer({
 				versions: ["last 2 versions"],
 			})
 		)
-		.pipe(cleanCss())
-		.pipe(srcMaps.write())
-		.pipe(lineEndingCorrector())
-		.pipe(rename("styles.min.css"))
+		.pipe(gulpCleanCss())
+		.pipe(gulpSourcemaps.write())
+		.pipe(gulpLineEndingCorrector())
+		.pipe(gulpRename("styles.min.css"))
 		.pipe(gulp.dest(pathDistCss));
 }
 
@@ -124,7 +124,7 @@ function jsCompile() {
 
 	return gulp
 		.src(filesJsCompile)
-		.pipe(babel(BabelConfig))
+		.pipe(gulpBabel(BabelConfig))
 		.pipe(
 			webpackStream(
 				require("./webpack.config.js"),
@@ -134,9 +134,9 @@ function jsCompile() {
 				}
 			)
 		)
-		.pipe(concat("scripts.min.js"))
-		.pipe(uglify())
-		.pipe(lineEndingCorrector())
+		.pipe(gulpConcat("scripts.min.js"))
+		.pipe(gulpUglify())
+		.pipe(gulpLineEndingCorrector())
 		.pipe(gulp.dest(pathDistJs));
 }
 
@@ -148,7 +148,7 @@ function createSprite() {
 	return gulp
 		.src(pathSrcSvg + pathFilesSvg)
 		.pipe(
-			svgSprite({
+			gulpSvgSprites({
 				svgId: "icon-%f",
 				baseSize: 16,
 				mode: "symbols",
