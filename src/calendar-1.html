@@ -10,29 +10,42 @@
 	</head>
 
 	<body class="page__body sticky__body">
-		<header class="page__header sticky__header page__inner">
+		<header class="header sticky__header page__inner">
 			<span class="logo">
 				Calendars
 			</span>
 
-			<nav class="nav">
-				<ul class="nav__list">
-					<li class="nav__item">
+			<nav id="headerNav" class="header-nav nav">
+				<ul class="header-nav__list nav__list">
+					<li class="header-nav__item nav__item">
 						<a class="nav__link" href="index.html">
 							Home
 						</a>
 					</li>
-					<li class="nav__item">
+					<li class="header-nav__item nav__item">
 						<a class="nav__link is-active" href="calendar-1.html">
 							Calendar 1
 						</a>
 					</li>
-					<li class="nav__item">
+					<li class="header-nav__item nav__item">
 						<a class="nav__link" href="calendar-2.html">
 							Calendar 2
 						</a>
 					</li>
+					<li class="header-nav__item nav__item">
+						<a class="nav__link" href="calendar-3.html">
+							Calendar 3
+						</a>
+					</li>
 				</ul>
+
+				<button id="headerNavButton" class="header-nav__button button button--icon">
+					<i class="icon">
+						<svg class="icon__svg">
+							<use class="icon__use" href="#icon-menu-vertical-dots-line" />
+						</svg>
+					</i>
+				</button>
 			</nav>
 		</header>
 
@@ -54,7 +67,7 @@
 									Languages
 								</option>
 							</select>
-						
+
 							<i class="select__icon icon">
 								<svg class="icon__svg">
 									<use class="icon__use" href="#icon-chevron-down" />
@@ -66,7 +79,7 @@
 			</section>
 		</main>
 
-		<footer class="page__footer sticky__footer page__inner">
+		<footer class="footer sticky__footer page__inner">
 			<p class="copyright">
 				@Copyright
 				<span class="copyright__year">
