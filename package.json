@@ -36,6 +36,7 @@
 		"webpack-stream": "^6.1.2"
 	},
 	"dependencies": {
+		"js-yaml": "^4.1.0",
 		"lodash": "^4.17.21",
 		"lodash.template": "^4.5.0",
 		"trim-newlines": "^4.0.2"
