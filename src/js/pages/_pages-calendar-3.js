@@ -39,7 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function getThisMonth() {
 			const date = new Date();
-			return date.getMonth();
+
+			// January is 0!
+			return date.getMonth() + 1;
 		}
 
 		function getThisDay() {
@@ -49,10 +51,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function createYearMonthDay(year, month, day) {
 			const yyyy = String(year);
-			const mm = String(month + 1).padStart(2, "0"); // January is 0!
+			const mm = String(month).padStart(2, "0");
 			const dd = String(day).padStart(2, "0");
 			const yearMonthDay = `${yyyy}-${mm}-${dd}`;
 			return yearMonthDay;
+		}
+
+		function getToday() {
+			const today = createYearMonthDay(
+				getThisYear(),
+				getThisMonth(),
+				getThisDay()
+			);
+			return today;
 		}
 
 		function getFirst4Letters(words) {
@@ -123,14 +134,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarDayCreate(year, month, day) {
 			const calendarDay = document.createElement("TD");
 
-			if (getThisDay() === day) {
+			if (getToday() === createYearMonthDay(year, month, day)) {
 				calendarDay.className = "calendar__cell calendar__day calendar__today";
 			} else {
 				calendarDay.className = "calendar__cell calendar__day";
 			}
 
 			if (day != 0) {
-				const yearMonthDay = createYearMonthDay(year, month - 1, day);
+				const yearMonthDay = createYearMonthDay(year, month, day);
 				calendarDay.setAttribute("data-time", yearMonthDay);
 				calendarDay.innerHTML = `<span>${day}</span>`;
 			}
@@ -188,13 +199,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 
 				if (i < firstDayOfWeek || i >= lastCell) {
-					let emptyCell = calendarDayCreate("", "", "");
+					let emptyCell = calendarDayCreate("00", "00", "00");
 					result += emptyCell;
 				} else {
 					// Show the day
 					if (
 						day == getThisDay() &&
-						month == getThisMonth() + 1 &&
+						month == getThisMonth() &&
 						year == getThisYear()
 					) {
 						let todayCell = calendarDayCreate(year, month, day);
@@ -276,6 +287,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarSetWeekend();
 		}
 
-		calendarCreate(getThisYear(), getThisMonth() + 1);
+		calendarCreate(getThisYear(), getThisMonth());
 	}
 });
