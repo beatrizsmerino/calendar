@@ -149,6 +149,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			return calendarDay.outerHTML;
 		}
 
+		function calendarSetHeight() {
+			const calendar = document.querySelector(".calendar");
+			const calendarCaption = document.querySelector(".calendar__caption");
+			const calendarHeader = document.querySelector(".calendar__header");
+			const calendarRow = document.querySelector(".calendar__body .calendar__row");
+			// the table has margins between each row -> (2 * 7)
+			const calendarHeight = calendarCaption.clientHeight + calendarHeader.clientHeight + (2 * 7) + calendarRow.clientHeight * 6;
+			calendar.style.height = `${calendarHeight}px`;
+		}
+
 		function calendarSetWeekend() {
 			const weekendSaturdays = document.querySelectorAll(
 				".calendar__body .calendar__row .calendar__cell:nth-child(6)"
@@ -284,6 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarCreateStructure();
 			calendarButtonsPrevAndNext(year, month);
 			calendarAllDaysCreate(year, month);
+			calendarSetHeight();
 			calendarSetWeekend();
 		}
 
