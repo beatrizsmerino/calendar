@@ -10,6 +10,7 @@
 	.calendar
 		width: 40rem
 		margin: 0 auto
+		position: relative
 
 		&__caption
 			text-align: left
@@ -27,6 +28,10 @@
 					margin-top: 0
 
 		&__inner
+			position: absolute
+			top: 0
+			left: 50%
+			transform: translate(-50%, 0)
 			display: flex
 			align-items: center
 			justify-content: center
