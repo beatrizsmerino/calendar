@@ -242,9 +242,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarSelectDay() {
 			const calendarDayButton = document.querySelectorAll('.calendar__day-button');
 			[...calendarDayButton].map(item => item.addEventListener('click', function () {
-				let theDataTime = this.getAttribute('data-time');
+				let theDataTime = {
+					dateTime: this.getAttribute('data-time')
+				};
 
-				console.log(theDataTime);
+				calendarModalCreate(theDataTime);
 			}));
 		}
 
@@ -309,6 +311,43 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarSetHeight();
 			calendarSetWeekend();
 			calendarSelectDay();
+		}
+
+		function calendarModalCreate(data) {
+			const calendarTemplate = `
+				<div class="modal">
+					<div class="modal__box">
+						<div class="modal__inner">
+							<button class="modal__button-close button button--icon">
+								<i class="icon">
+									<svg class="icon__svg">
+										<use class="icon__use" href="#icon-cross" />
+									</svg>
+								</i>
+							</button>
+
+							<div class="modal__content">
+								${data.dateTime}
+							</div>
+						</div>
+					</div>
+				</div>
+				`;
+
+			const modalTemplate = document.createRange().createContextualFragment(calendarTemplate);
+			document.querySelector('body').appendChild(modalTemplate);
+
+			setTimeout(function () {
+				document.querySelector('.modal').classList.add('is-show');
+			}, 100);
+
+			document.querySelector('.modal__button-close').addEventListener('click', function () {
+				document.querySelector('.modal').classList.remove('is-show');
+
+				setTimeout(function () {
+					document.querySelector('.modal').remove();
+				}, 1000);
+			});
 		}
 
 		calendarCreate(getThisYear(), getThisMonth());

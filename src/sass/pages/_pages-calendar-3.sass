@@ -70,9 +70,10 @@
 		// &__week
 		
 		&__weekend
-			.calendar__day-button
-				border-radius: 0.5rem
-				background-color: rgba($color-black, 0.1)
+			.calendar
+				&__day-button
+					border-radius: 0.5rem
+					background-color: rgba($color-black, 0.1)
 			
 		&__day
 			padding: 0.2rem
@@ -100,13 +101,14 @@
 			position: relative
 			color: $color-white
 
-			.calendar__day-button
-				width: 4rem
-				height: 4rem
-				border-radius: 50%
+			.calendar
+				&__day-button
+					width: 4rem
+					height: 4rem
+					border-radius: 50%
 
-				&:hover
-					color: $color-black
+					&:hover
+						color: $color-black
 
 			&:after
 				content: ''
