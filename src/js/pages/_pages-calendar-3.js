@@ -142,8 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			if (day != 0) {
 				const yearMonthDay = createYearMonthDay(year, month, day);
-				calendarDay.setAttribute("data-time", yearMonthDay);
-				calendarDay.innerHTML = `<span>${day}</span>`;
+				calendarDay.innerHTML = `
+						<button class="calendar__day-button button button--icon" data-time="${yearMonthDay}">
+							${day}
+						</button>
+					`;
 			}
 
 			return calendarDay.outerHTML;
@@ -236,6 +239,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			document.querySelector(".calendar__body").innerHTML = result;
 		}
 
+		function calendarSelectDay() {
+			const calendarDayButton = document.querySelectorAll('.calendar__day-button');
+			[...calendarDayButton].map(item => item.addEventListener('click', function () {
+				let theDataTime = this.getAttribute('data-time');
+
+				console.log(theDataTime);
+			}));
+		}
+
 		function calendarButtonsPrevAndNext(year, month) {
 			year = parseInt(year);
 			month = parseInt(month);
@@ -296,6 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarAllDaysCreate(year, month);
 			calendarSetHeight();
 			calendarSetWeekend();
+			calendarSelectDay();
 		}
 
 		calendarCreate(getThisYear(), getThisMonth());
