@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 	const pageCalendar2 = document
 		.querySelector("html")
-		.classList.contains("page-calendar-2");
+		.classList.contains("page-calendar-3");
 
 	if (pageCalendar2) {
 		const settings = {
@@ -142,11 +142,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			if (day != 0) {
 				const yearMonthDay = createYearMonthDay(year, month, day);
-				calendarDay.setAttribute("data-time", yearMonthDay);
-				calendarDay.innerHTML = `<span>${day}</span>`;
+				calendarDay.innerHTML = `
+						<button class="calendar__day-button button button--icon" data-time="${yearMonthDay}">
+							${day}
+						</button>
+					`;
 			}
 
 			return calendarDay.outerHTML;
+		}
+
+		function calendarSetHeight() {
+			const calendar = document.querySelector(".calendar");
+			const calendarCaption = document.querySelector(".calendar__caption");
+			const calendarHeader = document.querySelector(".calendar__header");
+			const calendarRow = document.querySelector(".calendar__body .calendar__row");
+			// the table has margins between each row -> (2 * 7)
+			const calendarHeight = calendarCaption.clientHeight + calendarHeader.clientHeight + (2 * 7) + calendarRow.clientHeight * 6;
+			calendar.style.height = `${calendarHeight}px`;
 		}
 
 		function calendarSetWeekend() {
@@ -226,6 +239,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			document.querySelector(".calendar__body").innerHTML = result;
 		}
 
+		function calendarSelectDay() {
+			const calendarDayButton = document.querySelectorAll('.calendar__day-button');
+			[...calendarDayButton].map(item => item.addEventListener('click', function () {
+				let theDataTime = {
+					dateTime: this.getAttribute('data-time')
+				};
+
+				calendarModalCreate(theDataTime);
+			}));
+		}
+
 		function calendarButtonsPrevAndNext(year, month) {
 			year = parseInt(year);
 			month = parseInt(month);
@@ -239,31 +263,29 @@ document.addEventListener("DOMContentLoaded", function () {
 			let prevYear = (month - 1 < 1) ? year - 1 : year;
 
 			let captionTemplate = `
-					<div>
+					<div class="button__list button__list--center">
+						<a class="calendar__button-prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}"'>
+							<i class="icon">
+								<svg class="icon__svg">
+									<use class="icon__use" href="#icon-chevron-left" />
+								</svg>
+							</i>
+						</a>
 						<div class="calendar__title">
-							<span class='calendar__year-name'>
-								${year}
-							</span>
 							<span class='calendar__month-name'>
 								${settings.months[month - 1]}
 							</span>
+							<span class='calendar__year-name'>
+								${year}
+							</span>
 						</div>
-						<div class="button__list button__list--center">
-							<a class="calendar__button-prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}"'>
-								<i class="icon">
-									<svg class="icon__svg">
-										<use class="icon__use" href="#icon-chevron-left" />
-									</svg>
-								</i>
-							</a>
-							<a class="calendar__button-next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}"'>
-								<i class="icon">
-									<svg class="icon__svg">
-										<use class="icon__use" href="#icon-chevron-right" />
-									</svg>
-								</i>
-							</a>
-						</div>
+						<a class="calendar__button-next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}"'>
+							<i class="icon">
+								<svg class="icon__svg">
+									<use class="icon__use" href="#icon-chevron-right" />
+								</svg>
+							</i>
+						</a>
 					</div>
 				`;
 
@@ -286,28 +308,48 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarCreateStructure();
 			calendarButtonsPrevAndNext(year, month);
 			calendarAllDaysCreate(year, month);
+			calendarSetHeight();
 			calendarSetWeekend();
+			calendarSelectDay();
 		}
 
-		function calendarEvents() {
-			let buttonToday = document.getElementById("goToday");
-			let buttonNextYear = document.getElementById("goNextYear");
-			let buttonLastYear = document.getElementById("goLastYear");
+		function calendarModalCreate(data) {
+			const calendarTemplate = `
+				<div class="modal">
+					<div class="modal__box">
+						<div class="modal__inner">
+							<button class="modal__button-close button button--icon">
+								<i class="icon">
+									<svg class="icon__svg">
+										<use class="icon__use" href="#icon-cross" />
+									</svg>
+								</i>
+							</button>
 
-			buttonToday.addEventListener("click", function () {
-				calendarCreate(getThisYear(), getThisMonth());
-			});
+							<div class="modal__content">
+								${data.dateTime}
+							</div>
+						</div>
+					</div>
+				</div>
+				`;
 
-			buttonNextYear.addEventListener("click", function () {
-				calendarCreate(getThisYear() + 1, getThisMonth());
-			});
+			const modalTemplate = document.createRange().createContextualFragment(calendarTemplate);
+			document.querySelector('body').appendChild(modalTemplate);
 
-			buttonLastYear.addEventListener("click", function () {
-				calendarCreate(getThisYear() - 1, getThisMonth());
+			setTimeout(function () {
+				document.querySelector('.modal').classList.add('is-show');
+			}, 100);
+
+			document.querySelector('.modal__button-close').addEventListener('click', function () {
+				document.querySelector('.modal').classList.remove('is-show');
+
+				setTimeout(function () {
+					document.querySelector('.modal').remove();
+				}, 1000);
 			});
 		}
 
 		calendarCreate(getThisYear(), getThisMonth());
-		calendarEvents();
 	}
 });
