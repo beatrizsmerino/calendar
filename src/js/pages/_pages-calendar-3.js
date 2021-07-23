@@ -66,6 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			return today;
 		}
 
+		function getDateFormatted(date) {
+			const dateArray = date.split('-');
+			const dateMonthText = settings.months[parseInt(dateArray[1])];
+			const dateFormatted = `${dateArray[2]} de ${dateMonthText} de ${dateArray[0]}`;
+			return dateFormatted;
+		}
+
 		function getFirst4Letters(words) {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
 			return wordsFormatted;
@@ -243,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const calendarDayButton = document.querySelectorAll('.calendar__day-button');
 			[...calendarDayButton].map(item => item.addEventListener('click', function () {
 				let theDataTime = {
-					dateTime: this.getAttribute('data-time')
+					dateTime: getDateFormatted(this.getAttribute('data-time'))
 				};
 
 				calendarModalCreate(theDataTime);
@@ -327,7 +334,16 @@ document.addEventListener("DOMContentLoaded", function () {
 							</button>
 
 							<div class="modal__content">
-								${data.dateTime}
+								<span class="modal__data-item">
+									<i class="icon">
+										<svg class="icon__svg">
+											<use class="icon__use" href="#icon-calendar" />
+										</svg>
+									</i>
+									<p>
+										${data.dateTime}
+									</p>
+								</span>
 							</div>
 						</div>
 					</div>
