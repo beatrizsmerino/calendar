@@ -1,15 +1,19 @@
 /**
- * @file layoutsHeader
- * @description Close/Open the menu of the header
+ * @file _layouts-header.js
+ * @module layoutHeader
+ * @description Layout Header
  * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
- * @copyright (2020)
+ * @copyright (2021)
  */
+
+
+
+
 
 /**
  * @function openCloseHeaderNav
  * @description Open/Close nav inside Header
  */
-
 function openCloseHeaderNav() {
 	const nav = document.querySelector('#headerNav');
 	const navButton = document.querySelector('#headerNavButton');
@@ -27,6 +31,4 @@ function openCloseHeaderNav() {
 	});
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-	openCloseHeaderNav();
-});
+export { openCloseHeaderNav }

@@ -1,9 +1,14 @@
 /**
- * @file componentSprites
- * @description Add sprite to html page
+ * @file _components-sprite.js
+ * @module sprite
+ * @description Component Sprite
  * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
- * @copyright (2020)
+ * @copyright (2021)
  */
+
+
+
+
 
 /**
  * @function printSprites
@@ -13,7 +18,7 @@ function printSprites() {
 	const url = 'images/icons/sprites.svg';
 	const className = 'sprite';
 
-	const getContentFile = async(urlFile) => {
+	const getContentFile = async (urlFile) => {
 		const getData = await fetch(urlFile);
 		const data = await getData.text();
 
@@ -28,6 +33,4 @@ function printSprites() {
 	});
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-	printSprites();
-});
+export { printSprites }

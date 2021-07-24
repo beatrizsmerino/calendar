@@ -56,15 +56,7 @@ let watchFilesHtml = pathDist + pathFilesHtml,
 	watchFilesSvg  = pathDistSvg + pathFilesSvg;
 
 // Paths used to concat the files in a specific order.
-let filesJsCompile = [
-	pathSrcJs + "scripts.js",
-	pathSrcJs + "components/_components-sprite.js",
-	pathSrcJs + "components/_components-firebase.js",
-	pathSrcJs + "layouts/_layouts-header.js",
-	pathSrcJs + "pages/_pages-calendar-1.js",
-	pathSrcJs + "pages/_pages-calendar-2.js",
-	pathSrcJs + "pages/_pages-calendar-3.js",
-];
+let filesJsCompile = [];
 
 
 
@@ -143,6 +135,10 @@ function jsCompile() {
 		.pipe(gulp.dest(pathDistJs));
 }
 
+function jsCopy() {
+	return copyFiles(pathSrc + pathFilesJs, pathDist);
+}
+
 function imagesCopy() {
 	return copyDirectory(pathSrcImg, pathDistImg);
 }
@@ -172,10 +168,16 @@ function watch() {
 
 	gulp.watch(pathSrc + pathFilesHtml, htmlCopy);
 	gulp.watch(pathSrcSass + pathFilesSass, sassCompile);
-	gulp.watch(pathSrcJs + pathFilesJs, jsCompile);
+	// gulp.watch(pathSrcJs + pathFilesJs, jsCompile);
+	gulp.watch(pathSrcJs + pathFilesJs, jsCopy);
 	gulp.watch(pathSrcSvg + pathFilesSvg, gulp.series(createSprite, imagesCopy));
 
-	gulp.watch([watchFilesHtml, watchFilesCss, watchFilesJs, watchFilesSvg]).on(
+	gulp.watch([
+		watchFilesHtml,
+		watchFilesCss,
+		watchFilesJs,
+		watchFilesSvg
+	]).on(
 		"change",
 		reload
 	);
@@ -188,7 +190,8 @@ function watch() {
 exports.createServer    = createServer;
 exports.htmlCopy        = htmlCopy;
 exports.sassCompile     = sassCompile;
-exports.jsCompile       = jsCompile;
+// exports.jsCompile       = jsCompile;
+exports.jsCopy          = jsCopy;
 exports.createSprite    = createSprite;
 exports.imagesCopy      = imagesCopy;
 exports.watch           = watch;
@@ -199,15 +202,31 @@ exports.watch           = watch;
 // =================================================
 gulp.task(
 	"default",
-	gulp.series(htmlCopy, sassCompile, jsCompile, createSprite, imagesCopy, watch)
+	gulp.series(
+		htmlCopy,
+		sassCompile,
+		// jsCompile,
+		jsCopy,
+		createSprite,
+		imagesCopy,
+		watch
+	)
 );
 gulp.task("serve", gulp.series(createServer));
 gulp.task(
 	"build",
-	gulp.series(htmlCopy, sassCompile, jsCompile, createSprite, imagesCopy)
+	gulp.series(
+		htmlCopy,
+		sassCompile,
+		// jsCompile,
+		jsCopy,
+		createSprite,
+		imagesCopy
+	)
 );
 gulp.task("html", gulp.series(htmlCopy));
 gulp.task("css", gulp.series(sassCompile));
-gulp.task("js", gulp.series(jsCompile));
+// gulp.task("js", gulp.series(jsCompile));
+gulp.task("js", gulp.series(jsCopy));
 gulp.task("img", gulp.series(createSprite, imagesCopy));
 gulp.task("watch", gulp.parallel(watch));
