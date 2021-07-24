@@ -1,9 +1,8 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-	const pageCalendar2 = document
-		.querySelector("html")
-		.classList.contains("page-calendar-2");
+	const pageCalendar2 = document.querySelector("html").classList.contains("page-calendar-2");
+	const pageContent = document.querySelector("#pageCalendar2Content");
 
 	if (pageCalendar2) {
 		const settings = {
@@ -69,6 +68,30 @@ document.addEventListener("DOMContentLoaded", function () {
 		function getFirst4Letters(words) {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
 			return wordsFormatted;
+		}
+
+		function calendarCreateTemplate() {
+			const template = `<div id="calendar" class="calendar no-select"></div>`;
+			const templateNode = document.createRange().createContextualFragment(template);
+			pageContent.append(templateNode);
+		}
+
+		function calendarToolsCreateTemplate() {
+			const template = `
+				<div class="button__list button__list--center no-select">
+					<button id="goLastYear" class="button button--bg-black">
+						Last Year
+					</button>
+					<button id="goToday" class="button button--line-black">
+						Today
+					</button>
+					<button id="goNextYear" class="button button--bg-black">
+						Next Year
+					</button>
+				</div>
+			`;
+			const templateNode = document.createRange().createContextualFragment(template);
+			pageContent.append(templateNode);
 		}
 
 		function calendarInnerCreate() {
@@ -276,12 +299,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				item.addEventListener("click", function () {
 					let year = this.getAttribute("date-year");
 					let month = this.getAttribute("date-month");
-					calendarCreate(year, month);
+					calendarSet(year, month);
 				})
 			);
 		}
 
-		function calendarCreate(year, month) {
+		function calendarSet(year, month) {
 			calendarEmpty();
 			calendarCreateStructure();
 			calendarButtonsPrevAndNext(year, month);
@@ -295,19 +318,22 @@ document.addEventListener("DOMContentLoaded", function () {
 			let buttonLastYear = document.getElementById("goLastYear");
 
 			buttonToday.addEventListener("click", function () {
-				calendarCreate(getThisYear(), getThisMonth());
+				calendarSet(getThisYear(), getThisMonth());
 			});
 
 			buttonNextYear.addEventListener("click", function () {
-				calendarCreate(getThisYear() + 1, getThisMonth());
+				calendarSet(getThisYear() + 1, getThisMonth());
 			});
 
 			buttonLastYear.addEventListener("click", function () {
-				calendarCreate(getThisYear() - 1, getThisMonth());
+				calendarSet(getThisYear() - 1, getThisMonth());
 			});
 		}
 
-		calendarCreate(getThisYear(), getThisMonth());
+		calendarCreateTemplate();
+		calendarToolsCreateTemplate();
+
+		calendarSet(getThisYear(), getThisMonth());
 		calendarEvents();
 	}
 });

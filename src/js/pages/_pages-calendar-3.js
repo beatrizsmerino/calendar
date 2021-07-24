@@ -1,9 +1,8 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-	const pageCalendar3 = document
-		.querySelector("html")
-		.classList.contains("page-calendar-3");
+	const pageCalendar3 = document.querySelector("html").classList.contains("page-calendar-3");
+	const pageContent = document.querySelector("#pageCalendar3Content");
 
 	if (pageCalendar3) {
 		const settings = {
@@ -76,6 +75,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		function getFirst4Letters(words) {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
 			return wordsFormatted;
+		}
+
+		function calendarCreateTemplate() {
+			const template = `<div id="calendar" class="calendar no-select"></div>`;
+			const templateNode = document.createRange().createContextualFragment(template);
+			pageContent.append(templateNode);
 		}
 
 		function calendarInnerCreate() {
@@ -305,12 +310,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				item.addEventListener("click", function () {
 					let year = this.getAttribute("date-year");
 					let month = this.getAttribute("date-month");
-					calendarCreate(year, month);
+					calendarSet(year, month);
 				})
 			);
 		}
 
-		function calendarCreate(year, month) {
+		function calendarSet(year, month) {
 			calendarEmpty();
 			calendarCreateStructure();
 			calendarButtonsPrevAndNext(year, month);
@@ -348,7 +353,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						</div>
 					</div>
 				</div>
-				`;
+			`;
 
 			const modalTemplate = document.createRange().createContextualFragment(calendarTemplate);
 			document.querySelector('body').appendChild(modalTemplate);
@@ -366,6 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 
-		calendarCreate(getThisYear(), getThisMonth());
+		calendarCreateTemplate();
+		calendarSet(getThisYear(), getThisMonth());
 	}
 });

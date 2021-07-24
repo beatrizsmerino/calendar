@@ -1,9 +1,8 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-	const pageCalendar1 = document
-		.querySelector("html")
-		.classList.contains("page-calendar-1");
+	const pageCalendar1 = document.querySelector("html").classList.contains("page-calendar-1");
+	const pageContent = document.querySelector("#pageCalendar1Content");
 
 	if (pageCalendar1) {
 		const settings = {
@@ -138,6 +137,42 @@ document.addEventListener("DOMContentLoaded", function () {
 			const wordsFormatted = words.map((item) => item.slice(0, 4));
 
 			return wordsFormatted;
+		}
+
+		function calendarCreateTemplate() {
+			const template = `<div id="calendar" class="calendar no-select"></div>`;
+			const templateNode = document.createRange().createContextualFragment(template);
+			pageContent.append(templateNode);
+		}
+
+		function calendarToolsCreateTemplate() {
+			const template = `
+				<div class="button__list button__list--center no-select">
+					<button id="buttonShowToday" class="button button-show-today button--bg-black">
+						show today
+					</button>
+					<button id="buttonShowMonths" class="button button-show-months button--bg-black">
+						<span class="button-show-months__all">show all months</span>
+						<span class="button-show-months__one">show one month</span>
+					</button>
+					<div class="select__wrapper">
+						<select id="selectTranslate" class="select select--black">
+							<option value="en">
+								Languages
+							</option>
+						</select>
+
+						<i class="select__icon icon">
+							<svg class="icon__svg">
+									<use class="icon__use" href="#icon-chevron-down" />
+							</svg>
+						</i>
+					</div>
+				</div>
+			`;
+
+			const templateNode = document.createRange().createContextualFragment(template);
+			pageContent.append(templateNode);
 		}
 
 		function calendarCreateStructure(monthsList, weeksList) {
@@ -374,11 +409,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			select.addEventListener("change", function () {
 				settings.languageSelected = this.value;
-				calendarCreate(settings.languageSelected);
+				calendarSet(settings.languageSelected);
 			});
 		}
 
-		function calendarCreate(language) {
+		function calendarSet(language) {
 			calendarEmpty();
 			calendarCreateStructure(
 				settings.months[language],
@@ -407,7 +442,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarInit() {
-			calendarCreate(settings.languageSelected);
+			calendarCreateTemplate();
+			calendarToolsCreateTemplate();
+			calendarSet(settings.languageSelected);
 			calendarEvents();
 		}
 
