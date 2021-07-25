@@ -8,10 +8,12 @@
  * @requires tools
  * @requires date
  * @requires modal
+ * @requires firebaseConexion
  */
 import * as tools from '../components/_components-tools.js';
 import * as date from '../components/_components-date.js';
 import * as modal from '../components/_components-modal.js';
+import * as firebaseConexion from '../components/firebase/_components-firebase-conexion.js';
 
 
 
@@ -98,10 +100,10 @@ function calendarDayCreate(year, month, day) {
 	if (day != 0) {
 		const yearMonthDay = date.getDateAsYearMonthDay(year, month, day);
 		calendarDay.innerHTML = `
-						<button class="calendar__day-button button button--icon" data-time="${yearMonthDay}">
-							${day}
-						</button>
-					`;
+				<button class="calendar__day-button button button--icon" data-time="${yearMonthDay}">
+					${day}
+				</button>
+			`;
 	}
 
 	return calendarDay.outerHTML;
@@ -289,6 +291,7 @@ function calendarInit() {
 	if (pageCalendar3) {
 		calendarCreateTemplate();
 		calendarSet(date.getThisYear(), date.getThisMonth());
+		firebaseConexion.init()
 	}
 }
 
