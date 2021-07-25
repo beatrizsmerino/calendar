@@ -11,10 +11,10 @@
 
 
 /**
- * @function printSprites
+ * @function insert
  * @description Insert file sprites.svg with the icons to the end of the all html files
  */
-function printSprites() {
+function insert() {
 	const url = 'images/icons/sprites.svg';
 	const className = 'sprite';
 
@@ -33,4 +33,6 @@ function printSprites() {
 	});
 }
 
-export { printSprites }
+
+
+export { insert }

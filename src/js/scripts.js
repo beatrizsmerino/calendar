@@ -27,8 +27,8 @@ import * as pagesCalendar3 from './modules/pages/_pages-calendar-3.js';
 
 
 document.addEventListener("DOMContentLoaded", function () {
-	sprite.printSprites();
-	layoutHeader.openCloseHeaderNav();
+	sprite.insert();
+	layoutHeader.openCloseNav();
 	layoutFooter.copyright();
 	pagesCalendar1.calendarInit();
 	pagesCalendar2.calendarInit();

@@ -11,10 +11,10 @@
 
 
 /**
- * @function openCloseHeaderNav
+ * @function openCloseNav
  * @description Open/Close nav inside Header
  */
-function openCloseHeaderNav() {
+function openCloseNav() {
 	const nav = document.querySelector('#headerNav');
 	const navButton = document.querySelector('#headerNavButton');
 
@@ -31,4 +31,4 @@ function openCloseHeaderNav() {
 	});
 }
 
-export { openCloseHeaderNav }
+export { openCloseNav }
