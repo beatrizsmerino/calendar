@@ -19,12 +19,12 @@ import * as tools from '../components/_components-tools.js';
 
 
 /**
- * @functions modalCreateTemplate
+ * @function createTemplate
  * @description Create template of modal al insert on the html
  * @param {String} content 
  * @returns 
  */
-function modalCreateTemplate(content) {
+function createTemplate(content) {
 	const template = `
 		<div class="modal">
 			<div class="modal__box">
@@ -51,10 +51,10 @@ function modalCreateTemplate(content) {
 
 
 /**
- * @functions modalOpen
+ * @function open
  * @description Show modal adding a class
  */
-function modalOpen() {
+function open() {
 	const modal = document.querySelector('.modal');
 
 	setTimeout(function () {
@@ -65,10 +65,10 @@ function modalOpen() {
 
 
 /**
- * @functions modalClose
+ * @function close
  * @description Hide modal removing a class and his html
  */
-function modalClose() {
+function close() {
 	const modal = document.querySelector('.modal');
 	const buttonClose = document.querySelector('.modal__button-close');
 
@@ -84,26 +84,26 @@ function modalClose() {
 
 
 /**
- * @functions modalAddEvents
+ * @function addEvents
  * @description Add events for show and hide the modal 
  */
-function modalAddEvents() {
-	modalOpen();
-	modalClose();
+function addEvents() {
+	open();
+	close();
 }
 
 
 
 /**
- * @functions modalCreate
+ * @function init
  * @description Create modal with the content and add events
  * @param {String} content - Content of modal
  */
-function modalCreate(content) {
-	modalCreateTemplate(content);
-	modalAddEvents();
+function init(content) {
+	createTemplate(content);
+	addEvents();
 }
 
 
 
-export { modalCreate }
+export { init }

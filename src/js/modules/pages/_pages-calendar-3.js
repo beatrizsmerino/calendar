@@ -284,7 +284,7 @@ function calendarModalCreate(data) {
 		</span>
 	`;
 
-	modal.modalCreate(calendarTemplate);
+	modal.init(calendarTemplate);
 }
 
 function calendarInit() {
