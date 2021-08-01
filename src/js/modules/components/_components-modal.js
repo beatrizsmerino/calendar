@@ -28,14 +28,14 @@ function createTemplate(data) {
 	const template = `
 		<div class="modal">
 			<div class="modal__box">
+				<button class="modal__button-close button button--icon button--line-black">
+					<i class="icon">
+						<svg class="icon__svg">
+							<use class="icon__use" href="#icon-cross" />
+						</svg>
+					</i>
+				</button>
 				<div class="modal__inner">
-					<button class="modal__button-close button button--icon">
-						<i class="icon">
-							<svg class="icon__svg">
-								<use class="icon__use" href="#icon-cross" />
-							</svg>
-						</i>
-					</button>
 					<div class="modal__content">
 						${data}
 					</div>
