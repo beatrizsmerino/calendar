@@ -24,55 +24,60 @@ import * as tools from '../_components-tools.js';
  */
 function createTemplate() {
 	const template = `
-		<div class="auth">
-			<button id="authButtonLogin" class="auth__button button button--bg-black">
+		<div class="auth-dropdown">
+			<button id="authButtonLogin" class="auth-dropdown__button button button--bg-black">
 				Login
 			</button>
 
-			<ul id="authList" class="auth__list">
-				<li class="auth__item">
-					<button id="buttonLoginGoogle" class="button button--line-black">
-						<span class="button__text">
-							with email&password
-						</span>
-						<span class="button__icon">
-							<i class="icon">
-								<svg class="icon__svg">
-									<use class="icon__use" href="#icon-lock" />
-								</svg>
-							</i>
-						</span>
-					</button>
-				</li>
-				<li class="auth__item">
-					<button id="buttonLoginGoogle" class="button button--line-black">
-						<span class="button__text">
-							with Google
-						</span>
-						<span class="button__icon">
-							<i class="icon">
-								<svg class="icon__svg">
-									<use class="icon__use" href="#icon-google" />
-								</svg>
-							</i>
-						</span>
-					</button>
-				</li>
-				<li class="auth__item">
-					<button id="buttonLoginGithub" class="button button--line-black">
-						<span class="button__text">
-							with GitHub
-						</span>
-						<span class="button__icon">
-							<i class="icon">
-								<svg class="icon__svg">
-									<use class="icon__use" href="#icon-github" />
-								</svg>
-							</i>
-						</span>
-					</button>
-				</li>
-			</ul>
+			<nav id="authNav" class="auth-dropdown__nav">
+				<h4 class="auth-dropdown__title">
+					Login with:
+				</h4>
+				<ul class="auth-dropdown__list">
+					<li class="auth-dropdown__item">
+						<button id="buttonLoginGoogle" class="button">
+							<span class="button__icon">
+								<i class="icon">
+									<svg class="icon__svg">
+										<use class="icon__use" href="#icon-lock" />
+									</svg>
+								</i>
+							</span>
+							<span class="button__text">
+								email & password
+							</span>
+						</button>
+					</li>
+					<li class="auth-dropdown__item">
+						<button id="buttonLoginGoogle" class="button">
+							<span class="button__icon">
+								<i class="icon">
+									<svg class="icon__svg">
+										<use class="icon__use" href="#icon-google" />
+									</svg>
+								</i>
+							</span>
+							<span class="button__text">
+								Google
+							</span>
+						</button>
+					</li>
+					<li class="auth-dropdown__item">
+						<button id="buttonLoginGithub" class="button">
+							<span class="button__icon">
+								<i class="icon">
+									<svg class="icon__svg">
+										<use class="icon__use" href="#icon-github" />
+									</svg>
+								</i>
+							</span>
+							<span class="button__text">
+								GitHub
+							</span>
+						</button>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	`;
 
@@ -100,7 +105,7 @@ function create() {
  */
 function openClose() {
 	const loginButton = document.querySelector('#authButtonLogin');
-	const loginNav = document.querySelector('#authList');
+	const loginNav = document.querySelector('#authNav');
 
 	loginButton.addEventListener('click', function () {
 		loginNav.classList.toggle('is-show');

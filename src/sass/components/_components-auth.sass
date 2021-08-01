@@ -6,7 +6,7 @@
 
 
 
-.auth
+.auth-dropdown
 	display: flex
 	flex-direction: column
 	justify-content: flex-end
@@ -18,15 +18,15 @@
 	&__button
 		margin-bottom: 1rem
 
-	&__list
-		display: flex
-		flex-direction: column
-		justify-content: flex-end
-		list-style: none
+	&__nav
+		padding: 3rem 2.5rem
 		position: absolute
 		right: 0
 		top: 5rem
 		z-index: 999999
+		box-shadow: 0 0 0.8rem 0 rgba($color-black, 0.6)
+		border-radius: 0.5rem
+		background-color: $color-white
 		opacity: 0
 		cursor-pointer: none
 		transition: all 0.2s ease-in-out
@@ -35,15 +35,26 @@
 			opacity: 1
 			cursor-pointer: all
 
+	&__title
+		margin-bottom: 2rem
+		
+	&__list
+		display: flex
+		flex-direction: column
+		list-style: none
+		
 	&__item
 		&:not(:last-child)
-			margin-bottom: 0.5rem
+			border-bottom: 0.1rem solid $color-silver
 		
 		>*
 			width: 100%
 
 		.button
-			justify-content: flex-end
+			justify-content: flex-start
+
+			&:hover
+				background-color: $color-light
 
 		.icon
 			width: 2rem
