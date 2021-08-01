@@ -1,0 +1,86 @@
+// COMPONENTS
+// MESSAGE
+// =================================================
+
+
+
+
+
+.message 
+	width: 100%
+	position: fixed
+	left: 0
+	bottom: 0
+	z-index: 999999
+	background-color: $color-light-1
+	-ms-box-shadow: 0px 0px 20px rgba($color-black, 0.1)
+	-o-box-shadow: 0px 0px 20px rgba($color-black, 0.1)
+	box-shadow: 0px 0px 20px rgba($color-black, 0.1)
+	opacity: 0
+	transform: translate3d(0, 100%, 0)
+
+	&__inner 
+		margin: 1rem 2rem
+		display: flex
+		flex-wrap: wrap
+		position: relative
+	
+	&__title 
+		width: 100%
+		margin-bottom: 0.5rem
+	
+	&__description 
+		width: 100%
+		margin-right: 3rem
+		line-height: 100%
+		font-size: 1.5rem
+		font-weight: 600
+		color: $color-gray
+
+		a 
+			text-decoration: underline
+		
+	&__close 
+		position: absolute
+		top: 0
+		right: 0
+		border: none
+		background-color: transparent
+
+		.icon
+			fill: $color-black
+	
+	&.is-success 
+		background-color: $color-success
+
+		.message
+			&__close
+				.icon
+					fill: rgba($color-white, 0.6)
+
+				&:hover
+					.icon
+						fill: $color-white
+						
+			&__title,
+			&__description 
+				color: $color-white
+			
+	&.is-error 
+		background-color: $color-error
+
+		.message
+			&__close
+				.icon
+					fill: rgba($color-white, 0.6)
+
+				&:hover
+					.icon
+						fill: $color-white
+			
+			&__title,
+			&__description 
+				color: $color-white
+
+	&.is-show 
+		animation: moveInBottomToTop 0.5s ease-in-out 0s forwards, moveOutBottomToTop 0.5s ease-in-out 10s forwards
