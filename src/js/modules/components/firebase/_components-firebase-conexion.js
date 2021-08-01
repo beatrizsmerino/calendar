@@ -11,6 +11,15 @@
 
 
 /**
+ * @requires message
+ */
+import * as message from '../_components-message.js';
+import * as firebaseErrors from './_components-firebase-errors.js';
+
+
+
+
+/**
  * @const settings
  * @type {Object}
  * @description Data to connect to my Firebase project database
@@ -33,7 +42,28 @@ const settings = {
  * @description Initialize Firebase
  */
 function init() {
-	firebase.initializeApp(settings);
+	try {
+		firebase.initializeApp(settings);
+
+		message.init({
+			title: "Success",
+			description: "Firebase conexion inizialized",
+			className: "is-success"
+		});
+
+	} catch (error) {
+		// Handle errors
+		const errorCode = error.code;
+		const errorMessage = error.message;
+		const listMessages = firebaseErrors.listMessages;
+		const verifyMessage = firebaseErrors.verify(listMessages[errorCode], errorMessage);
+
+		message.init({
+			title: "Error!",
+			description: verifyMessage,
+			className: "is-error"
+		});
+	}
 
 	console.info("Firebase Conexion:", firebase);
 }
