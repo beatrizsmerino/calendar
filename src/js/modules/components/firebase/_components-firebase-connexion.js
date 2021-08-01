@@ -39,7 +39,7 @@ const settings = {
 
 /**
  * @function init
- * @description Initialize firebase conexion component
+ * @description Initialize 'firebase conexion' component
  */
 function init() {
 	try {

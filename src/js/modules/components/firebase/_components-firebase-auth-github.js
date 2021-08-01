@@ -13,7 +13,7 @@
 
 /**
  * @function init
- * @description Init login with Github component
+ * @description Initialize login with Github component
  */
 function init() {
 	console.log("Firebase Auth: GitHub");

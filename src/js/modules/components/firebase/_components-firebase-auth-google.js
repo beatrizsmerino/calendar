@@ -13,7 +13,7 @@
 
 /**
  * @function init
- * @description Init login with Google component
+ * @description Initialize login with Google component
  */
 function init() {
 	console.log("Firebase Auth: Google");

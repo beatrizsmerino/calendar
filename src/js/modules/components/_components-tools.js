@@ -15,7 +15,7 @@
 /**
  * @function stringToNode
  * @description Convert string to DOM node
- * @param {String} string String to convert
+ * @param {String} string - String to convert
  * @returns {Element}
  */
 function stringToNode(string) {
@@ -29,7 +29,7 @@ function stringToNode(string) {
 /**
  * @function getFirst4Letters
  * @description Get the first 4 letters of a list words
- * @param {Array} words 
+ * @param {Array} words - List of words
  * @returns 
  */
 function getFirst4Letters(words) {

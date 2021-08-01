@@ -19,8 +19,8 @@ import * as tools from './_components-tools.js';
 
 /**
  * @function createTemplate
- * @description Create template of message
- * @param {Object} data Data for build the template
+ * @description Create template of the 'message' component
+ * @param {Object} data - Data for build the template
  * @returns
  */
 function createTemplate(data) {
@@ -51,8 +51,8 @@ function createTemplate(data) {
 
 /**
  * @function create
- * @description Insert the template of message into the html
- * @param {Object} data Data for build the template
+ * @description Insert the template of the 'message' component into the html
+ * @param {Object} data - Data for build the template
  */
 function create(data) {
 	const template = createTemplate(data);
@@ -65,7 +65,7 @@ function create(data) {
 
 /**
  * @function remove
- * @description Remove the message
+ * @description Remove the html of the 'message' component
  */
 function remove() {
 	const message = document.getElementById("message");
@@ -79,10 +79,10 @@ function remove() {
 
 /**
  * @function show
- * @description Show the message
+ * @description Show the 'message' component
  * - Add the class 'is-show'
  * - Remove the html
- * @param {Number} time Time to wait before show the message
+ * @param {Number} time - Time to wait before show the message
  */
 function show(time) {
 	const message = document.getElementById("message");
@@ -96,10 +96,10 @@ function show(time) {
 
 /**
  * @function hide
- * @description Hide the message
+ * @description Hide the 'message' component
  * - Remove the class 'is-show'
  * - Remove the html
- * @param {Number} time Time to wait before remove the message
+ * @param {Number} time - Time to wait before remove the message
  */
 function hide(time) {
 	const message = document.getElementById("message");
@@ -115,7 +115,7 @@ function hide(time) {
 
 /**
  * @function open
- * @description Show and hide message when click on the open button
+ * @description Show and hide the 'message' component when click on the open button
  * - Show after a 0.1s
  * - Hide after a 10.5s
  */
@@ -128,7 +128,7 @@ function open() {
 
 /**
  * @function close
- * @description Hide the message when click on the close button
+ * @description Hide the 'message' component when click on the close button
  * - Hide after a 0.1s
  */
 function close() {
@@ -143,7 +143,7 @@ function close() {
 
 /**
  * @function addEvents
- * @description Add events for show and hide the message
+ * @description Add events for show and hide the 'message' component
  */
 function addEvents() {
 	open();
@@ -154,8 +154,8 @@ function addEvents() {
 
 /**
  * @function init
- * @description Initialize message component
- * @param {Object} data Data for build the template of message
+ * @description Initialize 'message' component
+ * @param {Object} data - Data for build the template of 'message'
  */
 function init(data) {
 	remove();

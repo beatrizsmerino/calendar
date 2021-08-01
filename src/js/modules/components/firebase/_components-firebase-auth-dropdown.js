@@ -20,7 +20,7 @@ import * as tools from '../_components-tools.js';
 
 /**
  * @function createTemplate
- * @description Create template for auth dropdown
+ * @description Create template for 'auth dropdown' component
  * @returns
  */
 function createTemplate() {
@@ -89,7 +89,7 @@ function createTemplate() {
 
 /**
  * @function create
- * @description Insert the template of auth dropdown into the html
+ * @description Insert the template of 'auth dropdown' component into the html
  */
 function create() {
 	const template = createTemplate();
@@ -102,15 +102,15 @@ function create() {
 
 /**
  * @function closeOutside
- * @description Close auth dropdown when click outside
- * If the target element of the click isn't the nav of auth dropdown close it
+ * @description Close the nav of 'auth dropdown' component when click outside it
+ * If the target element of the click isn't the nav of 'auth dropdown' close it
  */
 function closeOutside() {
 	const authDropdown = document.querySelector('#authDropdown');
 	const authDropdownNav = document.querySelector('#authDropdownLoginNav');
 
-	document.addEventListener('mouseup', function (e) {
-		if (!authDropdown.contains(e.target)) {
+	document.addEventListener('mouseup', function (event) {
+		if (!authDropdown.contains(event.target)) {
 			authDropdownNav.classList.remove('is-show');
 		}
 	});
@@ -120,7 +120,7 @@ function closeOutside() {
 
 /**
  * @function openClose
- * @description Open and close auth dropdown when click login button
+ * @description Open and close the nav of 'auth dropdown' component when click on the login button
  */
 function openClose() {
 	const authDropdownButton = document.querySelector('#authDropdownLoginButton');
@@ -135,7 +135,7 @@ function openClose() {
 
 /**
  * @function addEvents
- * @description Add events for the auth dropdown
+ * @description Add events for the 'auth dropdown' component
  */
 function addEvents() {
 	openClose();
@@ -146,7 +146,7 @@ function addEvents() {
 
 /**
  * @function init
- * @description Init the auth dropdown component
+ * @description Initialize the 'auth dropdown' component
  */
 function init() {
 	create();

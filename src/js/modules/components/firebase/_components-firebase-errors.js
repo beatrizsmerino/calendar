@@ -87,7 +87,8 @@ const listMessages = {
 /**
  * @function verify
  * @description Verify if the firebase error it is a 'Internal error' for convert it to object
- * @param {String} text 
+ * @param {Number} errorCode - Number of error code gets of try/catch
+ * @param {String} errorMessage - Error message found on the 'listMessages' object
  */
 function verify(errorCode, errorMessage) {
 	if (errorCode === "Internal error") {

@@ -78,7 +78,7 @@ function create() {
  * @description Login user with email & password
  */
 function login() {
-	console.log("Login passs");
+	console.log("Login email and password");
 }
 
 
@@ -128,7 +128,7 @@ function addEvents() {
 
 /**
  * @function init
- * @description Init login with Email and Password component
+ * @description Initialize login with Email and Password component
  */
 function init() {
 	addEvents();

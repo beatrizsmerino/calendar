@@ -20,8 +20,8 @@ import * as tools from '../components/_components-tools.js';
 
 /**
  * @function createTemplate
- * @description Create template of modal
- * @param {Object} data Data for build the template
+ * @description Create template of 'modal' component
+ * @param {Object} data - Data for build the template
  * @returns 
  */
 function createTemplate(data) {
@@ -51,8 +51,8 @@ function createTemplate(data) {
 
 /**
  * @function create
- * @description Insert the template of modal into the html
- * @param {Object} data Data for build the template
+ * @description Insert the template of 'modal' component into the html
+ * @param {Object} data - Data for build the template
  */
 function create(data) {
 	const template = createTemplate(data);
@@ -65,7 +65,7 @@ function create(data) {
 
 /**
  * @function remove
- * @description Remove the modal
+ * @description Remove html of the 'modal' component
  */
 function remove() {
 	const modal = document.querySelector('.modal');
@@ -79,9 +79,9 @@ function remove() {
 
 /**
  * @function show
- * @description Show the modal
+ * @description Show the 'modal' component
  * - Add the class 'is-show'
- * @param {Number} time Time to wait before show the message
+ * @param {Number} time - Time to wait before show the message
  */
 function show(time) {
 	const modal = document.querySelector('.modal');
@@ -95,10 +95,10 @@ function show(time) {
 
 /**
  * @function hide
- * @description Hide the modal
+ * @description Hide the 'modal' component
  * - Remove the class 'is-show'
  * - Remove the html
- * @param {Number} time Time to wait before remove the message
+ * @param {Number} time - Time to wait before remove the message
  */
 function hide(time) {
 	const modal = document.querySelector('.modal');
@@ -114,7 +114,7 @@ function hide(time) {
 
 /**
  * @function open
- * @description Show modal when click on the open button
+ * @description Show the 'modal' component when click on the open button
  * - Show after a 0.1s
  */
 function open() {
@@ -125,7 +125,7 @@ function open() {
 
 /**
  * @function close
- * @description Hide the modal when click on the close button
+ * @description Hide the 'modal' component when click on the close button
  * - Hide after a 1s
  */
 function close() {
@@ -140,7 +140,7 @@ function close() {
 
 /**
  * @function addEvents
- * @description Add events for show and hide the modal 
+ * @description Add events for show and hide the 'modal' component
  */
 function addEvents() {
 	open();
@@ -151,8 +151,8 @@ function addEvents() {
 
 /**
  * @function init
- * @description Initialize modal component
- * @param {Object} data Data for build the template
+ * @description Initialize 'modal' component
+ * @param {Object} data - Data for build the template
  */
 function init(data) {
 	remove();

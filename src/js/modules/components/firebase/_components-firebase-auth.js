@@ -26,7 +26,7 @@ import * as firebaseAuthGithub from './_components-firebase-auth-github.js';
 
 /**
  * @function init
- * @description Init auth with Firebase component
+ * @description Initialize auth with Firebase component
  * - Create the login/logout buttons
  * - Add auth dropdown with the login options
  * - Add auth with email and password

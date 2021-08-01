@@ -117,6 +117,7 @@ const settings = {
  */
 function getThisYear() {
 	const date = new Date();
+
 	return date.getFullYear();
 }
 
@@ -152,6 +153,8 @@ function getThisDay() {
 /**
  * @function getDayOfYear
  * @description Sets the day of the month
+ * @param {Number} year - Number of year
+ * @param {Number} day - Number of day
  * @returns
  */
 function getDayOfYear(year, day) {
@@ -201,6 +204,9 @@ function getWeeksStartAtWeekend(language) {
 /**
  * @function getDateAsYearMonthDay
  * @description Get date as formatt: YYYY-MM-DD
+ * @param {Number} year - Number of year
+ * @param {Number} month - Number of month
+ * @param {Number} day - Number of day
  * @returns
  */
 function getDateAsYearMonthDay(year, month, day) {
@@ -217,6 +223,9 @@ function getDateAsYearMonthDay(year, month, day) {
 /**
  * @function getDateAsDayMonthYear
  * @description Get date as formatt: DD-MM-YYYY
+ * @param {Number} day - Number of day
+ * @param {Number} month - Number of month
+ * @param {Number} year - Number of year
  * @returns
  */
 function getDateAsDayMonthYear(day, month, year) {
@@ -233,6 +242,7 @@ function getDateAsDayMonthYear(day, month, year) {
 /**
  * @function getDateAsText
  * @description Get date as formatt: DD de Month de YYYY
+ * @param {String} date - Date as formatt YYYY-MM-DD
  * @returns
  */
 function getDateAsText(date) {
