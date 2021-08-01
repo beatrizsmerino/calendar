@@ -1,6 +1,6 @@
 /**
  * @file _components-firebase.js
- * @module firebaseConexion
+ * @module firebaseConnexion
  * @description Authentication and CRUD (Create, Read, Update and Delete)
  * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
  * @copyright (2021)
@@ -47,7 +47,7 @@ function init() {
 
 		message.init({
 			title: "Success",
-			description: "Firebase conexion inizialized",
+			description: "Firebase connexion inizialized",
 			className: "is-success"
 		});
 
@@ -65,7 +65,7 @@ function init() {
 		});
 	}
 
-	console.info("Firebase Conexion:", firebase);
+	console.info("Firebase Connexion:", firebase);
 }
 
 

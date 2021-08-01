@@ -1,7 +1,7 @@
 /**
  * @file _components-tools.js
  * @module tools
- * @description Helper functions
+ * @description Component Tools. Helper functions
  * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
  * @copyright (2021)
  */
@@ -19,6 +19,7 @@
  */
 function stringToNode(string) {
 	const nodeDOM = document.createRange().createContextualFragment(string);
+
 	return nodeDOM;
 }
 
@@ -32,6 +33,7 @@ function stringToNode(string) {
  */
 function getFirst4Letters(words) {
 	const wordsFormatted = words.map((item) => item.slice(0, 4));
+
 	return wordsFormatted;
 }
 

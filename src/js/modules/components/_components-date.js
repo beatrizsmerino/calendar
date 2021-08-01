@@ -143,6 +143,7 @@ function getThisMonth() {
  */
 function getThisDay() {
 	const date = new Date();
+
 	return date.getDate();
 }
 
@@ -155,6 +156,7 @@ function getThisDay() {
  */
 function getDayOfYear(year, day) {
 	const dateDay = new Date(year, 0);
+
 	return new Date(dateDay.setDate(day));
 }
 
@@ -171,6 +173,7 @@ function getToday() {
 		getThisMonth(),
 		getThisDay()
 	);
+
 	return today;
 }
 
@@ -205,6 +208,7 @@ function getDateAsYearMonthDay(year, month, day) {
 	const mm = String(month).padStart(2, "0");
 	const dd = String(day).padStart(2, "0");
 	const yearMonthDay = `${yyyy}-${mm}-${dd}`;
+
 	return yearMonthDay;
 }
 
@@ -220,6 +224,7 @@ function getDateAsDayMonthYear(day, month, year) {
 	const mm = String(month).padStart(2, "0");
 	const yyyy = String(year);
 	const dayMonthYear = `${dd}-${mm}-${yyyy}`;
+
 	return dayMonthYear;
 }
 
@@ -234,6 +239,7 @@ function getDateAsText(date) {
 	const dateArray = date.split('-');
 	const dateMonthText = settings.months.es[parseInt(dateArray[1])];
 	const dateFormatted = `${dateArray[2]} de ${dateMonthText} de ${dateArray[0]}`;
+
 	return dateFormatted;
 }
 

@@ -1,7 +1,7 @@
 /**
  * @file _components-message.js
  * @module message
- * @description Component message
+ * @description Component Message
  * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
  * @copyright (2021)
  */
