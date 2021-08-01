@@ -206,7 +206,7 @@ function calendarSetDays() {
 		const tableDays = calendarMonth.children[2].children[week].children[dateWeek];
 		tableDays.innerHTML = `<span>${dateDay}</span>`;
 
-		const yearMonthDay = date.getDateAsYearMonthDay(thisYear, dateMonth, dateDay);
+		const yearMonthDay = date.getDateAsYearMonthDay(thisYear, dateMonth + 1, dateDay);
 		tableDays.setAttribute("data-time", yearMonthDay);
 
 		if (tableDays.getAttribute("data-time") == date.getToday()) {
@@ -252,7 +252,7 @@ function calendarSetWeekend() {
 function calendarMoveScrollToday() {
 	const calendarInner = document.querySelector(".calendar__inner");
 	const calendarMonth = document.querySelectorAll(".calendar__month");
-	const currentMonth = date.getThisMonth();
+	const currentMonth = date.getThisMonth() - 1;
 
 	let positionScroll = 0;
 	for (let index = 0; index < currentMonth; index++) {
@@ -304,7 +304,7 @@ function calendarSet(language) {
 	calendarEmpty();
 	calendarCreateStructure(
 		date.settings.months[language],
-		tools.getFirst4Letters(date.settings.weeks[language])
+		tools.getFirst4Letters(date.getWeeksStartAtWeekend(language))
 	);
 	calendarSetDays();
 	calendarSetWeekend();

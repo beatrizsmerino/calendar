@@ -78,31 +78,32 @@ const settings = {
 	},
 	weeks: {
 		en: [
-			"Sunday",
 			"Monday",
 			"Tuesday",
 			"Wednesday",
 			"Thursday",
 			"Friday",
 			"Saturday",
+			"Sunday",
 		],
 		fr: [
-			"Dimanche",
 			"Lundi",
 			"Mardi",
 			"Mercredi",
 			"Jeudi",
 			"Vendredi",
 			"Samedi",
+			"Dimanche"
 		],
 		es: [
-			"Domingo",
+
 			"Lunes",
 			"Martes",
 			"Miércoles",
 			"Jueves",
 			"Viernes",
 			"Sábado",
+			"Domingo"
 		],
 	},
 };
@@ -149,7 +150,7 @@ function getThisDay() {
 
 /**
  * @function getDayOfYear
- * @description 
+ * @description Sets the day of the month
  * @returns
  */
 function getDayOfYear(year, day) {
@@ -171,6 +172,25 @@ function getToday() {
 		getThisDay()
 	);
 	return today;
+}
+
+
+
+/**
+ * @function getWeeksStartAtWeekend
+ * @description The week starts at the weekend (on Sunday)
+ * @param {String} language - Language selected
+ * @returns
+ */
+function getWeeksStartAtWeekend(language) {
+	const languageSelected = language;
+	const weeks = settings.weeks[languageSelected];
+	const weeksLast = weeks[weeks.length - 1];
+
+	let weeksFormatted = weeks.slice(0, -1);
+	weeksFormatted.unshift(weeksLast);
+
+	return weeksFormatted;
 }
 
 
@@ -226,6 +246,7 @@ export {
 	getThisDay,
 	getDayOfYear,
 	getToday,
+	getWeeksStartAtWeekend,
 	getDateAsYearMonthDay,
 	getDateAsDayMonthYear,
 	getDateAsText
