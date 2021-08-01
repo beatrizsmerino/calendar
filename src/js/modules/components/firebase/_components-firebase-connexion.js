@@ -1,7 +1,7 @@
 /**
  * @file _components-firebase.js
  * @module firebaseConnexion
- * @description Authentication and CRUD (Create, Read, Update and Delete)
+ * @description Component Firebase Connexion
  * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
  * @copyright (2021)
  */
@@ -39,7 +39,7 @@ const settings = {
 
 /**
  * @function init
- * @description Initialize Firebase
+ * @description Initialize firebase conexion component
  */
 function init() {
 	try {

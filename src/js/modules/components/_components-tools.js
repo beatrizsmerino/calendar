@@ -1,7 +1,8 @@
 /**
  * @file _components-tools.js
  * @module tools
- * @description Component Tools. Helper functions
+ * @description Component Tools
+ * Helper functions
  * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
  * @copyright (2021)
  */

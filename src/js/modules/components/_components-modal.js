@@ -151,7 +151,7 @@ function addEvents() {
 
 /**
  * @function init
- * @description Create modal with the content and add events
+ * @description Initialize modal component
  * @param {Object} data Data for build the template
  */
 function init(data) {

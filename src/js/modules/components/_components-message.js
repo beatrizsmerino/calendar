@@ -154,7 +154,7 @@ function addEvents() {
 
 /**
  * @function init
- * @description Create, insert and add events for the message component
+ * @description Initialize message component
  * @param {Object} data Data for build the template of message
  */
 function init(data) {
