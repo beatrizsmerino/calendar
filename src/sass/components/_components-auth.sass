@@ -1,0 +1,50 @@
+// COMPONENTS
+// BUTTON
+// =================================================
+
+
+
+
+
+.auth
+	display: flex
+	flex-direction: column
+	justify-content: flex-end
+	position: fixed
+	top: calc(5rem + 2rem)
+	right: 2rem
+	z-index: 99
+
+	&__button
+		margin-bottom: 1rem
+
+	&__list
+		display: flex
+		flex-direction: column
+		justify-content: flex-end
+		list-style: none
+		position: absolute
+		right: 0
+		top: 5rem
+		z-index: 999999
+		opacity: 0
+		cursor-pointer: none
+		transition: all 0.2s ease-in-out
+
+		&.is-show
+			opacity: 1
+			cursor-pointer: all
+
+	&__item
+		&:not(:last-child)
+			margin-bottom: 0.5rem
+		
+		>*
+			width: 100%
+
+		.button
+			justify-content: flex-end
+
+		.icon
+			width: 2rem
+			height: 2rem

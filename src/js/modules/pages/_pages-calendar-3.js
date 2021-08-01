@@ -9,11 +9,13 @@
  * @requires date
  * @requires modal
  * @requires firebaseConnexion
+ * @requires firebaseAuth
  */
 import * as tools from '../components/_components-tools.js';
 import * as date from '../components/_components-date.js';
 import * as modal from '../components/_components-modal.js';
 import * as firebaseConnexion from '../components/firebase/_components-firebase-connexion.js';
+import * as firebaseAuth from '../components/firebase/_components-firebase-auth.js';
 
 
 
@@ -292,6 +294,7 @@ function calendarInit() {
 		calendarCreateTemplate();
 		calendarSet(date.getThisYear(), date.getThisMonth());
 		firebaseConnexion.init()
+		firebaseAuth.init(pageContent)
 	}
 }
 
