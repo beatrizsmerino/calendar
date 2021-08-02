@@ -1,5 +1,5 @@
 /**
- * @file _components-firebase-auth-dropdown.js
+ * @file _components-firebase-auth-login-dropdown.js
  * @module firebaseAuthDropdown
  * @description Component Auth Dropdown
  * Create the Login/Logout buttons and dropdown with the options for login
@@ -25,18 +25,18 @@ import * as tools from '../_components-tools.js';
  */
 function createTemplate() {
 	const template = `
-		<div id="authDropdown" class="auth-dropdown">
-			<button id="authDropdownLoginButton" class="auth-dropdown__button button button--bg-black">
+		<div id="authDropdown" class="auth-login-dropdown">
+			<button id="authDropdownLoginButton" class="auth-login-dropdown__button button button--bg-black">
 				Login
 			</button>
 
-			<nav id="authDropdownLoginNav" class="auth-dropdown__nav">
-				<h4 class="auth-dropdown__title">
+			<nav id="authDropdownLoginNav" class="auth-login-dropdown__nav">
+				<h4 class="auth-login-dropdown__title">
 					Login with:
 				</h4>
-				<ul class="auth-dropdown__list">
-					<li class="auth-dropdown__item">
-						<button id="loginEmailPassShow" class="button">
+				<ul class="auth-login-dropdown__list">
+					<li class="auth-login-dropdown__item">
+						<button id="loginEmailPassShowModal" class="button">
 							<span class="button__icon">
 								<i class="icon">
 									<svg class="icon__svg">
@@ -49,7 +49,7 @@ function createTemplate() {
 							</span>
 						</button>
 					</li>
-					<li class="auth-dropdown__item">
+					<li class="auth-login-dropdown__item">
 						<button id="loginGoogleButton" class="button">
 							<span class="button__icon">
 								<i class="icon">
@@ -63,7 +63,7 @@ function createTemplate() {
 							</span>
 						</button>
 					</li>
-					<li class="auth-dropdown__item">
+					<li class="auth-login-dropdown__item">
 						<button id="loginGithubButton" class="button">
 							<span class="button__icon">
 								<i class="icon">

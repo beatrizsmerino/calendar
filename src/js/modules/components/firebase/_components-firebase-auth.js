@@ -12,12 +12,12 @@
 
 
 /**
- * @requires firebaseAuthDropdown
+ * @requires firebaseAuthLoginDropdown
  * @requires firebaseAuthEmailPass
  * @requires firebaseAuthGoogle
  * @requires firebaseAuthGithub
  */
-import * as firebaseAuthDropdown from './_components-firebase-auth-dropdown.js';
+import * as firebaseAuthLoginDropdown from './_components-firebase-auth-login-dropdown.js';
 import * as firebaseAuthEmailPass from './_components-firebase-auth-email-pass.js';
 import * as firebaseAuthGoogle from './_components-firebase-auth-google.js';
 import * as firebaseAuthGithub from './_components-firebase-auth-github.js';
@@ -34,7 +34,7 @@ import * as firebaseAuthGithub from './_components-firebase-auth-github.js';
  * - Add auth with Google
  */
 function init() {
-	firebaseAuthDropdown.init();
+	firebaseAuthLoginDropdown.init();
 	firebaseAuthEmailPass.init();
 	firebaseAuthGithub.init();
 	firebaseAuthGoogle.init();
