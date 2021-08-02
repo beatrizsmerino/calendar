@@ -118,12 +118,26 @@
 			background-color: $color-light
 
 	&__button-list
-		margin-top: 2rem
+		margin-top: 3rem
 		display: flex
 		justify-content: flex-end
 
+		> *
+			&:not(:first-child)
+				margin-left: 2rem
+
+		&--column
+			flex-direction: column
+
+			> *
+				&:not(:first-child)
+					margin-left: 0
+
+				&:not(:last-child)
+					margin-bottom: 2rem
+					
 	&__button
-		margin-top: 2rem
+		margin-top: 3rem
 			
 
 .legend
