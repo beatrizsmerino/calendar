@@ -400,6 +400,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendar.innerHTML = "";
 		}
 
+		function getCalendarFirstDayOfWeekSelected() {
+			const languageSelected = getCalendarLanguageSelected();
+			const current = settings.firstDayOfWeek[languageSelected.value].filter((item) => item.selected)[0];
+			return current;
+		}
+
 		function calendarFirstDayOfWeekCreateStructure() {
 			const select = document.querySelector("#selectFirstDayOfWeek");
 			const options = select.querySelectorAll("option");
@@ -419,6 +425,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 
+		function calendarFirstDayOfWeekUpdateStructure() {
+			const select = document.querySelector("#selectFirstDayOfWeek");
+			const firstOption = select.querySelectorAll("option")[0];
+			const firstDayOfWeekSelected = getCalendarFirstDayOfWeekSelected();
+
+			firstOption.value = firstDayOfWeekSelected.value;
+			firstOption.innerText = `First day of week: ${firstDayOfWeekSelected.text}`;
+			select.value = firstDayOfWeekSelected.value;
+		}
+
 		function calendarFirstDayOfWeekChange(firstDayOfWeekChanged) {
 			const languageSelected = getCalendarLanguageSelected();
 			const current = settings.firstDayOfWeek[languageSelected.value].filter((item) => item.value === parseInt(firstDayOfWeekChanged.value))[0];
@@ -429,6 +445,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			// 	language.map((item) => item.selected === true ? item.selected = false : item.selected = false)
 			// }
 			current.selected = true;
+			calendarFirstDayOfWeekUpdateStructure();
+		}
+
+		function getCalendarLanguageSelected() {
+			const current = settings.languages.filter((item) => item.selected)[0];
+			return current;
 		}
 
 		function calendarLanguageCreateStructure() {
@@ -444,15 +466,21 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		}
 
-		function getCalendarLanguageSelected() {
-			const current = settings.languages.filter((item) => item.selected)[0];
-			return current;
+		function calendarLanguageUpdateStructure() {
+			const select = document.querySelector("#selectLanguage");
+			const firstOption = select.querySelectorAll("option")[0];
+			const languageSelected = getCalendarLanguageSelected();
+
+			firstOption.value = languageSelected.value;
+			firstOption.innerText = `Language: ${languageSelected.text}`;
+			select.value = languageSelected.value;
 		}
 
 		function calendarLanguageChange(languageChanged) {
 			const current = settings.languages.filter((item) => item.value === languageChanged.value)[0];
 			settings.languages.map((item) => item.selected === true ? item.selected = false : item.selected = false);
 			current.selected = true;
+			calendarLanguageUpdateStructure();
 			calendarCreate(current.value);
 		}
 
@@ -488,6 +516,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				.addEventListener("change", function () {
 					calendarLanguageChange(this);
 					calendarFirstDayOfWeekCreateStructure();
+					calendarFirstDayOfWeekUpdateStructure();
 				});
 
 			document
