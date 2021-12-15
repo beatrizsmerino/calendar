@@ -400,8 +400,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendar.innerHTML = "";
 		}
 
-		function getCalendarFirstDayOfWeekSelected() {
-			const languageSelected = getCalendarLanguageSelected();
+		function calendarGetFirstDayOfWeekSelected() {
+			const languageSelected = calendarGetLanguageSelected();
 			const current = settings.firstDayOfWeek[languageSelected.value].filter((item) => item.selected)[0];
 			return current;
 		}
@@ -409,7 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarFirstDayOfWeekCreateStructure() {
 			const select = document.querySelector("#selectFirstDayOfWeek");
 			const options = select.querySelectorAll("option");
-			const languageSelected = getCalendarLanguageSelected();
+			const languageSelected = calendarGetLanguageSelected();
 
 			Array.from(options).map((item, index) => {
 				if(index !== 0) {
@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarFirstDayOfWeekUpdateStructure() {
 			const select = document.querySelector("#selectFirstDayOfWeek");
 			const firstOption = select.querySelectorAll("option")[0];
-			const firstDayOfWeekSelected = getCalendarFirstDayOfWeekSelected();
+			const firstDayOfWeekSelected = calendarGetFirstDayOfWeekSelected();
 
 			firstOption.value = firstDayOfWeekSelected.value;
 			firstOption.innerText = `First day of week: ${firstDayOfWeekSelected.text}`;
@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarFirstDayOfWeekChange(firstDayOfWeekChanged) {
-			const languageSelected = getCalendarLanguageSelected();
+			const languageSelected = calendarGetLanguageSelected();
 			const current = settings.firstDayOfWeek[languageSelected.value].filter((item) => item.value === parseInt(firstDayOfWeekChanged.value))[0];
 			settings.firstDayOfWeek[languageSelected.value].map((item) => item.selected === true ? item.selected = false : item.selected = false);
 			// Reset first day of week of all languages
@@ -448,7 +448,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarFirstDayOfWeekUpdateStructure();
 		}
 
-		function getCalendarLanguageSelected() {
+		function calendarGetLanguageSelected() {
 			const current = settings.languages.filter((item) => item.selected)[0];
 			return current;
 		}
@@ -469,7 +469,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarLanguageUpdateStructure() {
 			const select = document.querySelector("#selectLanguage");
 			const firstOption = select.querySelectorAll("option")[0];
-			const languageSelected = getCalendarLanguageSelected();
+			const languageSelected = calendarGetLanguageSelected();
 
 			firstOption.value = languageSelected.value;
 			firstOption.innerText = `Language: ${languageSelected.text}`;
@@ -485,7 +485,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarCreate() {
-			const languageSelected = getCalendarLanguageSelected();
+			const languageSelected = calendarGetLanguageSelected();
 			calendarEmpty();
 			calendarCreateStructure(
 				settings.months[languageSelected.value],
