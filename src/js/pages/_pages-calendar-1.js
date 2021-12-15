@@ -481,14 +481,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			settings.languages.map((item) => item.selected === true ? item.selected = false : item.selected = false);
 			current.selected = true;
 			calendarLanguageUpdateStructure();
-			calendarCreate(current.value);
+			calendarCreate();
 		}
 
-		function calendarCreate(language) {
+		function calendarCreate() {
+			const languageSelected = getCalendarLanguageSelected();
 			calendarEmpty();
 			calendarCreateStructure(
-				settings.months[language],
-				getFirst4Letters(settings.weeks[language])
+				settings.months[languageSelected.value],
+				getFirst4Letters(settings.weeks[languageSelected.value])
 			);
 			calendarSetDays();
 			calendarSetWeekend();
@@ -527,8 +528,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarInit() {
-			const languageSelected = getCalendarLanguageSelected();
-			calendarCreate(languageSelected.value);
+			calendarCreate();
 			calendarEvents();
 		}
 
