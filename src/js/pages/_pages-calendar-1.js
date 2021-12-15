@@ -11,17 +11,19 @@ document.addEventListener("DOMContentLoaded", function () {
 				{
 					value: "en",
 					text: "English",
+					selected: true
 				},
 				{
 					value: "fr",
 					text: "French",
+					selected: false
 				},
 				{
 					value: "es",
 					text: "Spanish",
+					selected: false
 				},
 			],
-			languageSelected: "en",
 			months: {
 				en: [
 					"January",
@@ -360,10 +362,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendar.innerHTML = "";
 		}
 
-		function calendarTranslate() {
-			const select = document.querySelector("#selectTranslate");
+		function calendarLanguageCreateStructure() {
+			const select = document.querySelector("#selectLanguage");
 
-			if (document.querySelectorAll("#selectTranslate option").length === 1) {
+			if (select.querySelectorAll("option").length === 1) {
 				settings.languages.map((item) => {
 					const option = document.createElement("option");
 					option.value = item.value;
@@ -371,11 +373,18 @@ document.addEventListener("DOMContentLoaded", function () {
 					select.appendChild(option);
 				});
 			}
+		}
 
-			select.addEventListener("change", function () {
-				settings.languageSelected = this.value;
-				calendarCreate(settings.languageSelected);
-			});
+		function getCalendarLanguageSelected() {
+			const current = settings.languages.filter((item) => item.selected)[0];
+			return current;
+		}
+
+		function calendarLanguageChange(languageChanged) {
+			const current = settings.languages.filter((item) => item.value === languageChanged.value)[0];
+			settings.languages.map((item) => item.selected === true ? item.selected = false : item.selected = false);
+			current.selected = true;
+			calendarCreate(current.value);
 		}
 
 		function calendarCreate(language) {
@@ -388,6 +397,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarSetWeekend();
 			calendarSetWidth();
 			calendarMoveScrollToday();
+			calendarLanguageCreateStructure();
 		}
 
 		function calendarEvents() {
@@ -403,11 +413,16 @@ document.addEventListener("DOMContentLoaded", function () {
 					calendarShowAllMonths();
 				});
 
-			calendarTranslate();
+			document
+				.querySelector("#selectLanguage")
+				.addEventListener("change", function () {
+					calendarLanguageChange(this);
+				});
 		}
 
 		function calendarInit() {
-			calendarCreate(settings.languageSelected);
+			const languageSelected = getCalendarLanguageSelected();
+			calendarCreate(languageSelected.value);
 			calendarEvents();
 		}
 
