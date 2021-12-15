@@ -70,31 +70,94 @@ document.addEventListener("DOMContentLoaded", function () {
 			},
 			weeks: {
 				en: [
-					"Sunday",
-					"Monday",
-					"Tuesday",
-					"Wednesday",
-					"Thursday",
-					"Friday",
-					"Saturday",
+					{
+						value: 1,
+						text: "Monday"
+					},
+					{
+						value: 2,
+						text: "Tuesday"
+					},
+					{
+						value: 3,
+						text: "Wednesday"
+					},
+					{
+						value: 4,
+						text: "Thursday"
+					},
+					{
+						value: 5,
+						text: "Friday"
+					},
+					{
+						value: 6,
+						text: "Saturday"
+					},
+					{
+						value: 7,
+						text: "Sunday"
+					}
 				],
 				fr: [
-					"Dimanche",
-					"Lundi",
-					"Mardi",
-					"Mercredi",
-					"Jeudi",
-					"Vendredi",
-					"Samedi",
+					{
+						value: 1,
+						text: "Lundi"
+					},
+					{
+						value: 2,
+						text: "Mardi"
+					},
+					{
+						value: 3,
+						text: "Mercredi"
+					},
+					{
+						value: 4,
+						text: "Jeudi"
+					},
+					{
+						value: 5,
+						text: "Vendredi"
+					},
+					{
+						value: 6,
+						text: "Samedi"
+					},
+					{
+						value: 7,
+						text: "Dimanche"
+					}
 				],
 				es: [
-					"Domingo",
-					"Lunes",
-					"Martes",
-					"Miércoles",
-					"Jueves",
-					"Viernes",
-					"Sábado",
+					{
+						value: 1,
+						text: "Lunes"
+					},
+					{
+						value: 2,
+						text: "Martes"
+					},
+					{
+						value: 3,
+						text: "Miércoles"
+					},
+					{
+						value: 4,
+						text: "Jueves"
+					},
+					{
+						value: 5,
+						text: "Viernes"
+					},
+					{
+						value: 6,
+						text: "Sábado"
+					},
+					{
+						value: 7,
+						text: "Domingo"
+					}
 				],
 			},
 			firstDayOfWeek: {
@@ -174,10 +237,41 @@ document.addEventListener("DOMContentLoaded", function () {
 			return today;
 		}
 
-		function getFirst4Letters(words) {
-			const wordsFormatted = words.map((item) => item.slice(0, 4));
+		function getFirst4Letters(word) {
+			const wordFormatted = word.slice(0, 4);
 
-			return wordsFormatted;
+			return wordFormatted;
+		}
+
+		function calendarOrderWeeksByFirstDayOfWeekSelected() {
+			const languageSelected = calendarGetLanguageSelected();
+			const weeksLanguageSelected = settings.weeks[languageSelected.value];
+			const firstDayOfWeekSelected = calendarGetFirstDayOfWeekSelected();
+			const firstDayOfWeekSelectedValue = firstDayOfWeekSelected.value;
+
+			weeksLanguageSelected.sort((a, b) => a.value - b.value);
+
+			let weeksOrdered = [];
+			let week1 = weeksLanguageSelected.filter(week => week.value === firstDayOfWeekSelectedValue)[0];
+			let weekStart = weeksLanguageSelected.filter(week => week.value > firstDayOfWeekSelectedValue);
+			let weekEnd = weeksLanguageSelected.filter(week => week.value < firstDayOfWeekSelectedValue);
+
+			weeksOrdered.push(week1);
+			weekStart.map(week => weeksOrdered.push(week));
+			weekEnd.map(week => weeksOrdered.push(week));
+
+			return weeksOrdered;
+		}
+
+		function calendarGetWeeks() {
+			let weeks = calendarOrderWeeksByFirstDayOfWeekSelected();
+
+			for (const key in weeks) {
+				const day = weeks[key];
+				day.text = getFirst4Letters(day.text);
+			}
+
+			return weeks;
 		}
 
 		function calendarCreateStructure(monthsList, weeksList) {
@@ -251,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
-				calendarWeek.innerText = weeksList[week];
+				calendarWeek.innerText = weeksList[week].text;
 				[...calendarRow].map((item) => item.appendChild(calendarWeek));
 			}
 
@@ -446,6 +540,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			// }
 			current.selected = true;
 			calendarFirstDayOfWeekUpdateStructure();
+			calendarCreate();
 		}
 
 		function calendarGetLanguageSelected() {
@@ -489,7 +584,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarEmpty();
 			calendarCreateStructure(
 				settings.months[languageSelected.value],
-				getFirst4Letters(settings.weeks[languageSelected.value])
+				calendarGetWeeks()
 			);
 			calendarSetDays();
 			calendarSetWeekend();
