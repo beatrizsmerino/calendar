@@ -97,6 +97,44 @@ document.addEventListener("DOMContentLoaded", function () {
 					"Sábado",
 				],
 			},
+			firstDayOfWeek: {
+				en: [
+					{
+						value: 1,
+						text: "Monday",
+						selected: false
+					},
+					{
+						value: 7,
+						text: "Sunday",
+						selected: true
+					}
+				],
+				fr: [
+					{
+						value: 1,
+						text: "Lundi",
+						selected: false
+					},
+					{
+						value: 7,
+						text: "Dimanche",
+						selected: true
+					}
+				],
+				es: [
+					{
+						value: 1,
+						text: "Lunes",
+						selected: false
+					},
+					{
+						value: 7,
+						text: "Domingo",
+						selected: true
+					}
+				]
+			},
 		};
 
 		function createYearMonthDay(year, month, day) {
@@ -362,6 +400,37 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendar.innerHTML = "";
 		}
 
+		function calendarFirstDayOfWeekCreateStructure() {
+			const select = document.querySelector("#selectFirstDayOfWeek");
+			const options = select.querySelectorAll("option");
+			const languageSelected = getCalendarLanguageSelected();
+
+			Array.from(options).map((item, index) => {
+				if(index !== 0) {
+					item.remove();
+				}
+			});
+			
+			settings.firstDayOfWeek[languageSelected.value].map((item) => {
+				const option = document.createElement("option");
+				option.value = item.value;
+				option.innerText = item.text;
+				select.appendChild(option);
+			});
+		}
+
+		function calendarFirstDayOfWeekChange(firstDayOfWeekChanged) {
+			const languageSelected = getCalendarLanguageSelected();
+			const current = settings.firstDayOfWeek[languageSelected.value].filter((item) => item.value === parseInt(firstDayOfWeekChanged.value))[0];
+			settings.firstDayOfWeek[languageSelected.value].map((item) => item.selected === true ? item.selected = false : item.selected = false);
+			// Reset first day of week of all languages
+			// for (const key in settings.firstDayOfWeek) {
+			// 	const language = settings.firstDayOfWeek[key];
+			// 	language.map((item) => item.selected === true ? item.selected = false : item.selected = false)
+			// }
+			current.selected = true;
+		}
+
 		function calendarLanguageCreateStructure() {
 			const select = document.querySelector("#selectLanguage");
 
@@ -397,6 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarSetWeekend();
 			calendarSetWidth();
 			calendarMoveScrollToday();
+			calendarFirstDayOfWeekCreateStructure();
 			calendarLanguageCreateStructure();
 		}
 
@@ -417,6 +487,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				.querySelector("#selectLanguage")
 				.addEventListener("change", function () {
 					calendarLanguageChange(this);
+					calendarFirstDayOfWeekCreateStructure();
+				});
+
+			document
+				.querySelector("#selectFirstDayOfWeek")
+				.addEventListener("change", function () {
+					calendarFirstDayOfWeekChange(this);
 				});
 		}
 
