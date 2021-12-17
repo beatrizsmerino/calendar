@@ -408,14 +408,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				const dateDay = dayOfYear.getDate();
 				const dateMonth = dayOfYear.getMonth();
 				const dateWeek = dayOfYear.getDay();
-				const calendarMonth = document.querySelectorAll(".calendar__table")[dateMonth];
+				const isWeekend = (dateWeek === 6) || (dateWeek === 0); // 6 = Saturday, 0 = Sunday
 
 				if (dateDay == 1) {
 					week = 0;
 				}
 
 				// Insert days in the calendar
-				const tableDays = calendarMonth.children[2].children[week].children[dateWeek];
+				const tableDays = document.querySelectorAll(".calendar__table")[dateMonth].children[2].children[week].children[dateWeek];
 				tableDays.innerHTML = `<span>${dateDay}</span>`;
 
 				const yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
@@ -423,6 +423,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				if (tableDays.getAttribute("data-time") == getToday()) {
 					tableDays.className += " calendar__today";
+				}
+
+				if(isWeekend) {
+					tableDays.className += " calendar__weekend";
 				}
 
 				if (dateWeek == 6) {
@@ -443,22 +447,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				calendar.style.width = `${calendarMonthWidth}px`;
 				buttonShowToday.click();
 			}
-		}
-
-		function calendarSetWeekend() {
-			const weekendSaturdays = document.querySelectorAll(
-				".calendar__body .calendar__row .calendar__cell:last-child"
-			);
-
-			const weekendSundays = document.querySelectorAll(
-				".calendar__body .calendar__row .calendar__cell:first-child"
-			);
-
-			[...weekendSaturdays, ...weekendSundays].map((item) => {
-				if (item.childNodes.length) {
-					item.classList.add("calendar__weekend");
-				}
-			});
 		}
 
 		function calendarMoveScrollToday() {
@@ -587,7 +575,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				calendarGetWeeks()
 			);
 			calendarSetDays();
-			calendarSetWeekend();
 			calendarSetWidth();
 			calendarMoveScrollToday();
 			calendarFirstDayOfWeekCreateStructure();
