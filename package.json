@@ -4,7 +4,7 @@
 	"description": "Calendar editable",
 	"main": "index.js",
 	"scripts": {
-		"preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
+		"preinstall": "rm -rf node_modules package-lock.json && npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
 		"deploy": "chmod +x ./deploy.sh && ./deploy.sh"
 	},
 	"author": "beatrizsmerino@gmail.com",
