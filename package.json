@@ -4,7 +4,8 @@
 	"description": "Calendar editable",
 	"main": "index.js",
 	"scripts": {
-		"preinstall": "rm -rf node_modules package-lock.json && npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
+		"install:clean": "rm -rf node_modules package-lock.json",
+		"preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
 		"deploy": "chmod +x ./deploy.sh && ./deploy.sh"
 	},
 	"author": "beatrizsmerino@gmail.com",
@@ -37,6 +38,8 @@
 		"webpack-stream": "^7.0.0"
 	},
 	"resolutions": {
+		"async": "https://registry.npmjs.org/async/-/async-2.6.4.tgz",
+		"glob-parent": "https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.2.tgz",
 		"js-yaml": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.13.1.tgz",
 		"lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
 		"lodash.template": "https://registry.npmjs.org/lodash.template/-/lodash.template-4.5.0.tgz",
