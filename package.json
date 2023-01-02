@@ -44,7 +44,7 @@
 		"js-yaml": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.13.1.tgz",
 		"lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
 		"lodash.template": "https://registry.npmjs.org/lodash.template/-/lodash.template-4.5.0.tgz",
-		"qs": ">=6.2.4",
+		"qs": "https://registry.npmjs.org/qs/-/qs-6.2.4.tgz",
 		"trim-newlines": "https://registry.npmjs.org/trim-newlines/-/trim-newlines-3.0.1.tgz"
 	},
 	"volta": {
