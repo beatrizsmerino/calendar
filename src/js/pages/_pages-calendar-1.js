@@ -521,11 +521,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			const languageSelected = calendarGetLanguageSelected();
 			const current = settings.firstDayOfWeek[languageSelected.value].filter((item) => item.value === parseInt(firstDayOfWeekChanged.value))[0];
 			settings.firstDayOfWeek[languageSelected.value].map((item) => item.selected === true ? item.selected = false : item.selected = false);
-			// Reset first day of week of all languages
-			// for (const key in settings.firstDayOfWeek) {
-			// 	const language = settings.firstDayOfWeek[key];
-			// 	language.map((item) => item.selected === true ? item.selected = false : item.selected = false)
-			// }
 			current.selected = true;
 			calendarFirstDayOfWeekUpdateStructure();
 			calendarCreate();
