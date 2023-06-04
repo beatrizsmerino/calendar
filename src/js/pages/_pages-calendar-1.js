@@ -399,19 +399,25 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarAllMonthsCreate();
 		}
 
-		function calendarSetDays() {
+		function calendarSetDays(startDay) {
 			const thisYear = getThisYear();
 			let week = 0;
+			let firstDayOfWeek = startDay === 7 ? 0 : startDay === 1 ? 1 : 0;
 
 			for (let i = 1; i < 366; i++) {
 				const dayOfYear = getDayOfYear(thisYear, i);
 				const dateDay = dayOfYear.getDate();
 				const dateMonth = dayOfYear.getMonth();
-				const dateWeek = dayOfYear.getDay();
+				let dateWeek = dayOfYear.getDay();
 				const isWeekend = (dateWeek === 6) || (dateWeek === 0); // 6 = Saturday, 0 = Sunday
 
 				if (dateDay == 1) {
 					week = 0;
+				}
+
+				// Adjust day of week if needed
+				if (startDay === 1) {
+					dateWeek = (dateWeek + 6) % 7; // Shift Sunday from 0 to 6
 				}
 
 				// Insert days in the calendar
@@ -564,12 +570,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarCreate() {
 			const languageSelected = calendarGetLanguageSelected();
+			const firstDayOfWeekSelected = calendarGetFirstDayOfWeekSelected();
 			calendarEmpty();
 			calendarCreateStructure(
 				settings.months[languageSelected.value],
 				calendarGetWeeks()
 			);
-			calendarSetDays();
+			calendarSetDays(firstDayOfWeekSelected.value);
 			calendarSetWidth();
 			calendarMoveScrollToday();
 			calendarFirstDayOfWeekCreateStructure();
