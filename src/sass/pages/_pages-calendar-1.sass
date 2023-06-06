@@ -54,6 +54,7 @@
 		&__cell
 			padding: 0.8rem 0.4rem
 			width: 5.4rem
+			height: 3.5rem
 			flex: 1
 			text-align: center
 			font-size: 1.6rem
@@ -65,30 +66,36 @@
 		// &__week
 
 		&__weekend
-			background-color: rgba($color-black, 0.1)
+			background-color: mix($color-black, $color-white, 10%)
 			
-		// &__day
-		
-		&__today
+		&__day
 			position: relative
-			color: $color-white
-
-			span
-				position: relative
-				z-index: 2
+		
+		&__number
+			position: relative
+			z-index: 2
 			
-			&:before
-				content: ''
-				display: inline-block
-				width: 4rem
-				height: 4rem
-				position: absolute
-				top: calc(50% - 4rem/2)
-				left: calc(50% - 4rem/2)
-				z-index: 1
-				border: 0.2rem solid $color-black
-				border-radius: 50%
-				background-color: $color-black
+		&__circle
+			display: inline-block
+			width: 4rem
+			height: 4rem
+			position: absolute
+			top: calc(50% - 4rem/2)
+			left: calc(50% - 4rem/2)
+			z-index: 1
+			border-radius: 50%
+			border: 0.2rem solid transparent
+			background-color: transparent
+
+		&__today
+			.calendar
+				&__number
+					color: $color-white
+					font-weight: bold
+
+				&__circle
+					border-color: $color-black
+					background-color: $color-black
 
 		&.is-show-months
 			width: 100%
@@ -112,8 +119,107 @@
 
 			.button
 				&__list
-					display: grid
-					grid-template-columns: repeat(2, minmax(0, 1fr))
-					grid-gap: 1rem
+					display: flex
+					flex-wrap: wrap
 					align-content: space-between
 					justify-content: space-around
+
+					> *
+						width: calc(33.333% - 1rem)
+						margin-bottom: 1rem
+
+						&:nth-child(even)
+							margin-left: 1rem
+							margin-right: 1rem
+
+						&:nth-last-child(-n+2)
+							width: calc(50% - 0.5rem)
+							margin: 0
+
+						&:last-child
+							margin-left: 1rem
+							margin-right: 0
+
+@page
+	margin: 0
+	marks: none
+	bleed: 0
+	marks-offset: 0
+
+@media print
+	.page-calendar-1
+		*
+			color-adjust: exact !important
+			-webkit-print-color-adjust: exact !important
+			print-color-adjust: exact !important
+
+		.header,
+		.footer,
+		.calendar__actions
+			display: none
+
+		.page
+			&__main,
+			&__section,
+			&__body
+				margin: 0
+				padding: 0
+
+		.calendar
+			width: 100% !important
+
+			&__year
+				margin-bottom: 3rem
+				font-size: 5rem
+
+			&__inner
+				display: flex
+				flex-wrap: wrap
+				justify-content: center
+				overflow-x: auto
+
+			&__month
+				break-inside: avoid
+
+			&__cell
+				width: 5rem
+
+			&__today
+				.calendar
+					&__number
+						color: $color-black
+
+					&__circle
+						border-color: $color-black
+						background-color: $color-white
+
+@media print and (orientation: landscape)
+	.page-calendar-1
+		font-size: 42%
+
+		.page
+			&__container
+				max-width: calc((40rem + 4rem) * 4)
+				display: flex
+				justify-content: center
+				align-items: center
+
+		.calendar
+			&__month
+				margin: 1rem 2rem !important
+
+@media print and (orientation: portrait)
+	.page-calendar-1
+		font-size: 40%
+
+		.page
+			&__main
+				margin-top: 20mm
+				justify-content: flex-start
+
+			&__container
+				max-width: calc((40rem + 3rem) * 3)
+
+		.calendar
+			&__month
+				margin: 2rem 1.5rem !important

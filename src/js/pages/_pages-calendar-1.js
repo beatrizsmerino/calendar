@@ -422,7 +422,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				// Insert days in the calendar
 				const tableDays = document.querySelectorAll(".calendar__table")[dateMonth].children[2].children[week].children[dateWeek];
-				tableDays.innerHTML = `<span>${dateDay}</span>`;
+				tableDays.innerHTML = `<span class="calendar__number">${dateDay}</span><span class="calendar__circle"></span>`;
 
 				const yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
 				tableDays.setAttribute("data-time", yearMonthDay);
@@ -481,6 +481,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendar.classList.toggle("is-show-months");
 
 			calendarSetWidth();
+		}
+
+		function calendarCreatePDF() {
+			document.title = `Calendar-${getToday()}`
+			window.print();
 		}
 
 		function calendarEmpty() {
@@ -594,6 +599,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				.querySelector("#buttonShowMonths")
 				.addEventListener("click", function () {
 					calendarShowAllMonths();
+				});
+
+			document
+				.querySelector("#buttonPrint")
+				.addEventListener("click", function () {
+					calendarCreatePDF();
 				});
 
 			document
