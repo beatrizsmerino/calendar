@@ -281,10 +281,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			return today;
 		}
 
-		function getFirst4Letters(word) {
-			const wordFormatted = word.slice(0, 4);
-
-			return wordFormatted;
+		function getShortText(string, length) {
+			const substring = string.slice(0, length);
+			return substring;
 		}
 
 		function calendarOrderWeeksByFirstDayOfWeekSelected() {
@@ -312,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			for (const key in weeks) {
 				const day = weeks[key];
-				day.text = getFirst4Letters(day.text);
+				day.abbreviation = getShortText(day.text, 4);
 			}
 
 			return weeks;
@@ -389,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
-				calendarWeek.innerText = weeksList[week].text;
+				calendarWeek.innerText = weeksList[week].abbreviation;
 				[...calendarRow].map((item) => item.appendChild(calendarWeek));
 			}
 
