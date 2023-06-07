@@ -125,12 +125,14 @@
 					justify-content: space-around
 
 					> *
-						width: calc(33.333% - 1rem)
 						margin-bottom: 1rem
 
 						&:nth-child(even)
 							margin-left: 1rem
 							margin-right: 1rem
+
+						&:nth-child(-n+3)
+							flex: auto
 
 						&:nth-last-child(-n+2)
 							width: calc(50% - 0.5rem)
