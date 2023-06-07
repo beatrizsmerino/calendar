@@ -189,16 +189,27 @@
 				&__use 
 					fill: $color-white
 
+	&--small
+		font-size: 1.2rem
+		padding: 0.8rem 1rem
+
 	&__list
 		margin-top: 2rem
-
-		>*
-			&:not(:last-child)
-				margin-right: 1.5rem
 
 		&--center
 			display: flex
 			justify-content: center
+
+			>*
+				&:not(:last-child)
+					margin-right: 1.5rem
+
+			&.button
+				&__list
+					&--small
+						>*
+							&:not(:last-child)
+								margin-right: 1rem
 
 
 .button-show-months
