@@ -663,6 +663,10 @@ document.addEventListener("DOMContentLoaded", function () {
 				.addEventListener("change", function () {
 					calendarFirstDayOfWeekChange(this);
 				});
+
+			window.addEventListener("resize", function () {
+				calendarSetWidth()
+			});
 		}
 
 		function calendarInit() {

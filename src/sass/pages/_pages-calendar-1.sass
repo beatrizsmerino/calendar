@@ -11,10 +11,16 @@
 		width: 40rem
 		margin: 0 auto
 
+		@include media('xs')
+			width: 30rem
+
 		&__year
 			text-align: center
 			font-size: 4rem
 			font-weight: 700
+
+			@include media('xs')
+				font-size: 2rem
 
 		&__inner
 			display: flex
@@ -44,10 +50,16 @@
 		&__title
 			font-size: 3.2rem
 
+			@include media('xs')
+				font-size: 2.5rem
+
 		// &__header
 
 		&__caption
 			padding: 0.8rem
+
+			@include media('xs')
+				padding: 0 0.8rem
 
 		// &__body
 
@@ -55,9 +67,12 @@
 			padding: 0.8rem 0.4rem
 			width: 5.4rem
 			height: 3.5rem
-			flex: 1
 			text-align: center
 			font-size: 1.6rem
+
+			@include media('xs')
+				width: 4rem
+				font-size: 1.4rem
 
 		&__row
 			display: flex
@@ -87,19 +102,28 @@
 			border: 0.2rem solid transparent
 			background-color: transparent
 
+			@include media('xs')
+				width: 3.5rem
+				height: 3.5rem
+				top: calc(50% - 3.5rem/2)
+				left: calc(50% - 3.5rem/2)
+
 		&__today
 			.calendar
 				&__number
 					color: $color-white
-					font-weight: bold
 
 				&__circle
 					border-color: $color-black
 					background-color: $color-black
 
 		&__actions
-			width: 45rem
+			width: 100%
+			max-width: 45rem
 			margin: 0 auto
+
+			@include media('xs')
+				max-width: 30rem
 
 			.button
 				&__list
@@ -111,20 +135,38 @@
 					> *
 						margin-bottom: 1rem
 
+						@include media('xs')
+							margin-bottom: 0.5rem
+
 						&:nth-child(even)
 							margin-left: 1rem
 							margin-right: 1rem
 
+							@include media('xs')
+								margin-left: 0.5rem
+								margin-right: 0.5rem
+
 						&:nth-child(-n+3)
 							flex: auto
+
+							@include media('xs')
+								flex: 1
 
 						&:nth-last-child(-n+2)
 							width: calc(50% - 0.5rem)
 							margin: 0
 
+							@include media('xs')
+								width: 100%
+								margin-bottom: 0.5rem
+
 						&:last-child
 							margin-left: 1rem
 							margin-right: 0
+
+							@include media('xs')
+								margin-left: 0
+								margin-bottom: 0
 
 		&.is-show-months
 			width: 100%

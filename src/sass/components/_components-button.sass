@@ -22,6 +22,10 @@
 	cursor: pointer
 	appearance: none
 
+	@include media('xs')
+		font-size: 1.2rem
+		padding: 0.8rem 1rem
+
 	> *
 		pointer-events: none
 
@@ -196,6 +200,9 @@
 	&__list
 		margin-top: 2rem
 
+		@include media('xs')
+			margin-top: 1rem
+
 		&--center
 			display: flex
 			justify-content: center
@@ -203,6 +210,9 @@
 			>*
 				&:not(:last-child)
 					margin-right: 1.5rem
+
+					@include media('xs')
+						margin-right: 1rem
 
 			&.button
 				&__list

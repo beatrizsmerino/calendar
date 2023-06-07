@@ -11,6 +11,9 @@
 		width: 40rem
 		margin: 0 auto
 
+		@include media('xs')
+			width: 30rem
+
 		&__caption
 			text-align: left
 			padding: 0.5rem 1rem
@@ -51,9 +54,15 @@
 		// &__body
 
 		&__cell
-			padding: 0.8rem
+			padding: 0.8rem 0.4rem
+			width: 5.4rem
+			height: 3.5rem
 			text-align: center
 			font-size: 1.6rem
+
+			@include media('xs')
+				width: 4rem
+				font-size: 1.4rem
 
 		// &__row
 
@@ -85,10 +94,19 @@
 				border-radius: 50%
 				background-color: $color-black
 
+				@include media('xs')
+					width: 3.5rem
+					height: 3.5rem
+					top: calc(50% - 3.5rem/2)
+					left: calc(50% - 3.5rem/2)
+
 		&__button-prev,
 		&__button-next
-			padding: 0.8rem
+			padding: 0.4rem
+
+			@include media('xs')
+				border-width: 0.1rem
 
 			.icon
-				width: 2.5rem
-				height: 2.5rem
+				width: 2rem
+				height: 2rem

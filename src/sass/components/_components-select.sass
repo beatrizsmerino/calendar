@@ -12,6 +12,14 @@
 	font-size: 1.5rem
 	font-weight: 700
 
+	@include media('xs')
+		font-size: 1.2rem
+		padding: 0.8rem 4rem 0.8rem 1.5rem
+
+		.select
+			&__icon
+				right: 1.5rem
+
 	&__wrapper
 		position: relative
 		display: flex
