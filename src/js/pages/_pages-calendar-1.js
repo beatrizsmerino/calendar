@@ -91,129 +91,32 @@ document.addEventListener("DOMContentLoaded", function () {
 				en: [
 					{
 						value: 1,
-						text: "Monday"
-					},
-					{
-						value: 2,
-						text: "Tuesday"
-					},
-					{
-						value: 3,
-						text: "Wednesday"
-					},
-					{
-						value: 4,
-						text: "Thursday"
-					},
-					{
-						value: 5,
-						text: "Friday"
-					},
-					{
-						value: 6,
-						text: "Saturday"
-					},
-					{
-						value: 7,
-						text: "Sunday"
-					}
-				],
-				fr: [
-					{
-						value: 1,
-						text: "Lundi"
-					},
-					{
-						value: 2,
-						text: "Mardi"
-					},
-					{
-						value: 3,
-						text: "Mercredi"
-					},
-					{
-						value: 4,
-						text: "Jeudi"
-					},
-					{
-						value: 5,
-						text: "Vendredi"
-					},
-					{
-						value: 6,
-						text: "Samedi"
-					},
-					{
-						value: 7,
-						text: "Dimanche"
-					}
-				],
-				de: [
-					{
-						value: 1,
-						text: "Montag"
-					},
-					{
-						value: 2,
-						text: "Dienstag"
-					},
-					{
-						value: 3,
-						text: "Mittwoch"
-					},
-					{
-						value: 4,
-						text: "Donnerstag"
-					},
-					{
-						value: 5,
-						text: "Freitag"
-					},
-					{
-						value: 6,
-						text: "Samstag"
-					},
-					{
-						value: 7,
-						text: "Sonntag"
-					}
-				],
-				es: [
-					{
-						value: 1,
-						text: "Lunes"
-					},
-					{
-						value: 2,
-						text: "Martes"
-					},
-					{
-						value: 3,
-						text: "Miércoles"
-					},
-					{
-						value: 4,
-						text: "Jueves"
-					},
-					{
-						value: 5,
-						text: "Viernes"
-					},
-					{
-						value: 6,
-						text: "Sábado"
-					},
-					{
-						value: 7,
-						text: "Domingo"
-					}
-				],
-			},
-			firstDayOfWeek: {
-				en: [
-					{
-						value: 1,
 						text: "Monday",
+						selected: false
+					},
+					{
+						value: 2,
+						text: "Tuesday",
+						selected: false
+					},
+					{
+						value: 3,
+						text: "Wednesday",
+						selected: false
+					},
+					{
+						value: 4,
+						text: "Thursday",
+						selected: false
+					},
+					{
+						value: 5,
+						text: "Friday",
+						selected: false
+					},
+					{
+						value: 6,
+						text: "Saturday",
 						selected: false
 					},
 					{
@@ -229,6 +132,31 @@ document.addEventListener("DOMContentLoaded", function () {
 						selected: false
 					},
 					{
+						value: 2,
+						text: "Mardi",
+						selected: false
+					},
+					{
+						value: 3,
+						text: "Mercredi",
+						selected: false
+					},
+					{
+						value: 4,
+						text: "Jeudi",
+						selected: false
+					},
+					{
+						value: 5,
+						text: "Vendredi",
+						selected: false
+					},
+					{
+						value: 6,
+						text: "Samedi",
+						selected: false
+					},
+					{
 						value: 7,
 						text: "Dimanche",
 						selected: true
@@ -238,6 +166,31 @@ document.addEventListener("DOMContentLoaded", function () {
 					{
 						value: 1,
 						text: "Montag",
+						selected: false
+					},
+					{
+						value: 2,
+						text: "Dienstag",
+						selected: false
+					},
+					{
+						value: 3,
+						text: "Mittwoch",
+						selected: false
+					},
+					{
+						value: 4,
+						text: "Donnerstag",
+						selected: false
+					},
+					{
+						value: 5,
+						text: "Freitag",
+						selected: false
+					},
+					{
+						value: 6,
+						text: "Samstag",
 						selected: false
 					},
 					{
@@ -253,12 +206,42 @@ document.addEventListener("DOMContentLoaded", function () {
 						selected: false
 					},
 					{
+						value: 2,
+						text: "Martes",
+						selected: false
+					},
+					{
+						value: 3,
+						text: "Miércoles",
+						selected: false
+					},
+					{
+						value: 4,
+						text: "Jueves",
+						selected: false
+					},
+					{
+						value: 5,
+						text: "Viernes",
+						selected: false
+					},
+					{
+						value: 6,
+						text: "Sábado",
+						selected: false
+					},
+					{
 						value: 7,
 						text: "Domingo",
 						selected: true
 					}
 				]
 			},
+			firstDayOfWeek: () =>
+				Object.entries(settings.weeks).reduce((filteredWeeks, [language, weeks]) => ({
+					...filteredWeeks,
+					[language]: weeks.filter(week => [1, 7].includes(week.value))
+				}), {})
 		};
 
 		function createYearMonthDay(year, month, day) {
@@ -556,7 +539,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarGetFirstDayOfWeekSelected() {
 			const languageSelected = calendarGetLanguageSelected();
-			const current = settings.firstDayOfWeek[languageSelected.value].filter((item) => item.selected)[0];
+			const current = settings.firstDayOfWeek()[languageSelected.value].filter((item) => item.selected)[0];
 			return current;
 		}
 
@@ -570,8 +553,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					item.remove();
 				}
 			});
-			
-			settings.firstDayOfWeek[languageSelected.value].map((item) => {
+
+			settings.firstDayOfWeek()[languageSelected.value].map((item) => {
 				const option = document.createElement("option");
 				option.value = item.value;
 				option.innerText = item.text;
@@ -591,8 +574,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarFirstDayOfWeekChange(firstDayOfWeekChanged) {
 			const languageSelected = calendarGetLanguageSelected();
-			const current = settings.firstDayOfWeek[languageSelected.value].filter((item) => item.value === parseInt(firstDayOfWeekChanged.value))[0];
-			settings.firstDayOfWeek[languageSelected.value].map((item) => item.selected === true ? item.selected = false : item.selected = false);
+			const current = settings.firstDayOfWeek()[languageSelected.value].filter((item) => item.value === parseInt(firstDayOfWeekChanged.value))[0];
+			settings.firstDayOfWeek()[languageSelected.value].map((item) => item.selected === true ? item.selected = false : item.selected = false);
 			current.selected = true;
 			calendarFirstDayOfWeekUpdateStructure();
 			calendarCreate();
