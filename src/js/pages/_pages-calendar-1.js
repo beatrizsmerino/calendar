@@ -655,8 +655,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				.querySelector("#selectLanguage")
 				.addEventListener("change", function () {
 					calendarLanguageChange(this);
-					calendarFirstDayOfWeekCreateStructure();
-					calendarFirstDayOfWeekUpdateStructure();
+					calendarFirstDayOfWeekChange(document.querySelector("#selectFirstDayOfWeek"))
 				});
 
 			document
