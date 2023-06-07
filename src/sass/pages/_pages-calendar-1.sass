@@ -22,35 +22,35 @@
 			overflow-y: hidden
 			overflow-x: scroll
 
-			&::-webkit-scrollbar 
+			&::-webkit-scrollbar
 				width: 1rem
 				border-radius: 1rem
-			
-			&::-webkit-scrollbar-track 
+
+			&::-webkit-scrollbar-track
 				-webkit-box-shadow: inset 0 0 0.6rem rgba($color-black,0.3)
 				border-radius: 1rem
 
-			&::-webkit-scrollbar-thumb 
+			&::-webkit-scrollbar-thumb
 				background-color: $color-metal
 				border-radius: 1rem
-			
+
 		&__month
 			&:not(:last-child)
 				margin-right: 3rem
 				margin-bottom: 1rem
-				
+
 		// &__table
-		
+
 		&__title
 			font-size: 3.2rem
-		
+
 		// &__header
-		
+
 		&__caption
 			padding: 0.8rem
-			
+
 		// &__body
-			
+
 		&__cell
 			padding: 0.8rem 0.4rem
 			width: 5.4rem
@@ -58,23 +58,23 @@
 			flex: 1
 			text-align: center
 			font-size: 1.6rem
-			
+
 		&__row
 			display: flex
 			justify-content: space-between
-		
+
 		// &__week
 
 		&__weekend
 			background-color: mix($color-black, $color-white, 10%)
-			
+
 		&__day
 			position: relative
-		
+
 		&__number
 			position: relative
 			z-index: 2
-			
+
 		&__circle
 			display: inline-block
 			width: 4rem
@@ -97,22 +97,6 @@
 					border-color: $color-black
 					background-color: $color-black
 
-		&.is-show-months
-			width: 100%
-
-			+ .button__list .button-show-today
-				display: none
-
-			.calendar
-				&__inner
-					display: flex
-					flex-wrap: wrap
-					justify-content: center
-					overflow-x: auto
-
-				&__month
-					margin: 1rem 3rem
-	
 		&__actions
 			width: 45rem
 			margin: 0 auto
@@ -141,6 +125,22 @@
 						&:last-child
 							margin-left: 1rem
 							margin-right: 0
+
+		&.is-show-months
+			width: 100%
+
+			+ .button__list .button-show-today
+				display: none
+
+			.calendar
+				&__inner
+					display: flex
+					flex-wrap: wrap
+					justify-content: center
+					overflow-x: auto
+
+				&__month
+					margin: 1rem 3rem
 
 @page
 	margin: 0
