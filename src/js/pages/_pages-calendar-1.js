@@ -19,6 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
 					selected: false
 				},
 				{
+					value: "de",
+					text: "German",
+					selected: false
+				},
+				{
 					value: "es",
 					text: "Spanish",
 					selected: false
@@ -52,6 +57,20 @@ document.addEventListener("DOMContentLoaded", function () {
 					"Octobre",
 					"Novembre",
 					"Décembre",
+				],
+				de: [
+					"Januar",
+					"Februar",
+					"März",
+					"April",
+					"Mai",
+					"Juni",
+					"Juli",
+					"August",
+					"September",
+					"Oktober",
+					"November",
+					"Dezember",
 				],
 				es: [
 					"Enero",
@@ -129,6 +148,36 @@ document.addEventListener("DOMContentLoaded", function () {
 						text: "Dimanche"
 					}
 				],
+				de: [
+					{
+						value: 1,
+						text: "Montag"
+					},
+					{
+						value: 2,
+						text: "Dienstag"
+					},
+					{
+						value: 3,
+						text: "Mittwoch"
+					},
+					{
+						value: 4,
+						text: "Donnerstag"
+					},
+					{
+						value: 5,
+						text: "Freitag"
+					},
+					{
+						value: 6,
+						text: "Samstag"
+					},
+					{
+						value: 7,
+						text: "Sonntag"
+					}
+				],
 				es: [
 					{
 						value: 1,
@@ -182,6 +231,18 @@ document.addEventListener("DOMContentLoaded", function () {
 					{
 						value: 7,
 						text: "Dimanche",
+						selected: true
+					}
+				],
+				de: [
+					{
+						value: 1,
+						text: "Montag",
+						selected: false
+					},
+					{
+						value: 7,
+						text: "Sonntag",
 						selected: true
 					}
 				],
