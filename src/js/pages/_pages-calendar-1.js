@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			for (const key in weeks) {
 				const day = weeks[key];
-				day.abbreviation = getShortText(day.text, 4);
+				day.abbreviation = getShortText(day.text, 3);
 			}
 
 			return weeks;
@@ -389,6 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
 				calendarWeek.innerText = weeksList[week].abbreviation;
+				calendarWeek.title = weeksList[week].text;
 				[...calendarRow].map((item) => item.appendChild(calendarWeek));
 			}
 
