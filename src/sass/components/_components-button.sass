@@ -21,6 +21,7 @@
 	user-select: none
 	cursor: pointer
 	appearance: none
+	transition: color 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border-color 0.15s ease-in-out 0s
 
 	@include media('xs')
 		font-size: 1.2rem
@@ -35,136 +36,8 @@
 		&:only-child
 			margin-right: 0
 
-	&__icon
-		&--left
-			margin-right: 1rem
-
-		&--right
-			margin-left: 1rem
-
-	&__text
-		white-space: nowrap
-
 	&--icon
 		padding: 0
-
-	&--bg-color,
-	&--line-color,
-	&--bg-white,
-	&--line-white,
-	&--bg-black,
-	&--line-black
-		transition: color 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border-color 0.15s ease-in-out 0s
-
-	&--bg-color
-		color: $color-white
-		background-color: $color-brand-1
-
-		.icon
-			&__use
-				fill: $color-white
-
-		&:hover
-			color: $color-white
-			background-color: mix($color-black, $color-brand-1, 15%)
-
-		&-1
-			color: $color-white
-			background-color: $color-brand-1
-
-			&:hover
-				background-color: mix($color-black, $color-brand-1, 15%)
-
-		&-2
-			color: $color-white
-			background-color: $color-brand-2
-
-			&:hover
-				background-color: mix($color-black, $color-brand-2, 15%)
-
-	&--line-color
-		color: $color-brand-1
-		border-color: $color-brand-1
-
-		.icon
-			&__use
-				fill: $color-brand-1
-
-		&:hover
-			color: $color-white
-			border-color: $color-brand-1
-			background-color: $color-brand-1
-
-			.icon
-				&__use
-					fill: $color-white
-
-		&-1
-			color: $color-brand-1
-			border-color: $color-brand-1
-
-			.icon
-				&__use
-					fill: $color-brand-1
-
-			&:hover
-				color: $color-white
-				border-color: $color-brand-1
-				background-color: $color-brand-1
-
-				.icon
-					&__use
-						fill: $color-white
-
-		&-2
-			color: $color-brand-2
-			border-color: $color-brand-2
-
-			.icon
-				&__use
-					fill: $color-brand-2
-
-			&:hover
-				color: $color-white
-				border-color: $color-brand-2
-				background-color: $color-brand-2
-
-				.icon
-					&__use
-						fill: $color-white
-
-	&--bg-white
-		color: $color-black
-		background-color: $color-white
-
-		.icon
-			&__use
-				fill: $color-black
-
-		&:hover
-			color: $color-white
-			background-color: $color-black
-
-			.icon
-				&__use
-					fill: $color-white
-
-	&--line-white
-		color: $color-white
-		border-color: $color-white
-
-		.icon
-			&__use
-				fill: $color-white
-
-		&:hover
-			color: $color-black
-			border-color: $color-white
-			background-color: $color-white
-
-			.icon
-				&__use
-					fill: $color-black
 
 	&--bg-black
 		color: $color-white
@@ -192,33 +65,6 @@
 			.icon
 				&__use
 					fill: $color-white
-
-	&--small
-		font-size: 1.2rem
-		padding: 0.8rem 1rem
-
-	&__list
-		@include media('xs')
-			margin-top: 1rem
-
-		&--center
-			display: flex
-			justify-content: center
-
-			>*
-				&:not(:last-child)
-					margin-right: 1.5rem
-
-					@include media('xs')
-						margin-right: 1rem
-
-			&.button
-				&__list
-					&--small
-						>*
-							&:not(:last-child)
-								margin-right: 1rem
-
 
 .button-show-months
 	> *
