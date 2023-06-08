@@ -55,17 +55,25 @@
 			<section class="page__section page__inner">
 				<div class="page__container">
 					<div id="calendar" class="calendar no-select"></div>
-					<div class="button__list button__list--center no-select">
-						<button id="goLastYear" class="button button--line-black">
-							Last Year
-						</button>
-						<button id="goToday" class="button button--bg-black">
-							Today
-						</button>
-						<button id="goNextYear" class="button button--line-black">
-							Next Year
-						</button>
-					</div>
+					<nav class="calendar__action no-select">
+						<ul class="list list--column-3">
+							<li class="list__item">
+								<button id="goLastYear" class="button button--line-black">
+									Last Year
+								</button>
+							</li>
+							<li class="list__item">
+								<button id="goToday" class="button button--bg-black">
+									Today
+								</button>
+							</li>
+							<li class="list__item">
+								<button id="goNextYear" class="button button--line-black">
+									Next Year
+								</button>
+							</li>
+						</ul>
+					</nav>
 				</div>
 			</section>
 		</main>

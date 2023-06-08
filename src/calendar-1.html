@@ -55,46 +55,58 @@
 			<section class="page__section page__inner">
 				<div class="page__container">
 					<div id="calendar" class="calendar no-select"></div>
-					<div class="calendar__actions">
-						<div class="button__list button__list--small no-select">
-							<button id="buttonShowToday" class="button-show-today button button--bg-black">
-								show today
-							</button>
-							<button id="buttonShowMonths" class="button-show-months button button--line-black">
-								<span class="button-show-months__all">show all months</span>
-								<span class="button-show-months__one">show one month</span>
-							</button>
-							<button id="buttonPrint" class="button-show-months button button--line-black">
-								create PDF
-							</button>
-							<div class="select__wrapper">
-								<select id="selectFirstDayOfWeek" class="select select--black select--small">
-									<option value="7">
-										First day of week: Sunday
-									</option>
-								</select>
-	
-								<i class="select__icon icon">
-									<svg class="icon__svg">
-										<use class="icon__use" href="#icon-chevron-down" />
-									</svg>
-								</i>
-							</div>
-							<div class="select__wrapper">
-								<select id="selectLanguage" class="select select--black select--small">
-									<option value="en">
-										Language: English
-									</option>
-								</select>
-	
-								<i class="select__icon icon">
-									<svg class="icon__svg">
-										<use class="icon__use" href="#icon-chevron-down" />
-									</svg>
-								</i>
-							</div>
-						</div>
-					</div>
+					<nav class="calendar__action no-select">
+						<ul class="list list--column-3">
+							<li class="list__item">
+								<button id="buttonShowToday" class="button-show-today button button--bg-black">
+									show today
+								</button>
+							</li>
+							<li class="list__item">
+								<button id="buttonShowMonths" class="button-show-months button button--line-black">
+									<span class="button-show-months__all">show all months</span>
+									<span class="button-show-months__one">show one month</span>
+								</button>
+							</li>
+							<li class="list__item">
+								<button id="buttonPrint" class="button-show-months button button--line-black">
+									create PDF
+								</button>
+							</li>
+						</ul>
+						<ul class="list list--column-2">
+							<li class="list__item">
+								<div class="select__wrapper">
+									<select id="selectFirstDayOfWeek" class="select select--black select--small">
+										<option value="7">
+											First day of week: Sunday
+										</option>
+									</select>
+
+									<i class="select__icon icon">
+										<svg class="icon__svg">
+											<use class="icon__use" href="#icon-chevron-down" />
+										</svg>
+									</i>
+								</div>
+							</li>
+							<li class="list__item">
+								<div class="select__wrapper">
+									<select id="selectLanguage" class="select select--black select--small">
+										<option value="en">
+											Language: English
+										</option>
+									</select>
+
+									<i class="select__icon icon">
+										<svg class="icon__svg">
+											<use class="icon__use" href="#icon-chevron-down" />
+										</svg>
+									</i>
+								</div>
+							</li>
+						</ul>
+					</nav>
 				</div>
 			</section>
 		</main>

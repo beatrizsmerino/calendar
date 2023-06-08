@@ -263,30 +263,38 @@ document.addEventListener("DOMContentLoaded", function () {
 			let prevYear = (month - 1 < 1) ? year - 1 : year;
 
 			let captionTemplate = `
-					<div class="button__list button__list--center">
-						<a class="calendar__button-prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}"'>
-							<i class="icon">
-								<svg class="icon__svg">
-									<use class="icon__use" href="#icon-chevron-left" />
-								</svg>
-							</i>
-						</a>
-						<div class="calendar__title">
-							<span class='calendar__month-name'>
-								${settings.months[month - 1]}
-							</span>
-							<span class='calendar__year-name'>
-								${year}
-							</span>
-						</div>
-						<a class="calendar__button-next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}"'>
-							<i class="icon">
-								<svg class="icon__svg">
-									<use class="icon__use" href="#icon-chevron-right" />
-								</svg>
-							</i>
-						</a>
-					</div>
+					<nav class="calendar__navigation">
+						<ul class="list">
+							<li class="list__item">
+								<a class="calendar__button-prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}"'>
+									<i class="icon">
+										<svg class="icon__svg">
+											<use class="icon__use" href="#icon-chevron-left" />
+										</svg>
+									</i>
+								</a>
+							</li>
+							<li class="list__item">
+								<div class="calendar__title">
+									<span class='calendar__month-name'>
+										${settings.months[month - 1]}
+									</span>
+									<span class='calendar__year-name'>
+										${year}
+									</span>
+								</div>
+							</li>
+							<li class="list__item">
+								<a class="calendar__button-next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}"'>
+									<i class="icon">
+										<svg class="icon__svg">
+											<use class="icon__use" href="#icon-chevron-right" />
+										</svg>
+									</i>
+								</a>
+							</li>
+						</ul>
+					</nav>
 				`;
 
 			document.querySelector(".calendar__caption").innerHTML = captionTemplate;
