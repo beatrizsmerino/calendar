@@ -82,14 +82,19 @@ img
 input
 	&[type="checkbox"],
 	&[type="radio"]
-		-webkit-appearance: none
-		-moz-appearance: none
 		appearance: none
+		outline: 0
+		border: 0
+		box-shadow: none
 
 select
-	-webkit-appearance: none
-	-moz-appearance: none
 	appearance: none
+	outline: 0
+	border: 0
+	box-shadow: none
+
+	&::-ms-expand
+		display: none
 
 
 fieldset
