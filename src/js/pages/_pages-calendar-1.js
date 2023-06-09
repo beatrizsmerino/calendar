@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			function calendarInnerCreate() {
 				const calendarInner = document.createElement("div");
-				calendarInner.className = "calendar__inner";
+				calendarInner.className = "calendar__inner scrollbar";
 				document.getElementById("calendar").appendChild(calendarInner);
 			}
 
