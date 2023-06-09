@@ -51,5 +51,8 @@
 	"volta": {
 		"node": "14.19.3",
 		"npm": "6.14.17"
+	},
+	"dependencies": {
+		"perfect-scrollbar": "^1.5.5"
 	}
 }

@@ -1,5 +1,7 @@
 "use strict";
 
+import PerfectScrollbar from 'perfect-scrollbar';
+
 document.addEventListener("DOMContentLoaded", function () {
 	const pageCalendar1 = document
 		.querySelector("html")
@@ -241,7 +243,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				Object.entries(settings.weeks).reduce((filteredWeeks, [language, weeks]) => ({
 					...filteredWeeks,
 					[language]: weeks.filter(week => [1, 7].includes(week.value))
-				}), {})
+				}), {}),
+			scrollbar: null
 		};
 
 		function createYearMonthDay(year, month, day) {
@@ -284,6 +287,35 @@ document.addEventListener("DOMContentLoaded", function () {
 		function getShortText(string, length) {
 			const substring = string.slice(0, length);
 			return substring;
+		}
+
+		function calendarScrollbar(action) {
+			const container = document.querySelector('.scrollbar');
+
+			if (container) {
+				switch (action) {
+					case 'create':
+						settings.scrollbar = new PerfectScrollbar(container, {
+							wheelSpeed: 2,
+							wheelPropagation: true,
+							minScrollbarLength: 20,
+						});
+						break;
+					case 'update':
+						if (settings.scrollbar !== null) {
+							settings.scrollbar.update();
+						}
+						break;
+					case 'remove':
+						if (settings.scrollbar !== null) {
+							settings.scrollbar.destroy();
+							settings.scrollbar = null;
+						}
+						break;
+					default:
+						console.log("Invalid action");
+				}
+			}
 		}
 
 		function calendarOrderWeeksByFirstDayOfWeekSelected() {
@@ -489,13 +521,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			const calendar = document.querySelector("#calendar");
 			const calendarMonth = document.querySelector(".calendar__month");
 			const calendarMonthWidth = calendarMonth.clientWidth;
-			const buttonShowToday = document.querySelector("#buttonShowToday");
 
 			if (calendar.classList.contains("is-show-months")) {
 				calendar.style.width = `auto`;
 			} else {
 				calendar.style.width = `${calendarMonthWidth}px`;
-				buttonShowToday.click();
 			}
 		}
 
@@ -520,11 +550,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarShowAllMonths() {
 			const calendar = document.querySelector("#calendar");
 			const buttonShowMonths = document.querySelector("#buttonShowMonths");
+			const buttonShowToday = document.querySelector("#buttonShowToday");
 
 			buttonShowMonths.classList.toggle("is-change-text");
 			calendar.classList.toggle("is-show-months");
 
 			calendarSetWidth();
+
+			if (calendar.classList.contains("is-show-months")) {
+				calendarScrollbar("remove");
+			} else {
+				calendarScrollbar("create");
+			}
+
+			buttonShowToday.click();
 		}
 
 		function calendarCreatePDF() {
@@ -627,6 +666,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			);
 			calendarSetDays(firstDayOfWeekSelected.value);
 			calendarSetWidth();
+			calendarScrollbar("create");
 			calendarMoveScrollToday();
 			calendarFirstDayOfWeekCreateStructure();
 			calendarLanguageCreateStructure();

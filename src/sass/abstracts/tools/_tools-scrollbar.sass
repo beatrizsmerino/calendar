@@ -6,39 +6,66 @@
 
 
 
-@mixin scrollbar($direction: 'y')
+@mixin createPerfectScrollbar($direction: 'y')
 	$thumb: $color-metal
 	$track: rgba($color-black,0.3)
-	$size: 1rem
+	$size: 1.5rem
 
 	@if $direction != 'x' and $direction != 'y'
 		@error "The $direction parameter must be 'x' or 'y'"
 
 
-	&.scrollbar
-		scrollbar-width: thin
-		scrollbar-color: $thumb $track
-		scrollbar-face-color: $thumb
-		scrollbar-track-color: $track
+
+	&.ps
+		position: relative
 		-ms-overflow-style: auto
 		-webkit-overflow-scrolling: touch
 
-		&::-webkit-scrollbar
-			width: $size
-			border-radius: $size
+		.ps__rail-x,
+		.ps__rail-y,
+		.ps__thumb-x,
+		.ps__thumb-y
+			position: absolute
+			display: none
 
-		&::-webkit-scrollbar-track
+		.ps__rail-x,
+		.ps__rail-y
+			align-items: center
 			box-shadow: inset 0 0 0.6rem $track
 			border-radius: $size
 
-		&::-webkit-scrollbar-thumb
+		.ps__thumb-x,
+		.ps__thumb-y
+			height: $size
 			background-color: $thumb
 			border-radius: $size
 
-		@if $direction == "x"
-			overflow-y: hidden
-			overflow-x: scroll
+		.ps__rail-y
+			width: $size
+			height: 100%
+			left: inherit !important
+			right: 0 !important
 
-		@if $direction == "y"
-			overflow-y: scroll
-			overflow-x: hidden
+		.ps__rail-x
+			width: 100%
+			height: $size
+			top: inherit !important
+			bottom: 0 !important
+
+	&.ps--active-x
+		padding-bottom: $size
+		overflow-y: hidden
+		overflow-x: auto
+
+		.ps__rail-x,
+		.ps__thumb-x
+			display: flex
+
+	&.ps--active-y
+		padding-right: $size
+		overflow-x: hidden
+		overflow-y: auto
+
+		.ps__rail-y,
+		.ps__thumb-y
+			display: flex
