@@ -13,22 +13,22 @@ document.addEventListener("DOMContentLoaded", function () {
 				{
 					value: "en",
 					text: "English",
-					selected: true
+					selected: true,
 				},
 				{
 					value: "fr",
 					text: "French",
-					selected: false
+					selected: false,
 				},
 				{
 					value: "de",
 					text: "German",
-					selected: false
+					selected: false,
 				},
 				{
 					value: "es",
 					text: "Spanish",
-					selected: false
+					selected: false,
 				},
 			],
 			months: {
@@ -94,159 +94,163 @@ document.addEventListener("DOMContentLoaded", function () {
 					{
 						value: 1,
 						text: "Monday",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 2,
 						text: "Tuesday",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 3,
 						text: "Wednesday",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 4,
 						text: "Thursday",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 5,
 						text: "Friday",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 6,
 						text: "Saturday",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 7,
 						text: "Sunday",
-						selected: true
-					}
+						selected: true,
+					},
 				],
 				fr: [
 					{
 						value: 1,
 						text: "Lundi",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 2,
 						text: "Mardi",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 3,
 						text: "Mercredi",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 4,
 						text: "Jeudi",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 5,
 						text: "Vendredi",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 6,
 						text: "Samedi",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 7,
 						text: "Dimanche",
-						selected: true
-					}
+						selected: true,
+					},
 				],
 				de: [
 					{
 						value: 1,
 						text: "Montag",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 2,
 						text: "Dienstag",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 3,
 						text: "Mittwoch",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 4,
 						text: "Donnerstag",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 5,
 						text: "Freitag",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 6,
 						text: "Samstag",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 7,
 						text: "Sonntag",
-						selected: true
-					}
+						selected: true,
+					},
 				],
 				es: [
 					{
 						value: 1,
 						text: "Lunes",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 2,
 						text: "Martes",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 3,
 						text: "Miércoles",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 4,
 						text: "Jueves",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 5,
 						text: "Viernes",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 6,
 						text: "Sábado",
-						selected: false
+						selected: false,
 					},
 					{
 						value: 7,
 						text: "Domingo",
-						selected: true
-					}
-				]
+						selected: true,
+					},
+				],
 			},
 			firstDayOfWeek: () =>
-				Object.entries(settings.weeks).reduce((filteredWeeks, [language, weeks]) => ({
-					...filteredWeeks,
-					[language]: weeks.filter(week => [1, 7].includes(week.value))
-				}), {}),
+				Object.entries(settings.weeks).reduce(
+					(filteredWeeks, [language, weeks]) => ({
+						...filteredWeeks,
+						[language]: weeks.filter((week) => [1, 7].includes(week.value)),
+					}),
+					{}
+				),
 			scrollbar: null,
-			showOneMonth: true
+			showOneMonth: true,
 		};
+
 
 		function getFormattedDate(year, month, day) {
 			const yyyy = String(year);
@@ -322,32 +326,27 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarFirstDayOfWeekSort() {
 			const languageSelected = calendarLanguageGetSelected();
 			const weeksLanguageSelected = settings.weeks[languageSelected.value];
-			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected();
-			const firstDayOfWeekSelectedValue = firstDayOfWeekSelected.value;
+			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected().value;
 
 			weeksLanguageSelected.sort((a, b) => a.value - b.value);
 
-			let weeksOrdered = [];
-			let week1 = weeksLanguageSelected.filter(week => week.value === firstDayOfWeekSelectedValue)[0];
-			let weekStart = weeksLanguageSelected.filter(week => week.value > firstDayOfWeekSelectedValue);
-			let weekEnd = weeksLanguageSelected.filter(week => week.value < firstDayOfWeekSelectedValue);
+			const weekSelected = weeksLanguageSelected.find(week => week.value === firstDayOfWeekSelected);
+			const weekStart = weeksLanguageSelected.filter(week => week.value > firstDayOfWeekSelected);
+			const weekEnd = weeksLanguageSelected.filter(week => week.value < firstDayOfWeekSelected);
 
-			weeksOrdered.push(week1);
-			weekStart.map(week => weeksOrdered.push(week));
-			weekEnd.map(week => weeksOrdered.push(week));
-
+			const weeksOrdered = [weekSelected, ...weekStart, ...weekEnd];
 			return weeksOrdered;
 		}
 
 		function calendarGetWeeks() {
-			let weeks = calendarFirstDayOfWeekSort();
+			let weeksList = calendarFirstDayOfWeekSort();
 
-			for (const key in weeks) {
-				const day = weeks[key];
+			for (const key in weeksList) {
+				const day = weeksList[key];
 				day.abbreviation = getFirstLetters(day.text, 3);
 			}
 
-			return weeks;
+			return weeksList;
 		}
 
 		function calendarCreateStructure(monthsList, weeksList) {
@@ -372,40 +371,38 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			function calendarTableCreate() {
-				const calendarMonth = document.querySelectorAll(".calendar__month");
+				const calendarMonthList = document.querySelectorAll(".calendar__month");
 				const calendarTable = document.createElement("TABLE");
 				calendarTable.className = "calendar__table";
-				[...calendarMonth].map((item) =>
+				[...calendarMonthList].map((item) =>
 					item.appendChild(calendarTable)
 				);
 			}
 
 			function calendarCaptionCreate() {
-				const calendarTable = document.querySelectorAll(".calendar__table");
+				const calendarTableList = document.querySelectorAll(".calendar__table");
 				const calendarCaption = document.createElement("CAPTION");
 				calendarCaption.className = "calendar__caption";
-				[...calendarTable].map((item) =>
+				[...calendarTableList].map((item) =>
 					item.appendChild(calendarCaption)
 				);
 			}
 
 			function calendarTitleCreate(monthsList, month) {
-				const calendarCaption = document.querySelectorAll(".calendar__caption");
+				const calendarCaptionList = document.querySelectorAll(".calendar__caption");
 				const calendarTitle = document.createElement("DIV");
 				calendarTitle.className = "calendar__title";
 				calendarTitle.innerText = monthsList[month];
-				[...calendarCaption].map((item) =>
+				[...calendarCaptionList].map((item) =>
 					item.appendChild(calendarTitle)
 				);
 			}
 
 			function calendarHeaderCreate() {
-				const calendarTable = document.querySelectorAll(".calendar__table");
+				const calendarTableList = document.querySelectorAll(".calendar__table");
 				const calendarHeader = document.createElement("THEAD");
 				calendarHeader.className = "calendar__header";
-				[...calendarTable].map((item) =>
-					item.appendChild(calendarHeader)
-				);
+				[...calendarTableList].map((item) => item.appendChild(calendarHeader));
 			}
 
 			function calendarRowCreate(contain) {
@@ -415,56 +412,54 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			function calendarWeekCreate(weeksList, week) {
-				const calendarRow = document.querySelectorAll(
-					".calendar__header .calendar__row"
-				);
+				const calendarRowList = document.querySelectorAll(".calendar__header .calendar__row");
 
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
 				calendarWeek.innerText = weeksList[week].abbreviation;
 				calendarWeek.title = weeksList[week].text;
-				[...calendarRow].map((item) => item.appendChild(calendarWeek));
+				[...calendarRowList].map((item) => item.appendChild(calendarWeek));
 			}
 
 			function calendarBodyCreate() {
-				const calendarTable = document.querySelectorAll(".calendar__table");
+				const calendarTableList = document.querySelectorAll(".calendar__table");
 				const calendarBody = document.createElement("TBODY");
 				calendarBody.className = "calendar__body";
-				[...calendarTable].map((item) =>
+				[...calendarTableList].map((item) =>
 					item.appendChild(calendarBody)
 				);
 			}
 
 			function calendarDayCreate() {
-				const calendarRow = document.querySelectorAll(".calendar__row");
+				const calendarRowList = document.querySelectorAll(".calendar__row");
 				const calendarDay = document.createElement("TD");
 				calendarDay.className = "calendar__cell calendar__day";
 				calendarDay.innerText = "";
-				[...calendarRow].map((item) => item.appendChild(calendarDay));
+				[...calendarRowList].map((item) => item.appendChild(calendarDay));
 			}
 
 			function calendarAllMonthsCreate() {
-				for (let m = 0; m <= 11; m++) {
+				for (let month = 0; month <= 11; month++) {
 					calendarMonthCreate();
 					calendarTableCreate();
 					calendarCaptionCreate();
-					calendarTitleCreate(monthsList, m);
+					calendarTitleCreate(monthsList, month);
 					calendarHeaderCreate();
 
-					const calendarHeader = document.querySelectorAll(".calendar__header");
-					calendarRowCreate(calendarHeader);
+					const calendarHeaderList = document.querySelectorAll(".calendar__header");
+					calendarRowCreate(calendarHeaderList);
 
-					for (let w = 0; w < 7; w++) {
-						calendarWeekCreate(weeksList, w);
+					for (let week = 0; week < 7; week++) {
+						calendarWeekCreate(weeksList, week);
 					}
 
 					calendarBodyCreate();
 
-					for (let f = 0; f < 6; f++) {
-						const calendarBody = document.querySelectorAll(".calendar__body");
-						calendarRowCreate(calendarBody);
+					for (let row = 0; row < 6; row++) {
+						const calendarBodyList = document.querySelectorAll(".calendar__body");
+						calendarRowCreate(calendarBodyList);
 
-						for (let d = 0; d < 7; d++) {
+						for (let day = 0; day < 7; day++) {
 							calendarDayCreate();
 						}
 					}
@@ -479,10 +474,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarSetDays(startDay) {
 			const thisYear = getCurrentYear();
 			let week = 0;
-			let firstDayOfWeek = startDay === 7 ? 0 : startDay === 1 ? 1 : 0;
 
-			for (let i = 1; i < 366; i++) {
-				const dayOfYear = getDayOfYear(thisYear, i);
+			for (let day = 1; day < 366; day++) {
+				const dayOfYear = getDayOfYear(thisYear, day);
 				const dateDay = dayOfYear.getDate();
 				const dateMonth = dayOfYear.getMonth();
 				let dateWeek = dayOfYear.getDay();
@@ -498,22 +492,23 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 
 				// Insert days in the calendar
-				const tableDays = document.querySelectorAll(".calendar__table")[dateMonth].children[2].children[week].children[dateWeek];
+				const calendarTableList = document.querySelectorAll(".calendar__table");
+				const tableDays = calendarTableList[dateMonth].children[2].children[week].children[dateWeek];
 				tableDays.innerHTML = `<span class="calendar__number">${dateDay}</span><span class="calendar__circle"></span>`;
 
 				const yearMonthDay = getFormattedDate(thisYear, dateMonth, dateDay);
-				tableDays.setAttribute("data-time", yearMonthDay);
+				tableDays.dataset.time = yearMonthDay;
 
-				if (tableDays.getAttribute("data-time") == getToday()) {
-					tableDays.className += " calendar__today";
+				if (tableDays.dataset.time == getToday()) {
+					tableDays.classList.add("calendar__today");
 				}
 
 				if (isWeekend) {
-					tableDays.className += " calendar__weekend";
+					tableDays.classList.add("calendar__weekend");
 				}
 
 				if (dateWeek == 6) {
-					week = week + 1;
+					week++;
 				}
 			}
 		}
@@ -533,23 +528,23 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarMoveScrollToday() {
 			const header = document.querySelector(".header");
 			const calendarInner = document.querySelector(".calendar__inner");
-			const calendarMonth = document.querySelectorAll(".calendar__month");
+			const calendarMonthList = document.querySelectorAll(".calendar__month");
 			const currentMonth = getCurrentMonth();
 
 			let positionScroll = 0;
 			if (settings.showOneMonth) {
-				for (let index = 0; index < currentMonth; index++) {
+				for (let month = 0; month < currentMonth; month++) {
 					const style =
-						calendarMonth[index].currentStyle ||
-						window.getComputedStyle(calendarMonth[index]);
+						calendarMonthList[month].currentStyle ||
+						window.getComputedStyle(calendarMonthList[month]);
 					positionScroll +=
-						parseFloat(calendarMonth[index].offsetWidth) +
+						parseFloat(calendarMonthList[month].offsetWidth) +
 						parseFloat(style.marginRight);
 				}
 
 				calendarInner.scrollLeft = positionScroll;
 			} else {
-				positionScroll = calendarMonth[currentMonth].offsetTop - header.offsetHeight;
+				positionScroll = calendarMonthList[currentMonth].offsetTop - header.offsetHeight;
 				window.scrollTo({ top: positionScroll, behavior: 'smooth' });
 			}
 		}
@@ -575,7 +570,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarGeneratePDF() {
-			document.title = `Calendar-${getToday()}`
+			document.title = `Calendar-${getToday()}`;
 			window.print();
 		}
 
@@ -586,22 +581,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarFirstDayOfWeekGetSelected() {
 			const languageSelected = calendarLanguageGetSelected();
-			const current = settings.firstDayOfWeek()[languageSelected.value].filter((item) => item.selected)[0];
-			return current;
+			return settings.firstDayOfWeek()[languageSelected.value].find(
+				(item) => item.selected
+			);
 		}
 
 		function calendarFirstDayOfWeekCreateStructure() {
 			const select = document.querySelector("#selectFirstDayOfWeek");
-			const options = select.querySelectorAll("option");
+			const optionsList = select.querySelectorAll("option");
 			const languageSelected = calendarLanguageGetSelected();
+			const firstDayOfWeekList = settings.firstDayOfWeek()[languageSelected.value];
 
-			Array.from(options).map((item, index) => {
+			optionsList.forEach((item, index) => {
 				if (index !== 0) {
 					item.remove();
 				}
 			});
 
-			settings.firstDayOfWeek()[languageSelected.value].map((item) => {
+			firstDayOfWeekList.forEach((item) => {
 				const option = document.createElement("option");
 				option.value = item.value;
 				option.innerText = item.text;
@@ -621,23 +618,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarFirstDayOfWeekChange(firstDayOfWeekChanged) {
 			const languageSelected = calendarLanguageGetSelected();
-			const current = settings.firstDayOfWeek()[languageSelected.value].filter((item) => item.value === parseInt(firstDayOfWeekChanged.value))[0];
-			settings.firstDayOfWeek()[languageSelected.value].map((item) => item.selected === true ? item.selected = false : item.selected = false);
-			current.selected = true;
+			const firstDayOfWeek = parseInt(firstDayOfWeekChanged.value);
+			const firstDayOfWeekList = settings.firstDayOfWeek()[languageSelected.value];
+
+			firstDayOfWeekList.forEach(
+				(item) => (item.selected = item.value === firstDayOfWeek)
+			);
+
 			calendarFirstDayOfWeekUpdateStructure();
 			calendarCreate();
 		}
 
 		function calendarLanguageGetSelected() {
-			const current = settings.languages.filter((item) => item.selected)[0];
-			return current;
+			return settings.languages.find((item) => item.selected);
 		}
 
 		function calendarLanguageCreateStructure() {
 			const select = document.querySelector("#selectLanguage");
-
 			if (select.querySelectorAll("option").length === 1) {
-				settings.languages.map((item) => {
+				settings.languages.forEach((item) => {
 					const option = document.createElement("option");
 					option.value = item.value;
 					option.innerText = item.text;
@@ -657,9 +656,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarLanguageChange(languageChanged) {
-			const current = settings.languages.filter((item) => item.value === languageChanged.value)[0];
-			settings.languages.map((item) => item.selected === true ? item.selected = false : item.selected = false);
-			current.selected = true;
+			const selectedValue = languageChanged.value;
+			const languageList = settings.languages;
+			languageList.forEach((item) => (item.selected = item.value === selectedValue));
 			calendarLanguageUpdateStructure();
 			calendarCreate();
 		}
@@ -681,39 +680,35 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarEvents() {
-			document
-				.querySelector("#buttonShowToday")
-				.addEventListener("click", function () {
-					calendarMoveScrollToday();
-				});
+			const buttonShowToday = document.querySelector("#buttonShowToday");
+			const buttonShowMonths = document.querySelector("#buttonShowMonths");
+			const buttonPrint = document.querySelector("#buttonPrint");
+			const selectLanguage = document.querySelector("#selectLanguage");
+			const selectFirstDayOfWeek = document.querySelector("#selectFirstDayOfWeek");
 
-			document
-				.querySelector("#buttonShowMonths")
-				.addEventListener("click", function () {
-					calendarShowAllMonths();
-				});
+			buttonShowToday.addEventListener("click", function () {
+				calendarMoveScrollToday();
+			});
 
-			document
-				.querySelector("#buttonPrint")
-				.addEventListener("click", function () {
-					calendarGeneratePDF();
-				});
+			buttonShowMonths.addEventListener("click", function () {
+				calendarShowAllMonths();
+			});
 
-			document
-				.querySelector("#selectLanguage")
-				.addEventListener("change", function () {
-					calendarLanguageChange(this);
-					calendarFirstDayOfWeekChange(document.querySelector("#selectFirstDayOfWeek"))
-				});
+			buttonPrint.addEventListener("click", function () {
+				calendarGeneratePDF();
+			});
 
-			document
-				.querySelector("#selectFirstDayOfWeek")
-				.addEventListener("change", function () {
-					calendarFirstDayOfWeekChange(this);
-				});
+			selectLanguage.addEventListener("change", function () {
+				calendarLanguageChange(this);
+				calendarFirstDayOfWeekChange(selectFirstDayOfWeek);
+			});
+
+			selectFirstDayOfWeek.addEventListener("change", function () {
+				calendarFirstDayOfWeekChange(this);
+			});
 
 			window.addEventListener("resize", function () {
-				calendarSetWidth()
+				calendarSetWidth();
 			});
 		}
 

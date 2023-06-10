@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			return today;
 		}
 
-		function getFirstLetters(words) {
-			const wordsFormatted = words.map((item) => item.slice(0, 3));
+		function getFirstLetters(words, length) {
+			const wordsFormatted = words.map((item) => item.slice(0, length));
 			return wordsFormatted;
 		}
 
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarWeekCreate() {
 			const weeksList = settings.weeks;
-			const weeksListFormatted = getFirstLetters(weeksList);
+			const weeksListFormatted = getFirstLetters(weeksList, 3);
 			for (let week = 0; week < 7; week++) {
 				const calendarRow = document.querySelectorAll(".calendar__header .calendar__row");
 				const calendarWeek = document.createElement("TH");
