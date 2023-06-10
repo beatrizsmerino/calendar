@@ -587,8 +587,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarGeneratePDF() {
-			document.title = `Calendar-${getToday()}`;
+			const originalTitle = document.title;
+			const currentTitle = `Calendar-${getToday()}`;
+
+			document.title = currentTitle;
 			window.print();
+
+			async function waitForPrintWindowClosed() {
+				while (window.matchMedia('print').matches) {
+					await new Promise(resolve => setTimeout(resolve, 1000));
+				}
+				document.title = originalTitle;
+			}
+
+			waitForPrintWindowClosed();
 		}
 
 		function calendarEmpty() {
