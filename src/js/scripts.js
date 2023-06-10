@@ -1,4 +1,4 @@
-function copyright(){
+function copyright() {
 	const currentDate = new Date();
 	const currentYear = currentDate.getFullYear();
 

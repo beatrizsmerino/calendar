@@ -508,7 +508,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					tableDays.className += " calendar__today";
 				}
 
-				if(isWeekend) {
+				if (isWeekend) {
 					tableDays.className += " calendar__weekend";
 				}
 
@@ -596,7 +596,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const languageSelected = calendarGetLanguageSelected();
 
 			Array.from(options).map((item, index) => {
-				if(index !== 0) {
+				if (index !== 0) {
 					item.remove();
 				}
 			});
