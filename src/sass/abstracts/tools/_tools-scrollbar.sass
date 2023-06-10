@@ -18,9 +18,14 @@
 
 	&.ps
 		position: relative
-		-ms-overflow-style: auto
+		-ms-overflow-style: none
 		-webkit-overflow-scrolling: touch
+		scrollbar-width: none
 		cursor: grab
+
+		&::-webkit-scrollbar
+			display: none
+			width: 0 !important
 
 		&:active
 			cursor: grabbing
@@ -36,6 +41,7 @@
 		.ps__rail-y
 			align-items: center
 			box-shadow: inset 0 0 0.6rem $track
+			background-color: $color-white
 			border-radius: $size
 
 		.ps__thumb-x,
