@@ -244,7 +244,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					...filteredWeeks,
 					[language]: weeks.filter(week => [1, 7].includes(week.value))
 				}), {}),
-			scrollbar: null
+			scrollbar: null,
+			showOneMonth: true
 		};
 
 		function createYearMonthDay(year, month, day) {
@@ -530,21 +531,27 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarMoveScrollToday() {
+			const header = document.querySelector(".header");
 			const calendarInner = document.querySelector(".calendar__inner");
 			const calendarMonth = document.querySelectorAll(".calendar__month");
 			const currentMonth = getThisMonth();
 
 			let positionScroll = 0;
-			for (let index = 0; index < currentMonth; index++) {
-				const style =
-					calendarMonth[index].currentStyle ||
-					window.getComputedStyle(calendarMonth[index]);
-				positionScroll +=
-					parseFloat(calendarMonth[index].offsetWidth) +
-					parseFloat(style.marginRight);
-			}
+			if (settings.showOneMonth) {
+				for (let index = 0; index < currentMonth; index++) {
+					const style =
+						calendarMonth[index].currentStyle ||
+						window.getComputedStyle(calendarMonth[index]);
+					positionScroll +=
+						parseFloat(calendarMonth[index].offsetWidth) +
+						parseFloat(style.marginRight);
+				}
 
-			calendarInner.scrollLeft = positionScroll;
+				calendarInner.scrollLeft = positionScroll;
+			} else {
+				positionScroll = calendarMonth[currentMonth].offsetTop - header.offsetHeight;
+				window.scrollTo({ top: positionScroll, behavior: 'smooth' });
+			}
 		}
 
 		function calendarShowAllMonths() {
@@ -554,6 +561,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			buttonShowMonths.classList.toggle("is-change-text");
 			calendar.classList.toggle("is-show-months");
+			settings.showOneMonth = !settings.showOneMonth;
 
 			calendarSetWidth();
 
