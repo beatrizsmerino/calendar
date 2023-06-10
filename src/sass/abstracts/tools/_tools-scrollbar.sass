@@ -20,6 +20,10 @@
 		position: relative
 		-ms-overflow-style: auto
 		-webkit-overflow-scrolling: touch
+		cursor: grab
+
+		&:active
+			cursor: grabbing
 
 		.ps__rail-x,
 		.ps__rail-y,
@@ -56,6 +60,11 @@
 		padding-bottom: $size
 		overflow-y: hidden
 		overflow-x: auto
+		scroll-snap-type: x mandatory
+		transition: scroll-left 1s ease-out
+
+		> *:not([class^="ps_"])
+			scroll-snap-align: center
 
 		.ps__rail-x,
 		.ps__thumb-x
@@ -65,6 +74,11 @@
 		padding-right: $size
 		overflow-x: hidden
 		overflow-y: auto
+		scroll-snap-type: y mandatory
+		transition: scroll-top 1s ease-out
+
+		> *:not([class^="ps_"])
+			scroll-snap-align: start
 
 		.ps__rail-y,
 		.ps__thumb-y

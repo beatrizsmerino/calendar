@@ -542,11 +542,28 @@ document.addEventListener("DOMContentLoaded", function () {
 						parseFloat(style.marginRight);
 				}
 
-				calendarInner.scrollLeft = positionScroll;
+				smoothScrollTo(calendarInner, positionScroll, 500); // Ajusta la duración según tus necesidades
 			} else {
 				positionScroll = calendarMonthList[currentMonth].offsetTop - header.offsetHeight;
 				window.scrollTo({ top: positionScroll, behavior: 'smooth' });
 			}
+		}
+
+		function smoothScrollTo(element, targetPosition, duration) {
+			const startPosition = element.scrollLeft;
+			const distance = targetPosition - startPosition;
+			const startTime = performance.now();
+
+			(function scrollAnimation() {
+				const currentTime = performance.now();
+				const animationDuration = currentTime - startTime;
+				const scrollProgress = Math.min(animationDuration / duration, 1);
+				element.scrollLeft = startPosition + distance * scrollProgress;
+
+				if (animationDuration < duration) {
+					setTimeout(scrollAnimation, 0);
+				}
+			})();
 		}
 
 		function calendarShowAllMonths() {
