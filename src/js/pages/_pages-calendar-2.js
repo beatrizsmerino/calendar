@@ -32,24 +32,24 @@ document.addEventListener("DOMContentLoaded", function () {
 			],
 		};
 
-		function getThisYear() {
+		function getCurrentYear() {
 			const date = new Date();
 			return date.getFullYear();
 		}
 
-		function getThisMonth() {
+		function getCurrentMonth() {
 			const date = new Date();
 
 			// January is 0!
 			return date.getMonth() + 1;
 		}
 
-		function getThisDay() {
+		function getCurrentDay() {
 			const date = new Date();
 			return date.getDate();
 		}
 
-		function createYearMonthDay(year, month, day) {
+		function getFormattedDate(year, month, day) {
 			const yyyy = String(year);
 			const mm = String(month).padStart(2, "0");
 			const dd = String(day).padStart(2, "0");
@@ -58,10 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function getToday() {
-			const today = createYearMonthDay(
-				getThisYear(),
-				getThisMonth(),
-				getThisDay()
+			const today = getFormattedDate(
+				getCurrentYear(),
+				getCurrentMonth(),
+				getCurrentDay()
 			);
 			return today;
 		}
@@ -134,14 +134,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarDayCreate(year, month, day) {
 			const calendarDay = document.createElement("TD");
 
-			if (getToday() === createYearMonthDay(year, month, day)) {
+			if (getToday() === getFormattedDate(year, month, day)) {
 				calendarDay.className = "calendar__cell calendar__day calendar__today";
 			} else {
 				calendarDay.className = "calendar__cell calendar__day";
 			}
 
 			if (day != 0) {
-				const yearMonthDay = createYearMonthDay(year, month, day);
+				const yearMonthDay = getFormattedDate(year, month, day);
 				calendarDay.setAttribute("data-time", yearMonthDay);
 				calendarDay.innerHTML = `<span>${day}</span>`;
 			}
@@ -204,9 +204,9 @@ document.addEventListener("DOMContentLoaded", function () {
 				} else {
 					// Show the day
 					if (
-						day == getThisDay() &&
-						month == getThisMonth() &&
-						year == getThisYear()
+						day == getCurrentDay() &&
+						month == getCurrentMonth() &&
+						year == getCurrentYear()
 					) {
 						let todayCell = calendarDayCreate(year, month, day);
 						result += todayCell;
@@ -299,19 +299,19 @@ document.addEventListener("DOMContentLoaded", function () {
 			let buttonLastYear = document.getElementById("goLastYear");
 
 			buttonToday.addEventListener("click", function () {
-				calendarCreate(getThisYear(), getThisMonth());
+				calendarCreate(getCurrentYear(), getCurrentMonth());
 			});
 
 			buttonNextYear.addEventListener("click", function () {
-				calendarCreate(getThisYear() + 1, getThisMonth());
+				calendarCreate(getCurrentYear() + 1, getCurrentMonth());
 			});
 
 			buttonLastYear.addEventListener("click", function () {
-				calendarCreate(getThisYear() - 1, getThisMonth());
+				calendarCreate(getCurrentYear() - 1, getCurrentMonth());
 			});
 		}
 
-		calendarCreate(getThisYear(), getThisMonth());
+		calendarCreate(getCurrentYear(), getCurrentMonth());
 		calendarEvents();
 	}
 });

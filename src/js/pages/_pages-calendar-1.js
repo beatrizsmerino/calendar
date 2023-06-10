@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			showOneMonth: true
 		};
 
-		function createYearMonthDay(year, month, day) {
+		function getFormattedDate(year, month, day) {
 			const yyyy = String(year);
 			const mm = String(month + 1).padStart(2, "0"); // January is 0!
 			const dd = String(day).padStart(2, "0");
@@ -256,17 +256,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			return yearMonthDay;
 		}
 
-		function getThisYear() {
+		function getCurrentYear() {
 			const date = new Date();
 			return date.getFullYear();
 		}
 
-		function getThisMonth() {
+		function getCurrentMonth() {
 			const date = new Date();
 			return date.getMonth();
 		}
 
-		function getThisDay() {
+		function getCurrentDay() {
 			const date = new Date();
 			return date.getDate();
 		}
@@ -277,20 +277,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function getToday() {
-			const today = createYearMonthDay(
-				getThisYear(),
-				getThisMonth(),
-				getThisDay()
+			const today = getFormattedDate(
+				getCurrentYear(),
+				getCurrentMonth(),
+				getCurrentDay()
 			);
 			return today;
 		}
 
-		function getShortText(string, length) {
+		function getFirstLetters(string, length) {
 			const substring = string.slice(0, length);
 			return substring;
 		}
 
-		function calendarScrollbar(action) {
+		function toggleScrollbar(action) {
 			const container = document.querySelector('.scrollbar');
 
 			if (container) {
@@ -319,10 +319,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		}
 
-		function calendarOrderWeeksByFirstDayOfWeekSelected() {
-			const languageSelected = calendarGetLanguageSelected();
+		function calendarFirstDayOfWeekSort() {
+			const languageSelected = calendarLanguageGetSelected();
 			const weeksLanguageSelected = settings.weeks[languageSelected.value];
-			const firstDayOfWeekSelected = calendarGetFirstDayOfWeekSelected();
+			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected();
 			const firstDayOfWeekSelectedValue = firstDayOfWeekSelected.value;
 
 			weeksLanguageSelected.sort((a, b) => a.value - b.value);
@@ -340,11 +340,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarGetWeeks() {
-			let weeks = calendarOrderWeeksByFirstDayOfWeekSelected();
+			let weeks = calendarFirstDayOfWeekSort();
 
 			for (const key in weeks) {
 				const day = weeks[key];
-				day.abbreviation = getShortText(day.text, 3);
+				day.abbreviation = getFirstLetters(day.text, 3);
 			}
 
 			return weeks;
@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			function calendarYearCreate() {
 				const calendarYear = document.createElement("div");
 				calendarYear.className = "calendar__year";
-				calendarYear.innerText = getThisYear();
+				calendarYear.innerText = getCurrentYear();
 				document.getElementById("calendar").appendChild(calendarYear);
 			}
 
@@ -477,7 +477,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarSetDays(startDay) {
-			const thisYear = getThisYear();
+			const thisYear = getCurrentYear();
 			let week = 0;
 			let firstDayOfWeek = startDay === 7 ? 0 : startDay === 1 ? 1 : 0;
 
@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				const tableDays = document.querySelectorAll(".calendar__table")[dateMonth].children[2].children[week].children[dateWeek];
 				tableDays.innerHTML = `<span class="calendar__number">${dateDay}</span><span class="calendar__circle"></span>`;
 
-				const yearMonthDay = createYearMonthDay(thisYear, dateMonth, dateDay);
+				const yearMonthDay = getFormattedDate(thisYear, dateMonth, dateDay);
 				tableDays.setAttribute("data-time", yearMonthDay);
 
 				if (tableDays.getAttribute("data-time") == getToday()) {
@@ -534,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const header = document.querySelector(".header");
 			const calendarInner = document.querySelector(".calendar__inner");
 			const calendarMonth = document.querySelectorAll(".calendar__month");
-			const currentMonth = getThisMonth();
+			const currentMonth = getCurrentMonth();
 
 			let positionScroll = 0;
 			if (settings.showOneMonth) {
@@ -566,15 +566,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarSetWidth();
 
 			if (calendar.classList.contains("is-show-months")) {
-				calendarScrollbar("remove");
+				toggleScrollbar("remove");
 			} else {
-				calendarScrollbar("create");
+				toggleScrollbar("create");
 			}
 
 			buttonShowToday.click();
 		}
 
-		function calendarCreatePDF() {
+		function calendarGeneratePDF() {
 			document.title = `Calendar-${getToday()}`
 			window.print();
 		}
@@ -584,8 +584,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendar.innerHTML = "";
 		}
 
-		function calendarGetFirstDayOfWeekSelected() {
-			const languageSelected = calendarGetLanguageSelected();
+		function calendarFirstDayOfWeekGetSelected() {
+			const languageSelected = calendarLanguageGetSelected();
 			const current = settings.firstDayOfWeek()[languageSelected.value].filter((item) => item.selected)[0];
 			return current;
 		}
@@ -593,7 +593,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarFirstDayOfWeekCreateStructure() {
 			const select = document.querySelector("#selectFirstDayOfWeek");
 			const options = select.querySelectorAll("option");
-			const languageSelected = calendarGetLanguageSelected();
+			const languageSelected = calendarLanguageGetSelected();
 
 			Array.from(options).map((item, index) => {
 				if (index !== 0) {
@@ -612,7 +612,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarFirstDayOfWeekUpdateStructure() {
 			const select = document.querySelector("#selectFirstDayOfWeek");
 			const firstOption = select.querySelectorAll("option")[0];
-			const firstDayOfWeekSelected = calendarGetFirstDayOfWeekSelected();
+			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected();
 
 			firstOption.value = firstDayOfWeekSelected.value;
 			firstOption.innerText = `First day of week: ${firstDayOfWeekSelected.text}`;
@@ -620,7 +620,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarFirstDayOfWeekChange(firstDayOfWeekChanged) {
-			const languageSelected = calendarGetLanguageSelected();
+			const languageSelected = calendarLanguageGetSelected();
 			const current = settings.firstDayOfWeek()[languageSelected.value].filter((item) => item.value === parseInt(firstDayOfWeekChanged.value))[0];
 			settings.firstDayOfWeek()[languageSelected.value].map((item) => item.selected === true ? item.selected = false : item.selected = false);
 			current.selected = true;
@@ -628,7 +628,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarCreate();
 		}
 
-		function calendarGetLanguageSelected() {
+		function calendarLanguageGetSelected() {
 			const current = settings.languages.filter((item) => item.selected)[0];
 			return current;
 		}
@@ -649,7 +649,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarLanguageUpdateStructure() {
 			const select = document.querySelector("#selectLanguage");
 			const firstOption = select.querySelectorAll("option")[0];
-			const languageSelected = calendarGetLanguageSelected();
+			const languageSelected = calendarLanguageGetSelected();
 
 			firstOption.value = languageSelected.value;
 			firstOption.innerText = `Language: ${languageSelected.text}`;
@@ -665,8 +665,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarCreate() {
-			const languageSelected = calendarGetLanguageSelected();
-			const firstDayOfWeekSelected = calendarGetFirstDayOfWeekSelected();
+			const languageSelected = calendarLanguageGetSelected();
+			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected();
 			calendarEmpty();
 			calendarCreateStructure(
 				settings.months[languageSelected.value],
@@ -674,7 +674,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			);
 			calendarSetDays(firstDayOfWeekSelected.value);
 			calendarSetWidth();
-			calendarScrollbar("create");
+			toggleScrollbar("create");
 			calendarMoveScrollToday();
 			calendarFirstDayOfWeekCreateStructure();
 			calendarLanguageCreateStructure();
@@ -696,7 +696,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			document
 				.querySelector("#buttonPrint")
 				.addEventListener("click", function () {
-					calendarCreatePDF();
+					calendarGeneratePDF();
 				});
 
 			document
