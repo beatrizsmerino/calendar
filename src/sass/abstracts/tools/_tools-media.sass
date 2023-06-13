@@ -1,35 +1,16 @@
 // TOOLS - MIXIN
-// MEDIA (Create mediaquery for breakpoint given.)
+// MEDIA
 // =================================================
 
 
 
 
 
-// This mixin 'media' generate the rule @media in a way more easy, passing only the parameters of size breakpoint, min/max and width/height.
-//
-// This mixin require:
-//
-// External means:
-// ------------------
-// - $breakpoints
-// @optional {map} Map with breakpoints names and values is required if param is key.
-//
-// Args:
-// ------------------
-// - $breakpoint
-// @param {num/string} Breakpoint to define the media query. It accepts 'numbers' with and without units (px will be asigned if unitless) or 'key' within a previous $breakpoints map defined (see @optional), or variables previously defined.
-// Values: $var | sizePX | size% | sizeEM | sizeREM
-// - $rule
-// @param {string} Defines if it will be a max-width or min-width mediaquery.
-// Default: max
-// Values: max | min
-// - $dimension
-// @param {string} Defines if it will be a width or height mediaquery.
-// Default: width
-// Values: width | height
-
-// Declaration of mixin
+// @mixin `media` - Simplifies the creation of @media rules by providing an easy way to define breakpoints, min/max settings, and width/height parameters.
+// @required `$breakpoints`, `contains()`
+// @param {number/string} - @paramName `$breakpoint` - @paramOptions $var | sizePX | size% | sizeEM | sizeREM - @paramDescription A numerical value or a key from the $breakpoints map. It defines the breakpoint for the media query. If a numerical value is provided without units, 'px' will be assumed.
+// @param {string} - @paramName `$rule` - @paramOptions max | min  - @paramDescription Defines if it will be a max-width or min-width mediaquery
+// @param {string} - @paramName `$dimension` - @paramOptions width | height - @paramDescription Defines if it will be a width or height mediaquery
 
 @mixin media($breakpoint, $rule: 'max', $dimension: 'width')
 	$rules: 'max', 'min'
@@ -40,7 +21,7 @@
 		$rule: 'max'
 	@if not contains($dimensions, $dimension)
 		$rule: 'width'
-	@if type-of($breakpoint)==number
+	@if type-of($breakpoint) == number
 		@if unitless($breakpoint)
 			@media (#{$rule}-#{$dimension}: #{$breakpoint + 'px'})
 				@content
@@ -61,33 +42,9 @@
 	@else
 		@error "Neither $breakpoints map nor variable provided are defined"
 
-
-// Use mixin:
-// @include media('sm')
-//   .example-1
-//     color: tomato
-//
-// @include media('lg', 'min')
-//   .example-2
-//      color: tomato
-//
-// @include media('sm', 'min', 'height')
-//   .example-3
-//     color: tomato
-//
-// @include media(300px)
-//   .example-4
-//     color: tomato
-//
-// @include media(90%)
-//   .example-5
-//     color: tomato
-//
-// @include media(1.2em)
-//   .example-6
-//     color: tomato
-//
-// $medida-especial: 2rem
-// @include media($medida-especial)
-//   .example-7
-//     color: tomato
+//	@include media('sm')
+//	@include media('lg', 'min')
+//	@include media('sm', 'min', 'height')
+//	@include media(300px)
+//	@include media(90%)
+//	@include media(1.2em)

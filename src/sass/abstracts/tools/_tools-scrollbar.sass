@@ -1,10 +1,12 @@
-// COMPONENTS
+// TOOLS - MIXIN
 // SCROLLBAR
 // =================================================
 
 
 
 
+// @mixin `createPerfectScrollbar` - Adds styles to create a perfect scrollbar.
+// @param - @paramName `$direction` - @paramOptions x | y - @paramDescription The direction of the scrollbar.
 
 @mixin createPerfectScrollbar($direction: 'y')
 	$thumb: $color-metal
@@ -13,8 +15,6 @@
 
 	@if $direction != 'x' and $direction != 'y'
 		@error "The $direction parameter must be 'x' or 'y'"
-
-
 
 	&.ps
 		position: relative
@@ -89,3 +89,6 @@
 		.ps__rail-y,
 		.ps__thumb-y
 			display: flex
+
+// @include createPerfectScrollbar()
+// @include createPerfectScrollbar('x')
