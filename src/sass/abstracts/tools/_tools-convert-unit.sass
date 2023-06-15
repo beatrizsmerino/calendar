@@ -1,0 +1,195 @@
+// TOOLS - FUNCTION
+// CONVERT UNIT
+// =================================================
+@use "sass:math"
+@use "sass:list"
+
+
+
+
+
+// @function `convertUnit` - Converts a size value from one unit to another.
+// @param {number} - @paramName `$sizeFrom` - The size value to convert.
+// @param {string} - @paramName `$unitTo` - The unit to convert the size value to. Must be one of "px", "rem", "em", or "pt".
+// @param {number} - @paramName `$sizeBase` - The base size value in pixels. Defaults to 10px.
+// @returns {number} - The converted size value in the specified unit.
+
+$unitsAbsolute: 'px', 'cm', 'mm', 'pt', 'in'
+$unitsRelative: 'rem', 'em'
+$units: list.join($unitsAbsolute, $unitsRelative)
+
+$pxPerIn: 96 // PPI
+$cmPerIn: 2.54
+$mmPerIn: $cmPerIn * 10
+$ptPerIn: 72
+
+@function convertUnit($sizeFrom, $unitTo, $sizeBase: 10px)
+	$numBase: map-get(extractValueUnit($sizeBase), "number")
+	$numFrom: map-get(extractValueUnit($sizeFrom), "number")
+	$numTo: 0
+
+	@if type-of($sizeFrom) != number
+		@error "Invalid $sizeFrom parameter. Please provide a number."
+
+	@if unit($sizeFrom) == $unitTo
+		@error "Cannot convert #{$sizeFrom} to #{$unitTo} because it is the same unit."
+
+	@if not contains($units, unit($sizeFrom))
+		@error "Invalid $sizeFrom parameter. The unit of measure #{unit($sizeFrom)} cannot be converted. Please use the following units: #{$units}."
+
+	@if type-of($unitTo) != "string"
+		@error "Invalid $unitTo parameter. Please provide a string."
+
+	@if not index($units, $unitTo)
+		@error "Invalid $unitTo parameter. The unit of measure #{$unitTo} cannot be converted. Please use one of the following units: #{$units}."
+
+	@if unit($sizeBase) != "px"
+		@error "Invalid $sizeBase parameter, its unit must be in px."
+
+	// Conversion from px
+	@if unit($sizeFrom) == "px"
+		@if $unitTo == "cm"
+			$numTo: #{math.div($numFrom, $pxPerIn) * $cmPerIn}
+		@else if $unitTo == "mm"
+			$numTo: #{math.div($numFrom, $pxPerIn) * $mmPerIn}
+		@else if $unitTo == "pt"
+			$numTo: #{math.div(($numFrom * $ptPerIn), $pxPerIn)}
+		@else if $unitTo == "in"
+			$numTo: #{math.div($numFrom, $pxPerIn)}
+		@else if $unitTo == "rem"
+			$numTo: #{math.div($numFrom, $numBase)}
+		@else if $unitTo == "em"
+			$numTo: #{math.div($numFrom, $numBase)}
+
+	// Conversion from cm
+	@if unit($sizeFrom) == "cm"
+		@if $unitTo == "px"
+			$numTo: #{math.div(($numFrom * $pxPerIn), $cmPerIn)}
+		@else if $unitTo == "mm"
+			$numTo: #{$numFrom * 10}
+		@else if $unitTo == "pt"
+			$numTo: #{math.div($numFrom, $cmPerIn) * $ptPerIn}
+		@else if $unitTo == "in"
+			$numTo: #{math.div($numFrom, $cmPerIn)}
+		@else if $unitTo == "rem"
+			$numTo: #{math.div(math.div(($numFrom * $pxPerIn), $cmPerIn), $numBase)}
+		@else if $unitTo == "em"
+			$numTo: #{math.div(math.div(($numFrom * $pxPerIn), $cmPerIn), $numBase)}
+
+	// Conversion from mm
+	@if unit($sizeFrom) == "mm"
+		@if $unitTo == "px"
+			$numTo: #{math.div(($numFrom * $pxPerIn), $mmPerIn)}
+		@else if $unitTo == "cm"
+			$numTo: #{math.div($numFrom, 10)}
+		@else if $unitTo == "pt"
+			$numTo: #{math.div(($numFrom * $ptPerIn), $mmPerIn)}
+		@else if $unitTo == "in"
+			$numTo: #{math.div($numFrom, $mmPerIn)}
+		@else if $unitTo == "rem"
+			$numTo: #{math.div(($numFrom * $pxPerIn), ($mmPerIn * $numBase))}
+		@else if $unitTo == "em"
+			$numTo: #{math.div(($numFrom * $pxPerIn), ($mmPerIn * $numBase))}
+
+	// Conversion from pt
+	@if unit($sizeFrom) == "pt"
+		@if $unitTo == "px"
+			$numTo: #{math.div(($numFrom * $pxPerIn), $ptPerIn)}
+		@else if $unitTo == "cm"
+			$numTo: #{math.div(($numFrom * $cmPerIn), $ptPerIn)}
+		@else if $unitTo == "mm"
+			$numTo: #{math.div(($numFrom * $mmPerIn), $ptPerIn)}
+		@else if $unitTo == "in"
+			$numTo: #{math.div($numFrom, $ptPerIn)}
+		@else if $unitTo == "rem"
+			$numTo: #{math.div($numFrom, $numBase)}
+		@else if $unitTo == "em"
+			$numTo: #{math.div($numFrom, $numBase)}
+
+	// Conversion from in
+	@if unit($sizeFrom) == "in"
+		@if $unitTo == "px"
+			$numTo: #{$numFrom * $pxPerIn}
+		@else if $unitTo == "cm"
+			$numTo: #{$numFrom * $cmPerIn}
+		@else if $unitTo == "mm"
+			$numTo: #{$numFrom * $mmPerIn}
+		@else if $unitTo == "pt"
+			$numTo: #{$numFrom * $ptPerIn}
+		@else if $unitTo == "rem"
+			$numTo: #{math.div(($numFrom * $ptPerIn), $numBase)}
+		@else if $unitTo == "em"
+			$numTo: #{math.div(($numFrom * $ptPerIn), $numBase)}
+
+	// Conversion from rem
+	@if unit($sizeFrom) == "rem"
+		@if $unitTo == "px"
+			$numTo: #{$numFrom * $numBase}
+		@else if $unitTo == "cm"
+			$numTo: #{math.div((($numFrom * $numBase) * $cmPerIn), $pxPerIn)}
+		@else if $unitTo == "mm"
+			$numTo: #{math.div((($numFrom * $numBase) * $mmPerIn), $pxPerIn)}
+		@else if $unitTo == "pt"
+			$numTo: #{math.div((($numFrom * $numBase) * $ptPerIn), $pxPerIn)}
+		@else if $unitTo == "in"
+			$numTo: #{math.div(($numFrom * $numBase), $pxPerIn)}
+		@else if $unitTo == "em"
+			$numTo: #{$numFrom}
+
+	// Conversion from em
+	@if unit($sizeFrom) == "em"
+		@if $unitTo == "px"
+			$numTo: #{$numFrom * $numBase}
+		@else if $unitTo == "cm"
+			$numTo: #{math.div((($numFrom * $numBase) * $cmPerIn), $pxPerIn)}
+		@else if $unitTo == "mm"
+			$numTo: #{math.div((($numFrom * $numBase) * $mmPerIn), $pxPerIn)}
+		@else if $unitTo == "pt"
+			$numTo: #{math.div((($numFrom * $numBase) * $ptPerIn), $pxPerIn)}
+		@else if $unitTo == "in"
+			$numTo: #{math.div(($numFrom * $numBase), $pxPerIn)}
+		@else if $unitTo == "rem"
+			$numTo: #{$numFrom}
+
+	@return #{$numTo}#{$unitTo}
+
+
+//$testNumFrom: 16
+
+// @debug convertUnit(($testNumFrom * 1vw), "px")
+// @debug convertUnit(($testNumFrom * 1px), "vw")
+// @debug convertUnit(($testNumFrom * 1px), "px")
+// @debug convertUnit(($testNumFrom * 1cm), "cm")
+// @debug convertUnit(($testNumFrom * 1mm), "mm")
+// @debug convertUnit(($testNumFrom * 1pt), "pt")
+// @debug convertUnit(($testNumFrom * 1in), "in")
+// @debug convertUnit(($testNumFrom * 1rem), "rem")
+// @debug convertUnit(($testNumFrom * 1em), "em")
+
+// @each $unit in $units
+// 	@if $unit != "px"
+// 		@debug convertUnit(($testNumFrom * 1px), $unit)
+
+// @each $unit in $units
+// 	@if $unit != "cm"
+// 		@debug convertUnit(($testNumFrom * 1cm), $unit)
+
+// @each $unit in $units
+// 	@if $unit != "mm"
+// 		@debug convertUnit(($testNumFrom * 1mm), $unit)
+
+// @each $unit in $units
+// 	@if $unit != "pt"
+// 		@debug convertUnit(($testNumFrom * 1pt), $unit)
+
+// @each $unit in $units
+// 	@if $unit != "in"
+// 		@debug convertUnit(($testNumFrom * 1in), $unit)
+
+// @each $unit in $units
+// 	@if $unit != "rem"
+// 		@debug convertUnit(($testNumFrom * 1rem), $unit)
+
+// @each $unit in $units
+// 	@if $unit != "em"
+// 		@debug convertUnit(($testNumFrom * 1em), $unit)

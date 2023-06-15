@@ -1,0 +1,28 @@
+// TOOLS - FUNCTION
+// EXTRACT VALUE UNIT
+// =================================================
+@use "sass:math"
+
+
+
+
+
+// @function extractValueUnit - Extracts the number and unit from a value with its unit of measurement.
+// @param {string} - @paramName `$value` - @paramDescription The value with its unit of measurement from which you want to extract the number and unit separately.
+// @returns {{number: number, unit: string}} - An object containing the extracted `number` and `unit`.
+
+@function extractValueUnit($value)
+	$unit: null
+	$number: null
+
+	@if type-of($value) == 'number' and not unitless($value)
+		$unit: unit($value)
+		$number: math.div($value, $value * 0 + 1)
+	@else
+		@error "The $value parameter must be a number with units"
+
+	@return (number: $number, unit: $unit)
+
+// @debug type-of(16px)
+// @debug map-get(extractValueUnit(10pt), "number")
+// @debug map-get(extractValueUnit(3000rem), "unit")
