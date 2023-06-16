@@ -25,7 +25,7 @@
 		&__inner
 			display: flex
 			align-items: center
-			@include createPerfectScrollbar('x')
+			@include perfectScrollbar('x')
 
 		&__month
 			&:not(:last-child)
@@ -113,7 +113,7 @@
 					display: flex
 					flex-wrap: wrap
 					justify-content: center
-					overflow-x: auto
+					@include perfectScrollbar('x', false)
 
 				&__month
 					margin: 1rem 3rem
@@ -154,7 +154,7 @@
 				display: flex
 				flex-wrap: wrap
 				justify-content: center
-				overflow-x: auto
+				@include perfectScrollbar('x', false)
 
 			&__month
 				break-inside: avoid
