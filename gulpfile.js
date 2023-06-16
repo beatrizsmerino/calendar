@@ -117,7 +117,16 @@ function sassCompile() {
 
 function jsCompile() {
 	const BabelConfig = {
-		presets: ["@babel/preset-env", "babel-preset-minify"],
+		presets: [
+			"@babel/preset-env",
+			[
+				"minify",
+				{
+					"builtIns": false,
+					"mangle": false
+				}
+			]
+		],
 		plugins: [
 			"@babel/transform-runtime",
 			"@babel/plugin-transform-async-to-generator",
