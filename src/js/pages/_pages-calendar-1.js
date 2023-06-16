@@ -355,12 +355,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			return weeksOrdered;
 		}
 
-		function calendarGetWeeks() {
+		function calendarGetWeeks(numLetters) {
 			let weeksList = calendarFirstDayOfWeekSort();
 
 			for (const key in weeksList) {
 				const day = weeksList[key];
-				day.abbreviation = getFirstLetters(day.text, 3);
+				day.abbreviation = getFirstLetters(day.text, numLetters);
 			}
 
 			return weeksList;
@@ -591,6 +591,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			const currentTitle = `Calendar-${getToday()}`;
 
 			document.title = currentTitle;
+			calendarCreate(1);
+
 			window.print();
 
 			async function waitForPrintWindowClosed() {
@@ -598,6 +600,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					await new Promise(resolve => setTimeout(resolve, 1000));
 				}
 				document.title = originalTitle;
+				calendarCreate();
 			}
 
 			waitForPrintWindowClosed();
@@ -692,13 +695,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarCreate();
 		}
 
-		function calendarCreate() {
+		function calendarCreate(numLetters = 3) {
 			const languageSelected = calendarLanguageGetSelected();
 			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected();
 			calendarEmpty();
 			calendarCreateStructure(
 				settings.months[languageSelected.value],
-				calendarGetWeeks()
+				calendarGetWeeks(numLetters)
 			);
 			calendarSetDays(firstDayOfWeekSelected.value);
 			calendarSetWidth();
