@@ -56,8 +56,9 @@
 				font-size: 1.4rem
 
 		&__row
-			display: flex
-			justify-content: space-between
+			display: grid
+			grid-gap: 0
+			grid-template-columns: repeat(7,1fr)
 
 		&__weekend
 			background-color: mix($color-black, $color-white, 10%)
@@ -118,15 +119,30 @@
 				&__month
 					margin: 1rem 3rem
 
+
+// PRINT version
+// We must convert the values into points (pt)
+
 @page
-	margin: 0
+	size: A4 landscape
+	margin: 1cm !important
+	padding: 0cm !important
 	marks: none
 	bleed: 0
 	marks-offset: 0
+	scale: 100%
 
 @media print
 	.page-calendar-1
+		height: 100%
+		width: 100%
+		display: flex
+		justify-content: center
+		align-items: center
+
 		*
+			margin: 0
+			padding: 0
 			color-adjust: exact !important
 			-webkit-print-color-adjust: exact !important
 			print-color-adjust: exact !important
@@ -136,62 +152,64 @@
 		.calendar__action
 			display: none
 
-		.page
-			&__main,
-			&__section,
+		.sticky
 			&__body
+				min-height: auto
+
+		.page
+			&__body,
+			&__main,
+			&__section
+				width: 100%
 				margin: 0
 				padding: 0
+
+			&__body
+				max-width: #{297mm - 20mm}
+				max-height: #{210mm - 20mm}
+				font-size: convertUnit(10px, "pt")
+
+			&__container
+				max-width: 100%
+				width: 100%
 
 		.calendar
 			width: 100% !important
 
 			&__year
-				margin-bottom: 3rem
-				font-size: 5rem
+				margin-bottom: 5mm
+				font-size: convertUnit(3rem, "pt")
 
 			&__inner
-				display: flex
-				flex-wrap: wrap
+				display: grid
+				grid-gap: convertUnit(1rem, "in") convertUnit(3rem, "in")
+				grid-template-columns: repeat(4, 1fr)
 				justify-content: center
+				align-items: flex-start
 				@include perfectScrollbar('x', false)
 
 			&__month
-				break-inside: avoid
+				margin: 0 !important
+
+			&__table
+				border-spacing: 0
+
+			&__caption
+				padding: 0
+
+			&__title
+				font-size: convertUnit(2rem, "pt")
+
+			&__row
+				display: grid
+				grid-gap: 0
+				grid-template-columns: repeat(7,1fr)
 
 			&__cell
-				width: 5rem
+				width: inherit
+				height: inherit
+				padding: convertUnit(0.4rem, "in") 0
+				font-size: convertUnit(1.5rem, "pt")
 
 			&__circle
 				display: none
-
-@media print and (orientation: landscape)
-	.page-calendar-1
-		font-size: 42%
-
-		.page
-			&__container
-				max-width: calc((40rem + 4rem) * 4)
-				display: flex
-				justify-content: center
-				align-items: center
-
-		.calendar
-			&__month
-				margin: 1rem 2rem !important
-
-@media print and (orientation: portrait)
-	.page-calendar-1
-		font-size: 40%
-
-		.page
-			&__main
-				margin-top: 20mm
-				justify-content: flex-start
-
-			&__container
-				max-width: calc((40rem + 3rem) * 3)
-
-		.calendar
-			&__month
-				margin: 2rem 1.5rem !important
