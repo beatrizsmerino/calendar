@@ -251,15 +251,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			showOneMonth: true,
 		};
 
-
-		function getFormattedDate(year, month, day) {
-			const yyyy = String(year);
-			const mm = String(month + 1).padStart(2, "0"); // January is 0!
-			const dd = String(day).padStart(2, "0");
-			const yearMonthDay = `${yyyy}-${mm}-${dd}`;
-			return yearMonthDay;
-		}
-
 		function getCurrentYear() {
 			const date = new Date();
 			return date.getFullYear();
@@ -278,6 +269,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		function getDayOfYear(year, day) {
 			const dateDay = new Date(year, 0);
 			return new Date(dateDay.setDate(day));
+		}
+
+		function getFormattedDate(year, month, day) {
+			const yyyy = String(year);
+			const mm = String(month + 1).padStart(2, "0"); // January is 0!
+			const dd = String(day).padStart(2, "0");
+			const yearMonthDay = `${yyyy}-${mm}-${dd}`;
+			return yearMonthDay;
 		}
 
 		function getToday() {
@@ -340,21 +339,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			})();
 		}
 
-		function calendarFirstDayOfWeekSort() {
-			const languageSelected = calendarLanguageGetSelected();
-			const weeksLanguageSelected = settings.weeks[languageSelected.value];
-			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected().value;
-
-			weeksLanguageSelected.sort((a, b) => a.value - b.value);
-
-			const weekSelected = weeksLanguageSelected.find(week => week.value === firstDayOfWeekSelected);
-			const weekStart = weeksLanguageSelected.filter(week => week.value > firstDayOfWeekSelected);
-			const weekEnd = weeksLanguageSelected.filter(week => week.value < firstDayOfWeekSelected);
-
-			const weeksOrdered = [weekSelected, ...weekStart, ...weekEnd];
-			return weeksOrdered;
-		}
-
 		function calendarGetWeeks(numLetters) {
 			let weeksList = calendarFirstDayOfWeekSort();
 
@@ -364,6 +348,65 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 
 			return weeksList;
+		}
+
+		function calendarSetDays(startDay) {
+			const thisYear = getCurrentYear();
+			let week = 0;
+
+			for (let day = 1; day < 366; day++) {
+				const dayOfYear = getDayOfYear(thisYear, day);
+				const dateDay = dayOfYear.getDate();
+				const dateMonth = dayOfYear.getMonth();
+				let dateWeek = dayOfYear.getDay();
+				const isWeekend = (dateWeek === 6) || (dateWeek === 0); // 6 = Saturday, 0 = Sunday
+
+				if (dateDay == 1) {
+					week = 0;
+				}
+
+				// Adjust day of week if needed
+				if (startDay === 1) {
+					dateWeek = (dateWeek + 6) % 7; // Shift Sunday from 0 to 6
+				}
+
+				// Insert days in the calendar
+				const calendarTableList = document.querySelectorAll(".calendar__table");
+				const tableDays = calendarTableList[dateMonth].children[2].children[week].children[dateWeek];
+				tableDays.innerHTML = `<span class="calendar__number">${dateDay}</span><span class="calendar__circle"></span>`;
+
+				const yearMonthDay = getFormattedDate(thisYear, dateMonth, dateDay);
+				tableDays.dataset.time = yearMonthDay;
+
+				if (tableDays.dataset.time == getToday()) {
+					tableDays.classList.add("calendar__today");
+				}
+
+				if (isWeekend) {
+					tableDays.classList.add("calendar__weekend");
+				}
+
+				if (dateWeek == 6) {
+					week++;
+				}
+			}
+		}
+
+		function calendarSetWidth() {
+			const calendar = document.querySelector("#calendar");
+			const calendarMonth = document.querySelector(".calendar__month");
+			const calendarMonthWidth = calendarMonth.clientWidth;
+
+			if (calendar.classList.contains("is-show-months")) {
+				calendar.style.width = `auto`;
+			} else {
+				calendar.style.width = `${calendarMonthWidth}px`;
+			}
+		}
+
+		function calendarRemoveStructure() {
+			const calendar = document.querySelector("#calendar");
+			calendar.innerHTML = "";
 		}
 
 		function calendarCreateStructure(monthsList, weeksList) {
@@ -488,60 +531,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarAllMonthsCreate();
 		}
 
-		function calendarSetDays(startDay) {
-			const thisYear = getCurrentYear();
-			let week = 0;
-
-			for (let day = 1; day < 366; day++) {
-				const dayOfYear = getDayOfYear(thisYear, day);
-				const dateDay = dayOfYear.getDate();
-				const dateMonth = dayOfYear.getMonth();
-				let dateWeek = dayOfYear.getDay();
-				const isWeekend = (dateWeek === 6) || (dateWeek === 0); // 6 = Saturday, 0 = Sunday
-
-				if (dateDay == 1) {
-					week = 0;
-				}
-
-				// Adjust day of week if needed
-				if (startDay === 1) {
-					dateWeek = (dateWeek + 6) % 7; // Shift Sunday from 0 to 6
-				}
-
-				// Insert days in the calendar
-				const calendarTableList = document.querySelectorAll(".calendar__table");
-				const tableDays = calendarTableList[dateMonth].children[2].children[week].children[dateWeek];
-				tableDays.innerHTML = `<span class="calendar__number">${dateDay}</span><span class="calendar__circle"></span>`;
-
-				const yearMonthDay = getFormattedDate(thisYear, dateMonth, dateDay);
-				tableDays.dataset.time = yearMonthDay;
-
-				if (tableDays.dataset.time == getToday()) {
-					tableDays.classList.add("calendar__today");
-				}
-
-				if (isWeekend) {
-					tableDays.classList.add("calendar__weekend");
-				}
-
-				if (dateWeek == 6) {
-					week++;
-				}
-			}
-		}
-
-		function calendarSetWidth() {
-			const calendar = document.querySelector("#calendar");
-			const calendarMonth = document.querySelector(".calendar__month");
-			const calendarMonthWidth = calendarMonth.clientWidth;
-
-			if (calendar.classList.contains("is-show-months")) {
-				calendar.style.width = `auto`;
-			} else {
-				calendar.style.width = `${calendarMonthWidth}px`;
-			}
-		}
-
 		function calendarMoveScrollToday() {
 			const header = document.querySelector(".header");
 			const calendarInner = document.querySelector(".calendar__inner");
@@ -606,9 +595,19 @@ document.addEventListener("DOMContentLoaded", function () {
 			waitForPrintWindowClosed();
 		}
 
-		function calendarRemoveStructure() {
-			const calendar = document.querySelector("#calendar");
-			calendar.innerHTML = "";
+		function calendarFirstDayOfWeekSort() {
+			const languageSelected = calendarLanguageGetSelected();
+			const weeksLanguageSelected = settings.weeks[languageSelected.value];
+			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected().value;
+
+			weeksLanguageSelected.sort((a, b) => a.value - b.value);
+
+			const weekSelected = weeksLanguageSelected.find(week => week.value === firstDayOfWeekSelected);
+			const weekStart = weeksLanguageSelected.filter(week => week.value > firstDayOfWeekSelected);
+			const weekEnd = weeksLanguageSelected.filter(week => week.value < firstDayOfWeekSelected);
+
+			const weeksOrdered = [weekSelected, ...weekStart, ...weekEnd];
+			return weeksOrdered;
 		}
 
 		function calendarFirstDayOfWeekGetSelected() {

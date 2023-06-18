@@ -149,38 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			return calendarDay.outerHTML;
 		}
 
-		function calendarSetWeekend() {
-			const weekendSaturdays = document.querySelectorAll(
-				".calendar__body .calendar__row .calendar__cell:nth-child(6)"
-			);
-
-			const weekendSundays = document.querySelectorAll(
-				".calendar__body .calendar__row .calendar__cell:nth-child(7)"
-			);
-
-			[...weekendSaturdays, ...weekendSundays].map((item) => {
-				if (item.childNodes.length) {
-					item.classList.add("calendar__weekend");
-				}
-			});
-		}
-
-		function calendarRemoveStructure() {
-			const calendar = document.querySelector("#calendar");
-			calendar.innerHTML = "";
-		}
-
-		function calendarCreateStructure() {
-			calendarInnerCreate();
-			calendarMonthCreate();
-			calendarTableCreate();
-			calendarCaptionCreate();
-			calendarHeaderCreate();
-			calendarRowCreate(document.querySelectorAll(".calendar__header"));
-			calendarWeekCreate();
-			calendarBodyCreate();
-		}
-
 		function calendarAllDaysCreate(year, month) {
 			var now = new Date(year, month - 1, 1);
 			var last = new Date(year, month, 0);
@@ -224,6 +192,38 @@ document.addEventListener("DOMContentLoaded", function () {
 			result += "</tr>";
 
 			document.querySelector(".calendar__body").innerHTML = result;
+		}
+
+		function calendarSetWeekend() {
+			const weekendSaturdays = document.querySelectorAll(
+				".calendar__body .calendar__row .calendar__cell:nth-child(6)"
+			);
+
+			const weekendSundays = document.querySelectorAll(
+				".calendar__body .calendar__row .calendar__cell:nth-child(7)"
+			);
+
+			[...weekendSaturdays, ...weekendSundays].map((item) => {
+				if (item.childNodes.length) {
+					item.classList.add("calendar__weekend");
+				}
+			});
+		}
+
+		function calendarRemoveStructure() {
+			const calendar = document.querySelector("#calendar");
+			calendar.innerHTML = "";
+		}
+
+		function calendarCreateStructure() {
+			calendarInnerCreate();
+			calendarMonthCreate();
+			calendarTableCreate();
+			calendarCaptionCreate();
+			calendarHeaderCreate();
+			calendarRowCreate(document.querySelectorAll(".calendar__header"));
+			calendarWeekCreate();
+			calendarBodyCreate();
 		}
 
 		function calendarButtonsPrevAndNext(year, month) {
