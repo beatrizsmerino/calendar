@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 
-		function calendarEmpty() {
+		function calendarRemoveStructure() {
 			const calendar = document.querySelector("#calendar");
 			calendar.innerHTML = "";
 		}
@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarCreate(year, month) {
-			calendarEmpty();
+			calendarRemoveStructure();
 			calendarCreateStructure();
 			calendarButtonsPrevAndNext(year, month);
 			calendarAllDaysCreate(year, month);

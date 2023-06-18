@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			return substring;
 		}
 
-		function toggleScrollbar(action) {
+		function scrollbarToggle(action) {
 			const container = document.querySelector('.scrollbar');
 
 			if (container) {
@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		}
 
-		function smoothScrollTo(element, targetPosition, duration) {
+		function scrollbarSmooth(element, targetPosition, duration) {
 			const startPosition = element.scrollLeft;
 			const distance = targetPosition - startPosition;
 			const startTime = performance.now();
@@ -559,7 +559,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						parseFloat(style.marginRight);
 				}
 
-				smoothScrollTo(calendarInner, positionScroll, 500); // Ajusta la duración según tus necesidades
+				scrollbarSmooth(calendarInner, positionScroll, 500); // Ajusta la duración según tus necesidades
 			} else {
 				positionScroll = calendarMonthList[currentMonth].offsetTop - header.offsetHeight;
 				window.scrollTo({ top: positionScroll, behavior: 'smooth' });
@@ -578,9 +578,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarSetWidth();
 
 			if (calendar.classList.contains("is-show-months")) {
-				toggleScrollbar("remove");
+				scrollbarToggle("remove");
 			} else {
-				toggleScrollbar("create");
+				scrollbarToggle("create");
 			}
 
 			buttonShowToday.click();
@@ -606,7 +606,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			waitForPrintWindowClosed();
 		}
 
-		function calendarEmpty() {
+		function calendarRemoveStructure() {
 			const calendar = document.querySelector("#calendar");
 			calendar.innerHTML = "";
 		}
@@ -698,14 +698,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarCreate(numLetters = 3) {
 			const languageSelected = calendarLanguageGetSelected();
 			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected();
-			calendarEmpty();
+			calendarRemoveStructure();
 			calendarCreateStructure(
 				settings.months[languageSelected.value],
 				calendarGetWeeks(numLetters)
 			);
 			calendarSetDays(firstDayOfWeekSelected.value);
 			calendarSetWidth();
-			toggleScrollbar("create");
+			scrollbarToggle("create");
 			calendarMoveScrollToday();
 			calendarFirstDayOfWeekCreateStructure();
 			calendarLanguageCreateStructure();
