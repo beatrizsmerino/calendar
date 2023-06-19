@@ -548,7 +548,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						parseFloat(style.marginRight);
 				}
 
-				scrollbarSmooth(calendarInner, positionScroll, 500); // Ajusta la duración según tus necesidades
+				scrollbarSmooth(calendarInner, positionScroll, 500);
 			} else {
 				positionScroll = calendarMonthList[currentMonth].offsetTop - header.offsetHeight;
 				window.scrollTo({ top: positionScroll, behavior: 'smooth' });
