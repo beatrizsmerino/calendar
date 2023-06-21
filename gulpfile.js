@@ -151,6 +151,14 @@ function jsCompile() {
 		.pipe(gulp.dest(pathDistJs));
 }
 
+function jsTest() {
+	return gulp
+		.src(filesJsCompile)
+		.pipe(gulpConcat('scripts.js'))
+		.pipe(gulpLineEndingCorrector())
+		.pipe(gulp.dest(pathDistJs))
+}
+
 function imagesCopy() {
 	return copyDirectory(pathSrcImg, pathDistImg);
 }
@@ -180,7 +188,7 @@ function watch() {
 
 	gulp.watch(pathSrc + pathFilesHtml, htmlCopy);
 	gulp.watch(pathSrcSass + pathFilesSass, sassCompile);
-	gulp.watch(pathSrcJs + pathFilesJs, jsCompile);
+	gulp.watch(pathSrcJs + pathFilesJs, gulp.series(jsCompile, jsTest));
 	gulp.watch(pathSrcSvg + pathFilesSvg, gulp.series(createSprite, imagesCopy));
 
 	gulp.watch([watchFilesHtml, watchFilesCss, watchFilesJs, watchFilesSvg]).on(
@@ -197,6 +205,7 @@ exports.createServer    = createServer;
 exports.htmlCopy        = htmlCopy;
 exports.sassCompile     = sassCompile;
 exports.jsCompile       = jsCompile;
+exports.jsTest          = jsTest;
 exports.createSprite    = createSprite;
 exports.imagesCopy      = imagesCopy;
 exports.watch           = watch;
@@ -207,15 +216,15 @@ exports.watch           = watch;
 // =================================================
 gulp.task(
 	"default",
-	gulp.series(htmlCopy, sassCompile, jsCompile, createSprite, imagesCopy, watch)
+	gulp.series(htmlCopy, sassCompile, jsCompile, jsTest, createSprite, imagesCopy, watch)
 );
 gulp.task("serve", gulp.series(createServer));
 gulp.task(
 	"build",
-	gulp.series(htmlCopy, sassCompile, jsCompile, createSprite, imagesCopy)
+	gulp.series(htmlCopy, sassCompile, jsCompile, jsTest, createSprite, imagesCopy)
 );
 gulp.task("html", gulp.series(htmlCopy));
 gulp.task("css", gulp.series(sassCompile));
-gulp.task("js", gulp.series(jsCompile));
+gulp.task("js", gulp.series(jsCompile, jsTest));
 gulp.task("img", gulp.series(createSprite, imagesCopy));
 gulp.task("watch", gulp.parallel(watch));
