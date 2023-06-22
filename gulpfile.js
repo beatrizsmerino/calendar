@@ -4,65 +4,62 @@
 
 // DEPENDENCIES
 // =================================================
-const gulp                    = require("gulp"),
-      gulpAutoprefixer        = require("gulp-autoprefixer"),
-      gulpBabel               = require("gulp-babel"),
-      gulpCleanCss            = require("gulp-clean-css"),
-      gulpConcat              = require("gulp-concat"),
-      gulpLineEndingCorrector = require("gulp-line-ending-corrector"),
-      gulpRename              = require("gulp-rename"),
-      gulpSass                = require("gulp-sass")(require("sass")),
-	  gulpSourcemaps          = require("gulp-sourcemaps"),
-	  gulpSvgSprites          = require("gulp-svg-sprites"),
-      gulpUglify              = require("gulp-uglify"),
-	  webpackStream           = require("webpack-stream"),
-	  webpack                 = require("webpack"),
-	  browserSync             = require("browser-sync").create(),
-	  reload                  = browserSync.reload;
+const gulp = require("gulp");
+const gulpAutoprefixer = require("gulp-autoprefixer");
+const gulpBabel = require("gulp-babel");
+const gulpCleanCss = require("gulp-clean-css");
+const gulpConcat = require("gulp-concat");
+const gulpLineEndingCorrector = require("gulp-line-ending-corrector");
+const gulpRename = require("gulp-rename");
+const gulpSass = require("gulp-sass")(require("sass"));
+const gulpSourcemaps = require("gulp-sourcemaps");
+const gulpSvgSprites = require("gulp-svg-sprites");
+const gulpUglify = require("gulp-uglify");
+const webpackStream = require("webpack-stream");
+const webpack = require("webpack");
+const browserSync = require("browser-sync").create();
+const reload = browserSync.reload;
 
 
 // SETTINGS: FOLDER/FILE PATHS
 // =================================================
-let proyectName = "calendar/";
 
 // Path src
-let pathSrc     = "src/",
-	pathSrcSass = pathSrc + "sass/",
-	pathSrcJs   = pathSrc + "js/",
-	pathSrcImg  = pathSrc + "images/",
-	pathSrcIcon = pathSrc + "images/icon/",
-	pathSrcSvg  = pathSrc + "images/icons/svg/";
+const pathSrc = "src/";
+const pathSrcSass = `${pathSrc}sass/`;
+const pathSrcJs = `${pathSrc}js/`;
+const pathSrcImg = `${pathSrc}images/`;
+const pathSrcSvg = `${pathSrc}images/icons/svg/`;
 
 // Path dist
-let pathDist     = "dist/",
-	pathDistCss  = pathDist + "css/",
-	pathDistJs   = pathDist + "js/",
-	pathDistImg  = pathDist + "images/",
-	pathDistIcon = pathDist + "images/icon/",
-	pathDistSvg  = pathDist + "images/icons/svg/";
+const pathDist = "dist/";
+const pathDistCss = `${pathDist}css/`;
+const pathDistJs = `${pathDist}js/`;
+const pathDistImg = `${pathDist}images/`;
+const pathDistSvg = `${pathDist}images/icons/svg/`;
 
 // Path Files
-let pathFiles     = "**/*",
-    pathFilesHtml = "*.html",
-    pathFilesSass = "**/*.sass",
-    pathFilesCss  = "**/*.css",
-    pathFilesJs   = "**/*.js",
-	pathFilesSvg  = "**/*.svg";
+const pathFiles = "**/*";
+const pathFilesHtml = "*.html";
+const pathFilesSass = `${pathFiles}.sass`;
+const pathFilesCss = `${pathFiles}.css`;
+const pathFilesJs = `${pathFiles}.js`;
+const pathFilesSvg = `${pathFiles}.svg`;
 
 // Watch Files
-let watchFilesHtml = pathDist + pathFilesHtml,
-    watchFilesCss  = pathDistCss + pathFilesCss,
-    watchFilesJs   = pathDistJs + pathFilesJs,
-	watchFilesSvg  = pathDistSvg + pathFilesSvg;
+const watchFilesHtml = `${pathDist}${pathFilesHtml}`;
+const watchFilesCss = `${pathDistCss}${pathFilesCss}`;
+const watchFilesJs = `${pathDistJs}${pathFilesJs}`;
+const watchFilesSvg = `${pathDistSvg}${pathFilesSvg}`;
 
 // Paths used to concat the files in a specific order.
-let filesJsCompile = [
-	pathSrcJs + "scripts.js",
-	pathSrcJs + "components/_components-sprite.js",
-	pathSrcJs + "layouts/_layouts-header.js",
-	pathSrcJs + "pages/_pages-calendar-1.js",
-	pathSrcJs + "pages/_pages-calendar-2.js",
-	pathSrcJs + "pages/_pages-calendar-3.js",
+const filesJsCompile = [
+	`${pathSrcJs}scripts.js`,
+	`${pathSrcJs}components/_components-sprite.js`,
+	`${pathSrcJs}layouts/_layouts-header.js`,
+	`${pathSrcJs}pages/_pages-calendar-1.js`,
+	`${pathSrcJs}pages/_pages-calendar-2.js`,
+	`${pathSrcJs}pages/_pages-calendar-3.js`,
 ];
 
 
@@ -79,7 +76,7 @@ function createServer() {
 }
 
 function copyDirectory(directoryToCopy, directoryOutput) {
-	return gulp.src(`${directoryToCopy}/**/*`).pipe(gulp.dest(directoryOutput));
+	return gulp.src(`${directoryToCopy}/${pathFiles}`).pipe(gulp.dest(directoryOutput));
 }
 
 function copyFiles(filesToCopy, directoryOutput) {
@@ -87,12 +84,12 @@ function copyFiles(filesToCopy, directoryOutput) {
 }
 
 function htmlCopy() {
-	return copyFiles(pathSrc + pathFilesHtml, pathDist);
+	return copyFiles(`${pathSrc}${pathFilesHtml}`, pathDist);
 }
 
 function sassCompile() {
 	return gulp
-		.src([pathSrcSass + "styles.sass"])
+		.src([`${pathSrcSass}styles.sass`])
 		.pipe(
 			gulpSourcemaps.init({
 				loadMaps: true,
@@ -116,7 +113,7 @@ function sassCompile() {
 }
 
 function jsCompile() {
-	const BabelConfig = {
+	const babelConfig = {
 		presets: [
 			"@babel/preset-env",
 			[
@@ -135,14 +132,11 @@ function jsCompile() {
 
 	return gulp
 		.src(filesJsCompile)
-		.pipe(gulpBabel(BabelConfig))
+		.pipe(gulpBabel(babelConfig))
 		.pipe(
 			webpackStream(
 				require("./webpack.config.js"),
-				webpack,
-				function (err, stats) {
-					/* Use stats to do more things if needed */
-				}
+				webpack
 			)
 		)
 		.pipe(gulpConcat("scripts.min.js"))
@@ -154,7 +148,7 @@ function jsCompile() {
 function jsTest() {
 	return gulp
 		.src(filesJsCompile)
-		.pipe(gulpConcat('scripts.js'))
+		.pipe(gulpConcat("scripts.js"))
 		.pipe(gulpLineEndingCorrector())
 		.pipe(gulp.dest(pathDistJs))
 }
@@ -165,7 +159,7 @@ function imagesCopy() {
 
 function createSprite() {
 	return gulp
-		.src(pathSrcSvg + pathFilesSvg)
+		.src(`${pathSrcSvg}${pathFilesSvg}`)
 		.pipe(
 			gulpSvgSprites({
 				svgId: "icon-%f",
@@ -175,7 +169,7 @@ function createSprite() {
 					symbols: "../sprites.svg",
 				},
 				svgPath: "../../%f",
-				preview:{
+				preview: {
 					symbols: ""
 				}
 			})
@@ -186,10 +180,10 @@ function createSprite() {
 function watch() {
 	createServer();
 
-	gulp.watch(pathSrc + pathFilesHtml, htmlCopy);
-	gulp.watch(pathSrcSass + pathFilesSass, sassCompile);
-	gulp.watch(pathSrcJs + pathFilesJs, gulp.series(jsCompile, jsTest));
-	gulp.watch(pathSrcSvg + pathFilesSvg, gulp.series(createSprite, imagesCopy));
+	gulp.watch(`${pathSrc}${pathFilesHtml}`, htmlCopy);
+	gulp.watch(`${pathSrcSass}${pathFilesSass}`, sassCompile);
+	gulp.watch(`${pathSrcJs}${pathFilesJs}`, gulp.series(jsCompile, jsTest));
+	gulp.watch(`${pathSrcSvg}${pathFilesSvg}`, gulp.series(createSprite, imagesCopy));
 
 	gulp.watch([watchFilesHtml, watchFilesCss, watchFilesJs, watchFilesSvg]).on(
 		"change",
@@ -201,14 +195,14 @@ function watch() {
 
 // EXPORTS
 // =================================================
-exports.createServer    = createServer;
-exports.htmlCopy        = htmlCopy;
-exports.sassCompile     = sassCompile;
-exports.jsCompile       = jsCompile;
-exports.jsTest          = jsTest;
-exports.createSprite    = createSprite;
-exports.imagesCopy      = imagesCopy;
-exports.watch           = watch;
+exports.createServer = createServer;
+exports.htmlCopy = htmlCopy;
+exports.sassCompile = sassCompile;
+exports.jsCompile = jsCompile;
+exports.jsTest = jsTest;
+exports.createSprite = createSprite;
+exports.imagesCopy = imagesCopy;
+exports.watch = watch;
 
 
 
