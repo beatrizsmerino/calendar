@@ -15,6 +15,7 @@ const gulpStripCssComments = require("gulp-strip-css-comments");
 const gulpSourcemaps = require("gulp-sourcemaps");
 const gulpSvgSprites = require("gulp-svg-sprites");
 const webpackStream = require("webpack-stream");
+const TerserPlugin = require("terser-webpack-plugin");
 const browserSync = require("browser-sync").create();
 const reload = browserSync.reload;
 
@@ -142,6 +143,23 @@ function jsCompile() {
 		output: {
 			filename: "scripts.min.js",
 		},
+		optimization: {
+			minimize: true,
+			minimizer: [
+				new TerserPlugin({
+					extractComments: false,
+					terserOptions: {
+						compress: {
+							drop_debugger: true,
+							drop_console: true
+						},
+						format: {
+							comments: false,
+						},
+					},
+				})
+			],
+		},
 	};
 
 	return gulp
@@ -167,6 +185,23 @@ function jsTest() {
 		mode: "production",
 		output: {
 			filename: "scripts.js",
+		},
+		optimization: {
+			minimize: false,
+			minimizer: [
+				new TerserPlugin({
+					extractComments: false,
+					terserOptions: {
+						compress: {
+							drop_debugger: false,
+							drop_console: false
+						},
+						format: {
+							comments: false,
+						},
+					},
+				})
+			],
 		},
 	};
 
