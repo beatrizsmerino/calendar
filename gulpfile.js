@@ -29,14 +29,14 @@ const paths = {
 		sass: "src/sass/",
 		js: "src/js/",
 		img: "src/images/",
-		svg: "src/images/icons/svg/"
+		svg: "src/images/icons/svg/",
 	},
 	dist: {
 		base: "dist/",
 		css: "dist/css/",
 		js: "dist/js/",
 		img: "dist/images/",
-		svg: "dist/images/icons/svg/"
+		svg: "dist/images/icons/svg/",
 	},
 	files: {
 		base: "**/*",
@@ -44,14 +44,14 @@ const paths = {
 		sass: "**/*.sass",
 		css: "**/*.css",
 		js: "**/*.js",
-		svg: "**/*.svg"
+		svg: "**/*.svg",
 	},
 	watch: {
 		html: "dist/*.html",
 		css: "dist/css/*.css",
 		js: "dist/js/*.js",
-		svg: "dist/images/icons/svg/*.svg"
-	}
+		svg: "dist/images/icons/svg/*.svg",
+	},
 };
 
 // Paths used to concat the files in a specific order.
@@ -61,7 +61,7 @@ const filesJsCompile = [
 	`${paths.src.js}layouts/_layouts-header.js`,
 	`${paths.src.js}pages/_pages-calendar-1.js`,
 	`${paths.src.js}pages/_pages-calendar-2.js`,
-	`${paths.src.js}pages/_pages-calendar-3.js`
+	`${paths.src.js}pages/_pages-calendar-3.js`,
 ];
 
 
@@ -72,26 +72,34 @@ function createServer() {
 	browserSync.init({
 		server: {
 			baseDir: "./dist",
-			browser: ["google-chrome", "firefox"],
+			browser: [
+				"google-chrome",
+				"firefox",
+			],
 		},
 	});
-}
+};
 
 function copyDirectory(directoryToCopy, directoryOutput) {
 	return gulp.src(`${directoryToCopy}/${paths.files.base}`).pipe(gulp.dest(directoryOutput));
-}
+};
 
 function copyFiles(filesToCopy, directoryOutput) {
 	return gulp.src(filesToCopy).pipe(gulp.dest(directoryOutput));
-}
+};
 
 function htmlCopy() {
-	return copyFiles(`${paths.src.base}${paths.files.html}`, paths.dist.base);
-}
+	return copyFiles(
+		`${paths.src.base}${paths.files.html}`,
+		paths.dist.base
+	);
+};
 
 function sassCompile() {
 	return gulp
-		.src([`${paths.src.sass}styles.sass`])
+		.src([
+			`${paths.src.sass}styles.sass`,
+		])
 		.pipe(
 			gulpSourcemaps.init({
 				loadMaps: true,
@@ -100,11 +108,16 @@ function sassCompile() {
 		.pipe(
 			gulpSass({
 				outputStyle: "compressed",
-			}).on("error", gulpSass.logError)
+			}).on(
+				"error",
+				gulpSass.logError
+			)
 		)
 		.pipe(
 			gulpAutoprefixer({
-				versions: ["last 2 versions"],
+				versions: [
+					"last 2 versions",
+				],
 			})
 		)
 		.pipe(gulpCleanCss())
@@ -112,7 +125,7 @@ function sassCompile() {
 		.pipe(gulpLineEndingCorrector())
 		.pipe(gulpRename("styles.min.css"))
 		.pipe(gulp.dest(paths.dist.css));
-}
+};
 
 function jsCompile() {
 	const babelConfig = {
@@ -122,9 +135,9 @@ function jsCompile() {
 				"minify",
 				{
 					"builtIns": false,
-					"mangle": false
-				}
-			]
+					"mangle": false,
+				},
+			],
 		],
 		plugins: [
 			"@babel/transform-runtime",
@@ -145,7 +158,7 @@ function jsCompile() {
 		.pipe(gulpUglify())
 		.pipe(gulpLineEndingCorrector())
 		.pipe(gulp.dest(paths.dist.js));
-}
+};
 
 function jsTest() {
 	return gulp
@@ -153,11 +166,14 @@ function jsTest() {
 		.pipe(gulpConcat("scripts.js"))
 		.pipe(gulpLineEndingCorrector())
 		.pipe(gulp.dest(paths.dist.js));
-}
+};
 
 function imagesCopy() {
-	return copyDirectory(paths.src.img, paths.dist.img);
-}
+	return copyDirectory(
+		paths.src.img,
+		paths.dist.img
+	);
+};
 
 function createSprite() {
 	return gulp
@@ -172,26 +188,52 @@ function createSprite() {
 				},
 				svgPath: "../../%f",
 				preview: {
-					symbols: ""
-				}
+					symbols: "",
+				},
 			})
 		)
 		.pipe(gulp.dest(paths.dist.svg));
-}
+};
 
 function watch() {
 	createServer();
 
-	gulp.watch(`${paths.src.base}${paths.files.html}`, htmlCopy);
-	gulp.watch(`${paths.src.sass}${paths.files.sass}`, sassCompile);
-	gulp.watch(`${paths.src.js}${paths.files.js}`, gulp.series(jsCompile, jsTest));
-	gulp.watch(`${paths.src.svg}${paths.files.svg}`, gulp.series(createSprite, imagesCopy));
+	gulp.watch(
+		`${paths.src.base}${paths.files.html}`,
+		htmlCopy
+	);
 
-	gulp.watch([paths.watch.html, paths.watch.css, paths.watch.js, paths.watch.svg]).on(
+	gulp.watch(
+		`${paths.src.sass}${paths.files.sass}`,
+		sassCompile
+	);
+
+	gulp.watch(
+		`${paths.src.js}${paths.files.js}`,
+		gulp.series(
+			jsCompile,
+			jsTest
+		)
+	);
+
+	gulp.watch(
+		`${paths.src.svg}${paths.files.svg}`,
+		gulp.series(
+			createSprite,
+			imagesCopy
+		)
+	);
+
+	gulp.watch([
+		paths.watch.html,
+		paths.watch.css,
+		paths.watch.js,
+		paths.watch.svg,
+	]).on(
 		"change",
 		reload
 	);
-}
+};
 
 
 
@@ -212,15 +254,61 @@ exports.watch = watch;
 // =================================================
 gulp.task(
 	"default",
-	gulp.series(htmlCopy, sassCompile, jsCompile, jsTest, createSprite, imagesCopy, watch)
+	gulp.series(
+		htmlCopy,
+		sassCompile,
+		jsCompile,
+		jsTest,
+		createSprite,
+		imagesCopy,
+		watch
+	)
 );
-gulp.task("serve", gulp.series(createServer));
+
+gulp.task(
+	"serve",
+	createServer
+);
+
 gulp.task(
 	"build",
-	gulp.series(htmlCopy, sassCompile, jsCompile, jsTest, createSprite, imagesCopy)
+	gulp.series(
+		htmlCopy,
+		sassCompile,
+		jsCompile,
+		jsTest,
+		createSprite,
+		imagesCopy
+	)
 );
-gulp.task("html", gulp.series(htmlCopy));
-gulp.task("css", gulp.series(sassCompile));
-gulp.task("js", gulp.series(jsCompile, jsTest));
-gulp.task("img", gulp.series(createSprite, imagesCopy));
-gulp.task("watch", gulp.parallel(watch));
+
+gulp.task(
+	"html",
+	htmlCopy
+);
+
+gulp.task(
+	"css",
+	sassCompile
+);
+
+gulp.task(
+	"js",
+	gulp.series(
+		jsCompile,
+		jsTest
+	)
+);
+
+gulp.task(
+	"img",
+	gulp.series(
+		createSprite,
+		imagesCopy
+	)
+);
+
+gulp.task(
+	"watch",
+	watch
+);
