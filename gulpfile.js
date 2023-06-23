@@ -11,6 +11,7 @@ const gulpCleanCss = require("gulp-clean-css");
 const gulpLineEndingCorrector = require("gulp-line-ending-corrector");
 const gulpRename = require("gulp-rename");
 const gulpSass = require("gulp-sass")(require("sass"));
+const gulpStripCssComments = require("gulp-strip-css-comments");
 const gulpSourcemaps = require("gulp-sourcemaps");
 const gulpSvgSprites = require("gulp-svg-sprites");
 const webpackStream = require("webpack-stream");
@@ -120,6 +121,7 @@ function sassCompile() {
 		.pipe(gulpCleanCss())
 		.pipe(gulpSourcemaps.write())
 		.pipe(gulpLineEndingCorrector())
+		.pipe(gulpStripCssComments())
 		.pipe(gulpRename("styles.min.css"))
 		.pipe(gulp.dest(paths.dist.css));
 };
