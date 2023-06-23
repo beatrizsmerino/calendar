@@ -8,15 +8,12 @@ const gulp = require("gulp");
 const gulpAutoprefixer = require("gulp-autoprefixer");
 const gulpBabel = require("gulp-babel");
 const gulpCleanCss = require("gulp-clean-css");
-const gulpConcat = require("gulp-concat");
 const gulpLineEndingCorrector = require("gulp-line-ending-corrector");
 const gulpRename = require("gulp-rename");
 const gulpSass = require("gulp-sass")(require("sass"));
 const gulpSourcemaps = require("gulp-sourcemaps");
 const gulpSvgSprites = require("gulp-svg-sprites");
-const gulpUglify = require("gulp-uglify");
 const webpackStream = require("webpack-stream");
-const webpack = require("webpack");
 const browserSync = require("browser-sync").create();
 const reload = browserSync.reload;
 
@@ -131,13 +128,6 @@ function jsCompile() {
 	const babelConfig = {
 		presets: [
 			"@babel/preset-env",
-			[
-				"minify",
-				{
-					"builtIns": false,
-					"mangle": false,
-				},
-			],
 		],
 		plugins: [
 			"@babel/transform-runtime",
@@ -145,25 +135,32 @@ function jsCompile() {
 		],
 	};
 
+	const webpackConfig = {
+		mode: "production",
+		output: {
+			filename: "scripts.min.js",
+		},
+	};
+
 	return gulp
 		.src(filesJsCompile)
 		.pipe(gulpBabel(babelConfig))
-		.pipe(
-			webpackStream(
-				require("./webpack.config.js"),
-				webpack
-			)
-		)
-		.pipe(gulpConcat("scripts.min.js"))
-		.pipe(gulpUglify())
+		.pipe(webpackStream(webpackConfig))
 		.pipe(gulpLineEndingCorrector())
 		.pipe(gulp.dest(paths.dist.js));
 };
 
 function jsTest() {
+	const webpackConfig = {
+		mode: "production",
+		output: {
+			filename: "scripts.js",
+		},
+	};
+
 	return gulp
 		.src(filesJsCompile)
-		.pipe(gulpConcat("scripts.js"))
+		.pipe(webpackStream(webpackConfig))
 		.pipe(gulpLineEndingCorrector())
 		.pipe(gulp.dest(paths.dist.js));
 };
