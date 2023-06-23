@@ -153,6 +153,16 @@ function jsCompile() {
 };
 
 function jsTest() {
+	const babelConfig = {
+		"presets": [
+			"@babel/preset-env",
+		],
+		plugins: [
+			"@babel/transform-runtime",
+			"@babel/plugin-transform-async-to-generator",
+		],
+	};
+
 	const webpackConfig = {
 		mode: "production",
 		output: {
@@ -162,6 +172,7 @@ function jsTest() {
 
 	return gulp
 		.src(filesJsCompile)
+		.pipe(gulpBabel(babelConfig))
 		.pipe(webpackStream(webpackConfig))
 		.pipe(gulpLineEndingCorrector())
 		.pipe(gulp.dest(paths.dist.js));
