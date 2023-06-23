@@ -23,43 +23,45 @@ const reload = browserSync.reload;
 
 // SETTINGS: FOLDER/FILE PATHS
 // =================================================
-
-// Path src
-const pathSrc = "src/";
-const pathSrcSass = `${pathSrc}sass/`;
-const pathSrcJs = `${pathSrc}js/`;
-const pathSrcImg = `${pathSrc}images/`;
-const pathSrcSvg = `${pathSrc}images/icons/svg/`;
-
-// Path dist
-const pathDist = "dist/";
-const pathDistCss = `${pathDist}css/`;
-const pathDistJs = `${pathDist}js/`;
-const pathDistImg = `${pathDist}images/`;
-const pathDistSvg = `${pathDist}images/icons/svg/`;
-
-// Path Files
-const pathFiles = "**/*";
-const pathFilesHtml = "*.html";
-const pathFilesSass = `${pathFiles}.sass`;
-const pathFilesCss = `${pathFiles}.css`;
-const pathFilesJs = `${pathFiles}.js`;
-const pathFilesSvg = `${pathFiles}.svg`;
-
-// Watch Files
-const watchFilesHtml = `${pathDist}${pathFilesHtml}`;
-const watchFilesCss = `${pathDistCss}${pathFilesCss}`;
-const watchFilesJs = `${pathDistJs}${pathFilesJs}`;
-const watchFilesSvg = `${pathDistSvg}${pathFilesSvg}`;
+const paths = {
+	src: {
+		base: "src/",
+		sass: "src/sass/",
+		js: "src/js/",
+		img: "src/images/",
+		svg: "src/images/icons/svg/"
+	},
+	dist: {
+		base: "dist/",
+		css: "dist/css/",
+		js: "dist/js/",
+		img: "dist/images/",
+		svg: "dist/images/icons/svg/"
+	},
+	files: {
+		base: "**/*",
+		html: "*.html",
+		sass: "**/*.sass",
+		css: "**/*.css",
+		js: "**/*.js",
+		svg: "**/*.svg"
+	},
+	watch: {
+		html: "dist/*.html",
+		css: "dist/css/*.css",
+		js: "dist/js/*.js",
+		svg: "dist/images/icons/svg/*.svg"
+	}
+};
 
 // Paths used to concat the files in a specific order.
 const filesJsCompile = [
-	`${pathSrcJs}scripts.js`,
-	`${pathSrcJs}components/_components-sprite.js`,
-	`${pathSrcJs}layouts/_layouts-header.js`,
-	`${pathSrcJs}pages/_pages-calendar-1.js`,
-	`${pathSrcJs}pages/_pages-calendar-2.js`,
-	`${pathSrcJs}pages/_pages-calendar-3.js`,
+	`${paths.src.js}scripts.js`,
+	`${paths.src.js}components/_components-sprite.js`,
+	`${paths.src.js}layouts/_layouts-header.js`,
+	`${paths.src.js}pages/_pages-calendar-1.js`,
+	`${paths.src.js}pages/_pages-calendar-2.js`,
+	`${paths.src.js}pages/_pages-calendar-3.js`
 ];
 
 
@@ -76,7 +78,7 @@ function createServer() {
 }
 
 function copyDirectory(directoryToCopy, directoryOutput) {
-	return gulp.src(`${directoryToCopy}/${pathFiles}`).pipe(gulp.dest(directoryOutput));
+	return gulp.src(`${directoryToCopy}/${paths.files.base}`).pipe(gulp.dest(directoryOutput));
 }
 
 function copyFiles(filesToCopy, directoryOutput) {
@@ -84,12 +86,12 @@ function copyFiles(filesToCopy, directoryOutput) {
 }
 
 function htmlCopy() {
-	return copyFiles(`${pathSrc}${pathFilesHtml}`, pathDist);
+	return copyFiles(`${paths.src.base}${paths.files.html}`, paths.dist.base);
 }
 
 function sassCompile() {
 	return gulp
-		.src([`${pathSrcSass}styles.sass`])
+		.src([`${paths.src.sass}styles.sass`])
 		.pipe(
 			gulpSourcemaps.init({
 				loadMaps: true,
@@ -109,7 +111,7 @@ function sassCompile() {
 		.pipe(gulpSourcemaps.write())
 		.pipe(gulpLineEndingCorrector())
 		.pipe(gulpRename("styles.min.css"))
-		.pipe(gulp.dest(pathDistCss));
+		.pipe(gulp.dest(paths.dist.css));
 }
 
 function jsCompile() {
@@ -142,7 +144,7 @@ function jsCompile() {
 		.pipe(gulpConcat("scripts.min.js"))
 		.pipe(gulpUglify())
 		.pipe(gulpLineEndingCorrector())
-		.pipe(gulp.dest(pathDistJs));
+		.pipe(gulp.dest(paths.dist.js));
 }
 
 function jsTest() {
@@ -150,16 +152,16 @@ function jsTest() {
 		.src(filesJsCompile)
 		.pipe(gulpConcat("scripts.js"))
 		.pipe(gulpLineEndingCorrector())
-		.pipe(gulp.dest(pathDistJs))
+		.pipe(gulp.dest(paths.dist.js));
 }
 
 function imagesCopy() {
-	return copyDirectory(pathSrcImg, pathDistImg);
+	return copyDirectory(paths.src.img, paths.dist.img);
 }
 
 function createSprite() {
 	return gulp
-		.src(`${pathSrcSvg}${pathFilesSvg}`)
+		.src(`${paths.src.svg}${paths.files.svg}`)
 		.pipe(
 			gulpSvgSprites({
 				svgId: "icon-%f",
@@ -174,18 +176,18 @@ function createSprite() {
 				}
 			})
 		)
-		.pipe(gulp.dest(pathDistSvg));
+		.pipe(gulp.dest(paths.dist.svg));
 }
 
 function watch() {
 	createServer();
 
-	gulp.watch(`${pathSrc}${pathFilesHtml}`, htmlCopy);
-	gulp.watch(`${pathSrcSass}${pathFilesSass}`, sassCompile);
-	gulp.watch(`${pathSrcJs}${pathFilesJs}`, gulp.series(jsCompile, jsTest));
-	gulp.watch(`${pathSrcSvg}${pathFilesSvg}`, gulp.series(createSprite, imagesCopy));
+	gulp.watch(`${paths.src.base}${paths.files.html}`, htmlCopy);
+	gulp.watch(`${paths.src.sass}${paths.files.sass}`, sassCompile);
+	gulp.watch(`${paths.src.js}${paths.files.js}`, gulp.series(jsCompile, jsTest));
+	gulp.watch(`${paths.src.svg}${paths.files.svg}`, gulp.series(createSprite, imagesCopy));
 
-	gulp.watch([watchFilesHtml, watchFilesCss, watchFilesJs, watchFilesSvg]).on(
+	gulp.watch([paths.watch.html, paths.watch.css, paths.watch.js, paths.watch.svg]).on(
 		"change",
 		reload
 	);
