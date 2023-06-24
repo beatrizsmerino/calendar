@@ -16,7 +16,7 @@ function printSprites() {
 	const url = 'images/icons/sprites.svg';
 	const className = 'sprite';
 
-	const getContentFile = async(urlFile) => {
+	const getContentFile = async (urlFile) => {
 		const getData = await fetch(urlFile);
 		const data = await getData.text();
 
