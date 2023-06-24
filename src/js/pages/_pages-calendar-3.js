@@ -72,9 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			return today;
 		}
 
-		function getFirstLetters(words, length) {
-			const wordsFormatted = words.map((item) => item.slice(0, length));
-			return wordsFormatted;
+		function getFirstLetters(wordList, length) {
+			const wordListFormatted = wordList.map((item) => item.slice(0, length));
+			return wordListFormatted;
 		}
 
 		function calendarInnerCreate() {
@@ -119,13 +119,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarWeekCreate() {
-			const weeksList = settings.weeks;
-			const weeksListFormatted = getFirstLetters(weeksList, 3);
+			const weekList = settings.weeks;
+			const weekListFormatted = getFirstLetters(weekList, 3);
 			for (let week = 0; week < 7; week++) {
 				const calendarRow = document.querySelectorAll(".calendar__header .calendar__row");
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
-				calendarWeek.innerText = weeksListFormatted[week];
+				calendarWeek.innerText = weekListFormatted[week];
 				[...calendarRow].map((item) => item.appendChild(calendarWeek));
 			}
 		}
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			return calendarDay.outerHTML;
 		}
 
-		function calendarAllDaysCreate(year, month) {
+		function calendarDayListCreate(year, month) {
 			var now = new Date(year, month - 1, 1);
 			var last = new Date(year, month, 0);
 			var firstDayOfWeek = now.getDay() == 0 ? 7 : now.getDay();
@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarRemoveStructure();
 			calendarCreateStructure();
 			calendarButtonsPrevAndNext(year, month);
-			calendarAllDaysCreate(year, month);
+			calendarDayListCreate(year, month);
 			calendarSetHeight();
 			calendarSetWeekend();
 			calendarSelectDay();

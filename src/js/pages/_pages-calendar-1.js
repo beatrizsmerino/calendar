@@ -247,8 +247,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			},
 			firstDayOfWeek: () =>
 				Object.entries(settings.weeks).reduce(
-					(filteredWeeks, [language, weeks]) => ({
-						...filteredWeeks,
+					(filteredWeekList, [language, weeks]) => ({
+						...filteredWeekList,
 						[language]: weeks.filter((week) => [1, 7].includes(week.value)),
 					}),
 					{}
@@ -345,15 +345,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			})();
 		}
 
-		function calendarGetWeeks(numLetters) {
-			let weeksList = calendarFirstDayOfWeekSort();
+		function calendarGetWeekList(numLetters) {
+			let weekList = calendarFirstDayOfWeekSort();
 
-			for (const key in weeksList) {
-				const day = weeksList[key];
+			for (const key in weekList) {
+				const day = weekList[key];
 				day.abbreviation = getFirstLetters(day.text, numLetters);
 			}
 
-			return weeksList;
+			return weekList;
 		}
 
 		function calendarSetDays(startDay) {
@@ -378,18 +378,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				// Insert days in the calendar
 				const calendarTableList = document.querySelectorAll(".calendar__table");
-				const tableDays = calendarTableList[dateMonth].children[2].children[week].children[dateWeek];
-				tableDays.innerHTML = `<span class="calendar__number">${dateDay}</span><span class="calendar__circle"></span>`;
+				const tableDayList = calendarTableList[dateMonth].children[2].children[week].children[dateWeek];
+				tableDayList.innerHTML = `<span class="calendar__number">${dateDay}</span><span class="calendar__circle"></span>`;
 
 				const yearMonthDay = getFormattedDate(thisYear, dateMonth, dateDay);
-				tableDays.dataset.time = yearMonthDay;
+				tableDayList.dataset.time = yearMonthDay;
 
-				if (tableDays.dataset.time == getToday()) {
-					tableDays.classList.add("calendar__today");
+				if (tableDayList.dataset.time == getToday()) {
+					tableDayList.classList.add("calendar__today");
 				}
 
 				if (isWeekend) {
-					tableDays.classList.add("calendar__weekend");
+					tableDayList.classList.add("calendar__weekend");
 				}
 
 				if (dateWeek == 6) {
@@ -415,7 +415,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendar.innerHTML = "";
 		}
 
-		function calendarCreateStructure(monthsList, weeksList) {
+		function calendarCreateStructure(monthList, weekList) {
 			function calendarYearCreate() {
 				const calendarYear = document.createElement("div");
 				calendarYear.className = "calendar__year";
@@ -454,11 +454,11 @@ document.addEventListener("DOMContentLoaded", function () {
 				);
 			}
 
-			function calendarTitleCreate(monthsList, month) {
+			function calendarTitleCreate(monthList, month) {
 				const calendarCaptionList = document.querySelectorAll(".calendar__caption");
 				const calendarTitle = document.createElement("DIV");
 				calendarTitle.className = "calendar__title";
-				calendarTitle.innerText = monthsList[month];
+				calendarTitle.innerText = monthList[month];
 				[...calendarCaptionList].map((item) =>
 					item.appendChild(calendarTitle)
 				);
@@ -477,13 +477,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				[...contain].map((item) => item.appendChild(calendarRow));
 			}
 
-			function calendarWeekCreate(weeksList, week) {
+			function calendarWeekCreate(weekList, week) {
 				const calendarRowList = document.querySelectorAll(".calendar__header .calendar__row");
 
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
-				calendarWeek.innerText = weeksList[week].abbreviation;
-				calendarWeek.title = weeksList[week].text;
+				calendarWeek.innerText = weekList[week].abbreviation;
+				calendarWeek.title = weekList[week].text;
 				[...calendarRowList].map((item) => item.appendChild(calendarWeek));
 			}
 
@@ -504,19 +504,19 @@ document.addEventListener("DOMContentLoaded", function () {
 				[...calendarRowList].map((item) => item.appendChild(calendarDay));
 			}
 
-			function calendarAllMonthsCreate() {
+			function calendarMonthListCreate() {
 				for (let month = 0; month <= 11; month++) {
 					calendarMonthCreate();
 					calendarTableCreate();
 					calendarCaptionCreate();
-					calendarTitleCreate(monthsList, month);
+					calendarTitleCreate(monthList, month);
 					calendarHeaderCreate();
 
 					const calendarHeaderList = document.querySelectorAll(".calendar__header");
 					calendarRowCreate(calendarHeaderList);
 
 					for (let week = 0; week < 7; week++) {
-						calendarWeekCreate(weeksList, week);
+						calendarWeekCreate(weekList, week);
 					}
 
 					calendarBodyCreate();
@@ -534,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			calendarYearCreate();
 			calendarInnerCreate();
-			calendarAllMonthsCreate();
+			calendarMonthListCreate();
 		}
 
 		function calendarMoveScrollToday() {
@@ -603,17 +603,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarFirstDayOfWeekSort() {
 			const languageSelected = calendarLanguageGetSelected();
-			const weeksLanguageSelected = settings.weeks[languageSelected.value];
+			const weekList = settings.weeks[languageSelected.value];
 			const firstDayOfWeekSelected = calendarFirstDayOfWeekGetSelected().value;
 
-			weeksLanguageSelected.sort((a, b) => a.value - b.value);
+			weekList.sort((a, b) => a.value - b.value);
 
-			const weekSelected = weeksLanguageSelected.find(week => week.value === firstDayOfWeekSelected);
-			const weekStart = weeksLanguageSelected.filter(week => week.value > firstDayOfWeekSelected);
-			const weekEnd = weeksLanguageSelected.filter(week => week.value < firstDayOfWeekSelected);
+			const weekSelected = weekList.find(week => week.value === firstDayOfWeekSelected);
+			const weekStart = weekList.filter(week => week.value > firstDayOfWeekSelected);
+			const weekEnd = weekList.filter(week => week.value < firstDayOfWeekSelected);
 
-			const weeksOrdered = [weekSelected, ...weekStart, ...weekEnd];
-			return weeksOrdered;
+			const weekListOrdered = [weekSelected, ...weekStart, ...weekEnd];
+			return weekListOrdered;
 		}
 
 		function calendarFirstDayOfWeekGetSelected() {
@@ -625,11 +625,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarFirstDayOfWeekCreateStructure() {
 			const select = document.querySelector("#selectFirstDayOfWeek");
-			const optionsList = select.querySelectorAll("option");
+			const optionList = select.querySelectorAll("option");
 			const languageSelected = calendarLanguageGetSelected();
 			const firstDayOfWeekList = settings.firstDayOfWeek()[languageSelected.value];
 
-			optionsList.forEach((item, index) => {
+			optionList.forEach((item, index) => {
 				if (index !== 0) {
 					item.remove();
 				}
@@ -706,7 +706,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			calendarRemoveStructure();
 			calendarCreateStructure(
 				settings.months[languageSelected.value],
-				calendarGetWeeks(numLetters)
+				calendarGetWeekList(numLetters)
 			);
 			calendarSetDays(firstDayOfWeekSelected.value);
 			calendarSetWidth();
