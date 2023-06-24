@@ -58,6 +58,7 @@ const filesJsCompile = [
 	`${paths.src.js}scripts.js`,
 	`${paths.src.js}components/_components-sprite.js`,
 	`${paths.src.js}layouts/_layouts-header.js`,
+	`${paths.src.js}layouts/_layouts-footer.js`,
 	`${paths.src.js}pages/_pages-calendar-1.js`,
 	`${paths.src.js}pages/_pages-calendar-2.js`,
 	`${paths.src.js}pages/_pages-calendar-3.js`,
