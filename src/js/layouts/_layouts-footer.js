@@ -7,19 +7,20 @@
 
 
 /**
- * @function copyright
+ * @function insertYearToCopyright
  * @description Gets the current year and inserts it in the `copyright` located in the `footer`.
  * This ensures that the year is updated dynamically without the need to modify the code manually each year.
  */
 
-function copyright() {
+function insertYearToCopyright() {
 	const currentDate = new Date();
 	const currentYear = currentDate.getFullYear();
+	const content = document.querySelector("#currentYear");
 
-	document.querySelector("#currentYear").innerHTML = currentYear;
+	content.innerHTML = currentYear;
 }
 
 
 document.addEventListener("DOMContentLoaded", function () {
-	copyright();
+	insertYearToCopyright();
 });

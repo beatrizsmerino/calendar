@@ -7,12 +7,12 @@
 
 
 /**
- * @function openCloseHeaderNav
+ * @function toggleNav
  * @description Controls the opening and closing of the navigation located in the `header`.
  * Clicking the navigation button shows or hides the menu, and prevents the animation from being applied when the window is resized beyond a certain limit.
  */
 
-function openCloseHeaderNav() {
+function toggleNav() {
 	const nav = document.querySelector('#headerNav');
 	const navButton = document.querySelector('#headerNavButton');
 
@@ -30,5 +30,5 @@ function openCloseHeaderNav() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-	openCloseHeaderNav();
+	toggleNav();
 });

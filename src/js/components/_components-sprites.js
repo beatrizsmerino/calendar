@@ -7,12 +7,12 @@
 
 
 /**
- * @function printSprites
+ * @function insertSprites
  * @description Insert the svg icons of the `sprite` at the end of the `body` in all html files.
  * This sprite is located in the path `images/icons/sprites.svg` and is created with gulp.
  */
 
-function printSprites() {
+function insertSprites() {
 	const url = 'images/icons/sprites.svg';
 	const className = 'sprite';
 
@@ -24,13 +24,15 @@ function printSprites() {
 	};
 
 	getContentFile(url).then((data) => {
+		const contentBody = document.querySelector('body');
 		const contentSprites = document.createElement('div');
+
 		contentSprites.setAttribute('class', className);
-		document.querySelector('body').appendChild(contentSprites);
+		contentBody.appendChild(contentSprites);
 		contentSprites.insertAdjacentHTML('beforeend', data);
 	});
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-	printSprites();
+	insertSprites();
 });
