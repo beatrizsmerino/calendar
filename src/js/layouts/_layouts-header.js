@@ -12,7 +12,7 @@
  * Clicking the navigation button shows or hides the menu, and prevents the animation from being applied when the window is resized beyond a certain limit.
  */
 
-function toggleNav() {
+async function toggleNav() {
 	const nav = document.querySelector('#headerNav');
 	const navButton = document.querySelector('#headerNavButton');
 
@@ -29,6 +29,6 @@ function toggleNav() {
 	});
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-	toggleNav();
+document.addEventListener("DOMContentLoaded", async function () {
+	await toggleNav();
 });
