@@ -56,7 +56,7 @@ const paths = {
 // Paths used to concat the files in a specific order.
 const filesJsCompile = [
 	`${paths.src.js}scripts.js`,
-	`${paths.src.js}components/_components-sprite.js`,
+	`${paths.src.js}components/_components-sprites.js`,
 	`${paths.src.js}layouts/_layouts-header.js`,
 	`${paths.src.js}layouts/_layouts-footer.js`,
 	`${paths.src.js}pages/_pages-calendar-1.js`,

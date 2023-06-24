@@ -1,6 +1,5 @@
 /**
- * @file componentSprites
- * @description Add sprite to html page
+ * @file componentsSprites
  * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
  * @copyright (2020)
  */
@@ -9,7 +8,8 @@
 
 /**
  * @function printSprites
- * @description Insert file sprites.svg with the icons to the end of the all html files
+ * @description Insert the svg icons of the `sprite` at the end of the `body` in all html files.
+ * This sprite is located in the path `images/icons/sprites.svg` and is created with gulp.
  */
 
 function printSprites() {

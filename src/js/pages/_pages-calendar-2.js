@@ -1,3 +1,8 @@
+/**
+ * @file pagesCalendar2
+ * @author Beatriz Sopeña Merino <beatrizsmerino@gmail.com>
+ * @copyright (2023)
+ */
 
 
 
