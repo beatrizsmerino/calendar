@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
 	const pageCalendar2 = document
 		.querySelector("html")

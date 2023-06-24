@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 import PerfectScrollbar from 'perfect-scrollbar';
 
 document.addEventListener("DOMContentLoaded", function () {
