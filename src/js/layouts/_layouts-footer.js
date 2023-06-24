@@ -12,7 +12,7 @@
  * This ensures that the year is updated dynamically without the need to modify the code manually each year.
  */
 
-function insertYearToCopyright() {
+async function insertYearToCopyright() {
 	const currentDate = new Date();
 	const currentYear = currentDate.getFullYear();
 	const content = document.querySelector("#currentYear");
@@ -21,6 +21,6 @@ function insertYearToCopyright() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
-	insertYearToCopyright();
+document.addEventListener("DOMContentLoaded", async function () {
+	await insertYearToCopyright();
 });
