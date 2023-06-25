@@ -40,21 +40,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function getCurrentYear() {
 			const date = new Date();
+			const year = date.getFullYear();
 
-			return date.getFullYear();
+			return year;
 		}
 
 		function getCurrentMonth() {
 			const date = new Date();
+			let month = date.getMonth();
+			month++; // January is 0!
 
-			// January is 0!
-			return date.getMonth() + 1;
+			return month;
 		}
 
 		function getCurrentDay() {
 			const date = new Date();
+			const day = date.getDate();
 
-			return date.getDate();
+			return day;
 		}
 
 		function getFormattedDate(year, month, day) {
@@ -67,11 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function getToday() {
-			const today = getFormattedDate(
-				getCurrentYear(),
-				getCurrentMonth(),
-				getCurrentDay()
-			);
+			const year = getCurrentYear();
+			const month = getCurrentMonth();
+			const day = getCurrentDay();
+			const today = getFormattedDate(year, month, day);
 
 			return today;
 		}

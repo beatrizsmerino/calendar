@@ -259,26 +259,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function getCurrentYear() {
 			const date = new Date();
+			const year = date.getFullYear();
 
-			return date.getFullYear();
+			return year;
 		}
 
 		function getCurrentMonth() {
 			const date = new Date();
+			const month = date.getMonth();
 
-			return date.getMonth();
+			return month;
 		}
 
 		function getCurrentDay() {
 			const date = new Date();
+			const day = date.getDate();
 
-			return date.getDate();
+			return day;
 		}
 
 		function getDayOfYear(year, day) {
-			const dateDay = new Date(year, 0);
+			const firstDayOfYear = new Date(year, 0);
+			const dayOfYear = new Date(firstDayOfYear.setDate(day));
 
-			return new Date(dateDay.setDate(day));
+			return dayOfYear;
 		}
 
 		function getFormattedDate(year, month, day) {
@@ -291,11 +295,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function getToday() {
-			const today = getFormattedDate(
-				getCurrentYear(),
-				getCurrentMonth(),
-				getCurrentDay()
-			);
+			const year = getCurrentYear();
+			const month = getCurrentMonth();
+			const day = getCurrentDay();
+			const today = getFormattedDate(year, month, day);
 
 			return today;
 		}
@@ -626,10 +629,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarFirstDayOfWeekGetSelected() {
 			const languageSelected = calendarLanguageGetSelected();
+			const firstDayOfWeekList = settings.firstDayOfWeek()[languageSelected.value];
+			const firstDayOfWeekSelected = firstDayOfWeekList.find((item) => item.selected);
 
-			return settings.firstDayOfWeek()[languageSelected.value].find(
-				(item) => item.selected
-			);
+			return firstDayOfWeekSelected;
 		}
 
 		function calendarFirstDayOfWeekCreateStructure() {
@@ -676,7 +679,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarLanguageGetSelected() {
-			return settings.languages.find((item) => item.selected);
+			const languageList = settings.languages;
+			const languageSelected = languageList.find((item) => item.selected);
+
+			return languageSelected;
 		}
 
 		function calendarLanguageCreateStructure() {
