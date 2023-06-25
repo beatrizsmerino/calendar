@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function getCurrentYear() {
 			const date = new Date();
+
 			return date.getFullYear();
 		}
 
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function getCurrentDay() {
 			const date = new Date();
+
 			return date.getDate();
 		}
 
@@ -60,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const mm = String(month).padStart(2, "0");
 			const dd = String(day).padStart(2, "0");
 			const yearMonthDay = `${yyyy}-${mm}-${dd}`;
+
 			return yearMonthDay;
 		}
 
@@ -69,11 +72,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				getCurrentMonth(),
 				getCurrentDay()
 			);
+
 			return today;
 		}
 
 		function getFirstLetters(wordList, length) {
 			const wordListFormatted = wordList.map((item) => item.slice(0, length));
+
 			return wordListFormatted;
 		}
 

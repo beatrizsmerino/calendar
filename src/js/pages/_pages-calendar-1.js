@@ -259,21 +259,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function getCurrentYear() {
 			const date = new Date();
+
 			return date.getFullYear();
 		}
 
 		function getCurrentMonth() {
 			const date = new Date();
+
 			return date.getMonth();
 		}
 
 		function getCurrentDay() {
 			const date = new Date();
+
 			return date.getDate();
 		}
 
 		function getDayOfYear(year, day) {
 			const dateDay = new Date(year, 0);
+
 			return new Date(dateDay.setDate(day));
 		}
 
@@ -282,6 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const mm = String(month + 1).padStart(2, "0"); // January is 0!
 			const dd = String(day).padStart(2, "0");
 			const yearMonthDay = `${yyyy}-${mm}-${dd}`;
+
 			return yearMonthDay;
 		}
 
@@ -291,11 +296,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				getCurrentMonth(),
 				getCurrentDay()
 			);
+
 			return today;
 		}
 
 		function getFirstLetters(string, length) {
 			const substring = string.slice(0, length);
+
 			return substring;
 		}
 
@@ -613,11 +620,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			const weekEnd = weekList.filter(week => week.value < firstDayOfWeekSelected);
 
 			const weekListOrdered = [weekSelected, ...weekStart, ...weekEnd];
+
 			return weekListOrdered;
 		}
 
 		function calendarFirstDayOfWeekGetSelected() {
 			const languageSelected = calendarLanguageGetSelected();
+
 			return settings.firstDayOfWeek()[languageSelected.value].find(
 				(item) => item.selected
 			);
