@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="page-home page sticky notranslate" translate="no">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Calendar</title>
+		<meta name="theme-color" content="#ffffff">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="google" content="notranslate">
+		<link rel="icon" href="images/favicon/favicon.ico">
+		<link rel="stylesheet" href="css/styles.min.css">
+	</head>
+
+	<body class="page__body sticky__body">
+		<header class="header sticky__header page__inner">
+			<span class="logo">
+				Calendars
+			</span>
+
+			<nav id="headerNav" class="header-nav nav">
+				<ul class="header-nav__list nav__list">
+					<li class="header-nav__item nav__item">
+						<a class="nav__link is-active" href="index.html">
+							Home
+						</a>
+					</li>
+					<li class="header-nav__item nav__item">
+						<a class="nav__link" href="calendar-1.html">
+							Calendar 1
+						</a>
+					</li>
+					<li class="header-nav__item nav__item">
+						<a class="nav__link" href="calendar-2.html">
+							Calendar 2
+						</a>
+					</li>
+					<li class="header-nav__item nav__item">
+						<a class="nav__link" href="calendar-3.html">
+							Calendar 3
+						</a>
+					</li>
+				</ul>
+
+				<button id="headerNavButton" class="header-nav__button button button--icon">
+					<i class="icon">
+						<svg class="icon__svg">
+							<use class="icon__use" href="#icon-menu-vertical-dots-line" />
+						</svg>
+					</i>
+				</button>
+			</nav>
+		</header>
+
+		<main class="page__main sticky__main">
+			<h1 class="page__title">
+				Calendars
+			</h1>
+
+			<section class="page__section page__inner">
+				<div class="page__container">
+					<article class="page__article">
+						<h2 class="page__subtitle">
+							Calendar 1
+						</h2>
+
+						<div>
+							<p>
+								Calendar of the current year, that starts the week on Sunday and it has the current date
+								selected.
+								You can scroll horizontally to see the months and click on the <strong>button</strong>
+								<code class="code">show today</code> to return to the current date.
+								The <strong>button</strong> <code class="code">show all months</code> display one by one
+								or all months at the
+								same time. And with the <strong>select</strong> of the <code
+									class="code">languages</code> you can change the
+								language of the name months and weeks.
+							</p>
+						</div>
+					</article>
+					<article class="page__article">
+						<h2 class="page__subtitle">
+							Calendar 2
+						</h2>
+
+						<div>
+							<p>
+								This calendar, unlike the other one, starts the week on Monday and its language is in
+								Spanish.
+								It has <code class="code">previous</code> and <code class="code">next</code>
+								<strong>buttons</strong> to show the other months, this makes that the structure of the
+								calendar does not generate the html of the whole year, but it does it month by
+								month, so you can see the month of the following year.
+								It shows by default the current date, but if you scroll through the months, there are 3
+								<strong>buttons</strong> as shortcuts to go back to the <code
+									class="code">previous year</code>, to the <code class="code">current date</code> and
+								to the <code class="code">next year</code>.
+							</p>
+						</div>
+					</article>
+					<article class="page__article">
+						<h2 class="page__subtitle">
+							Calendar 3
+						</h2>
+
+						<div>
+							<p>
+								<strong>WORKING ON IT...</strong>.<br> You can see the progress on the <code
+									class="code">feature/calendar-3</code> branch of the GitHub repository <a
+									class="link ellipsis"
+									href="https://github.com/beatrizsmerino/calendar/tree/feature/calendar-php">https://github.com/beatrizsmerino/calendar/tree/feature/calendar-3</a>
+							</p>
+						</div>
+					</article>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer sticky__footer page__inner">
+			<p class="copyright">
+				@Copyright
+				<span class="copyright__year">
+					2019
+				</span>
+				<span id="currentYear" class="copyright__year">
+					YYYY
+				</span>
+			</p>
+		</footer>
+
+		<script src="js/scripts.min.js"></script>
+
+	</body>
+
+</html>

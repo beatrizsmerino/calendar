@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="page-calendar-1 page sticky notranslate" translate="no">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Calendar</title>
+		<meta name="theme-color" content="#ffffff">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="google" content="notranslate">
+		<link rel="icon" href="images/favicon/favicon.ico">
+		<link rel="stylesheet" href="css/styles.min.css">
+	</head>
+
+	<body class="page__body sticky__body">
+		<header class="header sticky__header page__inner">
+			<span class="logo">
+				Calendars
+			</span>
+
+			<nav id="headerNav" class="header-nav nav">
+				<ul class="header-nav__list nav__list">
+					<li class="header-nav__item nav__item">
+						<a class="nav__link" href="index.html">
+							Home
+						</a>
+					</li>
+					<li class="header-nav__item nav__item">
+						<a class="nav__link is-active" href="calendar-1.html">
+							Calendar 1
+						</a>
+					</li>
+					<li class="header-nav__item nav__item">
+						<a class="nav__link" href="calendar-2.html">
+							Calendar 2
+						</a>
+					</li>
+					<li class="header-nav__item nav__item">
+						<a class="nav__link" href="calendar-3.html">
+							Calendar 3
+						</a>
+					</li>
+				</ul>
+
+				<button id="headerNavButton" class="header-nav__button button button--icon">
+					<i class="icon">
+						<svg class="icon__svg">
+							<use class="icon__use" href="#icon-menu-vertical-dots-line" />
+						</svg>
+					</i>
+				</button>
+			</nav>
+		</header>
+
+		<main class="page__main sticky__main">
+			<section class="page__section page__inner">
+				<div class="page__container">
+					<div id="calendar" class="calendar no-select"></div>
+					<nav class="calendar__action no-select">
+						<ul class="list list--column-3">
+							<li class="list__item">
+								<button id="buttonShowToday" class="button-show-today button button--bg-black">
+									show today
+								</button>
+							</li>
+							<li class="list__item">
+								<button id="buttonShowMonths" class="button-show-months button button--line-black">
+									<span class="button-show-months__all">show all months</span>
+									<span class="button-show-months__one">show one month</span>
+								</button>
+							</li>
+							<li class="list__item">
+								<button id="buttonPrint" class="button-print button button--icon" title="Download PDF">
+									<i class="button__icon icon" aria-label="Download PDF">
+										<svg class="icon__svg">
+											<use class="icon__use" href="#icon-download-pdf" />
+										</svg>
+									</i>
+								</button>
+							</li>
+						</ul>
+						<ul class="list list--column-2">
+							<li class="list__item">
+								<div class="select__wrapper">
+									<select id="selectFirstDayOfWeek" class="select select--black select--small">
+										<option value="7">
+											First day of week: Sunday
+										</option>
+									</select>
+
+									<i class="select__icon icon">
+										<svg class="icon__svg">
+											<use class="icon__use" href="#icon-chevron-down" />
+										</svg>
+									</i>
+								</div>
+							</li>
+							<li class="list__item">
+								<div class="select__wrapper">
+									<select id="selectLanguage" class="select select--black select--small">
+										<option value="en">
+											Language: English
+										</option>
+									</select>
+
+									<i class="select__icon icon">
+										<svg class="icon__svg">
+											<use class="icon__use" href="#icon-chevron-down" />
+										</svg>
+									</i>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+		</main>
+
+		<footer class="footer sticky__footer page__inner">
+			<p class="copyright">
+				@Copyright
+				<span class="copyright__year">
+					2019
+				</span>
+				<span id="currentYear" class="copyright__year">
+					YYYY
+				</span>
+			</p>
+		</footer>
+
+		<script src="js/scripts.min.js"></script>
+
+	</body>
+
+</html>
