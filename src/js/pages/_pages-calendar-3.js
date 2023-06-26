@@ -128,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarWeekCreate() {
 			const weekList = settings.weeks;
 			const weekListFormatted = getFirstLetters(weekList, 3);
+
 			for (let week = 0; week < 7; week++) {
 				const calendarRowList = document.querySelectorAll(".calendar__header .calendar__row");
 				const calendarWeek = document.createElement("TH");
@@ -191,11 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					result += cellEmpty;
 				} else {
 					// Show the day
-					if (
-						day == getCurrentDay() &&
-						month == getCurrentMonth() &&
-						year == getCurrentYear()
-					) {
+					if (day == getCurrentDay() && month == getCurrentMonth() && year == getCurrentYear()) {
 						const cellToday = calendarDayCreate(year, month, day);
 						result += cellToday;
 					} else {
@@ -216,14 +213,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarSetWeekend() {
-			const calendarSaturdayList = document.querySelectorAll(
-				".calendar__body .calendar__row .calendar__cell:nth-child(6)"
-			);
-
-			const calendarSundayList = document.querySelectorAll(
-				".calendar__body .calendar__row .calendar__cell:nth-child(7)"
-			);
-
+			const calendarSaturdayList = document.querySelectorAll(".calendar__body .calendar__row .calendar__cell:nth-child(6)");
+			const calendarSundayList = document.querySelectorAll(".calendar__body .calendar__row .calendar__cell:nth-child(7)");
 			const calendarWeekendList = [...calendarSaturdayList, ...calendarSundayList];
 
 			calendarWeekendList.map((item) => {

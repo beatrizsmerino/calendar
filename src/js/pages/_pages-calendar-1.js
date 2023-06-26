@@ -499,7 +499,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 			async function calendarWeekCreate(weekList, week) {
 				const calendarRowList = document.querySelectorAll(".calendar__header .calendar__row");
-
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
 				calendarWeek.innerText = weekList[week].abbreviation;
@@ -566,12 +565,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 			let scrollPosition = 0;
 			if (settings.showOneMonth) {
 				for (let month = 0; month < currentMonth; month++) {
-					const style =
-						calendarMonthList[month].currentStyle ||
-						window.getComputedStyle(calendarMonthList[month]);
-					scrollPosition +=
-						parseFloat(calendarMonthList[month].offsetWidth) +
-						parseFloat(style.marginRight);
+					const style = calendarMonthList[month].currentStyle || window.getComputedStyle(calendarMonthList[month]);
+					scrollPosition += parseFloat(calendarMonthList[month].offsetWidth) + parseFloat(style.marginRight);
 				}
 
 				await scrollbarSmooth(calendarInner, scrollPosition, 500);
@@ -660,6 +655,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 			firstDayOfWeekList.forEach((item) => {
 				const option = document.createElement("OPTION");
+
 				option.value = item.value;
 				option.innerText = item.text;
 				select.appendChild(option);
@@ -706,6 +702,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 			if (optionTotal === 1) {
 				languageList.forEach((item) => {
 					const option = document.createElement("OPTION");
+
 					option.value = item.value;
 					option.innerText = item.text;
 					select.appendChild(option);
@@ -726,6 +723,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 		async function calendarLanguageChange(languageChanged) {
 			const selectedValue = languageChanged.value;
 			const languageList = settings.languages;
+
 			languageList.forEach((item) => (item.selected = item.value === selectedValue));
 			await calendarLanguageUpdateStructure();
 			await calendarCreate();
@@ -736,6 +734,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 			const firstDayOfWeekSelected = await calendarFirstDayOfWeekGetSelected();
 			const monthList = await settings.months[languageSelected.value];
 			const weekList = await calendarGetWeekList(numLetters);
+
 			await calendarRemoveStructure();
 			await calendarCreateStructure(monthList, weekList);
 			await calendarSetDays(firstDayOfWeekSelected.value);
