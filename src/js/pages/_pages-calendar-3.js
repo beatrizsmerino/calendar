@@ -168,24 +168,24 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarDayListCreate(year, month) {
-			var now = new Date(year, month - 1, 1);
-			var last = new Date(year, month, 0);
-			var firstDayOfWeek = now.getDay() == 0 ? 7 : now.getDay();
-			var lastDayOfMonth = last.getDate();
-			var day = 0;
-			var result = '<tr class="calendar__row">';
-			var lastCell = firstDayOfWeek + lastDayOfMonth;
+			const now = new Date(year, month - 1, 1);
+			const last = new Date(year, month, 0);
+			const firstDayOfWeek = now.getDay() == 0 ? 7 : now.getDay();
+			const lastDayOfMonth = last.getDate();
+			let day = 0;
+			let result = '<tr class="calendar__row">';
+			const lastCell = firstDayOfWeek + lastDayOfMonth;
 
 			// Created loop up to 42, which is the maximum number of values that can be present.
 			// 6 columns of 7 days
-			for (var i = 1; i <= 42; i++) {
+			for (let i = 1; i <= 42; i++) {
 				if (i == firstDayOfWeek) {
 					// Determine on which day it starts
 					day = 1;
 				}
 
 				if (i < firstDayOfWeek || i >= lastCell) {
-					let emptyCell = calendarDayCreate("00", "00", "00");
+					const emptyCell = calendarDayCreate("00", "00", "00");
 					result += emptyCell;
 				} else {
 					// Show the day
@@ -194,10 +194,10 @@ document.addEventListener("DOMContentLoaded", function () {
 						month == getCurrentMonth() &&
 						year == getCurrentYear()
 					) {
-						let todayCell = calendarDayCreate(year, month, day);
+						const todayCell = calendarDayCreate(year, month, day);
 						result += todayCell;
 					} else {
-						let dayCell = calendarDayCreate(year, month, day);
+						const dayCell = calendarDayCreate(year, month, day);
 						result += dayCell;
 					}
 					day++;
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		function calendarSelectDay() {
 			const calendarDayButton = document.querySelectorAll('.calendar__day-button');
 			[...calendarDayButton].map(item => item.addEventListener('click', function () {
-				let theDataTime = {
+				const theDataTime = {
 					dateTime: this.getAttribute('data-time')
 				};
 
@@ -270,14 +270,14 @@ document.addEventListener("DOMContentLoaded", function () {
 			month = parseInt(month);
 
 			// Calculate the next month and year
-			let nextMonth = (month + 1 > 12) ? 1 : month + 1;
-			let nextYear = (month + 1 > 12) ? year + 1 : year;
+			const nextMonth = (month + 1 > 12) ? 1 : month + 1;
+			const nextYear = (month + 1 > 12) ? year + 1 : year;
 
 			// Calculate the previous month and year
-			let prevMonth = (month - 1 < 1) ? 12 : month - 1;
-			let prevYear = (month - 1 < 1) ? year - 1 : year;
+			const prevMonth = (month - 1 < 1) ? 12 : month - 1;
+			const prevYear = (month - 1 < 1) ? year - 1 : year;
 
-			let captionTemplate = `
+			const captionTemplate = `
 					<nav class="calendar__navigation">
 						<ul class="list">
 							<li class="list__item">
@@ -314,13 +314,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			document.querySelector(".calendar__caption").innerHTML = captionTemplate;
 
-			let buttonPrev = document.querySelectorAll(".calendar__button-prev");
-			let buttonNext = document.querySelectorAll(".calendar__button-next");
+			const buttonPrev = document.querySelectorAll(".calendar__button-prev");
+			const buttonNext = document.querySelectorAll(".calendar__button-next");
 
 			[...buttonPrev, ...buttonNext].map((item) =>
 				item.addEventListener("click", function () {
-					let year = this.getAttribute("date-year");
-					let month = this.getAttribute("date-month");
+					const year = this.getAttribute("date-year");
+					const month = this.getAttribute("date-month");
 					calendarCreate(year, month);
 				})
 			);

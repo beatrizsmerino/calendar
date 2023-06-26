@@ -362,9 +362,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 		}
 
 		async function calendarGetWeekList(numLetters) {
-			let weekList = await calendarFirstDayOfWeekSort();
+			const weekList = await calendarFirstDayOfWeekSort();
 
-			for (const key in weekList) {
+			for (let key in weekList) {
 				const day = weekList[key];
 				day.abbreviation = await getFirstLetters(day.text, numLetters);
 			}
