@@ -434,14 +434,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 		async function calendarCreateStructure(monthList, weekList) {
 			async function calendarYearCreate() {
-				const calendarYear = document.createElement("div");
+				const calendarYear = document.createElement("DIV");
 				calendarYear.className = "calendar__year";
 				calendarYear.innerText = await getCurrentYear();
 				document.getElementById("calendar").appendChild(calendarYear);
 			}
 
 			async function calendarInnerCreate() {
-				const calendarInner = document.createElement("div");
+				const calendarInner = document.createElement("DIV");
 				calendarInner.className = "calendar__inner scrollbar";
 				document.getElementById("calendar").appendChild(calendarInner);
 			}
@@ -656,7 +656,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 			});
 
 			firstDayOfWeekList.forEach((item) => {
-				const option = document.createElement("option");
+				const option = document.createElement("OPTION");
 				option.value = item.value;
 				option.innerText = item.text;
 				select.appendChild(option);
@@ -698,7 +698,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 			const select = document.querySelector("#selectLanguage");
 			if (select.querySelectorAll("option").length === 1) {
 				settings.languages.forEach((item) => {
-					const option = document.createElement("option");
+					const option = document.createElement("OPTION");
 					option.value = item.value;
 					option.innerText = item.text;
 					select.appendChild(option);

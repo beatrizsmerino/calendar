@@ -29,7 +29,7 @@ async function insertSprites() {
 	const urlFile = 'images/icons/sprites.svg';
 	const className = 'sprite';
 	const contentBody = document.querySelector('body');
-	const contentSprites = document.createElement('div');
+	const contentSprites = document.createElement('DIV');
 
 	try {
 		const data = await getContentFile(urlFile);

@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		function calendarInnerCreate() {
 			const calendar = document.getElementById("calendar");
-			const calendarInner = document.createElement("div");
+			const calendarInner = document.createElement("DIV");
 			calendarInner.className = "calendar__inner";
 			calendar.appendChild(calendarInner);
 		}
