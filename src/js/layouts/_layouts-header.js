@@ -13,18 +13,18 @@
  */
 
 async function toggleNav() {
-	const nav = document.querySelector("#headerNav");
-	const navButton = document.querySelector("#headerNavButton");
+	const pageNav = document.querySelector("#headerNav");
+	const pageNavButton = document.querySelector("#headerNavButton");
 
-	navButton.addEventListener("click", function () {
-		nav.classList.add("is-animate");
-		nav.classList.toggle("is-open");
+	pageNavButton.addEventListener("click", function () {
+		pageNav.classList.add("is-animate");
+		pageNav.classList.toggle("is-open");
 	});
 
 	window.addEventListener("resize", function () {
-		const maxWidth = 786;
-		if (window.innerWidth > maxWidth) {
-			nav.classList.remove("is-animate");
+		const windowWidthMax = 786;
+		if (window.innerWidth > windowWidthMax) {
+			pageNav.classList.remove("is-animate");
 		}
 	});
 }

@@ -15,9 +15,9 @@
 async function insertYearToCopyright() {
 	const currentDate = new Date();
 	const currentYear = currentDate.getFullYear();
-	const content = document.querySelector("#currentYear");
+	const pageCopyrightYear = document.querySelector("#currentYear");
 
-	content.innerHTML = currentYear;
+	pageCopyrightYear.innerHTML = currentYear;
 }
 
 

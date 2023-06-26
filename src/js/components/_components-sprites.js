@@ -7,15 +7,15 @@
 
 
 /**
- * @function getContentFile
+ * @function getFileContent
  * @description Gets the content of a file as text, through an asynchronous request.
  */
 
-async function getContentFile(urlFile) {
-	const data = await fetch(urlFile);
-	const content = await data.text();
+async function getFileContent(fileUrl) {
+	const fileData = await fetch(fileUrl);
+	const fileContent = await fileData.text();
 
-	return content;
+	return fileContent;
 }
 
 
@@ -26,16 +26,16 @@ async function getContentFile(urlFile) {
  */
 
 async function insertSprites() {
-	const urlFile = "images/icons/sprites.svg";
+	const fileUrl = "images/icons/sprites.svg";
 	const className = "sprite";
-	const contentBody = document.querySelector("body");
-	const contentSprites = document.createElement("DIV");
+	const pageBody = document.querySelector("body");
+	const pageSprites = document.createElement("DIV");
 
 	try {
-		const data = await getContentFile(urlFile);
-		contentSprites.setAttribute("class", className);
-		contentBody.appendChild(contentSprites);
-		contentSprites.insertAdjacentHTML("beforeend", data);
+		const fileData = await getFileContent(fileUrl);
+		pageSprites.setAttribute("class", className);
+		pageBody.appendChild(pageSprites);
+		pageSprites.insertAdjacentHTML("beforeend", fileData);
 	} catch (error) {
 		console.log("Error:", error);
 	}

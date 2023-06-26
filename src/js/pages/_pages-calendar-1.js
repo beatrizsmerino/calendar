@@ -261,24 +261,24 @@ document.addEventListener("DOMContentLoaded", async function () {
 		};
 
 		async function getCurrentYear() {
-			const date = new Date();
-			const year = date.getFullYear();
+			const currentDate = new Date();
+			const currentYear = currentDate.getFullYear();
 
-			return year;
+			return currentYear;
 		}
 
 		async function getCurrentMonth() {
-			const date = new Date();
-			const month = date.getMonth();
+			const currentDate = new Date();
+			const currentMonth = currentDate.getMonth();
 
-			return month;
+			return currentMonth;
 		}
 
 		async function getCurrentDay() {
-			const date = new Date();
-			const day = date.getDate();
+			const currentDate = new Date();
+			const currentDay = currentDate.getDate();
 
-			return day;
+			return currentDay;
 		}
 
 		async function getDayOfYear(year, day) {
@@ -288,56 +288,59 @@ document.addEventListener("DOMContentLoaded", async function () {
 			return dayOfYear;
 		}
 
-		async function getFormattedDate(year, month, day) {
+		async function getDateFormatted(year, month, day) {
 			const yyyy = String(year);
 			const mm = String(month + 1).padStart(2, "0"); // January is 0!
 			const dd = String(day).padStart(2, "0");
-			const yearMonthDay = `${yyyy}-${mm}-${dd}`;
+			const dateFormatted = `${yyyy}-${mm}-${dd}`;
 
-			return yearMonthDay;
+			return dateFormatted;
 		}
 
 		async function getToday() {
-			const year = await getCurrentYear();
-			const month = await getCurrentMonth();
-			const day = await getCurrentDay();
-			const today = await getFormattedDate(year, month, day);
+			const currentYear = await getCurrentYear();
+			const currentMonth = await getCurrentMonth();
+			const currentDay = await getCurrentDay();
+			const today = await getDateFormatted(currentYear, currentMonth, currentDay);
 
 			return today;
 		}
 
-		async function getFirstLetters(string, length) {
-			const substring = string.slice(0, length);
+		async function getFirstLetters(word, numLetters) {
+			const wordFormatted = word.slice(0, numLetters);
 
-			return substring;
+			return wordFormatted;
 		}
 
 		async function scrollbarToggle(action) {
-			const container = document.querySelector(".scrollbar");
+			const scrollbarContainer = document.querySelector(".scrollbar");
+			let ps = null;
 
-			if (container) {
+			if (scrollbarContainer) {
 				switch (action) {
 					case "create":
-						settings.scrollbar = new PerfectScrollbar(container, {
+						ps = new PerfectScrollbar(scrollbarContainer, {
 							wheelSpeed: 2,
 							wheelPropagation: true,
 							minScrollbarLength: 20,
 						});
 						break;
 					case "update":
-						if (settings.scrollbar !== null) {
-							settings.scrollbar.update();
+						if (ps !== null) {
+							ps.update();
 						}
 						break;
 					case "remove":
-						if (settings.scrollbar !== null) {
-							settings.scrollbar.destroy();
-							settings.scrollbar = null;
+						if (ps !== null) {
+							ps.destroy();
+							ps = null;
 						}
 						break;
 					default:
 						console.log("Invalid action");
 				}
+
+				settings.scrollbar = ps;
 			}
 		}
 
@@ -373,11 +376,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 		}
 
 		async function calendarSetDays(startDay) {
-			const thisYear = await getCurrentYear();
+			const dateYear = await getCurrentYear();
 			let week = 0;
 
 			for (let day = 1; day < 366; day++) {
-				const dayOfYear = await getDayOfYear(thisYear, day);
+				const dayOfYear = await getDayOfYear(dateYear, day);
 				const dateDay = dayOfYear.getDate();
 				const dateMonth = dayOfYear.getMonth();
 				let dateWeek = dayOfYear.getDay();
@@ -397,7 +400,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 				const tableDayList = calendarTableList[dateMonth].children[2].children[week].children[dateWeek];
 				tableDayList.innerHTML = `<span class="calendar__number">${dateDay}</span><span class="calendar__circle"></span>`;
 
-				const yearMonthDay = await getFormattedDate(thisYear, dateMonth, dateDay);
+				const yearMonthDay = await getDateFormatted(dateYear, dateMonth, dateDay);
 				tableDayList.dataset.time = yearMonthDay;
 
 				const today = await getToday();
@@ -488,10 +491,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 				[...calendarTableList].map((item) => item.appendChild(calendarHeader));
 			}
 
-			async function calendarRowCreate(contain) {
+			async function calendarRowCreate(containList) {
 				const calendarRow = document.createElement("TR");
 				calendarRow.className = "calendar__row";
-				[...contain].map((item) => item.appendChild(calendarRow));
+				[...containList].map((item) => item.appendChild(calendarRow));
 			}
 
 			async function calendarWeekCreate(weekList, week) {
@@ -555,26 +558,26 @@ document.addEventListener("DOMContentLoaded", async function () {
 		}
 
 		async function calendarMoveScrollToday() {
-			const header = document.querySelector(".header");
+			const pageHeader = document.querySelector(".header");
 			const calendarInner = document.querySelector(".calendar__inner");
 			const calendarMonthList = document.querySelectorAll(".calendar__month");
 			const currentMonth = await getCurrentMonth();
 
-			let positionScroll = 0;
+			let scrollPosition = 0;
 			if (settings.showOneMonth) {
 				for (let month = 0; month < currentMonth; month++) {
 					const style =
 						calendarMonthList[month].currentStyle ||
 						window.getComputedStyle(calendarMonthList[month]);
-					positionScroll +=
+					scrollPosition +=
 						parseFloat(calendarMonthList[month].offsetWidth) +
 						parseFloat(style.marginRight);
 				}
 
-				await scrollbarSmooth(calendarInner, positionScroll, 500);
+				await scrollbarSmooth(calendarInner, scrollPosition, 500);
 			} else {
-				positionScroll = calendarMonthList[currentMonth].offsetTop - header.offsetHeight;
-				window.scrollTo({ top: positionScroll, behavior: "smooth" });
+				scrollPosition = calendarMonthList[currentMonth].offsetTop - pageHeader.offsetHeight;
+				window.scrollTo({ top: scrollPosition, behavior: "smooth" });
 			}
 		}
 
@@ -665,11 +668,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 		async function calendarFirstDayOfWeekUpdateStructure() {
 			const select = document.querySelector("#selectFirstDayOfWeek");
-			const firstOption = select.querySelectorAll("option")[0];
+			const optionFirst = select.querySelectorAll("option")[0];
 			const firstDayOfWeekSelected = await calendarFirstDayOfWeekGetSelected();
 
-			firstOption.value = firstDayOfWeekSelected.value;
-			firstOption.innerText = `First day of week: ${firstDayOfWeekSelected.text}`;
+			optionFirst.value = firstDayOfWeekSelected.value;
+			optionFirst.innerText = `First day of week: ${firstDayOfWeekSelected.text}`;
 			select.value = firstDayOfWeekSelected.value;
 		}
 
@@ -696,8 +699,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 		async function calendarLanguageCreateStructure() {
 			const select = document.querySelector("#selectLanguage");
-			if (select.querySelectorAll("option").length === 1) {
-				settings.languages.forEach((item) => {
+			const optionList = select.querySelectorAll("option");
+			const optionTotal = optionList.length;
+			const languageList = settings.languages;
+
+			if (optionTotal === 1) {
+				languageList.forEach((item) => {
 					const option = document.createElement("OPTION");
 					option.value = item.value;
 					option.innerText = item.text;
@@ -708,11 +715,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 		async function calendarLanguageUpdateStructure() {
 			const select = document.querySelector("#selectLanguage");
-			const firstOption = select.querySelectorAll("option")[0];
+			const optionFirst = select.querySelectorAll("option")[0];
 			const languageSelected = await calendarLanguageGetSelected();
 
-			firstOption.value = languageSelected.value;
-			firstOption.innerText = `Language: ${languageSelected.text}`;
+			optionFirst.value = languageSelected.value;
+			optionFirst.innerText = `Language: ${languageSelected.text}`;
 			select.value = languageSelected.value;
 		}
 

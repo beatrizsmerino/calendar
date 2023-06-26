@@ -39,47 +39,47 @@ document.addEventListener("DOMContentLoaded", function () {
 		};
 
 		function getCurrentYear() {
-			const date = new Date();
-			const year = date.getFullYear();
+			const currentDate = new Date();
+			const currentYear = currentDate.getFullYear();
 
-			return year;
+			return currentYear;
 		}
 
 		function getCurrentMonth() {
-			const date = new Date();
-			let month = date.getMonth();
-			month++; // January is 0!
+			const currentDate = new Date();
+			let currentMonth = currentDate.getMonth();
+			currentMonth++; // January is 0!
 
-			return month;
+			return currentMonth;
 		}
 
 		function getCurrentDay() {
-			const date = new Date();
-			const day = date.getDate();
+			const currentDate = new Date();
+			const currentDay = currentDate.getDate();
 
-			return day;
+			return currentDay;
 		}
 
-		function getFormattedDate(year, month, day) {
+		function getDateFormatted(year, month, day) {
 			const yyyy = String(year);
 			const mm = String(month).padStart(2, "0");
 			const dd = String(day).padStart(2, "0");
-			const yearMonthDay = `${yyyy}-${mm}-${dd}`;
+			const dateFormatted = `${yyyy}-${mm}-${dd}`;
 
-			return yearMonthDay;
+			return dateFormatted;
 		}
 
 		function getToday() {
-			const year = getCurrentYear();
-			const month = getCurrentMonth();
-			const day = getCurrentDay();
-			const today = getFormattedDate(year, month, day);
+			const currentYear = getCurrentYear();
+			const currentMonth = getCurrentMonth();
+			const currentDay = getCurrentDay();
+			const today = getDateFormatted(currentYear, currentMonth, currentDay);
 
 			return today;
 		}
 
-		function getFirstLetters(wordList, length) {
-			const wordListFormatted = wordList.map((item) => item.slice(0, length));
+		function getFirstLetters(wordList, numLetters) {
+			const wordListFormatted = wordList.map((item) => item.slice(0, numLetters));
 
 			return wordListFormatted;
 		}
@@ -99,63 +99,64 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarTableCreate() {
-			const calendarMonth = document.querySelectorAll(".calendar__month");
+			const calendarMonthList = document.querySelectorAll(".calendar__month");
 			const calendarTable = document.createElement("TABLE");
 			calendarTable.className = "calendar__table";
-			[...calendarMonth].map((item) => item.appendChild(calendarTable));
+			[...calendarMonthList].map((item) => item.appendChild(calendarTable));
 		}
 
 		function calendarHeaderCreate() {
-			const calendarTable = document.querySelectorAll(".calendar__table");
+			const calendarTableList = document.querySelectorAll(".calendar__table");
 			const calendarHeader = document.createElement("THEAD");
 			calendarHeader.className = "calendar__header";
-			[...calendarTable].map((item) => item.appendChild(calendarHeader));
+			[...calendarTableList].map((item) => item.appendChild(calendarHeader));
 		}
 
 		function calendarCaptionCreate() {
-			const calendarTable = document.querySelectorAll(".calendar__table");
+			const calendarTableList = document.querySelectorAll(".calendar__table");
 			const calendarCaption = document.createElement("CAPTION");
 			calendarCaption.className = "calendar__caption";
-			[...calendarTable].map((item) => item.appendChild(calendarCaption));
+			[...calendarTableList].map((item) => item.appendChild(calendarCaption));
 		}
 
-		function calendarRowCreate(contain) {
+		function calendarRowCreate(containList) {
 			const calendarRow = document.createElement("TR");
 			calendarRow.className = "calendar__row";
-			[...contain].map((item) => item.appendChild(calendarRow));
+			[...containList].map((item) => item.appendChild(calendarRow));
 		}
 
 		function calendarWeekCreate() {
 			const weekList = settings.weeks;
 			const weekListFormatted = getFirstLetters(weekList, 3);
 			for (let week = 0; week < 7; week++) {
-				const calendarRow = document.querySelectorAll(".calendar__header .calendar__row");
+				const calendarRowList = document.querySelectorAll(".calendar__header .calendar__row");
 				const calendarWeek = document.createElement("TH");
 				calendarWeek.className = "calendar__cell calendar__week";
 				calendarWeek.innerText = weekListFormatted[week];
-				[...calendarRow].map((item) => item.appendChild(calendarWeek));
+				[...calendarRowList].map((item) => item.appendChild(calendarWeek));
 			}
 		}
 
 		function calendarBodyCreate() {
-			const calendarTable = document.querySelectorAll(".calendar__table");
+			const calendarTableList = document.querySelectorAll(".calendar__table");
 			const calendarBody = document.createElement("TBODY");
 			calendarBody.className = "calendar__body";
-			[...calendarTable].map((item) => item.appendChild(calendarBody));
+			[...calendarTableList].map((item) => item.appendChild(calendarBody));
 		}
 
 		function calendarDayCreate(year, month, day) {
 			const calendarDay = document.createElement("TD");
+			const today = getToday();
+			const dateFormatted = getDateFormatted(year, month, day);
 
-			if (getToday() === getFormattedDate(year, month, day)) {
+			if (today === dateFormatted) {
 				calendarDay.className = "calendar__cell calendar__day calendar__today";
 			} else {
 				calendarDay.className = "calendar__cell calendar__day";
 			}
 
 			if (day != 0) {
-				const yearMonthDay = getFormattedDate(year, month, day);
-				calendarDay.setAttribute("data-time", yearMonthDay);
+				calendarDay.setAttribute("data-time", dateFormatted);
 				calendarDay.innerHTML = `<span>${day}</span>`;
 			}
 
@@ -169,19 +170,20 @@ document.addEventListener("DOMContentLoaded", function () {
 			const lastDayOfMonth = last.getDate();
 			let day = 0;
 			let result = `<tr class="calendar__row">`;
-			const lastCell = firstDayOfWeek + lastDayOfMonth;
+			const cellLast = firstDayOfWeek + lastDayOfMonth;
+			const cellTotal = 42;
 
 			// Created loop up to 42, which is the maximum number of values that can be present.
 			// 6 columns of 7 days
-			for (let i = 1; i <= 42; i++) {
-				if (i == firstDayOfWeek) {
+			for (let cellIndex = 1; cellIndex <= cellTotal; cellIndex++) {
+				if (cellIndex == firstDayOfWeek) {
 					// Determine on which day it starts
 					day = 1;
 				}
 
-				if (i < firstDayOfWeek || i >= lastCell) {
-					const emptyCell = calendarDayCreate("00", "00", "00");
-					result += emptyCell;
+				if (cellIndex < firstDayOfWeek || cellIndex >= cellLast) {
+					const cellEmpty = calendarDayCreate("00", "00", "00");
+					result += cellEmpty;
 				} else {
 					// Show the day
 					if (
@@ -189,34 +191,37 @@ document.addEventListener("DOMContentLoaded", function () {
 						month == getCurrentMonth() &&
 						year == getCurrentYear()
 					) {
-						const todayCell = calendarDayCreate(year, month, day);
-						result += todayCell;
+						const cellToday = calendarDayCreate(year, month, day);
+						result += cellToday;
 					} else {
-						const dayCell = calendarDayCreate(year, month, day);
-						result += dayCell;
+						const cellDay = calendarDayCreate(year, month, day);
+						result += cellDay;
 					}
 					day++;
 				}
-				if (i % 7 == 0) {
+				if (cellIndex % 7 == 0) {
 					if (day > lastDayOfMonth) break;
 					result += `</tr><tr class="calendar__row">`;
 				}
 			}
 			result += "</tr>";
 
-			document.querySelector(".calendar__body").innerHTML = result;
+			const calendarBody = document.querySelector(".calendar__body");
+			calendarBody.innerHTML = result;
 		}
 
 		function calendarSetWeekend() {
-			const weekendSaturdays = document.querySelectorAll(
+			const calendarSaturdayList = document.querySelectorAll(
 				".calendar__body .calendar__row .calendar__cell:nth-child(6)"
 			);
 
-			const weekendSundays = document.querySelectorAll(
+			const calendarSundayList = document.querySelectorAll(
 				".calendar__body .calendar__row .calendar__cell:nth-child(7)"
 			);
 
-			[...weekendSaturdays, ...weekendSundays].map((item) => {
+			const calendarWeekendList = [...calendarSaturdayList, ...calendarSundayList];
+
+			calendarWeekendList.map((item) => {
 				if (item.childNodes.length) {
 					item.classList.add("calendar__weekend");
 				}
@@ -229,12 +234,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarCreateStructure() {
+			const calendarHeaderList = document.querySelectorAll(".calendar__header");
 			calendarInnerCreate();
 			calendarMonthCreate();
 			calendarTableCreate();
 			calendarCaptionCreate();
 			calendarHeaderCreate();
-			calendarRowCreate(document.querySelectorAll(".calendar__header"));
+			calendarRowCreate(calendarHeaderList);
 			calendarWeekCreate();
 			calendarBodyCreate();
 		}
@@ -284,12 +290,13 @@ document.addEventListener("DOMContentLoaded", function () {
 					</nav>
 				`;
 
-			document.querySelector(".calendar__caption").innerHTML = captionTemplate;
+			const calendarCaption = document.querySelector(".calendar__caption");
+			calendarCaption.innerHTML = captionTemplate;
 
-			const buttonPrev = document.querySelectorAll(".calendar__button-prev");
-			const buttonNext = document.querySelectorAll(".calendar__button-next");
+			const calendarButtonPrevList = document.querySelectorAll(".calendar__button-prev");
+			const calendarButtonNextList = document.querySelectorAll(".calendar__button-next");
 
-			[...buttonPrev, ...buttonNext].map((item) =>
+			[...calendarButtonPrevList, ...calendarButtonNextList].map((item) =>
 				item.addEventListener("click", function () {
 					const year = this.getAttribute("date-year");
 					const month = this.getAttribute("date-month");
