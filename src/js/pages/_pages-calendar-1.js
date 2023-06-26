@@ -6,7 +6,7 @@
 
 
 
-import PerfectScrollbar from 'perfect-scrollbar';
+import PerfectScrollbar from "perfect-scrollbar";
 
 document.addEventListener("DOMContentLoaded", async function () {
 	const pageCalendar1 = document
@@ -313,23 +313,23 @@ document.addEventListener("DOMContentLoaded", async function () {
 		}
 
 		async function scrollbarToggle(action) {
-			const container = document.querySelector('.scrollbar');
+			const container = document.querySelector(".scrollbar");
 
 			if (container) {
 				switch (action) {
-					case 'create':
+					case "create":
 						settings.scrollbar = new PerfectScrollbar(container, {
 							wheelSpeed: 2,
 							wheelPropagation: true,
 							minScrollbarLength: 20,
 						});
 						break;
-					case 'update':
+					case "update":
 						if (settings.scrollbar !== null) {
 							settings.scrollbar.update();
 						}
 						break;
-					case 'remove':
+					case "remove":
 						if (settings.scrollbar !== null) {
 							settings.scrollbar.destroy();
 							settings.scrollbar = null;
@@ -574,7 +574,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 				await scrollbarSmooth(calendarInner, positionScroll, 500);
 			} else {
 				positionScroll = calendarMonthList[currentMonth].offsetTop - header.offsetHeight;
-				window.scrollTo({ top: positionScroll, behavior: 'smooth' });
+				window.scrollTo({ top: positionScroll, behavior: "smooth" });
 			}
 		}
 
@@ -604,7 +604,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 			const currentTitle = `Calendar-${today}`;
 
 			async function waitForPrintWindowClosed() {
-				while (window.matchMedia('print').matches) {
+				while (window.matchMedia("print").matches) {
 					await new Promise(resolve => setTimeout(resolve, 1000));
 				}
 				document.title = originalTitle;

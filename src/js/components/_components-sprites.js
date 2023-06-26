@@ -26,18 +26,18 @@ async function getContentFile(urlFile) {
  */
 
 async function insertSprites() {
-	const urlFile = 'images/icons/sprites.svg';
-	const className = 'sprite';
-	const contentBody = document.querySelector('body');
-	const contentSprites = document.createElement('DIV');
+	const urlFile = "images/icons/sprites.svg";
+	const className = "sprite";
+	const contentBody = document.querySelector("body");
+	const contentSprites = document.createElement("DIV");
 
 	try {
 		const data = await getContentFile(urlFile);
-		contentSprites.setAttribute('class', className);
+		contentSprites.setAttribute("class", className);
 		contentBody.appendChild(contentSprites);
-		contentSprites.insertAdjacentHTML('beforeend', data);
+		contentSprites.insertAdjacentHTML("beforeend", data);
 	} catch (error) {
-		console.log('Error:', error);
+		console.log("Error:", error);
 	}
 }
 

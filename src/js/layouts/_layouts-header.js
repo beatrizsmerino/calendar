@@ -13,15 +13,15 @@
  */
 
 async function toggleNav() {
-	const nav = document.querySelector('#headerNav');
-	const navButton = document.querySelector('#headerNavButton');
+	const nav = document.querySelector("#headerNav");
+	const navButton = document.querySelector("#headerNavButton");
 
-	navButton.addEventListener('click', function () {
+	navButton.addEventListener("click", function () {
 		nav.classList.add("is-animate");
 		nav.classList.toggle("is-open");
 	});
 
-	window.addEventListener('resize', function () {
+	window.addEventListener("resize", function () {
 		const maxWidth = 786;
 		if (window.innerWidth > maxWidth) {
 			nav.classList.remove("is-animate");

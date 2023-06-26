@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const firstDayOfWeek = now.getDay() == 0 ? 7 : now.getDay();
 			const lastDayOfMonth = last.getDate();
 			let day = 0;
-			let result = '<tr class="calendar__row">';
+			let result = `<tr class="calendar__row">`;
 			const lastCell = firstDayOfWeek + lastDayOfMonth;
 
 			// Created loop up to 42, which is the maximum number of values that can be present.
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 				if (i % 7 == 0) {
 					if (day > lastDayOfMonth) break;
-					result += '</tr><tr class="calendar__row">';
+					result += `</tr><tr class="calendar__row">`;
 				}
 			}
 			result += "</tr>";
@@ -253,17 +253,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			const captionTemplate = `
 					<div class="calendar__title">
-						<span class='calendar__year-name'>
+						<span class="calendar__year-name">
 							${year}
 						</span>
-						<span class='calendar__month-name'>
+						<span class="calendar__month-name">
 							${settings.months[month - 1]}
 						</span>
 					</div>
 					<nav class="calendar__navigation">
 						<ul class="list">
 							<li class="list__item">
-								<a class="calendar__button-prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}"'>
+								<a class="calendar__button-prev button button--line-black" date-year="${prevYear}" date-month="${prevMonth}">
 									<i class="icon">
 										<svg class="icon__svg">
 											<use class="icon__use" href="#icon-chevron-left" />
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
 								</a>
 							</li>
 							<li class="list__item">
-								<a class="calendar__button-next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}"'>
+								<a class="calendar__button-next button button--line-black" date-year="${nextYear}" date-month="${nextMonth}">
 									<i class="icon">
 										<svg class="icon__svg">
 											<use class="icon__use" href="#icon-chevron-right" />
