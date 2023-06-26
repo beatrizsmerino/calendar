@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarInnerCreate() {
-			const calendar = document.getElementById("calendar");
+			const calendar = document.querySelector("#calendar");
 			const calendarInner = document.createElement("DIV");
 			calendarInner.className = "calendar__inner";
 			calendar.appendChild(calendarInner);
@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarSetHeight() {
-			const calendar = document.querySelector(".calendar");
+			const calendar = document.querySelector("#calendar");
 			const calendarCaption = document.querySelector(".calendar__caption");
 			const calendarHeader = document.querySelector(".calendar__header");
 			const calendarRow = document.querySelector(".calendar__body .calendar__row");

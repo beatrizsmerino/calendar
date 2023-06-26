@@ -437,13 +437,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 				const calendarYear = document.createElement("DIV");
 				calendarYear.className = "calendar__year";
 				calendarYear.innerText = await getCurrentYear();
-				document.getElementById("calendar").appendChild(calendarYear);
+				document.querySelector("#calendar").appendChild(calendarYear);
 			}
 
 			async function calendarInnerCreate() {
 				const calendarInner = document.createElement("DIV");
 				calendarInner.className = "calendar__inner scrollbar";
-				document.getElementById("calendar").appendChild(calendarInner);
+				document.querySelector("#calendar").appendChild(calendarInner);
 			}
 
 			async function calendarMonthCreate() {

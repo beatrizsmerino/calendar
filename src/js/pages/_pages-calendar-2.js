@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarInnerCreate() {
-			const calendar = document.getElementById("calendar");
+			const calendar = document.querySelector("#calendar");
 			const calendarInner = document.createElement("DIV");
 			calendarInner.className = "calendar__inner";
 			calendar.appendChild(calendarInner);
@@ -307,9 +307,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 
 		function calendarEvents() {
-			const buttonToday = document.getElementById("goToday");
-			const buttonNextYear = document.getElementById("goNextYear");
-			const buttonLastYear = document.getElementById("goLastYear");
+			const buttonToday = document.querySelector("#goToday");
+			const buttonNextYear = document.querySelector("#goNextYear");
+			const buttonLastYear = document.querySelector("#goLastYear");
 
 			buttonToday.addEventListener("click", function () {
 				calendarCreate(getCurrentYear(), getCurrentMonth());
