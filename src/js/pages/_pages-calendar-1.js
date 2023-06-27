@@ -588,14 +588,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 		async function calendarShowAllMonths() {
 			const calendar = document.querySelector("#calendar");
 			const buttonShowMonths = document.querySelector("#buttonShowMonths");
-			const buttonShowToday = document.querySelector("#buttonShowToday");
 
 			buttonShowMonths.classList.toggle("is-change-text");
 			calendar.classList.toggle("is-show-months");
 			settings.showOneMonth = !settings.showOneMonth;
 
 			await calendarSetWidth();
-			await buttonShowToday.click();
+			await calendarMoveScrollToday();
 
 			if (calendar.classList.contains("is-show-months")) {
 				await scrollbarToggle("remove");
