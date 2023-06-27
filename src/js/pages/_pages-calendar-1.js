@@ -595,14 +595,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 			settings.showOneMonth = !settings.showOneMonth;
 
 			await calendarSetWidth();
+			await buttonShowToday.click();
 
 			if (calendar.classList.contains("is-show-months")) {
 				await scrollbarToggle("remove");
 			} else {
 				await scrollbarToggle("create");
 			}
-
-			await buttonShowToday.click();
 		}
 
 		async function calendarGeneratePDF() {
