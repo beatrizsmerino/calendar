@@ -344,8 +344,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 			}
 		}
 
-		async function scrollbarSmooth(element, targetPosition, duration) {
-			const startPosition = element.scrollLeft;
+		async function scrollbarSmooth(element, targetPosition, duration, axis = 'y') {
+			if (axis !== 'x' && axis !== 'y') {
+				throw new Error("El parámetro 'axis' solo puede ser 'x' o 'y'.");
+			}
+
+			const startPosition = axis === 'y' ? element.scrollTop : element.scrollLeft;
 			const distance = targetPosition - startPosition;
 			const startTime = performance.now();
 
@@ -353,7 +357,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 				const currentTime = performance.now();
 				const animationDuration = currentTime - startTime;
 				const scrollProgress = Math.min(animationDuration / duration, 1);
-				element.scrollLeft = startPosition + distance * scrollProgress;
+
+				if (axis === 'y') {
+					element.scrollTop = startPosition + distance * scrollProgress;
+				} else {
+					element.scrollLeft = startPosition + distance * scrollProgress;
+				}
 
 				if (animationDuration < duration) {
 					await new Promise((resolve) => requestAnimationFrame(resolve));
@@ -569,7 +578,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 					scrollPosition += parseFloat(calendarMonthList[month].offsetWidth) + parseFloat(style.marginRight);
 				}
 
-				await scrollbarSmooth(calendarInner, scrollPosition, 500);
+				await scrollbarSmooth(calendarInner, scrollPosition, 500, "x");
 			} else {
 				scrollPosition = calendarMonthList[currentMonth].offsetTop - pageHeader.offsetHeight;
 				window.scrollTo({ top: scrollPosition, behavior: "smooth" });
