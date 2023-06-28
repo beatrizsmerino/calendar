@@ -144,6 +144,7 @@ function jsCompile() {
 		output: {
 			filename: "scripts.min.js",
 		},
+		devtool: 'source-map',
 		optimization: {
 			minimize: true,
 			minimizer: [
@@ -187,6 +188,7 @@ function jsTest() {
 		output: {
 			filename: "scripts.js",
 		},
+		devtool: 'source-map',
 		optimization: {
 			minimize: false,
 			minimizer: [
