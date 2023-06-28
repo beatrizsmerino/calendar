@@ -8,7 +8,8 @@
 
 .page-calendar-1
 	.calendar
-		width: 40rem
+		width: 100%
+		max-width: 40rem
 		margin: 0 auto
 
 		@include media('xs')
@@ -16,11 +17,11 @@
 
 		&__year
 			text-align: center
-			font-size: 4rem
+			font-size: 3.5rem
 			font-weight: 700
 
 			@include media('xs')
-				font-size: 2rem
+				font-size: 2.5rem
 
 		&__inner
 			display: flex
@@ -52,7 +53,7 @@
 			font-size: 1.6rem
 
 			@include media('xs')
-				width: 4rem
+				max-width: 4.5rem
 				font-size: 1.4rem
 
 		&__row
