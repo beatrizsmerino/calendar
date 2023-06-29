@@ -7,6 +7,7 @@
 
 
 import PerfectScrollbar from "perfect-scrollbar";
+import PanelSnap from 'panelsnap';
 
 document.addEventListener("DOMContentLoaded", async function () {
 	const pageCalendar1 = document
@@ -415,6 +416,19 @@ document.addEventListener("DOMContentLoaded", async function () {
 			await handleMouseDown(event);
 		}
 
+		async function scrollbarSnap(containerElement, itemListSelector) {
+			const panelSnapConfig = {
+				container: containerElement,
+				panelSelector: itemListSelector,
+				directionThreshold: 50,
+				delay: 0,
+				duration: 300,
+				easing: function (t) { return t },
+			};
+
+			new PanelSnap(panelSnapConfig);
+		}
+
 		async function calendarGetWeekList(numLetters) {
 			const weekList = await calendarFirstDayOfWeekSort();
 
@@ -804,6 +818,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 			calendarInner.addEventListener('mousedown', async function (event) {
 				await scrollbarDraggable(event, this);
+				await scrollbarSnap(calendarInner, '> .calendar__month');
 			});
 
 			buttonShowToday.addEventListener("click", async function () {
