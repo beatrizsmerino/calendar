@@ -373,6 +373,48 @@ document.addEventListener("DOMContentLoaded", async function () {
 			await scrollAnimation();
 		}
 
+		async function scrollbarDraggable(event, element) {
+			let position = {
+				top: 0,
+				left: 0,
+				x: 0,
+				y: 0
+			};
+
+			const handleMouseMove = function (event) {
+				const offsetX = event.clientX - position.x;
+				const offsetY = event.clientY - position.y;
+
+				element.scrollTop = position.top - offsetY;
+				element.scrollLeft = position.left - offsetX;
+			};
+
+			const handleMouseUp = function () {
+				document.removeEventListener('mousemove', handleMouseMove);
+				document.removeEventListener('mouseup', handleMouseUp);
+
+				element.style.cursor = 'grab';
+				element.style.removeProperty('user-select');
+			};
+
+			const handleMouseDown = async function (event) {
+				position = {
+					left: element.scrollLeft,
+					top: element.scrollTop,
+					x: event.clientX,
+					y: event.clientY,
+				};
+
+				element.style.cursor = 'grabbing';
+				element.style.userSelect = 'none';
+
+				document.addEventListener('mousemove', handleMouseMove);
+				document.addEventListener('mouseup', handleMouseUp);
+			};
+
+			await handleMouseDown(event);
+		}
+
 		async function calendarGetWeekList(numLetters) {
 			const weekList = await calendarFirstDayOfWeekSort();
 
@@ -753,11 +795,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 		}
 
 		async function calendarEvents() {
+			const calendarInner = document.querySelector(".calendar__inner");
 			const buttonShowToday = document.querySelector("#buttonShowToday");
 			const buttonShowMonths = document.querySelector("#buttonShowMonths");
 			const buttonPrint = document.querySelector("#buttonPrint");
 			const selectLanguage = document.querySelector("#selectLanguage");
 			const selectFirstDayOfWeek = document.querySelector("#selectFirstDayOfWeek");
+
+			calendarInner.addEventListener('mousedown', async function (event) {
+				await scrollbarDraggable(event, this);
+			});
 
 			buttonShowToday.addEventListener("click", async function () {
 				await calendarMoveScrollToday();
