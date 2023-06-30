@@ -416,9 +416,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 			await handleMouseDown(event);
 		}
 
-		async function scrollbarSnap(containerElement, itemListSelector) {
+		async function scrollbarSnap(containerSelector, itemListSelector) {
 			const panelSnapConfig = {
-				container: containerElement,
+				container: document.querySelector(containerSelector),
 				panelSelector: itemListSelector,
 				directionThreshold: 50,
 				delay: 0,
@@ -804,6 +804,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 			await calendarSetWidth();
 			await scrollbarToggle("create");
 			await calendarMoveScrollToday();
+			await scrollbarSnap(".calendar__inner", "> .calendar__month");
 			await calendarFirstDayOfWeekCreateStructure();
 			await calendarLanguageCreateStructure();
 		}
@@ -818,7 +819,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 			calendarInner.addEventListener("mousedown", async function (event) {
 				await scrollbarDraggable(event, this);
-				await scrollbarSnap(calendarInner, "> .calendar__month");
 			});
 
 			buttonShowToday.addEventListener("click", async function () {
