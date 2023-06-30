@@ -7,7 +7,7 @@
 
 
 import PerfectScrollbar from "perfect-scrollbar";
-import PanelSnap from 'panelsnap';
+import PanelSnap from "panelsnap";
 
 document.addEventListener("DOMContentLoaded", async function () {
 	const pageCalendar1 = document
@@ -345,12 +345,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 			}
 		}
 
-		async function scrollbarSmooth(element, targetPosition, duration, axis = 'y') {
-			if (axis !== 'x' && axis !== 'y') {
+		async function scrollbarSmooth(element, targetPosition, duration, axis = "y") {
+			if (axis !== "x" && axis !== "y") {
 				throw new Error("El parámetro 'axis' solo puede ser 'x' o 'y'.");
 			}
 
-			const startPosition = axis === 'y' ? element.scrollTop : element.scrollLeft;
+			const startPosition = axis === "y" ? element.scrollTop : element.scrollLeft;
 			const distance = targetPosition - startPosition;
 			const startTime = performance.now();
 
@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 				const animationDuration = currentTime - startTime;
 				const scrollProgress = Math.min(animationDuration / duration, 1);
 
-				if (axis === 'y') {
+				if (axis === "y") {
 					element.scrollTop = startPosition + distance * scrollProgress;
 				} else {
 					element.scrollLeft = startPosition + distance * scrollProgress;
@@ -391,11 +391,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 			};
 
 			const handleMouseUp = function () {
-				document.removeEventListener('mousemove', handleMouseMove);
-				document.removeEventListener('mouseup', handleMouseUp);
+				document.removeEventListener("mousemove", handleMouseMove);
+				document.removeEventListener("mouseup", handleMouseUp);
 
-				element.style.cursor = 'grab';
-				element.style.removeProperty('user-select');
+				element.style.cursor = "grab";
+				element.style.removeProperty("user-select");
 			};
 
 			const handleMouseDown = async function (event) {
@@ -406,11 +406,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 					y: event.clientY,
 				};
 
-				element.style.cursor = 'grabbing';
-				element.style.userSelect = 'none';
+				element.style.cursor = "grabbing";
+				element.style.userSelect = "none";
 
-				document.addEventListener('mousemove', handleMouseMove);
-				document.addEventListener('mouseup', handleMouseUp);
+				document.addEventListener("mousemove", handleMouseMove);
+				document.addEventListener("mouseup", handleMouseUp);
 			};
 
 			await handleMouseDown(event);
@@ -816,9 +816,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 			const selectLanguage = document.querySelector("#selectLanguage");
 			const selectFirstDayOfWeek = document.querySelector("#selectFirstDayOfWeek");
 
-			calendarInner.addEventListener('mousedown', async function (event) {
+			calendarInner.addEventListener("mousedown", async function (event) {
 				await scrollbarDraggable(event, this);
-				await scrollbarSnap(calendarInner, '> .calendar__month');
+				await scrollbarSnap(calendarInner, "> .calendar__month");
 			});
 
 			buttonShowToday.addEventListener("click", async function () {
