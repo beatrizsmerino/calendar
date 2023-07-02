@@ -45,6 +45,7 @@
 		"lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
 		"lodash.template": "https://registry.npmjs.org/lodash.template/-/lodash.template-4.5.0.tgz",
 		"qs": "https://registry.npmjs.org/qs/-/qs-6.2.4.tgz",
+		"semver": "https://registry.npmjs.org/semver/-/semver-7.5.2.tgz",
 		"trim-newlines": "https://registry.npmjs.org/trim-newlines/-/trim-newlines-3.0.1.tgz",
 		"ua-parser-js": "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-1.0.33.tgz"
 	},
